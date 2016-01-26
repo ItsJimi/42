@@ -1,0 +1,7 @@
+Credentials cache: API:13792
+        Principal: jmaiquez@42.FR
+
+  Issued                Expires               Principal
+Jul  7 14:57:52 2015  Jul  8 00:57:14 2015  krbtgt/42.FR@42.FR
+Jul  7 14:58:04 2015  Jul  8 00:57:14 2015  nfs/zfs-student-1.42.fr@42.FR
+Jul  7 14:58:04 2015  Jul  8 00:57:14 2015  nfs/zfs-student-5.42.fr@42.FR

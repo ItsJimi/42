@@ -1,2 +1,1 @@
-# 42
-My projetcs in 42born2code
+My projects in 42
