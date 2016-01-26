@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/23 12:28:27 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/01/26 14:03:55 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/01/26 18:45:03 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int		main(int argc, char **argv)
 		ft_putstr("--- PARSE ---\n");
 		if (!(fd = open(argv[1], O_RDONLY)))
 			error("/!\\ main.c line 52 : Open /!\\");
-		if (!(point = parse(argv[1], mlx, fd)))
+		if (!(point = parse(mlx, fd)))
 			error("/!\\ main.c line 54 : Parse /!\\");
 		draw(mlx, line, point);
 		draw2(mlx, line, point);

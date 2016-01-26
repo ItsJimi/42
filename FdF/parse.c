@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/23 13:52:02 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/01/26 14:38:23 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/01/26 18:48:19 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,27 +47,26 @@ static t_point	**define(char **tab, t_mlx *mlx, int i)
 	return (tmp);
 }
 
-static int		count_lines(char *arg)
+t_point			***ft_realloc(t_point ***p, int nline)
 {
-	int		fd;
-	int		i;
-	int		err;
-	char	*test;
+	t_point		***tmp;
+	int			i;
+	int			j;
 
 	i = 0;
-	fd = open(arg, O_RDONLY);
-	while ((err = get_next_line(fd, &test)) > 0)
+	j = 0;
+	tmp = (t_point ***)malloc(sizeof(tmp) * (nline + 1));
+	while (i != nline)
+	{
+		tmp[i] = p[i];
 		i++;
-	close(fd);
-	ft_putnbr(i);
-	ft_putchar('\n');
-	if (err == 0)
-		return (i);
-	else
-		return (-1);
+	}
+	free(p);
+	p = tmp;
+	return (p);
 }
 
-t_point			***parse(char *arg, t_mlx *mlx, int fd)
+t_point			***parse(t_mlx *mlx, int fd)
 {
 	int		i;
 	int		err;
@@ -76,10 +75,12 @@ t_point			***parse(char *arg, t_mlx *mlx, int fd)
 	char	*line;
 
 	i = 0;
-	if (!(point = (t_point ***)malloc(sizeof(point) * (count_lines(arg)))))
+	if (!(point = (t_point ***)malloc(sizeof(point) * 2)))
 		error("/!\\ parse.c line 76 : Malloc point /!\\");
 	while ((err = get_next_line(fd, &line)) > 0)
 	{
+		if (!(point = ft_realloc(point, i + 1)))
+			error("/!\\ parse.c line 76 : Malloc point /!\\");
 		tab = ft_strsplit(line, ' ');
 		if (!(point[i] = define(tab, mlx, i)))
 			error("/!\\ parse.c line 81 : Define /!\\");
