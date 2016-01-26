@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/23 13:52:02 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/01/26 19:30:40 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/01/26 20:31:31 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ static int		count_case(char **tab)
 	i = 0;
 	while (tab[i] != 0)
 		i++;
-	ft_putnbr(i);
-	ft_putchar('\n');
 	return (i);
 }
 
@@ -43,6 +41,7 @@ static t_point	**define(char **tab, t_mlx *mlx, int i)
 		tmp[x]->z = ft_atoi(tab[x]);
 		x++;
 	}
+	//tmp[x] = NULL;
 	mlx->sizex = x;
 	return (tmp);
 }
@@ -66,6 +65,30 @@ t_point			***ft_realloc(t_point ***p, int nline)
 	return (p);
 }
 
+void	put_points(t_point ***points)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (points[i])
+	{
+		j = 0;
+		while (points[i][j])
+		{
+			ft_putnbr((points[i][j])->x);
+			ft_putstr(", ");
+			ft_putnbr((points[i][j])->y);
+			ft_putstr(", ");
+			ft_putnbr((points[i][j])->z);
+			ft_putchar('\n');
+			j++;
+		}
+		i++;
+	}
+	ft_putstr("All points done\n");
+}
+
 t_point			***parse(t_mlx *mlx, int fd)
 {
 	int		i;
@@ -75,22 +98,21 @@ t_point			***parse(t_mlx *mlx, int fd)
 	char	*line;
 
 	i = 0;
-	if (!(point = (t_point ***)malloc(sizeof(point) * 2)))
-		error("/!\\ parse.c line 76 : Malloc point /!\\");
+	if (!(point = (t_point ***)malloc(sizeof(point) * 1)))
+		error("/!\\ parse.c line 78 : Malloc point /!\\");
 	while ((err = get_next_line(fd, &line)) > 0)
 	{
 		if (!(point = ft_realloc(point, i + 1)))
-			error("/!\\ parse.c line 76 : Malloc point /!\\");
-		tab = ft_strsplit(line, ' ');
+			error("/!\\ parse.c line 82 : Malloc point /!\\");
+		tab = ft_strsplit(line, 32);
 		if (!(point[i] = define(tab, mlx, i)))
-			error("/!\\ parse.c line 81 : Define /!\\");
-		ft_putendl(line);
-		free(tab);
+			error("/!\\ parse.c line 85 : Define /!\\");
 		tab = NULL;
 		i++;
 	}
-	ft_putchar('\n');
+	point[i] = NULL;
 	mlx->sizey = i;
+	//put_points(point);
 	if (err == 0)
 		return (point);
 	else

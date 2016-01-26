@@ -6,13 +6,13 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 16:51:23 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/01/26 18:45:58 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/01/26 20:21:09 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
-# define SPACE 50
+# define SPACE 10
 # define AAA 4
 
 # include "libft/includes/libft.h"
@@ -39,12 +39,12 @@ typedef struct	s_mlx
 	void		*win;
 	int			sizex;
 	int			sizey;
-	t_point		*point;
 }				t_mlx;
 
 t_point			***parse(t_mlx *mlx, int fd);
 int				draw(t_mlx *mlx, t_line *line, t_point ***point);
 int				draw2(t_mlx *mlx, t_line *line, t_point ***point);
 int				error(char *str);
+void	put_points(t_point ***points);
 
 #endif

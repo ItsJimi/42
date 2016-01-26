@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/23 12:28:27 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/01/26 18:45:03 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/01/26 20:09:20 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int		main(int argc, char **argv)
 		if (!(point = parse(mlx, fd)))
 			error("/!\\ main.c line 54 : Parse /!\\");
 		draw(mlx, line, point);
-		draw2(mlx, line, point);
+		//draw2(mlx, line, point);
 	}
 	mlx_key_hook(mlx->win, key, mlx);
 	mlx_loop(mlx);

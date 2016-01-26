@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 17:28:52 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/01/25 19:01:16 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/01/26 20:17:43 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,16 +90,20 @@ int			draw2(t_mlx *mlx, t_line *line, t_point ***point)
 	int		x;
 	int		y;
 
+	//put_points(point);
 	y = 0;
-	while (y < mlx->sizey - 1)
+	while (point[y])
 	{
 		x = 0;
-		while (x < mlx->sizex)
+		while (point[y][x])
 		{
 			line->x1 = point[y][x]->x - point[y][x]->z * AAA;
 			line->y1 = point[y][x]->y - point[y][x]->z * AAA;
-			line->x2 = point[y + 1][x]->x - point[y + 1][x]->z * AAA;
-			line->y2 = point[y + 1][x]->y - point[y + 1][x]->z * AAA;
+			if (point[y + 1])
+			{
+				line->x2 = point[y + 1][x]->x - point[y + 1][x]->z * AAA;
+				line->y2 = point[y + 1][x]->y - point[y + 1][x]->z * AAA;
+			}
 			draw_line(mlx, line);
 			x++;
 		}
@@ -114,15 +118,18 @@ int			draw(t_mlx *mlx, t_line *line, t_point ***point)
 	int		y;
 
 	y = 0;
-	while (y < mlx->sizey)
+	while (point[y])
 	{
 		x = 0;
-		while (x < mlx->sizex - 1)
+		while (point[y][x])
 		{
 			line->x1 = point[y][x]->x - point[y][x]->z * AAA;
 			line->y1 = point[y][x]->y - point[y][x]->z * AAA;
-			line->x2 = point[y][x + 1]->x - point[y][x + 1]->z * AAA;
-			line->y2 = point[y][x + 1]->y - point[y][x + 1]->z * AAA;
+			if (point[y][x + 1])
+			{
+				line->x2 = point[y][x + 1]->x - point[y][x + 1]->z * AAA;
+				line->y2 = point[y][x + 1]->y - point[y][x + 1]->z * AAA;
+			}
 			draw_line(mlx, line);
 			x++;
 		}
