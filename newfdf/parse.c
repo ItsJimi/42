@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 13:20:17 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/01/27 16:32:58 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/01/27 17:34:34 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ t_point			***ft_realloc(t_point ***p, int nline)
 		tmp[i] = p[i];
 		i++;
 	}
-	if (nline != 0)
-		free(p);
+	free(p);
 	p = tmp;
 	return (p);
 }
@@ -74,12 +73,13 @@ t_point	***parse(char *av)
 	y = 0;
 	if (!(fd = open(av, O_RDONLY)))
 		str_exit(-1, "Error open");
+	point = (t_point ***)malloc(sizeof(***point));
 	while ((error = get_next_line(fd, &line)) > 0)
 	{
-		point = ft_realloc(point, y);
 		point[y] = define(line, y);
 		ft_putstr(line);
 		ft_putstr("\n");
+		point = ft_realloc(point, y + 1);
 		y++;
 	}
 	point[y] = NULL;

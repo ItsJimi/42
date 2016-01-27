@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 13:20:21 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/01/27 16:34:17 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/01/27 19:28:50 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_mlx	*n_mlx(int sx, int sy, char *t)
 	mlx->perspx = 0;
 	mlx->perspy = 0;
 	mlx->space = 20;
-	mlx->dim = 100;
+	mlx->dim = 3;
 	mlx->erasing = 0;
 	return (mlx);
 }
@@ -65,25 +65,13 @@ int		key(int keycode)
 int		main(int ac, char **av)
 {
 	t_mlx	*mlx;
-	int		x;
-	int		y;
 
-	y = 0;
 	if (ac != 2)
 		str_exit(-1, "No file");
 	mlx = n_mlx(1000, 1000, "F D F");
 	mlx->p = parse(av[1]);
 	mlx->p = dep_points(mlx, mlx->p);
-	while (mlx->p[y])
-	{
-		x = 0;
-		while (mlx->p[y][x])
-		{
-			mlx_pixel_put(mlx->mlx, mlx->win, mlx->p[y][x]->px, mlx->p[y][x]->py, 0xFFFFFF);
-			x++;
-		}
-		y++;
-	}
+	d_points(mlx, mlx->p);
 	mlx_hook(mlx->win, 2, 0, key, 0);
 	mlx_loop(mlx->mlx);
 }
