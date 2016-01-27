@@ -13,7 +13,8 @@
 NAME = fdf
 
 SRC = main.c \
-	  draw.c \
+	  line.c \
+	  point.c \
 	  parse.c
 
 FLAG = -g -Wall -Werror -Wextra

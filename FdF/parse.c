@@ -5,68 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/23 13:52:02 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/01/26 22:15:27 by jmaiquez         ###   ########.fr       */
+/*   Created: 2016/01/27 13:20:17 by jmaiquez          #+#    #+#             */
+/*   Updated: 2016/01/27 20:27:24 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int		count_case(char *str)
+static int		count_case(char **str)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 0;
 	while (str[i])
-	{
-		while (str[i] == 32 && str[i])
-			i++;
-		while (str[i] != 32 && str[i])
-			i++;
-		j++;
-	}
-	if (str[i - 1] == 32)
-		j--;
-	return (j);
+		i++;
+	return (i);
 }
 
-t_point	*ft_pointnew(int x, int y, int z)
-{
-	t_point	*point;
-
-	if (!(point = (t_point *)malloc(sizeof(*point))))
-		return (NULL);
-	point->x = x;
-	point->y = y;
-	point->z = z;
-	return (point);
-}
-
-static t_point	**define(char *line, t_mlx *mlx, int i)qq
-{
-	int		x;
-	int		count;
-	char	**tab;
-	t_point	**tmp;
-
-	x = 0;
-	count = count_case(line);
-	tab = ft_strsplit(line, 32);
-	if (!(tmp = (t_point **)malloc(sizeof(*tmp) * (count + 3))))
-		error("/!\\ parse.c line 33 : Malloc tmp /!\\");
-	while (x < count)
-	{
-		tmp[x] = ft_pointnew(x, i, ft_atoi(tab[x]));
-		x++;
-	}
-	//tmp[x] = NULL;
-	mlx->sizex = x;
-	return (tmp);
-}
-
-t_point			***ft_realloc(t_point ***p, int nline)
+static t_point	***ft_realloc(t_point ***p, int nline)
 {
 	t_point		***tmp;
 	int			i;
@@ -85,53 +41,52 @@ t_point			***ft_realloc(t_point ***p, int nline)
 	return (p);
 }
 
-void	put_points(t_point ***points)
+static t_point	**define(char *line, int y)
 {
-	int		i;
-	int		j;
+	t_point	**point;
+	char	**tab;
+	int		nbr_case;
+	int		x;
 
-	i = 0;
-	while (points[i])
+	x = 0;
+	tab = ft_strsplit(line, ' ');
+	nbr_case = count_case(tab);
+	if (!(point = (t_point **)malloc(sizeof(**point) * nbr_case)))
+		str_exit(-1, "Error");
+	while (x < nbr_case)
 	{
-		j = 0;
-		while (points[i][j])
-		{
-			ft_putnbr((points[i][j])->x);
-			ft_putstr(", ");
-			ft_putnbr((points[i][j])->y);
-			ft_putstr(", ");
-			ft_putnbr((points[i][j])->z);
-			ft_putchar('\n');
-			j++;
-		}
-		i++;
+		point[x] = new_point(x, y, ft_atoi(tab[x]));
+		x++;
 	}
-	ft_putstr("All points done\n");
+	point[x] = NULL;
+	return (point);
 }
 
-t_point			***parse(char *av, t_mlx *mlx)
+t_point			***parse(char *av)
 {
-	int		i;
 	int		fd;
-	int		err;
-	t_point	***point;
+	int		y;
+	int		error;
 	char	*line;
+	t_point	***point;
 
-	i = 0;
-	if ((fd = open(av, O_RDONLY)) == -1)
-		return (NULL);
-	if (!(point = (t_point ***)malloc(sizeof(point) * 2)))
-		return (NULL);
-	while ((err = get_next_line(fd, &line)) > 0)
+	y = 0;
+	if (!(fd = open(av, O_RDONLY)))
+		str_exit(-1, "Error open");
+	if (!(point = (t_point ***)malloc(sizeof(***point))))
+		str_exit(-1, "Error");
+	while ((error = get_next_line(fd, &line)) > 0)
 	{
-		point[i] = define(line, mlx, i);
-			//error("/!\\ parse.c line 85 : Define /!\\");
-		point = ft_realloc(point, i + 1);
-			//error("/!\\ parse.c line 82 : Malloc point /!\\");
-		i++;
+		point[y] = define(line, y);
+		ft_putstr(line);
+		ft_putstr("\n");
+		point = ft_realloc(point, y + 1);
+		y++;
 	}
-	//point[i] = NULL;
-	mlx->sizey = i;
-	//put_points(point);
-	return (point);
+	point[y] = NULL;
+	if (error == 0)
+		return (point);
+	else
+		str_exit(-1, "Error gnl");
+	return (0);
 }
