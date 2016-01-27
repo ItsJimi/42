@@ -13,6 +13,7 @@
 NAME = fdf
 
 SRC = main.c \
+	  draw.c \
 	  parse.c
 
 FLAG = -g -Wall -Werror -Wextra
@@ -23,7 +24,7 @@ $(NAME):
 	@echo "\x1b[31m > \x1b[32mCompilation Libft ...\x1b[37m"
 	@cd libft && make re && cd ..
 	@echo "\x1b[31m > \x1b[32mCompilation F D F ...\x1b[37m"
-	@gcc $(SRC) -o $(NAME) -L. libft/libft.a -I./incs/ -L/usr/local/lib/ -I/usr/local/include -lmlx -framework OpenGL -framework AppKit
+	@gcc $(FLAG) $(SRC) -o $(NAME) -L. libft/libft.a -I./incs/ -L/usr/local/lib/ -I/usr/local/include -lmlx -framework OpenGL -framework AppKit
 	@echo "\x1b[31m > \x1b[34mCompilation terminée\x1b[37m"
 	@echo ""
 

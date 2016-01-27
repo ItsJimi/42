@@ -6,133 +6,57 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 17:28:52 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/01/27 13:20:06 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/01/27 16:16:48 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	first(t_mlx *mlx, t_line *line, int xincr, int yincr)
+t_point		***dep_points(t_mlx *mlx, t_point ***p)
 {
-	int		e;
-	int		dxy[2];
 	int		i;
-	int		xy1[2];
+	int		j;
 
-	xy1[0] = line->x1;
-	xy1[1] = line->y1;
-	dxy[0] = ft_abs((line->x2) - (line->x1));
-	dxy[1] = ft_abs((line->y2) - (line->y1));
-	e = dxy[0] / 2;
 	i = 0;
-	while (i < dxy[0])
+	while (p[i])
 	{
-		xy1[0] += xincr;
-		e += dxy[1];
-		if (e > dxy[0])
+		j = 0;
+		while (p[i][j])
 		{
-			e -= dxy[0];
-			xy1[1] += yincr;
+			(p[i][j])->px = (mlx->decalx) + (mlx->perspx * i) + ((p[i][j])->x +
+				(j * mlx->space)) - ((p[i][j])->z * mlx->dim);
+			(p[i][j])->py = (mlx->decaly) + (mlx->perspy * j) + ((p[i][j])->y +
+				(i * mlx->space)) - ((p[i][j])->z * mlx->dim);
+			j++;
 		}
-		mlx_pixel_put(mlx->mlx, mlx->win, xy1[0], xy1[1], 0xFFFFFF);
 		i++;
 	}
+	return (p);
 }
 
-static void	second(t_mlx *mlx, t_line *line, int xincr, int yincr)
+/*void		d_points(t_mlx *mlx, t_point ***p)
 {
-	int		e;
-	int		dxy[2];
 	int		i;
-	int		xy1[2];
+	int		j;
 
-	xy1[0] = line->x1;
-	xy1[1] = line->y1;
-	dxy[0] = ft_abs((line->x2) - (line->x1));
-	dxy[1] = ft_abs((line->y2) - (line->y1));
-	e = dxy[1] / 2;
 	i = 0;
-	while (i < dxy[1])
+	while (p[i])
 	{
-		xy1[1] += yincr;
-		e += dxy[0];
-		if (e > dxy[1])
+		j = 0;
+		while (p[i][j])
 		{
-			e -= dxy[1];
-			xy1[0] += xincr;
+			if (p[i][j + 1])
+				d_line(mlx, n_line((p[i][j])->px, (p[i][j])->py,
+					(p[i][j + 1])->px, (p[i][j + 1])->py),
+					mlx->erasing ? 0x00000000 : p[i][j]->color);
+			if (p[i + 1] && p[i + 1][j])
+				d_line(mlx, n_line((p[i][j])->px, (p[i][j])->py,
+					(p[i + 1][j])->px, (p[i + 1][j])->py),
+					mlx->erasing ? 0x00000000 : p[i][j]->color);
+			j++;
 		}
-		mlx_pixel_put(mlx->mlx, mlx->win, xy1[0], xy1[1], 0xFFFFFF);
 		i++;
 	}
-}
-
-static void	draw_line(t_mlx *mlx, t_line *line)
-{
-	int		xincr;
-	int		yincr;
-
-	if ((line->x1) < (line->x2))
-		xincr = 1;
-	else
-		xincr = -1;
-	if ((line->y1) < (line->y2))
-		yincr = 1;
-	else
-		yincr = -1;
-	if (ft_abs((line->x2) - (line->x1)) > ft_abs((line->y2) - (line->y1)))
-		first(mlx, line, xincr, yincr);
-	else
-		second(mlx, line, xincr, yincr);
-}
-
-int			draw2(t_mlx *mlx, t_line *line, t_point ***point)
-{
-	int		x;
-	int		y;
-
-	y = 0;
-	while (point[y])
-	{
-		x = 0;
-		while (point[y][x])
-		{
-			line->x1 = point[y][x]->x - point[y][x]->z * AAA;
-			line->y1 = point[y][x]->y - point[y][x]->z * AAA;
-			if (point[y + 1])
-			{
-				line->x2 = point[y + 1][x]->x - point[y + 1][x]->z * AAA;
-				line->y2 = point[y + 1][x]->y - point[y + 1][x]->z * AAA;
-			}
-			draw_line(mlx, line);
-			x++;
-		}
-		y++;
-	}
-	return (0);
-}
-
-int			draw(t_mlx *mlx, t_line *line, t_point ***point)
-{
-	int		x;
-	int		y;
-
-	y = 0;
-	while (point[y])
-	{
-		x = 0;
-		while (point[y][x])
-		{
-			line->x1 = point[y][x]->x - point[y][x]->z * AAA;
-			line->y1 = point[y][x]->y - point[y][x]->z * AAA;
-			if (point[y][x + 1])
-			{
-				line->x2 = point[y][x + 1]->x - point[y][x + 1]->z * AAA;
-				line->y2 = point[y][x + 1]->y - point[y][x + 1]->z * AAA;
-			}
-			draw_line(mlx, line);
-			x++;
-		}
-		y++;
-	}
-	return (0);
-}
+	//mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img->ptr, 0, 0);
+	mlx_string_put(mlx->mlx, mlx->win, 0, 350, 0xFFFFFF, "===[ F D F ]===");
+}*/
