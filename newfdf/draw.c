@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 17:28:52 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/01/26 22:15:29 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/01/27 13:20:06 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ int			draw2(t_mlx *mlx, t_line *line, t_point ***point)
 	int		x;
 	int		y;
 
-	//put_points(point);
 	y = 0;
 	while (point[y])
 	{
