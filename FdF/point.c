@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 18:21:42 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/01/28 16:54:25 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/01/28 18:09:42 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,6 @@ void			draw_point(t_mlx *mlx, t_point ***p)
 		}
 		y++;
 	}
-	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->mlx, 0, 0);
+	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->img, 0, 0);
 	str_data(mlx);
 }

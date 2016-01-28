@@ -13,6 +13,7 @@
 NAME = fdf
 
 SRC = main.c \
+	  new.c \
 	  parse.c \
 	  key.c \
 	  point.c \

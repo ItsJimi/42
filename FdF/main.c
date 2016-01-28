@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 13:20:21 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/01/28 17:39:44 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/01/28 18:08:36 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ int		main(int ac, char **av)
 		str_exit(-1, "No file");
 	if (ac > 2)
 		str_exit(-1, "To many arguments");
-	mlx = n_mlx(2000, 1000, "F D F", av[1]);
+	mlx = new_mlx(2000, 1000, "F D F", av[1]);
+	mlx->img = new_img(mlx);
 	mlx->p = parse(av[1]);
 	mlx->p = dep_point(mlx, mlx->p);
 	draw_point(mlx, mlx->p);

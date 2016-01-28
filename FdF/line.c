@@ -6,15 +6,14 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 17:36:37 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/01/28 17:12:53 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/01/28 18:10:46 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void draw_img(int color, char *cimg, int sizel, int bpp, int x, int y)
+static void		draw_img(t_mlx *mlx, int color, int x, int y)
 {
-	int i;
 	unsigned char color1;
 	unsigned char color2;
 	unsigned char color3;
@@ -22,9 +21,9 @@ static void draw_img(int color, char *cimg, int sizel, int bpp, int x, int y)
 	color1 = (color & 0xFF00000) >> 24;
 	color2 = (color & 0xFF00000) >> 16;
 	color3 = (color & 0xFF00000) >> 8;
-	cimg[y * sizel + x * bpp / 8 ] = color1;
-	cimg[y * sizel + x * bpp / 8 + 1] = color2;
-	cimg[y * sizel+ x * bpp / 8 + 2] = color3;
+	mlx->img->addr[y * mlx->img->sizel + x * mlx->img->bpp / 8] = color1;
+	mlx->img->addr[y * mlx->img->sizel + x * mlx->img->bpp / 8 + 1] = color2;
+	mlx->img->addr[y * mlx->img->sizel + x * mlx->img->bpp / 8 + 2] = color3;
 }
 
 static void		first(t_mlx *mlx, int pos[5], int xincr, int yincr)
@@ -47,7 +46,7 @@ static void		first(t_mlx *mlx, int pos[5], int xincr, int yincr)
 			e -= dx;
 			(pos[1]) += yincr;
 		}
-		draw_img(pos[4], char *cimg, int sizel, int bpp, pos[0], pos[1]);
+		draw_img(mlx, pos[4], pos[0], pos[1]);
 		i++;
 	}
 }
@@ -72,7 +71,7 @@ static void		second(t_mlx *mlx, int pos[5], int xincr, int yincr)
 			e -= dy;
 			(pos[0]) += xincr;
 		}
-		draw_img(pos[4], char *cimg, int sizel, int bpp, pos[0], pos[1]);
+		draw_img(mlx, pos[4], pos[0], pos[1]);
 		i++;
 	}
 }
