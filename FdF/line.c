@@ -6,11 +6,26 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 17:36:37 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/01/27 20:28:05 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/01/28 17:12:53 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static void draw_img(int color, char *cimg, int sizel, int bpp, int x, int y)
+{
+	int i;
+	unsigned char color1;
+	unsigned char color2;
+	unsigned char color3;
+
+	color1 = (color & 0xFF00000) >> 24;
+	color2 = (color & 0xFF00000) >> 16;
+	color3 = (color & 0xFF00000) >> 8;
+	cimg[y * sizel + x * bpp / 8 ] = color1;
+	cimg[y * sizel + x * bpp / 8 + 1] = color2;
+	cimg[y * sizel+ x * bpp / 8 + 2] = color3;
+}
 
 static void		first(t_mlx *mlx, int pos[5], int xincr, int yincr)
 {
@@ -32,7 +47,7 @@ static void		first(t_mlx *mlx, int pos[5], int xincr, int yincr)
 			e -= dx;
 			(pos[1]) += yincr;
 		}
-		mlx_pixel_put(mlx->mlx, mlx->win, pos[0], pos[1], pos[4]);
+		draw_img(pos[4], char *cimg, int sizel, int bpp, pos[0], pos[1]);
 		i++;
 	}
 }
@@ -57,7 +72,7 @@ static void		second(t_mlx *mlx, int pos[5], int xincr, int yincr)
 			e -= dy;
 			(pos[0]) += xincr;
 		}
-		mlx_pixel_put(mlx->mlx, mlx->win, pos[0], pos[1], pos[4]);
+		draw_img(pos[4], char *cimg, int sizel, int bpp, pos[0], pos[1]);
 		i++;
 	}
 }
