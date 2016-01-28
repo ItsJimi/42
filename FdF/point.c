@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 18:21:42 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/01/27 20:22:29 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/01/28 13:17:09 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void		new_pos_x(t_mlx *mlx, t_point ***p, int x, int y)
 	mlx->pos[4] = p[y][x]->color;
 }
 
-t_point			***dep_points(t_mlx *mlx, t_point ***p)
+t_point			***dep_point(t_mlx *mlx, t_point ***p)
 {
 	int		i;
 	int		j;
@@ -58,7 +58,7 @@ t_point			***dep_points(t_mlx *mlx, t_point ***p)
 	return (p);
 }
 
-void			d_points(t_mlx *mlx, t_point ***p)
+void			draw_point(t_mlx *mlx, t_point ***p)
 {
 	int		x;
 	int		y;
@@ -84,5 +84,5 @@ void			d_points(t_mlx *mlx, t_point ***p)
 		y++;
 	}
 	//mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img->ptr, 0, 0);
-	mlx_string_put(mlx->mlx, mlx->win, 425, 0, 0xFFFFFF, "===[ F D F ]===");
+	mlx_string_put(mlx->mlx, mlx->win, 425, 0, 0x6f5c87, "===[ F D F ]===");
 }

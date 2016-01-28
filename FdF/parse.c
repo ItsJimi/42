@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 13:20:17 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/01/27 20:27:24 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/01/28 11:28:28 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static t_point	**define(char *line, int y)
 	tab = ft_strsplit(line, ' ');
 	nbr_case = count_case(tab);
 	if (!(point = (t_point **)malloc(sizeof(**point) * nbr_case)))
-		str_exit(-1, "Error");
+		str_exit(-1, "parse.c : Error line 54");
 	while (x < nbr_case)
 	{
 		point[x] = new_point(x, y, ft_atoi(tab[x]));
@@ -74,7 +74,7 @@ t_point			***parse(char *av)
 	if (!(fd = open(av, O_RDONLY)))
 		str_exit(-1, "Error open");
 	if (!(point = (t_point ***)malloc(sizeof(***point))))
-		str_exit(-1, "Error");
+		str_exit(-1, "parse.c : Error line 76");
 	while ((error = get_next_line(fd, &line)) > 0)
 	{
 		point[y] = define(line, y);

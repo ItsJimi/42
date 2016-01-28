@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 16:51:23 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/01/27 19:18:27 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/01/28 11:24:52 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,10 @@ typedef struct	s_mlx
 
 t_point			***parse(char *av);
 t_point			*new_point(int x, int y, int z);
-t_point			***dep_points(t_mlx *mlx, t_point ***p);
+t_point			***dep_point(t_mlx *mlx, t_point ***p);
 int				draw_line(t_mlx *mlx, int pos[5]);
-void			d_points(t_mlx *mlx, t_point ***p);
-//int				draw(t_mlx *mlx, t_line *line, t_point ***point);
-//int				draw2(t_mlx *mlx, t_line *line, t_point ***point);
+void			draw_point(t_mlx *mlx, t_point ***p);
 int				str_exit(int error, char *str);
+int				key(int keycode, t_mlx *mlx);
 
 #endif
