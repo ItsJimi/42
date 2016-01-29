@@ -6,11 +6,29 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 11:23:31 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/01/28 18:26:02 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/01/29 19:32:34 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	reset(t_mlx *mlx)
+{
+	int		x;
+	int		y;
+
+	y = 0;
+	while (y < 1440)
+	{
+		x = 0;
+		while (x < 2560)
+		{
+			draw_img(mlx, 0x000000, x, y);
+			x++;
+		}
+		y++;
+	}
+}
 
 t_mlx	*key_color(int keycode, t_mlx *mlx)
 {
@@ -41,7 +59,7 @@ t_mlx	*key_color(int keycode, t_mlx *mlx)
 
 int		key(int keycode, t_mlx *mlx)
 {
-	mlx_clear_window(mlx->mlx, mlx->win);
+	reset(mlx);
 	ft_putstr("KEYCODE : ");
 	ft_putnbr(keycode);
 	ft_putstr("\n");

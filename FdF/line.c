@@ -6,24 +6,25 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 17:36:37 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/01/28 18:10:46 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/01/29 19:32:18 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void		draw_img(t_mlx *mlx, int color, int x, int y)
+void		draw_img(t_mlx *mlx, int color, int x, int y)
 {
-	unsigned char color1;
-	unsigned char color2;
-	unsigned char color3;
-
-	color1 = (color & 0xFF00000) >> 24;
-	color2 = (color & 0xFF00000) >> 16;
-	color3 = (color & 0xFF00000) >> 8;
-	mlx->img->addr[y * mlx->img->sizel + x * mlx->img->bpp / 8] = color1;
-	mlx->img->addr[y * mlx->img->sizel + x * mlx->img->bpp / 8 + 1] = color2;
-	mlx->img->addr[y * mlx->img->sizel + x * mlx->img->bpp / 8 + 2] = color3;
+	if (((x >= 0) && (y >= 0)) && ((x < 2560) && (y < 1440)))
+	{
+		mlx->img->addr[y * mlx->img->size_l + x * mlx->img->bpp / 8] = color % 256;
+		color /= 256;
+		mlx->img->addr[y * mlx->img->size_l + x * mlx->img->bpp / 8 + 1] = color % 256;
+		color /= 256;
+		mlx->img->addr[y * mlx->img->size_l + x * mlx->img->bpp / 8 + 2] = color % 256;
+		color /= 256;
+		mlx->img->addr[y * mlx->img->size_l + x * mlx->img->bpp / 8 + 3] = 0;
+		color /= 256;
+	}
 }
 
 static void		first(t_mlx *mlx, int pos[5], int xincr, int yincr)

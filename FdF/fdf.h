@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 16:51:23 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/01/28 18:11:22 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/01/29 17:21:44 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ typedef struct	s_img
 {
 	void		*img;
 	char		*addr;
-	char		*cimg;
+	char		*data;
 	int			bpp;
-	int			sizel;
-	int			endn;
+	int			size_l;
+	int			endian;
 }				t_img;
 
 typedef struct	s_point
@@ -73,5 +73,6 @@ void			draw_point(t_mlx *mlx, t_point ***p);
 int				str_exit(int error, char *str);
 int				key(int keycode, t_mlx *mlx);
 void			str_data(t_mlx *mlx);
+void			draw_img(t_mlx *mlx, int color, int x, int y);
 
 #endif

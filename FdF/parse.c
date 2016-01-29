@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 13:20:17 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/01/28 11:28:28 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/01/29 19:05:12 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,6 @@ t_point			***parse(char *av)
 	while ((error = get_next_line(fd, &line)) > 0)
 	{
 		point[y] = define(line, y);
-		ft_putstr(line);
-		ft_putstr("\n");
 		point = ft_realloc(point, y + 1);
 		y++;
 	}
