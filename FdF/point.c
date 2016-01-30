@@ -6,13 +6,13 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 18:21:42 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/01/28 18:09:42 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/01/30 15:54:03 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static int		couleur(double t)
+static int		color(double t)
 {
 	return ((RGB(
 	127.5 * (cos(t) + 1),
@@ -20,7 +20,7 @@ static int		couleur(double t)
 	127.5 * (1 - cos(t)))));
 }
 
-static void change_color(t_mlx *mlx, t_point ***p, int x, int y)
+static void		change_color(t_mlx *mlx, t_point ***p, int x, int y)
 {
 	if (mlx->change_color == 0)
 		p[y][x]->color = rand();
@@ -84,7 +84,7 @@ t_point			***dep_point(t_mlx *mlx, t_point ***p)
 			(p[y][x])->py = (mlx->decaly) + (mlx->perspy * x) + ((p[y][x])->y +
 				(y * mlx->space)) - ((p[y][x])->z * mlx->dim);
 			if (mlx->change_color == 10)
-				p[y][x]->color = couleur((double)p[y][x]->z);
+				p[y][x]->color = color((double)p[y][x]->z);
 			else
 				change_color(mlx, p, x, y);
 			x++;

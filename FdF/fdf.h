@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 16:51:23 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/01/29 17:21:44 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/01/30 15:51:30 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct	s_mlx
 }				t_mlx;
 
 t_point			***parse(char *av);
-t_point			*new_point(int x, int y, int z);
+t_point			*new_point(int x, int y, char *z);
 t_mlx			*new_mlx(int sx, int sy, char *t, char *av);
 t_img			*new_img(t_mlx *mlx);
 t_point			***dep_point(t_mlx *mlx, t_point ***p);
@@ -74,5 +74,6 @@ int				str_exit(int error, char *str);
 int				key(int keycode, t_mlx *mlx);
 void			str_data(t_mlx *mlx);
 void			draw_img(t_mlx *mlx, int color, int x, int y);
+int				find_color(char *z);
 
 #endif

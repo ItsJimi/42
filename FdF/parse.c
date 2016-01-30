@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 13:20:17 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/01/29 19:05:12 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/01/30 14:06:38 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static t_point	**define(char *line, int y)
 		str_exit(-1, "parse.c : Error line 54");
 	while (x < nbr_case)
 	{
-		point[x] = new_point(x, y, ft_atoi(tab[x]));
+		point[x] = new_point(x, y, tab[x]);
 		x++;
 	}
 	point[x] = NULL;
