@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 16:51:23 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/01/30 15:51:30 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/01/30 17:41:52 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct	s_point
 	int			z;
 
 	int			color;
+	int			savecolor;
 }				t_point;
 
 typedef struct	s_mlx
@@ -61,6 +62,7 @@ typedef struct	s_mlx
 	int			erasing;
 	int			pos[5];
 	int			change_color;
+	int			menu;
 }				t_mlx;
 
 t_point			***parse(char *av);
@@ -75,5 +77,6 @@ int				key(int keycode, t_mlx *mlx);
 void			str_data(t_mlx *mlx);
 void			draw_img(t_mlx *mlx, int color, int x, int y);
 int				find_color(char *z);
+int				color(double t);
 
 #endif

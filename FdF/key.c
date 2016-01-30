@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 11:23:31 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/01/30 14:23:01 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/01/30 19:23:03 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	reset(t_mlx *mlx)
 	int		y;
 
 	y = 0;
-	while (y < 1440)
+	while (y < 1000)
 	{
 		x = 0;
-		while (x < 2560)
+		while (x < 1500)
 		{
 			draw_img(mlx, 0x000000, x, y);
 			x++;
@@ -54,17 +54,13 @@ t_mlx	*key_color(int keycode, t_mlx *mlx)
 		mlx->change_color = 9;
 	if (keycode == 65)
 		mlx->change_color = 10;
+	if (keycode == 87)
+		mlx->change_color = 11;
 	return (mlx);
 }
 
-int		key(int keycode, t_mlx *mlx)
+t_mlx	*key_yolo(int keycode, t_mlx *mlx)
 {
-	reset(mlx);
-	ft_putstr("KEYCODE : ");
-	ft_putnbr(keycode);
-	ft_putstr("\n");
-	if (keycode == 53)
-		str_exit(0, "ESC !");
 	if (keycode == 123)
 		mlx->decalx -= 10;
 	if (keycode == 124)
@@ -89,6 +85,22 @@ int		key(int keycode, t_mlx *mlx)
 		mlx->perspy++;
 	if (keycode == 80)
 		mlx->perspy--;
+	return (mlx);
+}
+
+int		key(int keycode, t_mlx *mlx)
+{
+	reset(mlx);
+	if (keycode == 53)
+		str_exit(0, "ESC !");
+	if (keycode == 115)
+	{
+		if (mlx->menu == 1)
+			mlx->menu = 0;
+		else
+			mlx->menu = 1;
+	}
+	mlx = key_yolo(keycode, mlx);
 	mlx = key_color(keycode, mlx);
 	mlx->p = dep_point(mlx, mlx->p);
 	draw_point(mlx, mlx->p);

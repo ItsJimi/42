@@ -6,19 +6,11 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 18:21:42 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/01/30 15:54:03 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/01/30 18:46:36 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-static int		color(double t)
-{
-	return ((RGB(
-	127.5 * (cos(t) + 1),
-	127.5 * (sin(t) + 1),
-	127.5 * (1 - cos(t)))));
-}
 
 static void		change_color(t_mlx *mlx, t_point ***p, int x, int y)
 {
@@ -42,6 +34,8 @@ static void		change_color(t_mlx *mlx, t_point ***p, int x, int y)
 		p[y][x]->color = 0xff0000;
 	if (mlx->change_color == 9)
 		p[y][x]->color = 0x0000ff;
+	if (mlx->change_color == 11)
+		p[y][x]->color = p[y][x]->savecolor;
 }
 
 static void		new_pos_y(t_mlx *mlx, t_point ***p, int x, int y)
