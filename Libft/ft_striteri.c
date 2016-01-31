@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaiquez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/27 17:27:20 by jmaiquez          #+#    #+#             */
-/*   Updated: 2015/11/28 17:26:06 by jmaiquez         ###   ########.fr       */
+/*   Created: 2015/11/25 17:39:29 by jmaiquez          #+#    #+#             */
+/*   Updated: 2015/11/25 17:42:59 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,14 @@
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	size_t		i;
+	int	i;
 
 	i = 0;
-	if (s && f)
+	if (s == NULL || f == NULL)
+		return ;
+	while (s[i])
 	{
-		while (s[i] != '\0')
-		{
-			f(i, &s[i]);
-			i++;
-		}
+		f(i, &s[i]);
+		i++;
 	}
 }

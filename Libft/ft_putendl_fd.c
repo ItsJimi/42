@@ -5,15 +5,22 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaiquez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/24 14:17:39 by jmaiquez          #+#    #+#             */
-/*   Updated: 2015/11/24 14:22:06 by jmaiquez         ###   ########.fr       */
+/*   Created: 2015/11/23 15:42:19 by jmaiquez          #+#    #+#             */
+/*   Updated: 2015/11/25 18:57:03 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putendl_fd(const char *s, int fd)
+void	ft_putendl_fd(char const *s, int fd)
 {
-	ft_putstr_fd(s, fd);
-	ft_putchar_fd('\n', fd);
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		write(fd, &s[i], 1);
+		i++;
+	}
+	write(fd, "\n", 1);
 }

@@ -5,19 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaiquez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/23 17:12:37 by jmaiquez          #+#    #+#             */
-/*   Updated: 2015/11/24 15:47:39 by jmaiquez         ###   ########.fr       */
+/*   Created: 2015/11/23 16:32:52 by jmaiquez          #+#    #+#             */
+/*   Updated: 2015/11/26 12:28:36 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isprint(int c)
+int	ft_isprint(int c)
 {
-	if (c >= 32 && c <= 126)
-	{
-		return (1);
-	}
-	else
-	{
-		return (0);
-	}
+	return (c >= 32 && c <= 126);
 }

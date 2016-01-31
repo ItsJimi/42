@@ -5,27 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaiquez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/23 17:25:32 by jmaiquez          #+#    #+#             */
-/*   Updated: 2015/11/24 15:43:09 by jmaiquez         ###   ########.fr       */
+/*   Created: 2015/11/23 17:36:45 by jmaiquez          #+#    #+#             */
+/*   Updated: 2015/11/28 18:58:40 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isalnum(int c)
+int	ft_isalnum(int c)
 {
-	if (c >= 48 && c <= 57)
-	{
+	if (c >= '0' && c <= '9')
 		return (1);
-	}
-	else if (c >= 65 && c <= 90)
-	{
+	else if (c >= 'A' && c <= 'Z')
 		return (1);
-	}
-	else if (c >= 97 && c <= 122)
-	{
+	else if (c >= 'a' && c <= 'z')
 		return (1);
-	}
 	else
-	{
 		return (0);
-	}
 }

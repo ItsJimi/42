@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaiquez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/25 19:39:48 by jmaiquez          #+#    #+#             */
-/*   Updated: 2015/11/27 14:36:12 by jmaiquez         ###   ########.fr       */
+/*   Created: 2015/11/24 14:24:58 by jmaiquez          #+#    #+#             */
+/*   Updated: 2015/12/01 17:33:11 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strncat(char *s1, const char *s2, size_t n)
 
 	i = 0;
 	len = ft_strlen(s1);
-	while (s2[i] != '\0' && i < n)
+	while (i < n && s2[i])
 	{
 		s1[len + i] = s2[i];
 		i++;

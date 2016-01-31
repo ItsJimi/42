@@ -5,74 +5,53 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaiquez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/28 18:46:38 by jmaiquez          #+#    #+#             */
-/*   Updated: 2015/12/03 14:41:29 by jmaiquez         ###   ########.fr       */
+/*   Created: 2015/11/23 15:52:46 by jmaiquez          #+#    #+#             */
+/*   Updated: 2015/12/04 10:57:35 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*nrm_itoa(int n, int i, int j, int started)
+static	int		ft_val(int n)
 {
-	char	*nbr;
-
-	if ((nbr = ft_strnew(11)) == NULL)
-		return (NULL);
-	if (n < 0)
-	{
-		nbr[0] = '-';
-		n *= -1;
-	}
-	while (i != 0)
-	{
-		if ((n / i) != 0)
-		{
-			started = 1;
-			nbr[j] = (n / i) + '0';
-			n -= ((n / i) * i);
-		}
-		else if (started)
-			nbr[j] = '0';
-		if (((n / i) != 0) || started)
-			j++;
-		i /= 10;
-	}
-	return (nbr);
-}
-
-static int	n_len(int n)
-{
-	int		i;
-	int		negative;
+	int i;
 
 	i = 0;
-	negative = 0;
-	if (n < 0)
-		negative = 1;
-	while (n > 0)
+	if (n == 0)
+		return (1);
+	while (n != 0)
 	{
-		n /= 10;
+		n = n / 10;
 		i++;
 	}
-	return (i + negative);
+	return (i);
 }
 
-char		*ft_itoa(int n)
+char			*ft_itoa(int n)
 {
+	int		i;
 	int		j;
-	char	*s;
+	char	*tab;
+	int		power;
 
-	s = (char*)malloc(sizeof(*s) * n_len(n));
-	if (s == NULL)
+	i = 0;
+	j = 0;
+	tab = (char*)malloc(sizeof(*tab) * (ft_val(n) + 1));
+	if (!tab)
 		return (NULL);
-	if (n == 0)
-		return (ft_strcpy(s, "0"));
-	if (n < 0)
-		j = 1;
-	else
-		j = 0;
 	if (n == -2147483648)
-		return (ft_strcpy(s, "-2147483648"));
-	s = nrm_itoa(n, 1000000000, j, 0);
-	return (s);
+		return (ft_strcpy(tab, "-2147483648"));
+	if (n < 0)
+	{
+		tab[0] = '-';
+		i++;
+		n = n * (-1);
+	}
+	while (j < ft_val(n))
+	{
+		power = ft_val(n) - (j++) - 1;
+		tab[i++] = 48 + (n / (ft_power(10, power)) % 10);
+	}
+	tab[i] = '\0';
+	return (tab);
 }

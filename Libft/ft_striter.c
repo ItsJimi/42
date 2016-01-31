@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaiquez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/27 17:27:20 by jmaiquez          #+#    #+#             */
-/*   Updated: 2015/11/28 17:24:33 by jmaiquez         ###   ########.fr       */
+/*   Created: 2015/11/25 17:05:36 by jmaiquez          #+#    #+#             */
+/*   Updated: 2015/12/02 16:49:22 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,14 @@
 
 void	ft_striter(char *s, void (*f)(char *))
 {
-	size_t		i;
+	int	i;
 
 	i = 0;
-	if (s && f)
+	if (!s || !f)
+		return ;
+	while (s[i])
 	{
-		while (s[i] != '\0')
-		{
-			f(s + i);
-			i++;
-		}
+		f(&s[i]);
+		i++;
 	}
 }

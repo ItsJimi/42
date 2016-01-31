@@ -5,21 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaiquez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/24 14:00:14 by jmaiquez          #+#    #+#             */
-/*   Updated: 2015/11/24 14:05:03 by jmaiquez         ###   ########.fr       */
+/*   Created: 2015/11/23 14:15:58 by jmaiquez          #+#    #+#             */
+/*   Updated: 2015/11/25 18:59:18 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(const char *s, int fd)
+void	ft_putstr_fd(char const *s, int fd)
 {
-	int		i;
+	int i;
 
 	i = 0;
-	while (s[i] != '\0')
+	while (s[i])
 	{
-		ft_putchar_fd(s[i], fd);
+		write(fd, &s[i], 1);
 		i++;
 	}
 }

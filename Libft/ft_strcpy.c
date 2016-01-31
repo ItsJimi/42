@@ -5,21 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaiquez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/24 16:07:25 by jmaiquez          #+#    #+#             */
-/*   Updated: 2015/12/03 16:56:09 by jmaiquez         ###   ########.fr       */
+/*   Created: 2015/11/24 11:48:22 by jmaiquez          #+#    #+#             */
+/*   Updated: 2016/01/08 15:11:49 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 char	*ft_strcpy(char *dst, const char *src)
 {
-	int		i;
+	int	k;
 
-	i = 0;
-	while (src[i] != '\0')
+	k = 0;
+	while (src[k])
 	{
-		dst[i] = src[i];
-		i++;
+		dst[k] = src[k];
+		k++;
 	}
-	dst[i] = '\0';
+	dst[k] = '\0';
 	return (dst);
 }

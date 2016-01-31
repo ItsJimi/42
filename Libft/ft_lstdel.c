@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   ft_lstdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaiquez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/23 14:03:06 by jmaiquez          #+#    #+#             */
-/*   Updated: 2015/11/24 19:14:18 by jmaiquez         ###   ########.fr       */
+/*   Created: 2015/11/29 11:58:20 by jmaiquez          #+#    #+#             */
+/*   Updated: 2015/11/29 12:26:37 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putchar(char c)
+void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
 {
-	write(1, &c, 1);
+	t_list	*next;
+
+	while (*alst)
+	{
+		next = (*alst)->next;
+		ft_lstdelone(alst, del);
+		*alst = next;
+	}
+	ft_memdel((void *)alst);
 }

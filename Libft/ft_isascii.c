@@ -5,19 +5,17 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaiquez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/23 17:22:57 by jmaiquez          #+#    #+#             */
-/*   Updated: 2015/11/24 15:47:30 by jmaiquez         ###   ########.fr       */
+/*   Created: 2015/11/23 17:16:30 by jmaiquez          #+#    #+#             */
+/*   Updated: 2015/11/23 17:34:56 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isascii(int c)
+int	ft_isascii(int c)
 {
 	if (c >= 0 && c <= 127)
 	{
 		return (1);
 	}
 	else
-	{
 		return (0);
-	}
 }

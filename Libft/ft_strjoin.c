@@ -5,37 +5,33 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaiquez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/28 18:31:21 by jmaiquez          #+#    #+#             */
-/*   Updated: 2015/12/11 16:07:33 by jmaiquez         ###   ########.fr       */
+/*   Created: 2015/11/26 18:30:22 by jmaiquez          #+#    #+#             */
+/*   Updated: 2016/01/14 14:28:38 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *str1, char const *str2)
 {
-	size_t	i;
-	size_t	j;
-	char	*mem;
+	char	*newstr;
+	int		i;
+	int		j;
 
-	i = 0;
-	j = 0;
-	if (s1 == NULL || s2 == NULL)
-		return (NULL);
-	mem = ft_memalloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (mem == NULL)
-		return (NULL);
-	while (s1[i] != '\0')
+	if (str1 && str2)
 	{
-		mem[i] = s1[i];
-		i++;
+		newstr = (char *)malloc(sizeof(newstr) *
+								(ft_strlen(str1) + ft_strlen(str2) + 1));
+		if (newstr == NULL)
+			return (NULL);
+		i = -1;
+		while (str1[++i])
+			newstr[i] = str1[i];
+		j = -1;
+		while (str2[++j])
+			newstr[i + j] = str2[j];
+		newstr[i + j] = '\0';
+		return (newstr);
 	}
-	while (s2[j] != '\0')
-	{
-		mem[i] = s2[j];
-		i++;
-		j++;
-	}
-	mem[i] = '\0';
-	return (mem);
+	return (NULL);
 }

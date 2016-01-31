@@ -5,21 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaiquez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/24 17:22:33 by jmaiquez          #+#    #+#             */
-/*   Updated: 2015/11/27 13:05:32 by jmaiquez         ###   ########.fr       */
+/*   Created: 2015/11/24 10:56:00 by jmaiquez          #+#    #+#             */
+/*   Updated: 2015/11/25 19:45:12 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
 char	*ft_strcat(char *s1, const char *s2)
 {
-	int		i;
-	int		len;
+	int	i;
+	int	len;
 
 	i = 0;
-	len = ft_strlen(s1);
-	while (s2[i] != '\0')
+	len = 0;
+	while (s1[len])
+		len++;
+	while (s2[i])
 	{
 		s1[len + i] = s2[i];
 		i++;

@@ -1,18 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   ft_freedtab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaiquez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/23 14:03:06 by jmaiquez          #+#    #+#             */
-/*   Updated: 2015/11/24 19:14:18 by jmaiquez         ###   ########.fr       */
+/*   Created: 2015/12/03 15:36:05 by jmaiquez          #+#    #+#             */
+/*   Updated: 2015/12/03 15:38:16 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putchar(char c)
+void	ft_freedtab(char **tab)
 {
-	write(1, &c, 1);
+	int	i;
+
+	i = 0;
+	if (tab == NULL)
+	{
+		free(tab);
+		tab = NULL;
+		return ;
+	}
+	while (tab[i])
+	{
+		free(tab[i]);
+		tab[i] = NULL;
+		i++;
+	}
+	free(tab[i]);
+	tab[i] = NULL;
+	free(tab);
+	tab = NULL;
 }

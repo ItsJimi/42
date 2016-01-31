@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaiquez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/25 16:49:57 by jmaiquez          #+#    #+#             */
-/*   Updated: 2015/12/03 16:56:08 by jmaiquez         ###   ########.fr       */
+/*   Created: 2015/11/24 13:06:15 by jmaiquez          #+#    #+#             */
+/*   Updated: 2016/01/05 18:06:18 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,20 @@
 
 char	*ft_strdup(const char *s1)
 {
-	char	*str1;
+	int		i;
+	char	*dst;
 
-	str1 = (char *)malloc(sizeof(*str1) * (ft_strlen(s1) + 1));
-	if (str1 == NULL)
+	i = 0;
+	if (!s1)
 		return (NULL);
-	ft_strcpy(str1, (char *)s1);
-	return (str1);
+	dst = (char *)malloc(sizeof(dst) * (ft_strlen(s1) + 1));
+	if (!dst)
+		return (NULL);
+	while (s1[i])
+	{
+		dst[i] = s1[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
 }

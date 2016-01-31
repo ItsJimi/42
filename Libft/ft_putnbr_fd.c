@@ -5,53 +5,51 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaiquez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/24 14:38:18 by jmaiquez          #+#    #+#             */
-/*   Updated: 2015/12/02 15:52:56 by jmaiquez         ###   ########.fr       */
+/*   Created: 2015/11/26 20:24:22 by jmaiquez          #+#    #+#             */
+/*   Updated: 2015/12/04 10:58:11 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	itoa_putnbr(int n, int j, int started, int fd)
+static	int	ft_val(int n)
 {
-	int		i;
+	int i;
 
-	i = 1000000000;
-	if (n < 0)
+	i = 0;
+	if (n == 0)
+		return (1);
+	while (n != 0)
 	{
-		ft_putchar_fd('-', fd);
-		n *= -1;
+		n = n / 10;
+		i++;
 	}
-	while (i != 0)
-	{
-		if ((n / i) != 0)
-		{
-			started = 1;
-			ft_putchar_fd((n / i) + '0', fd);
-			n -= ((n / i) * i);
-			j++;
-		}
-		else if (started)
-		{
-			ft_putchar_fd('0', fd);
-			j++;
-		}
-		i /= 10;
-	}
+	return (i);
 }
 
 void		ft_putnbr_fd(int n, int fd)
 {
-	int		j;
+	int	j;
+	int	i;
+	int	power;
 
-	if (n < 0)
-		j = 1;
-	else
-		j = 0;
-	if (n == 0)
-		ft_putchar_fd('0', fd);
-	else if (n == -2147483648)
+	if (n == -2147483648)
+	{
 		ft_putstr_fd("-2147483648", fd);
-	else
-		itoa_putnbr(n, j, 0, fd);
+		return ;
+	}
+	i = 0;
+	j = 0;
+	if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		i++;
+		n = n * (-1);
+	}
+	while (j < ft_val(n))
+	{
+		power = ft_val(n) - j - 1;
+		ft_putchar_fd(48 + (n / (ft_power(10, power)) % 10), fd);
+		j++;
+	}
 }

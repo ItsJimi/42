@@ -5,23 +5,17 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaiquez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/23 17:50:19 by jmaiquez          #+#    #+#             */
-/*   Updated: 2015/11/27 11:07:24 by jmaiquez         ###   ########.fr       */
+/*   Created: 2015/11/23 17:53:24 by jmaiquez          #+#    #+#             */
+/*   Updated: 2015/11/23 18:39:24 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isalpha(int c)
+int	ft_isalpha(int c)
 {
-	if (c >= 65 && c <= 90)
-	{
+	if (c >= 'a' && c <= 'z')
 		return (1);
-	}
-	else if (c >= 97 && c <= 122)
-	{
+	else if (c >= 'A' && c <= 'Z')
 		return (1);
-	}
 	else
-	{
 		return (0);
-	}
 }

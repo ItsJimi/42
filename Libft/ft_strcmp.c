@@ -5,19 +5,17 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaiquez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/24 11:03:49 by jmaiquez          #+#    #+#             */
-/*   Updated: 2015/12/10 14:09:44 by jmaiquez         ###   ########.fr       */
+/*   Created: 2015/11/23 18:07:27 by jmaiquez          #+#    #+#             */
+/*   Updated: 2015/11/27 14:30:58 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_strcmp(const char *s1, const char *s2)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	int		i;
+	int	i;
 
 	i = 0;
-	while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i])
-	{
+	while (s1[i] && s2[i] && s1[i] == s2[i])
 		i++;
-	}
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

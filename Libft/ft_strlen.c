@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaiquez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/23 14:01:40 by jmaiquez          #+#    #+#             */
-/*   Updated: 2015/12/03 16:56:10 by jmaiquez         ###   ########.fr       */
+/*   Created: 2015/11/24 13:01:50 by jmaiquez          #+#    #+#             */
+/*   Updated: 2015/11/25 11:57:53 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 size_t	ft_strlen(const char *s)
 {
-	int		i;
+	int	i;
 
 	i = 0;
-	while (s[i] != '\0')
+	while (s[i])
 		i++;
 	return (i);
 }
