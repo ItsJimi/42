@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/30 18:41:20 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/01 16:26:18 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/01 18:27:38 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,6 @@ void	str_data(t_mlx *mlx)
 		mlx_string_put(mlx->mlx, mlx->win, 0, 20, 0xFFFFFF, "Menu    :");
 		mlx_string_put(mlx->mlx, mlx->win, 100, 20, 0x8f8f8f, "Home");
 	}
-	mlx_string_put(mlx->mlx, mlx->win, 1095, 975, 0x8f8f8f,
+	mlx_string_put(mlx->mlx, mlx->win, 0, mlx->h - 20, 0x8f8f8f,
 		"FdF by jmaiquez <jmaiquez@student.42.fr>");
 }

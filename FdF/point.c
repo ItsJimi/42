@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 18:21:42 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/01 17:53:08 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/01 20:35:35 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ t_point			***dep_point(t_mlx *mlx, t_point ***p)
 	int		y;
 
 	y = 0;
-	while (p[y])
+	while (p[y] && y >= 0 && y <= mlx->h && x >= 0 && x <= mlx->w)
 	{
 		x = 0;
-		while (p[y][x])
+		while (p[y][x] && y >= 0 && y <= mlx->h && x >= 0 && x <= mlx->w)
 		{
 			(p[y][x])->px = (mlx->decalx) + (mlx->perspx * y) + ((p[y][x])->x +
 				(x * mlx->space)) - (((p[y][x])->z * mlx->dim) / 10);

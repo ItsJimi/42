@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 17:36:37 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/01 17:53:04 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/01 19:28:42 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int				color(double t)
 
 void			draw_img(t_mlx *mlx, int color, int x, int y)
 {
-	if (((x >= 0) && (y >= 0)) && ((x < 2560) && (y < 1400)))
+	if (((x >= 0) && (y >= 0)) && ((x < mlx->w) && (y < mlx->h)))
 	{
 		mlx->img->addr[y * mlx->img->size_l + x * mlx->img->bpp / 8] = color
 		% 256;
@@ -49,17 +49,20 @@ static void		first(t_mlx *mlx, int pos[5], int xincr, int yincr)
 	dy = ft_abs((pos[3]) - (pos[1]));
 	e = dx / 2;
 	i = 0;
-	while (i < dx)
+	if (pos[0] < mlx->w && pos[1] < mlx->h)
 	{
-		(pos[0]) += xincr;
-		e += dy;
-		if (e > dx)
+		while (i < dx)
 		{
-			e -= dx;
-			(pos[1]) += yincr;
+			(pos[0]) += xincr;
+			e += dy;
+			if (e > dx)
+			{
+				e -= dx;
+				(pos[1]) += yincr;
+			}
+			draw_img(mlx, pos[4], pos[0], pos[1]);
+			i++;
 		}
-		draw_img(mlx, pos[4], pos[0], pos[1]);
-		i++;
 	}
 }
 
@@ -74,17 +77,20 @@ static void		second(t_mlx *mlx, int pos[5], int xincr, int yincr)
 	dy = ft_abs((pos[3]) - (pos[1]));
 	e = dy / 2;
 	i = 0;
-	while (i < dy)
+	if (pos[0] < mlx->w && pos[1] < mlx->h)
 	{
-		(pos[1]) += yincr;
-		e += dx;
-		if (e > dy)
+		while (i < dy)
 		{
-			e -= dy;
-			(pos[0]) += xincr;
+			(pos[1]) += yincr;
+			e += dx;
+			if (e > dy)
+			{
+				e -= dy;
+				(pos[0]) += xincr;
+			}
+			draw_img(mlx, pos[4], pos[0], pos[1]);
+			i++;
 		}
-		draw_img(mlx, pos[4], pos[0], pos[1]);
-		i++;
 	}
 }
 
