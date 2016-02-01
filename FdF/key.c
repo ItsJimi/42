@@ -6,29 +6,11 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 11:23:31 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/01/30 19:23:03 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/01 17:52:46 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void	reset(t_mlx *mlx)
-{
-	int		x;
-	int		y;
-
-	y = 0;
-	while (y < 1000)
-	{
-		x = 0;
-		while (x < 1500)
-		{
-			draw_img(mlx, 0x000000, x, y);
-			x++;
-		}
-		y++;
-	}
-}
 
 t_mlx	*key_color(int keycode, t_mlx *mlx)
 {
@@ -90,7 +72,7 @@ t_mlx	*key_yolo(int keycode, t_mlx *mlx)
 
 int		key(int keycode, t_mlx *mlx)
 {
-	reset(mlx);
+	mlx->img->addr = ft_memset(mlx->img->addr, 0, 2560 * 1400 * 4 - 1);
 	if (keycode == 53)
 		str_exit(0, "ESC !");
 	if (keycode == 115)

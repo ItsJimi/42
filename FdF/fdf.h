@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 16:51:23 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/01/30 17:41:52 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/01 17:47:19 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ typedef struct	s_img
 {
 	void		*img;
 	char		*addr;
-	char		*data;
 	int			bpp;
 	int			size_l;
 	int			endian;
@@ -67,7 +66,7 @@ typedef struct	s_mlx
 
 t_point			***parse(char *av);
 t_point			*new_point(int x, int y, char *z);
-t_mlx			*new_mlx(int sx, int sy, char *t, char *av);
+t_mlx			*new_mlx(t_mlx *mlx, char *av);
 t_img			*new_img(t_mlx *mlx);
 t_point			***dep_point(t_mlx *mlx, t_point ***p);
 int				draw_line(t_mlx *mlx, int pos[5]);

@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 18:21:42 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/01/30 18:46:36 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/01 17:53:08 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ t_point			***dep_point(t_mlx *mlx, t_point ***p)
 		while (p[y][x])
 		{
 			(p[y][x])->px = (mlx->decalx) + (mlx->perspx * y) + ((p[y][x])->x +
-				(x * mlx->space)) - ((p[y][x])->z * mlx->dim);
+				(x * mlx->space)) - (((p[y][x])->z * mlx->dim) / 10);
 			(p[y][x])->py = (mlx->decaly) + (mlx->perspy * x) + ((p[y][x])->y +
-				(y * mlx->space)) - ((p[y][x])->z * mlx->dim);
+				(y * mlx->space)) - (((p[y][x])->z * mlx->dim) / 10);
 			if (mlx->change_color == 10)
 				p[y][x]->color = color((double)p[y][x]->z);
 			else

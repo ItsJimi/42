@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 17:33:40 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/01/30 17:40:32 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/01 17:52:31 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,24 +64,17 @@ t_img	*new_img(t_mlx *mlx)
 
 	if (!(img = (t_img *)malloc(sizeof(*img))))
 		str_exit(-1, "new.c : Error line 55");
-	img->bpp = 0;
-	img->size_l = 0;
-	img->endian = 0;
-	img->img = mlx_new_image(mlx->mlx, 1500, 1000);
+	img->img = mlx_new_image(mlx->mlx, 2560, 1400);
 	img->addr = mlx_get_data_addr(img->img, &(img->bpp), &(img->size_l),
 		&(img->endian));
 	return (img);
 }
 
-t_mlx	*new_mlx(int sx, int sy, char *t, char *av)
+t_mlx	*new_mlx(t_mlx *mlx, char *av)
 {
-	t_mlx	*mlx;
-
-	if (!(mlx = (t_mlx *)malloc(sizeof(*mlx))))
-		str_exit(-1, "new.c : Error line 32");
 	if (!(mlx->mlx = mlx_init()))
 		str_exit(-1, "new.c : Error line 34");
-	if (!(mlx->win = mlx_new_window(mlx->mlx, sx, sy, t)))
+	if (!(mlx->win = mlx_new_window(mlx->mlx, 2560, 1400, "F D F")))
 		str_exit(-1, "new.c : Error line 36");
 	mlx->img = new_img(mlx);
 	mlx->decalx = 300;

@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 13:20:21 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/01/30 18:48:39 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/01 17:55:03 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,12 @@ int		main(int ac, char **av)
 		str_exit(-1, "No file");
 	if (ac > 2)
 		str_exit(-1, "To many arguments");
-	mlx = new_mlx(1500, 1000, "F D F", av[1]);
+	if (!(mlx = (t_mlx *)malloc(sizeof(*mlx))))
+		str_exit(-1, "new.c : Error line 32");
+	ft_putstr("Chargement de la carte ...\n");
 	mlx->p = parse(av[1]);
+	ft_putstr("Chargement termine !\n");
+	mlx = new_mlx(mlx, av[1]);
 	mlx->p = dep_point(mlx, mlx->p);
 	draw_point(mlx, mlx->p);
 	mlx_hook(mlx->win, 2, 0, key, mlx);
