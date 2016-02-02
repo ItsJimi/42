@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 17:33:40 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/01 18:19:49 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/02 18:53:26 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ t_point	*new_point(int x, int y, char *z)
 	point->z = ft_atoi(z);
 	point->color = find_color(z);
 	point->savecolor = point->color;
+	free(z);
 	return (point);
 }
 

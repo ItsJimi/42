@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 17:36:37 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/01 19:28:42 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/02 18:59:46 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,17 @@ static void		first(t_mlx *mlx, int pos[5], int xincr, int yincr)
 	dy = ft_abs((pos[3]) - (pos[1]));
 	e = dx / 2;
 	i = 0;
-	if (pos[0] < mlx->w && pos[1] < mlx->h)
+	while (i < dx)
 	{
-		while (i < dx)
+		(pos[0]) += xincr;
+		e += dy;
+		if (e > dx)
 		{
-			(pos[0]) += xincr;
-			e += dy;
-			if (e > dx)
-			{
-				e -= dx;
-				(pos[1]) += yincr;
-			}
-			draw_img(mlx, pos[4], pos[0], pos[1]);
-			i++;
+			e -= dx;
+			(pos[1]) += yincr;
 		}
+		draw_img(mlx, pos[4], pos[0], pos[1]);
+		i++;
 	}
 }
 
@@ -77,20 +74,17 @@ static void		second(t_mlx *mlx, int pos[5], int xincr, int yincr)
 	dy = ft_abs((pos[3]) - (pos[1]));
 	e = dy / 2;
 	i = 0;
-	if (pos[0] < mlx->w && pos[1] < mlx->h)
+	while (i < dy)
 	{
-		while (i < dy)
+		(pos[1]) += yincr;
+		e += dx;
+		if (e > dy)
 		{
-			(pos[1]) += yincr;
-			e += dx;
-			if (e > dy)
-			{
-				e -= dy;
-				(pos[0]) += xincr;
-			}
-			draw_img(mlx, pos[4], pos[0], pos[1]);
-			i++;
+			e -= dy;
+			(pos[0]) += xincr;
 		}
+		draw_img(mlx, pos[4], pos[0], pos[1]);
+		i++;
 	}
 }
 

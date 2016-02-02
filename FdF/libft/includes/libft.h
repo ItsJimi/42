@@ -6,13 +6,13 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 15:14:46 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/01 18:59:10 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/02 17:07:01 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# define BUFF_SIZE 2048
+# define BUFF_SIZE 4096
 
 # include <unistd.h>
 # include <stdlib.h>

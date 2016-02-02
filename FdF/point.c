@@ -6,13 +6,13 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 18:21:42 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/01 20:35:35 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/02 19:01:09 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void		change_color(t_mlx *mlx, t_point ***p, int x, int y)
+static void	change_color(t_mlx *mlx, t_point ***p, int x, int y)
 {
 	if (mlx->change_color == 0)
 		p[y][x]->color = rand();
@@ -38,7 +38,7 @@ static void		change_color(t_mlx *mlx, t_point ***p, int x, int y)
 		p[y][x]->color = p[y][x]->savecolor;
 }
 
-static void		new_pos_y(t_mlx *mlx, t_point ***p, int x, int y)
+void		new_pos_y(t_mlx *mlx, t_point ***p, int x, int y)
 {
 	mlx->pos[0] = p[y][x]->px;
 	mlx->pos[1] = p[y][x]->py;
@@ -50,7 +50,7 @@ static void		new_pos_y(t_mlx *mlx, t_point ***p, int x, int y)
 	mlx->pos[4] = p[y][x]->color;
 }
 
-static void		new_pos_x(t_mlx *mlx, t_point ***p, int x, int y)
+void		new_pos_x(t_mlx *mlx, t_point ***p, int x, int y)
 {
 	mlx->pos[0] = p[y][x]->px;
 	mlx->pos[1] = p[y][x]->py;
@@ -62,33 +62,25 @@ static void		new_pos_x(t_mlx *mlx, t_point ***p, int x, int y)
 	mlx->pos[4] = p[y][x]->color;
 }
 
-t_point			***dep_point(t_mlx *mlx, t_point ***p)
+void		draw_point(int x, int y, t_mlx *mlx, t_point ***p)
 {
-	int		x;
-	int		y;
-
-	y = 0;
-	while (p[y] && y >= 0 && y <= mlx->h && x >= 0 && x <= mlx->w)
+	if (x > 0 && p[y][x - 1]->px <= mlx->w && p[y][x]->px > 0 - ft_abs(mlx->space))
 	{
-		x = 0;
-		while (p[y][x] && y >= 0 && y <= mlx->h && x >= 0 && x <= mlx->w)
-		{
-			(p[y][x])->px = (mlx->decalx) + (mlx->perspx * y) + ((p[y][x])->x +
-				(x * mlx->space)) - (((p[y][x])->z * mlx->dim) / 10);
-			(p[y][x])->py = (mlx->decaly) + (mlx->perspy * x) + ((p[y][x])->y +
-				(y * mlx->space)) - (((p[y][x])->z * mlx->dim) / 10);
-			if (mlx->change_color == 10)
-				p[y][x]->color = color((double)p[y][x]->z);
-			else
-				change_color(mlx, p, x, y);
-			x++;
-		}
+		x--;
+		new_pos_x(mlx, p, x, y);
+		draw_line(mlx, mlx->pos);
+		x++;
+	}
+	if (y > 0 && p[y - 1][x]->py <= mlx->h && p[y][x]->py > 0  - ft_abs(mlx->space))
+	{
+		y--;
+		new_pos_y(mlx, p, x, y);
+		draw_line(mlx, mlx->pos);
 		y++;
 	}
-	return (p);
 }
 
-void			draw_point(t_mlx *mlx, t_point ***p)
+t_point		***dep_point(t_mlx *mlx, t_point ***p)
 {
 	int		x;
 	int		y;
@@ -99,20 +91,20 @@ void			draw_point(t_mlx *mlx, t_point ***p)
 		x = 0;
 		while (p[y][x])
 		{
-			if (p[y][x + 1])
-			{
-				new_pos_x(mlx, p, x, y);
-				draw_line(mlx, mlx->pos);
-			}
-			if (p[y + 1] && p[y + 1][x])
-			{
-				new_pos_y(mlx, p, x, y);
-				draw_line(mlx, mlx->pos);
-			}
+			(p[y][x])->px = (mlx->decalx) + (mlx->perspx * y) + ((p[y][x])->x +
+				(x * mlx->space)) - (((p[y][x])->z * mlx->dim) / 10);
+			(p[y][x])->py = (mlx->decaly) + (mlx->perspy * x) + ((p[y][x])->y +
+				(y * mlx->space)) - (((p[y][x])->z * mlx->dim) / 10);
+			if (mlx->change_color == 10)
+				p[y][x]->color = color((double)p[y][x]->z);
+			else
+				change_color(mlx, p, x, y);
+			draw_point(x, y, mlx, p);
 			x++;
 		}
 		y++;
 	}
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->img, 0, 0);
 	str_data(mlx);
+	return (p);
 }

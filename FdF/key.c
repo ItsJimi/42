@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 11:23:31 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/02 12:46:45 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/02 18:53:40 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,5 @@ int		key(int keycode, t_mlx *mlx)
 	mlx = key_yolo(keycode, mlx);
 	mlx = key_color(keycode, mlx);
 	mlx->p = dep_point(mlx, mlx->p);
-	draw_point(mlx, mlx->p);
 	return (0);
 }
