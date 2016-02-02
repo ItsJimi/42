@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/30 18:41:20 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/01 18:27:38 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/02 12:50:30 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	str_menu_key(t_mlx *mlx)
 	mlx_string_put(mlx->mlx, mlx->win, 160, 320, 0x8f8f8f, "+ | -");
 	mlx_string_put(mlx->mlx, mlx->win, 0, 340, 0xFFFFFF, "Perspective   :");
 	mlx_string_put(mlx->mlx, mlx->win, 160, 340, 0x8f8f8f, "F16~F19");
-	mlx_string_put(mlx->mlx, mlx->win, 0, 360, 0xFFFFFF, "Effacer       :");
+	mlx_string_put(mlx->mlx, mlx->win, 0, 360, 0xFFFFFF, "Reinitialiser :");
 	mlx_string_put(mlx->mlx, mlx->win, 160, 360, 0x8f8f8f, "Clear");
 }
 
