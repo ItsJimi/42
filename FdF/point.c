@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 18:21:42 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/02 19:01:09 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/03 16:55:08 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,16 @@ void		new_pos_x(t_mlx *mlx, t_point ***p, int x, int y)
 
 void		draw_point(int x, int y, t_mlx *mlx, t_point ***p)
 {
-	if (x > 0 && p[y][x - 1]->px <= mlx->w && p[y][x]->px > 0 - ft_abs(mlx->space))
+	if (x > 0 && p[y][x - 1]->px <= mlx->w &&
+		p[y][x]->px > 0 - ft_abs(mlx->space))
 	{
 		x--;
 		new_pos_x(mlx, p, x, y);
 		draw_line(mlx, mlx->pos);
 		x++;
 	}
-	if (y > 0 && p[y - 1][x]->py <= mlx->h && p[y][x]->py > 0  - ft_abs(mlx->space))
+	if (y > 0 && p[y - 1][x] && p[y - 1][x]->py <= mlx->h &&
+		p[y][x]->py > 0 - ft_abs(mlx->space))
 	{
 		y--;
 		new_pos_y(mlx, p, x, y);

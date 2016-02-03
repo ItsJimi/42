@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 13:20:17 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/02 18:53:29 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/03 16:55:11 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,13 @@ static t_point	**define(char *line, int y)
 		str_exit(-1, "parse.c : Error line 54");
 	while (x < nbr_case)
 	{
+		if (gnl_error(tab[x]) == -1)
+			str_exit(-1, "Are you fucking kidding me ?");
 		point[x] = new_point(x, y, tab[x]);
 		x++;
 	}
+	if (x == 0)
+		str_exit(-1, "Are you fucking kidding me ?");
 	point[x] = NULL;
 	return (point);
 }
@@ -83,7 +87,7 @@ t_point			***parse(char *av)
 		y++;
 	}
 	point[y] = NULL;
-	if (error == 0)
+	if (error == 0 && y != 0)
 		return (point);
 	else
 		str_exit(-1, "Error gnl");

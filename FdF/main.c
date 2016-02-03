@@ -6,11 +6,29 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 13:20:21 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/02 18:53:42 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/03 16:55:05 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+int		gnl_error(char *tab)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	while (tab[i])
+	{
+		if (tab[i] >= 48 && tab[i] <= 57)
+			j++;
+		i++;
+	}
+	if (j == 0)
+		return (-1);
+	return (0);
+}
 
 int		main(int ac, char **av)
 {
@@ -18,19 +36,14 @@ int		main(int ac, char **av)
 
 	if (ac < 2)
 		str_exit(-1, "No file");
-	if (ac == 2)
-	{
-		av[2] = "2560";
-		av[3] = "1395";
-	}
-	if (ac > 4)
+	if (ac > 2)
 		str_exit(-1, "To many arguments");
 	if (!(mlx = (t_mlx *)malloc(sizeof(*mlx))))
 		str_exit(-1, "new.c : Error line 32");
 	ft_putstr("Chargement de la carte ...\n");
 	mlx->p = parse(av[1]);
 	ft_putstr("Chargement termine !\n");
-	mlx = new_mlx(mlx, av[1], ft_atoi(av[2]), ft_atoi(av[3]));
+	mlx = new_mlx(mlx, av[1]);
 	mlx->p = dep_point(mlx, mlx->p);
 	mlx_hook(mlx->win, 2, 0, key, mlx);
 	mlx_loop(mlx->mlx);
