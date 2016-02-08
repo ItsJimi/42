@@ -62,27 +62,28 @@ t_mlx	*key_yolo(int keycode, t_mlx *mlx)
 		mlx->decaly += 10;
 	if (keycode == 126)
 		mlx->decaly -= 10;
-	if (keycode == 69)
+	if (keycode == 8)
 		mlx->dim++;
-	if (keycode == 78)
+	if (keycode == 9)
 		mlx->dim--;
-	if (keycode == 67)
+	if (keycode == 6)
 		mlx->space++;
-	if (keycode == 75)
+	if (keycode == 7)
 		mlx->space--;
-	if (keycode == 106)
+	if (keycode == 12)
 		mlx->perspx++;
-	if (keycode == 64)
+	if (keycode == 13)
 		mlx->perspx--;
-	if (keycode == 79)
+	if (keycode == 14)
 		mlx->perspy++;
-	if (keycode == 80)
+	if (keycode == 15)
 		mlx->perspy--;
 	return (mlx);
 }
 
 int		key(int keycode, t_mlx *mlx)
 {
+	ft_putnbr(keycode);
 	mlx->img->addr = ft_memset(mlx->img->addr, 0, 2560 * 1400 * 4 - 1);
 	if (keycode == 53)
 		str_exit(0, "ESC !");

@@ -15,7 +15,7 @@
 # define RGB(r, g, b)(256 * 256 * (int)(r) + 256 * (int)(g) + (int)(b))
 
 # include "libft/includes/libft.h"
-# include <mlx.h>
+# include "mlx/mlx.h"
 # include <math.h>
 
 typedef struct	s_img

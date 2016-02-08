@@ -73,8 +73,8 @@ t_img	*new_img(t_mlx *mlx)
 
 t_mlx	*new_mlx(t_mlx *mlx, char *av)
 {
-	mlx->w = 2560;
-	mlx->h = 1395;
+	mlx->w = 1280;
+	mlx->h = 800;
 	if (!(mlx->mlx = mlx_init()))
 		str_exit(-1, "new.c : Error line 34");
 	if (!(mlx->win = mlx_new_window(mlx->mlx, mlx->w, mlx->h, "F D F")))
