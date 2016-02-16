@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 13:20:21 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/16 13:51:19 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/16 15:58:32 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		main(int ac, char **av)
 		str_exit(-1, "main.c : Error line 23");
 	ft_putstr("Chargement ...\n");
 	mlx = new_mlx(mlx, av[1]);
-	mlx->p = draw(mlx, mlx->p);
+	draw(mlx);
 	mlx_hook(mlx->win, 2, 0, key, mlx);
 	mlx_loop(mlx->mlx);
 }

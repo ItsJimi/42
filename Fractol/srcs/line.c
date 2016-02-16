@@ -6,12 +6,12 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 17:36:37 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/16 13:51:21 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/16 14:10:33 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
+/*
 int				color(double t)
 {
 	return ((RGB(
@@ -107,3 +107,4 @@ int				draw_line(t_mlx *mlx, int pos[5])
 		second(mlx, pos, xincr, yincr);
 	return (0);
 }
+*/

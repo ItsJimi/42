@@ -6,13 +6,13 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 11:23:31 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/03 16:21:29 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/16 19:31:34 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fractol.h"
 
-void	clear(t_mlx *mlx)
+/*void	clear(t_mlx *mlx)
 {
 	mlx->decalx = 300;
 	mlx->decaly = 300;
@@ -50,52 +50,45 @@ t_mlx	*key_color(int keycode, t_mlx *mlx)
 	if (keycode == 65)
 		mlx->change_color = 10;
 	return (mlx);
-}
+}*/
 
 t_mlx	*key_yolo(int keycode, t_mlx *mlx)
 {
 	if (keycode == 123)
-		mlx->decalx -= 10;
+		mlx->x1 += 0.01;
 	if (keycode == 124)
-		mlx->decalx += 10;
+		mlx->x1 -= 0.01;
 	if (keycode == 125)
-		mlx->decaly += 10;
+		mlx->y1 -= 0.01;
 	if (keycode == 126)
-		mlx->decaly -= 10;
-	if (keycode == 8)
-		mlx->dim++;
-	if (keycode == 9)
-		mlx->dim--;
-	if (keycode == 6)
-		mlx->space++;
-	if (keycode == 7)
-		mlx->space--;
-	if (keycode == 12)
-		mlx->perspx++;
-	if (keycode == 13)
-		mlx->perspx--;
-	if (keycode == 14)
-		mlx->perspy++;
-	if (keycode == 15)
-		mlx->perspy--;
+		mlx->y1 += 0.01;
+	if (keycode == 69)
+		mlx->zoom += 10;
+	if (keycode == 78)
+		mlx->zoom -= 10;
+	if (keycode == 67)
+		mlx->max += 10;
+	if (keycode == 75)
+		mlx->max -= 10;
 	return (mlx);
 }
 
 int		key(int keycode, t_mlx *mlx)
 {
 	ft_putnbr(keycode);
-	mlx->img->addr = ft_memset(mlx->img->addr, 0, 2560 * 1400 * 4 - 1);
+	mlx->img->addr = ft_memset(mlx->img->addr, 0, mlx->w * mlx->h * 4 - 1);
 	if (keycode == 53)
-		str_exit(0, "ESC !");
-	if (keycode == 115)
-	{
-		if (mlx->menu == 1)
-			mlx->menu = 0;
-		else
-			mlx->menu = 1;
-	}
+	 	str_exit(0, "ESC !");
+	// if (keycode == 115)
+	// {
+	// 	if (mlx->menu == 1)
+	// 		mlx->menu = 0;
+	// 	else
+	// 		mlx->menu = 1;
+	// }
 	mlx = key_yolo(keycode, mlx);
-	mlx = key_color(keycode, mlx);
-	mlx->p = dep_point(mlx, mlx->p);
+	// mlx = key_color(keycode, mlx);
+	// mlx->p = dep_point(mlx, mlx->p);
+	draw(mlx);
 	return (0);
 }
