@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 17:33:40 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/19 13:20:48 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/19 14:53:17 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_img	*new_img(t_mlx *mlx)
 	return (img);
 }
 
-t_mlx	*new_mlx(t_mlx *mlx, char *av)
+t_mlx	*new_mlx(t_mlx *mlx, int av)
 {
 	mlx->w = 500;
 	mlx->h = 500;
@@ -35,6 +35,7 @@ t_mlx	*new_mlx(t_mlx *mlx, char *av)
 	mlx->y2 = 2;
 	mlx->zoom = 100;
 	mlx->max = 50;
+	mlx->change_color = 0xffffff;
 	if (!(mlx->mlx = mlx_init()))
 		str_exit(-1, "new.c : Error line 34");
 	if (!(mlx->win = mlx_new_window(mlx->mlx, mlx->w, mlx->h, "F R A C T O L")))

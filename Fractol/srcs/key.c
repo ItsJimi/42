@@ -6,51 +6,50 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 11:23:31 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/18 16:40:00 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/19 17:07:00 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-/*void	clear(t_mlx *mlx)
+void	clear(t_mlx *mlx)
 {
-	mlx->decalx = 300;
-	mlx->decaly = 300;
-	mlx->perspx = 0;
-	mlx->perspy = 0;
-	mlx->space = 10;
-	mlx->dim = 3;
-	mlx->change_color = 1;
+	mlx->x1 = -2;
+	mlx->x2 = -2 + 4 * mlx->w / mlx->h;
+	mlx->y1 = -2;
+	mlx->y2 = 2;
+	mlx->zoom = 100;
+	mlx->max = 50;
 }
 
 t_mlx	*key_color(int keycode, t_mlx *mlx)
 {
 	if (keycode == 82)
-		mlx->change_color = 0;
+		mlx->change_color = rand();
 	if (keycode == 83)
-		mlx->change_color = 1;
+		mlx->change_color = 8;
 	if (keycode == 84)
-		mlx->change_color = 2;
+		mlx->change_color = 8;
 	if (keycode == 85)
-		mlx->change_color = 3;
+		mlx->change_color = 8;
 	if (keycode == 86)
-		mlx->change_color = 4;
-	if (keycode == 71)
+		mlx->change_color = 8;
+	if (keycode == 51)
 		clear(mlx);
 	if (keycode == 88)
-		mlx->change_color = 6;
+		mlx->change_color = 8;
 	if (keycode == 89)
-		mlx->change_color = 7;
+		mlx->change_color = 8;
 	if (keycode == 91)
 		mlx->change_color = 8;
 	if (keycode == 92)
-		mlx->change_color = 9;
+		mlx->change_color = 0xf0f0f0;
 	if (keycode == 87)
-		mlx->change_color = 11;
+		mlx->change_color = 0x0f0f0f;
 	if (keycode == 65)
-		mlx->change_color = 10;
+		mlx->change_color = 0x000000;
 	return (mlx);
-}*/
+}
 
 t_mlx	*key_yolo(int keycode, t_mlx *mlx)
 {
@@ -67,9 +66,9 @@ t_mlx	*key_yolo(int keycode, t_mlx *mlx)
 	if (keycode == 78)
 		mlx->zoom -= 10;
 	if (keycode == 67)
-		mlx->max += 10;
+		mlx->max++;
 	if (keycode == 75)
-		mlx->max -= 10;
+		mlx->max--;
 	return (mlx);
 }
 
@@ -87,8 +86,7 @@ int		key(int keycode, t_mlx *mlx)
 	// 		mlx->menu = 1;
 	// }
 	mlx = key_yolo(keycode, mlx);
-	// mlx = key_color(keycode, mlx);
-	// mlx->p = dep_point(mlx, mlx->p);
+	mlx = key_color(keycode, mlx);
 	draw(mlx);
 	return (0);
 }
