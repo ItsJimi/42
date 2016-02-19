@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 16:51:23 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/16 16:16:02 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/18 16:50:56 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ typedef struct	s_mlx
 	int			h;
 	int			w;
 
+	double		x;
+	double		y;
 	double		x1;
 	double		x2;
 	double		y1;
@@ -46,9 +48,10 @@ typedef struct	s_mlx
 	int			max;
 }				t_mlx;
 
-void draw(t_mlx *mlx);
+void	draw(t_mlx *mlx);
 int		str_exit(int error, char *str);
 t_mlx	*new_mlx(t_mlx *mlx, char *av);
 int		key(int keycode, t_mlx *mlx);
+int		mouse(int c, int x, int y, t_mlx *mlx);
 
 #endif

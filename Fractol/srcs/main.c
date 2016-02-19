@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 13:20:21 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/16 15:58:32 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/18 17:20:44 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,7 @@ int		main(int ac, char **av)
 	mlx = new_mlx(mlx, av[1]);
 	draw(mlx);
 	mlx_hook(mlx->win, 2, 0, key, mlx);
+	mlx_hook(mlx->win, 4, 0, mouse, mlx);
+	//mlx_hook(mlx->win, 6, 0, click, mlx);
 	mlx_loop(mlx->mlx);
 }
