@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 11:23:31 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/19 17:07:00 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/20 17:28:39 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,38 +16,30 @@ void	clear(t_mlx *mlx)
 {
 	mlx->x1 = -2;
 	mlx->x2 = -2 + 4 * mlx->w / mlx->h;
-	mlx->y1 = -2;
+	mlx->y1 = -1.2;
 	mlx->y2 = 2;
-	mlx->zoom = 100;
-	mlx->max = 50;
+	mlx->zoom = 200;
+	mlx->max = 20;
 }
 
 t_mlx	*key_color(int keycode, t_mlx *mlx)
 {
-	if (keycode == 82)
-		mlx->change_color = rand();
-	if (keycode == 83)
-		mlx->change_color = 8;
-	if (keycode == 84)
-		mlx->change_color = 8;
-	if (keycode == 85)
-		mlx->change_color = 8;
-	if (keycode == 86)
-		mlx->change_color = 8;
+	if (keycode == 18)
+		mlx->change_color = 0;
+	if (keycode == 19)
+		mlx->change_color = 1;
+	if (keycode == 20)
+		mlx->change_color = 2;
+	if (keycode == 21)
+		mlx->change_color = 3;
+	if (keycode == 23)
+		mlx->change_color = 4;
 	if (keycode == 51)
 		clear(mlx);
-	if (keycode == 88)
-		mlx->change_color = 8;
-	if (keycode == 89)
-		mlx->change_color = 8;
-	if (keycode == 91)
-		mlx->change_color = 8;
-	if (keycode == 92)
-		mlx->change_color = 0xf0f0f0;
-	if (keycode == 87)
-		mlx->change_color = 0x0f0f0f;
-	if (keycode == 65)
-		mlx->change_color = 0x000000;
+	if (keycode == 22)
+		mlx->change_color = 5;
+	if (keycode == 50)
+		mlx->change_color = 6;
 	return (mlx);
 }
 
@@ -61,30 +53,32 @@ t_mlx	*key_yolo(int keycode, t_mlx *mlx)
 		mlx->y1 -= 0.01;
 	if (keycode == 126)
 		mlx->y1 += 0.01;
-	if (keycode == 69)
+	if (keycode == 24)
 		mlx->zoom += 10;
-	if (keycode == 78)
-		mlx->zoom -= 10;
-	if (keycode == 67)
+	if (keycode == 27)
+	{
+		if (mlx->zoom > 0)
+			mlx->zoom -= 10;
+	}
+	if (keycode == 29)
 		mlx->max++;
-	if (keycode == 75)
-		mlx->max--;
+	if (keycode == 25)
+	{
+		if (mlx->max > 0)
+			mlx->max--;
+	}
 	return (mlx);
 }
 
 int		key(int keycode, t_mlx *mlx)
 {
+	int		i;
+
+	i = 0;
 	ft_putnbr(keycode);
 	mlx->img->addr = ft_memset(mlx->img->addr, 0, mlx->w * mlx->h * 4 - 1);
 	if (keycode == 53)
-	 	str_exit(0, "ESC !");
-	// if (keycode == 115)
-	// {
-	// 	if (mlx->menu == 1)
-	// 		mlx->menu = 0;
-	// 	else
-	// 		mlx->menu = 1;
-	// }
+		str_exit(0, "ESC !");
 	mlx = key_yolo(keycode, mlx);
 	mlx = key_color(keycode, mlx);
 	draw(mlx);

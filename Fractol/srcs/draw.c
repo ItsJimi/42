@@ -6,18 +6,41 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:43:42 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/19 15:34:30 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/20 17:28:37 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
+int		color_fract(t_mlx *mlx, int i)
+{
+	int	color;
+
+	i *= 20;
+	if (mlx->change_color == 0)
+		color = (i | (i << 8) | i << 16);
+	else if (mlx->change_color == 1)
+		color = (i << 8);
+	else if (mlx->change_color == 2)
+		color = (i << 16);
+	else if (mlx->change_color == 3)
+		color = (i | i << 8);
+	else if (mlx->change_color == 4)
+		color = (i | i << 16);
+	else if (mlx->change_color == 5)
+		color = (i | (i >> 8) | i >> 16);
+	else if (mlx->change_color == 6)
+		color = (i >> rand());
+	else
+		color = (i | (i << 8) | i << 16);
+	return (color);
+}
+
 void	draw_img(t_mlx *mlx, int i, int x, int y)
 {
 	int		color;
 
-	i *= 20;
-	color = (i | (i << mlx->change_color));
+	color = color_fract(mlx, i);
 	if (((x >= 0) && (y >= 0)) && ((x < mlx->w) && (y < mlx->h)))
 	{
 		mlx->img->addr[y * mlx->img->size_l + x * mlx->img->bpp / 8] = color
@@ -55,4 +78,5 @@ void	draw(t_mlx *mlx)
 		y++;
 	}
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->img, 0, 0);
+	str_data(mlx);
 }

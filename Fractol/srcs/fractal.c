@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str.c                                              :+:      :+:    :+:   */
+/*   fractal.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/30 18:41:20 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/20 17:28:40 by jmaiquez         ###   ########.fr       */
+/*   Created: 2016/02/19 13:59:25 by jmaiquez          #+#    #+#             */
+/*   Updated: 2016/02/20 17:28:39 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		str_exit(int error, char *str)
+int		mandelbrot(t_mlx *mlx, int x, int y, int i)
 {
-	ft_putstr(str);
-	ft_putchar('\n');
-	exit(error);
-}
+	double	z1;
+	double	z2;
+	double	c1;
+	double	c2;
+	double	tmp;
 
-void	str_data(t_mlx *mlx)
-{
-	mlx_string_put(mlx->mlx, mlx->win, 0, 0, 0xFFFFFF, "Zoom       :");
-	mlx_string_put(mlx->mlx, mlx->win, 130, 0, 0x6752d9, ft_itoa(mlx->zoom));
-	mlx_string_put(mlx->mlx, mlx->win, 0, 20, 0xFFFFFF, "Iterations :");
-	mlx_string_put(mlx->mlx, mlx->win, 130, 20, 0x6752d9,
-		ft_itoa(mlx->max));
+	c1 = (double)x / mlx->zoom + mlx->x1;
+	c2 = (double)y / mlx->zoom + mlx->y1;
+	z1 = 0;
+	z2 = 0;
+	while ((z1 * z1) + (z2 * z2) < 4 && i < mlx->max)
+	{
+		tmp = z1;
+		z1 = (z1 * z1) - (z2 * z2) + c1;
+		z2 = 2 * z2 * tmp + c2;
+		i++;
+	}
+	return (i);
 }
