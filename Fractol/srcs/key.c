@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 11:23:31 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/20 17:28:39 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/21 18:20:09 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ t_mlx	*key_yolo(int keycode, t_mlx *mlx)
 		mlx->y1 -= 0.01;
 	if (keycode == 126)
 		mlx->y1 += 0.01;
-	if (keycode == 24)
+	if (keycode == 24 && mlx->av != 6)
 		mlx->zoom += 10;
-	if (keycode == 27)
+	if (keycode == 27 && mlx->av != 6)
 	{
 		if (mlx->zoom > 0)
 			mlx->zoom -= 10;
@@ -79,6 +79,13 @@ int		key(int keycode, t_mlx *mlx)
 	mlx->img->addr = ft_memset(mlx->img->addr, 0, mlx->w * mlx->h * 4 - 1);
 	if (keycode == 53)
 		str_exit(0, "ESC !");
+	if (keycode == 28)
+	{
+		if (mlx->mouse_on == 0)
+			mlx->mouse_on = 1;
+		else
+			mlx->mouse_on = 0;
+	}
 	mlx = key_yolo(keycode, mlx);
 	mlx = key_color(keycode, mlx);
 	draw(mlx);

@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:43:42 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/21 10:02:31 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/21 17:44:11 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ int		fractal(t_mlx *mlx, int x, int y)
 		i = burningship(mlx, x, y, 0);
 	else if (mlx->av == 4)
 		i = douady(mlx, x, y, 0);
-	else if (mlx->av == 5)
-		i = buddhabrot(mlx, x, y, 0);
 	return (i);
 }
 
@@ -82,17 +80,22 @@ void	draw(t_mlx *mlx)
 	int		y;
 
 	y = 0;
-	while (y < mlx->h)
+	if (mlx->av == 6)
+		draw_tree(mlx, new_line(mlx->w / 2, mlx->h, -90, mlx->max));
+	else
 	{
-		x = 0;
-		while (x < mlx->w)
+		while (y < mlx->h)
 		{
-			i = fractal(mlx, x, y);
-			if (i != mlx->max)
-				draw_img(mlx, i, x, y);
-			x++;
+			x = 0;
+			while (x < mlx->w)
+			{
+				i = fractal(mlx, x, y);
+				if (i != mlx->max)
+					draw_img(mlx, i, x, y);
+				x++;
+			}
+			y++;
 		}
-		y++;
 	}
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->img, 0, 0);
 	str_data(mlx);

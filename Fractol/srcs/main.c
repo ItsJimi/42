@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 13:20:21 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/21 10:03:54 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/21 17:42:25 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ void	choice(t_mlx *mlx, char *av)
 		mlx = new_mlx(mlx, 3, av);
 	else if (!(ft_strcmp(av, "douady")))
 		mlx = new_mlx(mlx, 4, av);
-	else if (!(ft_strcmp(av, "buddhabrot")))
-		mlx = new_mlx(mlx, 5, av);
+	else if (!(ft_strcmp(av, "tree")))
+		mlx = new_mlx(mlx, 6, av);
 	else
 		str_exit(-1,
-		"Usage : ./fractol <mandelbrot|julia|burningship|douady|buddhabrot>");
+		"Usage : ./fractol <mandelbrot|julia|burningship|douady|tree>");
 }
 
 int		main(int ac, char **av)
@@ -35,10 +35,10 @@ int		main(int ac, char **av)
 
 	if (ac < 2)
 		str_exit(-1,
-		"Usage : ./fractol <mandelbrot|julia|burningship|douady|buddhabrot>");
+		"Usage : ./fractol <mandelbrot|julia|burningship|douady|tree>");
 	if (ac > 2)
 		str_exit(-1,
-		"Usage : ./fractol <mandelbrot|julia|burningship|douady|buddhabrot>");
+		"Usage : ./fractol <mandelbrot|julia|burningship|douady|tree>");
 	if (!(mlx = (t_mlx *)malloc(sizeof(*mlx))))
 		str_exit(-1, "main.c : Error line 23");
 	choice(mlx, av[1]);
@@ -46,6 +46,6 @@ int		main(int ac, char **av)
 	draw(mlx);
 	mlx_hook(mlx->win, 2, 0, key, mlx);
 	mlx_hook(mlx->win, 4, 0, mouse, mlx);
-	//mlx_hook(mlx->win, 6, 0, click, mlx);
+	mlx_hook(mlx->win, 6, 0, move, mlx);
 	mlx_loop(mlx->mlx);
 }

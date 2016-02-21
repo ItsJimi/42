@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 17:36:37 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/21 11:41:49 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/21 17:32:38 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,86 +24,87 @@ void			draw_tree(t_mlx *mlx, t_line *line)
 
 	if (line->y2 != 0)
 	{
-		x2 = mlx->p->dx + line->x1 + (int)(cos(to_rad(line->x2)) * line->y2 *
-			10.0 * mlx->p->zoom);
-		y2 = mlx->p->dy + line->y1 + (int)(sin(to_rad(line->x2)) * line->y2 *
-			10.0 * mlx->p->zoom);
-		d_line(mlx, n_line(line->x1, line->y1, x2, y2),
-			color(mlx->p, line->y2 * 20));
-		draw_tree(mlx, n_line(x2, y2, line->x2 - (int)-mlx->p->mx % 100,
+		x2 = mlx->x + line->x1 + (int)(cos(to_rad(line->x2)) * line->y2 *
+			10.0 * mlx->zoom);
+		y2 = mlx->y + line->y1 + (int)(sin(to_rad(line->x2)) * line->y2 *
+			10.0 * mlx->zoom);
+		draw_line(mlx, new_line(line->x1, line->y1, x2, y2), 0xffffff);
+		draw_tree(mlx, new_line(x2, y2, line->x2 - (int)-mlx->mousex % 100,
 			line->y2 - 1));
-		draw_tree(mlx, n_line(x2, y2, line->x2 + (int)-mlx->p->mx % 100,
+		draw_tree(mlx, new_line(x2, y2, line->x2 + (int)-mlx->mousex % 100,
 			line->y2 - 1));
 	}
 	free(line);
 }
 
-static void		first(t_mlx *mlx, int pos[5], int xincr, int yincr)
+static void		first(t_mlx *mlx, t_line *line, int xincr, int yincr)
 {
 	int		e;
 	int		dx;
 	int		dy;
 	int		i;
 
-	dx = ft_abs((pos[2]) - (pos[0]));
-	dy = ft_abs((pos[3]) - (pos[1]));
+	dx = ft_abs((line->x2) - (line->x1));
+	dy = ft_abs((line->y2) - (line->y1));
 	e = dx / 2;
 	i = 0;
 	while (i < dx)
 	{
-		(pos[0]) += xincr;
+		(line->x1) += xincr;
 		e += dy;
 		if (e > dx)
 		{
 			e -= dx;
-			(pos[1]) += yincr;
+			(line->y1) += yincr;
 		}
-		draw_img(mlx, pos[4], pos[0], pos[1]);
+		draw_img(mlx, line->color, line->x1, line->y1);
 		i++;
 	}
 }
 
-static void		second(t_mlx *mlx, int pos[5], int xincr, int yincr)
+static void		second(t_mlx *mlx, t_line *line, int xincr, int yincr)
 {
 	int		e;
 	int		dx;
 	int		dy;
 	int		i;
 
-	dx = ft_abs((pos[2]) - (pos[0]));
-	dy = ft_abs((pos[3]) - (pos[1]));
+	dx = ft_abs((line->x2) - (line->x1));
+	dy = ft_abs((line->y2) - (line->y1));
 	e = dy / 2;
 	i = 0;
 	while (i < dy)
 	{
-		(pos[1]) += yincr;
+		(line->y1) += yincr;
 		e += dx;
 		if (e > dy)
 		{
 			e -= dy;
-			(pos[0]) += xincr;
+			(line->x1) += xincr;
 		}
-		draw_img(mlx, pos[4], pos[0], pos[1]);
+		draw_img(mlx, line->color, line->x1, line->y1);
 		i++;
 	}
 }
 
-int				draw_line(t_mlx *mlx, int pos[5])
+int				draw_line(t_mlx *mlx, t_line *line, int color)
 {
 	int		xincr;
 	int		yincr;
 
-	if ((pos[0]) < (pos[2]))
+	if ((line->x1) < (line->x2))
 		xincr = 1;
 	else
 		xincr = -1;
-	if ((pos[1]) < (pos[3]))
+	if ((line->y1) < (line->y2))
 		yincr = 1;
 	else
 		yincr = -1;
-	if (ft_abs((pos[2]) - (pos[0])) > ft_abs((pos[3]) - (pos[1])))
-		first(mlx, pos, xincr, yincr);
+	line->color = color;
+	if (ft_abs((line->x2) - (line->x1)) > ft_abs((line->y2) - (line->y1)))
+		first(mlx, line, xincr, yincr);
 	else
-		second(mlx, pos, xincr, yincr);
-	return (0);
+		second(mlx, line, xincr, yincr);
+	free(line);
+	return (1);
 }
