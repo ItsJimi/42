@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 16:51:23 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/20 17:28:43 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/21 11:33:48 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,14 @@ typedef struct	s_img
 	int			size_l;
 	int			endian;
 }				t_img;
+
+typedef struct	s_line
+{
+	int			x1;
+	int			x2;
+	int			y1;
+	int			y2;
+}				t_line;
 
 typedef struct	s_mlx
 {
@@ -54,6 +62,10 @@ typedef struct	s_mlx
 
 void	draw(t_mlx *mlx);
 int		mandelbrot(t_mlx *mlx, int x, int y, int i);
+int		julia(t_mlx *mlx, int x, int y, int i);
+int		burningship(t_mlx *mlx, int x, int y, int i);
+int		douady(t_mlx *mlx, int x, int y, int i);
+int		buddhabrot(t_mlx *mlx, int x, int y, int i);
 int		str_exit(int error, char *str);
 t_mlx	*new_mlx(t_mlx *mlx, int av, char *name);
 int		key(int keycode, t_mlx *mlx);

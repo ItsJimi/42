@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:43:42 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/20 17:28:37 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/21 10:02:31 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,24 @@ void	draw_img(t_mlx *mlx, int i, int x, int y)
 	}
 }
 
+int		fractal(t_mlx *mlx, int x, int y)
+{
+	int		i;
+
+	i = 0;
+	if (mlx->av == 1)
+		i = mandelbrot(mlx, x, y, 0);
+	else if (mlx->av == 2)
+		i = julia(mlx, x, y, 0);
+	else if (mlx->av == 3)
+		i = burningship(mlx, x, y, 0);
+	else if (mlx->av == 4)
+		i = douady(mlx, x, y, 0);
+	else if (mlx->av == 5)
+		i = buddhabrot(mlx, x, y, 0);
+	return (i);
+}
+
 void	draw(t_mlx *mlx)
 {
 	int		i;
@@ -69,8 +87,7 @@ void	draw(t_mlx *mlx)
 		x = 0;
 		while (x < mlx->w)
 		{
-			if (mlx->av == 1)
-				i = mandelbrot(mlx, x, y, 0);
+			i = fractal(mlx, x, y);
 			if (i != mlx->max)
 				draw_img(mlx, i, x, y);
 			x++;

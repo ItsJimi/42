@@ -6,36 +6,36 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 17:36:37 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/16 14:10:33 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/21 11:41:49 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-/*
-int				color(double t)
+
+static double	to_rad(double deg)
 {
-	return ((RGB(
-	127.5 * (cos(t) + 1),
-	127.5 * (sin(t) + 1),
-	127.5 * (1 - cos(t)))));
+	return (deg * M_PI / 180.0);
 }
 
-void			draw_img(t_mlx *mlx, int color, int x, int y)
+void			draw_tree(t_mlx *mlx, t_line *line)
 {
-	if (((x >= 0) && (y >= 0)) && ((x < mlx->w) && (y < mlx->h)))
+	int		x2;
+	int		y2;
+
+	if (line->y2 != 0)
 	{
-		mlx->img->addr[y * mlx->img->size_l + x * mlx->img->bpp / 8] = color
-		% 256;
-		color /= 256;
-		mlx->img->addr[y * mlx->img->size_l + x * mlx->img->bpp / 8 + 1] = color
-		% 256;
-		color /= 256;
-		mlx->img->addr[y * mlx->img->size_l + x * mlx->img->bpp / 8 + 2] = color
-		% 256;
-		color /= 256;
-		mlx->img->addr[y * mlx->img->size_l + x * mlx->img->bpp / 8 + 3] = 0;
-		color /= 256;
+		x2 = mlx->p->dx + line->x1 + (int)(cos(to_rad(line->x2)) * line->y2 *
+			10.0 * mlx->p->zoom);
+		y2 = mlx->p->dy + line->y1 + (int)(sin(to_rad(line->x2)) * line->y2 *
+			10.0 * mlx->p->zoom);
+		d_line(mlx, n_line(line->x1, line->y1, x2, y2),
+			color(mlx->p, line->y2 * 20));
+		draw_tree(mlx, n_line(x2, y2, line->x2 - (int)-mlx->p->mx % 100,
+			line->y2 - 1));
+		draw_tree(mlx, n_line(x2, y2, line->x2 + (int)-mlx->p->mx % 100,
+			line->y2 - 1));
 	}
+	free(line);
 }
 
 static void		first(t_mlx *mlx, int pos[5], int xincr, int yincr)
@@ -107,4 +107,3 @@ int				draw_line(t_mlx *mlx, int pos[5])
 		second(mlx, pos, xincr, yincr);
 	return (0);
 }
-*/

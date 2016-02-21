@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 17:33:40 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/20 17:28:37 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/21 11:32:55 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,19 @@ char	*str_maj(char *s)
 	return (str);
 }
 
+t_line	*new_line(int x1, int y1, int x2, int y2)
+{
+	t_line	*line;
+
+	if (!(line = (t_line *)malloc(sizeof(*line))))
+		str_exit(-1, "new.c : Error line 51")
+	line->x1 = x1;
+	line->y1 = y1;
+	line->x2 = x2;
+	line->y2 = y2;
+	return (line);
+}
+
 t_mlx	*new_mlx(t_mlx *mlx, int av, char *name)
 {
 	mlx->w = 500;
@@ -58,9 +71,9 @@ t_mlx	*new_mlx(t_mlx *mlx, int av, char *name)
 	mlx->max = 20;
 	mlx->change_color = 0;
 	if (!(mlx->mlx = mlx_init()))
-		str_exit(-1, "new.c : Error line 34");
+		str_exit(-1, "new.c : Error line 73");
 	if (!(mlx->win = mlx_new_window(mlx->mlx, mlx->w, mlx->h, str_maj(name))))
-		str_exit(-1, "new.c : Error line 36");
+		str_exit(-1, "new.c : Error line 75");
 	mlx->img = new_img(mlx);
 	return (mlx);
 }
