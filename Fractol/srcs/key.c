@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 11:23:31 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/22 20:49:37 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/22 21:01:53 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ t_mlx	*key_color(int keycode, t_mlx *mlx)
 
 t_mlx	*key_move(int keycode, t_mlx *mlx)
 {
+	if (keycode == 26)
+		mlx->change_color = 7;
 	if (keycode == 123)
 		mlx->movex += 1 * mlx->zoom;
 	if (keycode == 124)

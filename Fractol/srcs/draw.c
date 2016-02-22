@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:43:42 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/22 18:14:34 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/22 21:01:51 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int		color_fract(t_mlx *mlx, int i)
 		color = (i | (i >> 8) | i >> 16);
 	else if (mlx->change_color == 6)
 		color = (i >> rand());
+	else if (mlx->change_color == 7)
+		color = (5648648 * i);
 	else
 		color = (i | (i << 8) | i << 16);
 	return (color);
