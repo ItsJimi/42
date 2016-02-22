@@ -36,7 +36,7 @@ OBCC =		$(addprefix $(ODIR),$(OBJS))
 
 NORM =		$(SRCC) $(INCC) $(EXEC)
 
-FLAG =		-g -Wall -Wextra -Werror -I$(IDIR)
+FLAG =		-Wall -Wextra -Werror -I$(IDIR)
 
 all: $(NAME)
 

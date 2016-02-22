@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 17:36:37 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/21 17:32:38 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/22 20:49:44 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ void			draw_tree(t_mlx *mlx, t_line *line)
 	if (line->y2 != 0)
 	{
 		x2 = mlx->x + line->x1 + (int)(cos(to_rad(line->x2)) * line->y2 *
-			10.0 * mlx->zoom);
+			10.0);
 		y2 = mlx->y + line->y1 + (int)(sin(to_rad(line->x2)) * line->y2 *
-			10.0 * mlx->zoom);
+			10.0);
 		draw_line(mlx, new_line(line->x1, line->y1, x2, y2), 0xffffff);
-		draw_tree(mlx, new_line(x2, y2, line->x2 - (int)-mlx->mousex % 100,
+		draw_tree(mlx, new_line(x2, y2, line->x2 - (int)-mlx->mousex,
 			line->y2 - 1));
-		draw_tree(mlx, new_line(x2, y2, line->x2 + (int)-mlx->mousex % 100,
+		draw_tree(mlx, new_line(x2, y2, line->x2 + (int)-mlx->mousex,
 			line->y2 - 1));
 	}
 	free(line);

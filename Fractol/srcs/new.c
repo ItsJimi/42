@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 17:33:40 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/21 18:17:53 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/22 19:38:53 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_img	*new_img(t_mlx *mlx)
 	t_img	*img;
 
 	if (!(img = (t_img *)malloc(sizeof(*img))))
-		str_exit(-1, "new.c : Error line 55");
+		str_exit(-1, "new.c : Error line 19");
 	img->img = mlx_new_image(mlx->mlx, mlx->w, mlx->h);
 	img->addr = mlx_get_data_addr(img->img, &(img->bpp), &(img->size_l),
 		&(img->endian));
@@ -64,22 +64,21 @@ t_mlx	*new_mlx(t_mlx *mlx, int av, char *name)
 	mlx->av = av;
 	mlx->menu = 0;
 	mlx->mouse_on = 0;
-	mlx->x1 = -2;
-	mlx->x2 = -2 + 4 * mlx->w / mlx->h;
-	mlx->y1 = -1.2;
-	mlx->y2 = 2;
-	mlx->zoom = 200;
+	mlx->x1 = -1.5;
+	mlx->x2 = 1.5;
+	mlx->y1 = -1.5;
+	mlx->y2 = 1.5;
 	mlx->max = 20;
+	mlx->movex = 0;
+	mlx->movey = 0;
+	mlx->zoom = 1;
 	if (av == 6)
-	{
-		mlx->zoom = 1;
 		mlx->max = 1;
-	}
 	mlx->change_color = 0;
 	if (!(mlx->mlx = mlx_init()))
-		str_exit(-1, "new.c : Error line 73");
-	if (!(mlx->win = mlx_new_window(mlx->mlx, mlx->w, mlx->h, str_maj(name))))
 		str_exit(-1, "new.c : Error line 75");
+	if (!(mlx->win = mlx_new_window(mlx->mlx, mlx->w, mlx->h, str_maj(name))))
+		str_exit(-1, "new.c : Error line 77");
 	mlx->img = new_img(mlx);
 	return (mlx);
 }

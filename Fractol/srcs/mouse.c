@@ -6,46 +6,55 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/09 15:28:33 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/20 17:28:38 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/22 20:50:37 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void	zoom_in(double xspan, double yspan, t_mlx *mlx)
+void	zoom_in(int x, int y, t_mlx *mlx)
 {
-	double tmp;
+	double	tmp;
+	double	scal[2];
 
+	scal[0] = (mlx->x2 - mlx->x1);
+	scal[1] = (mlx->y2 - mlx->y1);
+	mlx->x = x / (mlx->w / scal[0]) + mlx->x1;
+	mlx->y = y / (mlx->h / scal[1]) + mlx->y1;
 	tmp = mlx->x1;
-	mlx->x1 = (mlx->x + (mlx->x2 + mlx->x1) / 2) / 2 - (xspan * 0.4);
-	mlx->x2 = (mlx->x + (mlx->x2 + tmp) / 2) / 2 + (xspan * 0.4);
+	mlx->x1 = mlx->x - (scal[0] * 0.4);
+	mlx->x2 = mlx->x + (scal[0] * 0.4);
 	tmp = mlx->y1;
-	mlx->y1 = (mlx->y + (mlx->y2 + mlx->y1) / 2) / 2 - (yspan * 0.4);
-	mlx->y2 = (mlx->y + (mlx->y2 + tmp) / 2) / 2 + (yspan * 0.4);
+	mlx->y1 = mlx->y - (scal[1] * 0.4);
+	mlx->y2 = mlx->y + (scal[1] * 0.4);
+	mlx->zoom *= 0.8;
 }
 
-static void	zoom_out(double xspan, double yspan, t_mlx *mlx)
+void	zoom_out(int x, int y, t_mlx *mlx)
 {
-	mlx->x1 = mlx->x1 - (xspan * 0.52);
-	mlx->x2 = mlx->x2 + (xspan * 0.52);
-	mlx->y1 = mlx->y1 - (yspan * 0.52);
-	mlx->y2 = mlx->y2 + (yspan * 0.52);
+	double	tmp;
+	double	scal[2];
+
+	scal[0] = (mlx->x2 - mlx->x1);
+	scal[1] = (mlx->y2 - mlx->y1);
+	mlx->x = x / (mlx->w / scal[0]) + mlx->x1;
+	mlx->y = y / (mlx->h / scal[1]) + mlx->y1;
+	tmp = mlx->x1;
+	mlx->x1 = mlx->x - (scal[0] / 1.60);
+	mlx->x2 = mlx->x + (scal[0] / 1.60);
+	tmp = mlx->y1;
+	mlx->y1 = mlx->y - (scal[1] / 1.60);
+	mlx->y2 = mlx->y + (scal[1] / 1.60);
+	mlx->zoom *= 1.25;
 }
 
-int			mouse(int c, int x, int y, t_mlx *mlx)
+int		mouse(int c, int x, int y, t_mlx *mlx)
 {
-	int		xspan;
-	int		yspan;
-
 	mlx->img->addr = ft_memset(mlx->img->addr, 0, mlx->w * mlx->h * 4 - 1);
-	xspan = mlx->x2 - mlx->x1;
-	yspan = mlx->y2 - mlx->y1;
-	mlx->x = x / (mlx->w / (mlx->x2 - mlx->x1)) + mlx->x1;
-	mlx->y = y / (mlx->h / (mlx->y2 - mlx->y1)) + mlx->y1;
-	if (c == 1)
-		zoom_in(xspan, yspan, mlx);
-	else if (c == 2)
-		zoom_out(xspan, yspan, mlx);
+	if (c == 1 || c == 4)
+		zoom_in(x, y, mlx);
+	else if (c == 2 || c == 5)
+		zoom_out(x, y, mlx);
 	draw(mlx);
 	return (0);
 }
