@@ -6,11 +6,11 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 18:21:42 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/03 16:55:08 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/26 11:56:58 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "wolf3d.h"
 
 static void	change_color(t_mlx *mlx, t_point ***p, int x, int y)
 {

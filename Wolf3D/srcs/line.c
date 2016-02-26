@@ -6,11 +6,11 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 17:36:37 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/03 16:21:32 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/26 11:57:09 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "wolf3d.h"
 
 int				color(double t)
 {

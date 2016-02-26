@@ -6,14 +6,15 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 16:51:23 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/25 20:13:58 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/26 12:31:15 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WOLF3D_H
 # define WOLF3D_H
+# define RGB(r, g, b)(256 * 256 * (int)(r) + 256 * (int)(g) + (int)(b))
 
-# include "libft/includes/libft.h"
+# include "../libft/includes/libft.h"
 # include <mlx.h>
 # include <math.h>
 
@@ -28,6 +29,9 @@ typedef struct	s_img
 
 typedef struct	s_point
 {
+	int			beginx;
+	int			beginy;
+
 	int			px;
 	int			py;
 

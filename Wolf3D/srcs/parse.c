@@ -6,11 +6,11 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 13:20:17 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/03 16:55:11 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/26 12:27:28 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "wolf3d.h"
 
 static int		count_case(char **str)
 {

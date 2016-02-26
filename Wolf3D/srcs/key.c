@@ -6,11 +6,11 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 11:23:31 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/03 16:21:29 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/26 12:05:46 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "wolf3d.h"
 
 void	clear(t_mlx *mlx)
 {
@@ -35,7 +35,7 @@ t_mlx	*key_color(int keycode, t_mlx *mlx)
 		mlx->change_color = 3;
 	if (keycode == 86)
 		mlx->change_color = 4;
-	if (keycode == 71)
+	if (keycode == 51)
 		clear(mlx);
 	if (keycode == 88)
 		mlx->change_color = 6;

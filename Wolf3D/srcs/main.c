@@ -6,11 +6,11 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 13:20:21 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/03 16:55:05 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/26 12:25:39 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "wolf3d.h"
 
 int		gnl_error(char *tab)
 {
@@ -40,7 +40,7 @@ int		main(int ac, char **av)
 		str_exit(-1, "To many arguments");
 	if (!(mlx = (t_mlx *)malloc(sizeof(*mlx))))
 		str_exit(-1, "new.c : Error line 32");
-	ft_putstr("Chargement de la carte ...\n");
+	ft_putstr("Chargement du niveau ...\n");
 	mlx->p = parse(av[1]);
 	ft_putstr("Chargement termine !\n");
 	mlx = new_mlx(mlx, av[1]);

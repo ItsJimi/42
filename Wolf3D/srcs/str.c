@@ -6,11 +6,11 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/30 18:41:20 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/03 16:21:29 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/26 11:57:14 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "wolf3d.h"
 
 int		str_exit(int error, char *str)
 {

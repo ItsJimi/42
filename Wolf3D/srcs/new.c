@@ -6,11 +6,11 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 17:33:40 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/03 16:36:08 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/26 13:02:25 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "wolf3d.h"
 
 int		atoi_color(char *z)
 {
@@ -53,6 +53,11 @@ t_point	*new_point(int x, int y, char *z)
 	point->x = x;
 	point->y = y;
 	point->z = ft_atoi(z);
+	if (point->z == 42)
+	{
+		point->beginx = x;
+		point->beginy = y;
+	}
 	point->color = find_color(z);
 	point->savecolor = point->color;
 	free(z);
