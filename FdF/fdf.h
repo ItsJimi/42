@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 16:51:23 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/03 16:36:58 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/02/27 14:30:28 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # define RGB(r, g, b)(256 * 256 * (int)(r) + 256 * (int)(g) + (int)(b))
 
 # include "libft/includes/libft.h"
-# include "mlx/mlx.h"
+# include <mlx.h>
 # include <math.h>
 
 typedef struct	s_img
