@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 11:23:31 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/26 12:05:46 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/02 16:07:18 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ t_mlx	*key_yolo(int keycode, t_mlx *mlx)
 
 int		key(int keycode, t_mlx *mlx)
 {
-	ft_putnbr(keycode);
 	mlx->img->addr = ft_memset(mlx->img->addr, 0, 2560 * 1400 * 4 - 1);
 	if (keycode == 53)
 		str_exit(0, "ESC !");

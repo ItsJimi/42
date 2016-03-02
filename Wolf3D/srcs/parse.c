@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 13:20:17 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/26 12:27:28 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/02 18:47:07 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static t_point	***ft_realloc(t_point ***p, int nline)
 	return (p);
 }
 
-static t_point	**define(char *line, int y)
+static t_point	**define(char *line, int y, t_mlx *mlx)
 {
 	t_point	**point;
 	char	**tab;
@@ -57,7 +57,7 @@ static t_point	**define(char *line, int y)
 	{
 		if (gnl_error(tab[x]) == -1)
 			str_exit(-1, "Are you fucking kidding me ?");
-		point[x] = new_point(x, y, tab[x]);
+		point[x] = new_point(x, y, tab[x], mlx);
 		x++;
 	}
 	if (x == 0)
@@ -66,7 +66,7 @@ static t_point	**define(char *line, int y)
 	return (point);
 }
 
-t_point			***parse(char *av)
+t_point			***parse(char *av, t_mlx *mlx)
 {
 	int		fd;
 	int		y;
@@ -81,7 +81,9 @@ t_point			***parse(char *av)
 		str_exit(-1, "parse.c : Error line 76");
 	while ((error = get_next_line(fd, &line)) > 0)
 	{
-		point[y] = define(line, y);
+		point[y] = define(line, y, mlx);
+		ft_putstr(line);
+		ft_putchar('\n');
 		point = ft_realloc(point, y + 1);
 		free(line);
 		y++;

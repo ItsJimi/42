@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 16:51:23 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/26 12:31:15 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/02 18:29:51 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,6 @@ typedef struct	s_img
 
 typedef struct	s_point
 {
-	int			beginx;
-	int			beginy;
-
 	int			px;
 	int			py;
 
@@ -52,6 +49,9 @@ typedef struct	s_mlx
 	int			w;
 	int			h;
 
+	int			beginx;
+	int			beginy;
+
 	t_point		***p;
 	t_img		*img;
 
@@ -70,8 +70,9 @@ typedef struct	s_mlx
 	int			menu;
 }				t_mlx;
 
-t_point			***parse(char *av);
-t_point			*new_point(int x, int y, char *z);
+void			dep(t_mlx *mlx, t_point ***p);
+t_point			***parse(char *av, t_mlx *mlx);
+t_point			*new_point(int x, int y, char *z, t_mlx *mlx);
 t_mlx			*new_mlx(t_mlx *mlx, char *av);
 t_img			*new_img(t_mlx *mlx);
 t_point			***dep_point(t_mlx *mlx, t_point ***p);

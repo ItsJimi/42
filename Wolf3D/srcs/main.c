@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 13:20:21 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/26 12:25:39 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/02 18:25:13 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ int		main(int ac, char **av)
 	if (!(mlx = (t_mlx *)malloc(sizeof(*mlx))))
 		str_exit(-1, "new.c : Error line 32");
 	ft_putstr("Chargement du niveau ...\n");
-	mlx->p = parse(av[1]);
+	mlx->p = parse(av[1], mlx);
 	ft_putstr("Chargement termine !\n");
 	mlx = new_mlx(mlx, av[1]);
-	mlx->p = dep_point(mlx, mlx->p);
+	dep(mlx, mlx->p);
 	mlx_hook(mlx->win, 2, 0, key, mlx);
 	mlx_loop(mlx->mlx);
 }
