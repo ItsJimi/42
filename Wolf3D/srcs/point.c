@@ -6,13 +6,13 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 18:21:42 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/02 17:47:36 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/03 20:47:37 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-static void	change_color(t_mlx *mlx, t_point ***p, int x, int y)
+/*static void	change_color(t_mlx *mlx, t_point ***p, int x, int y)
 {
 	if (mlx->change_color == 0)
 		p[y][x]->color = rand();
@@ -110,3 +110,4 @@ t_point		***dep_point(t_mlx *mlx, t_point ***p)
 	str_data(mlx);
 	return (p);
 }
+*/

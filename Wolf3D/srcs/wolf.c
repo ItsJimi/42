@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 17:20:43 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/02 18:33:00 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/03 20:47:35 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,5 @@ void		dep(t_mlx *mlx, t_point ***p)
 		y--;
 		i++;
 	}
-	ft_putstr("Fini !");
+	ft_putstr("Fini !\n");
 }

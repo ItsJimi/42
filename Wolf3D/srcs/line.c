@@ -6,13 +6,13 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 17:36:37 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/02 17:47:34 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/03 20:47:38 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-int				color(double t)
+/*int				color(double t)
 {
 	return ((RGB(
 	127.5 * (cos(t) + 1),
@@ -106,4 +106,4 @@ int				draw_line(t_mlx *mlx, int pos[5])
 	else
 		second(mlx, pos, xincr, yincr);
 	return (0);
-}
+}*/

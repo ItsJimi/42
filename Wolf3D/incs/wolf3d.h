@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 16:51:23 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/02 18:29:51 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/03 20:47:39 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ typedef struct	s_point
 	int			z;
 
 	int			color;
-	int			savecolor;
 }				t_point;
 
 typedef struct	s_mlx
@@ -55,18 +54,6 @@ typedef struct	s_mlx
 	t_point		***p;
 	t_img		*img;
 
-	int			decalx;
-	int			decaly;
-
-	int			perspx;
-	int			perspy;
-
-	int			space;
-	int			dim;
-
-	int			erasing;
-	int			pos[5];
-	int			change_color;
 	int			menu;
 }				t_mlx;
 
@@ -75,14 +62,10 @@ t_point			***parse(char *av, t_mlx *mlx);
 t_point			*new_point(int x, int y, char *z, t_mlx *mlx);
 t_mlx			*new_mlx(t_mlx *mlx, char *av);
 t_img			*new_img(t_mlx *mlx);
-t_point			***dep_point(t_mlx *mlx, t_point ***p);
-int				draw_line(t_mlx *mlx, int pos[5]);
+void			draw(t_mlx *mlx);
 int				str_exit(int error, char *str);
 int				key(int keycode, t_mlx *mlx);
 void			str_data(t_mlx *mlx);
-void			draw_img(t_mlx *mlx, int color, int x, int y);
-int				find_color(char *z);
-int				color(double t);
 int				gnl_error(char *tab);
 
 #endif
