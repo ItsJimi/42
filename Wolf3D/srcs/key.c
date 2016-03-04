@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 11:23:31 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/03 20:47:36 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/04 16:54:18 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static t_mlx	*key_dep(int keycode, t_mlx *mlx)
 	if (keycode == 123)
 		mlx->beginx--;
 	if (keycode == 124)
-		mlx->beginy++;
-	if (keycode == 125)
 		mlx->beginx++;
+	if (keycode == 125)
+		mlx->beginy++;
 	if (keycode == 126)
 		mlx->beginy--;
 	return (mlx);
@@ -38,6 +38,6 @@ int				key(int keycode, t_mlx *mlx)
 			mlx->menu = 1;
 	}
 	mlx = key_dep(keycode, mlx);
-	dep(mlx, mlx->p);
+	draw(mlx, mlx->p);
 	return (0);
 }

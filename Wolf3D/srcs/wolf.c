@@ -6,13 +6,13 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 17:20:43 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/03 20:47:35 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/04 16:48:43 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-void		dep(t_mlx *mlx, t_point ***p)
+int		dep(t_mlx *mlx, t_point ***p)
 {
 	int		i;
 	int		val;
@@ -25,8 +25,9 @@ void		dep(t_mlx *mlx, t_point ***p)
 	x = mlx->beginx;
 	y = mlx->beginy;
 	size = 0;
+	ft_putstr("\nX : ");
 	ft_putnbr(x);
-	ft_putstr(" - ");
+	ft_putstr("\nY : ");
 	ft_putnbr(y);
 	ft_putstr("\n\n");
 	while (val != 1)
@@ -40,4 +41,5 @@ void		dep(t_mlx *mlx, t_point ***p)
 		i++;
 	}
 	ft_putstr("Fini !\n");
+	return (i);
 }
