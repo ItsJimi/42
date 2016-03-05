@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/03 18:35:48 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/04 16:57:02 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/05 17:26:26 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	draw_img(t_mlx *mlx, int color, int x, int y)
 	}
 }
 
-void	drawy(t_mlx *mlx, int wall, int x)
+static void	drawy(t_mlx *mlx, int wall, int x)
 {
 	int		y;
 
@@ -42,45 +42,28 @@ void	drawy(t_mlx *mlx, int wall, int x)
 	}
 }
 
-void	drawx(t_mlx *mlx, t_point ***p)
+static void	drawx(t_mlx *mlx)
 {
 	int		x;
-	int		dist;
-	int		wall;
+	float	length;
+	float	wall;
 
 	x = 0;
-	dist = 0;
+	length = 0;
 	wall = 0;
 	while (x < mlx->w)
 	{
-		dist = dep(mlx, p);
-		wall = mlx->h / dist;
+		length = line(mlx, 0);
+		printf("%f\n", length);
+		wall = mlx->h / (length / 40);
 		drawy(mlx, wall, x);
 		x++;
 	}
 }
 
-void	draw(t_mlx *mlx, t_point ***p)
+void		draw(t_mlx *mlx)
 {
-	int		x;
-	int		y;
-
-	y = 0;
-	x = 0;
-	// while (p[y])
-	// {
-	// 	x = 0;
-	// 	while (p[y][x])
-	// 	{
-	// 		if (p[y][x]->z == 1)
-	// 			draw_img(mlx, 0xffffff, x, y);
-	// 		else
-	// 			draw_img(mlx, 0x000000, x, y);
-	// 		x++;
-	// 	}
-	// 	y++;
-	// }
-	drawx(mlx, p);
+	drawx(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->img, 0, 0);
 	str_data(mlx);
 }

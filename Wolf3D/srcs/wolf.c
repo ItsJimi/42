@@ -6,40 +6,34 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 17:20:43 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/04 16:48:43 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/05 17:25:29 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-int		dep(t_mlx *mlx, t_point ***p)
+float		line(t_mlx *mlx, float length)
 {
-	int		i;
-	int		val;
-	int		x;
-	int		y;
-	int		size;
+	float	xy2[2];
+	float	x;
+	float	y;
+	float	dx;
+	float	dy;
 
-	i = 0;
-	val = 0;
-	x = mlx->beginx;
-	y = mlx->beginy;
-	size = 0;
-	ft_putstr("\nX : ");
-	ft_putnbr(x);
-	ft_putstr("\nY : ");
-	ft_putnbr(y);
-	ft_putstr("\n\n");
-	while (val != 1)
+	xy2[0] = cos(90 * (PI / 180)) * 100;
+	xy2[1] = sin(90 * (PI / 180)) * 100;
+	if (ft_abs(xy2[0] - mlx->beginx) >= ft_abs(xy2[1] - mlx->beginy))
+		length = ft_abs(xy2[0] - mlx->beginx);
+	else
+		length = ft_abs(xy2[1] - mlx->beginy);
+	dx = (xy2[0] - mlx->beginx) / length;
+	dy = (xy2[1] - mlx->beginy) / length;
+	x = mlx->beginx + 0.1;
+	y = mlx->beginy + 0.1;
+	while (mlx->p[(int)y][(int)x]->z != 1)
 	{
-		val = p[y][x]->z;
-		ft_putnbr(i);
-		ft_putstr(" - ");
-		ft_putnbr(val);
-		ft_putchar('\n');
-		y--;
-		i++;
+		x += dx;
+		y += dy;
 	}
-	ft_putstr("Fini !\n");
-	return (i);
+	return (sqrt(pow(xy2[0] - mlx->beginx, 2) + pow(xy2[1] - mlx->beginy, 2)));
 }

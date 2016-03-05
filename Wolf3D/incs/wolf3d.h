@@ -6,17 +6,19 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 16:51:23 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/04 16:48:55 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/05 17:25:40 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WOLF3D_H
 # define WOLF3D_H
 # define RGB(r, g, b)(256 * 256 * (int)(r) + 256 * (int)(g) + (int)(b))
+# define PI 3.14159265359
 
 # include "../libft/includes/libft.h"
 # include <mlx.h>
 # include <math.h>
+# include <stdio.h>
 
 typedef struct	s_img
 {
@@ -57,12 +59,12 @@ typedef struct	s_mlx
 	int			menu;
 }				t_mlx;
 
-int			dep(t_mlx *mlx, t_point ***p);
+float			line(t_mlx *mlx, float length);
 t_point			***parse(char *av, t_mlx *mlx);
 t_point			*new_point(int x, int y, char *z, t_mlx *mlx);
 t_mlx			*new_mlx(t_mlx *mlx, char *av);
 t_img			*new_img(t_mlx *mlx);
-void			draw(t_mlx *mlx, t_point ***p);
+void			draw(t_mlx *mlx);
 int				str_exit(int error, char *str);
 int				key(int keycode, t_mlx *mlx);
 void			str_data(t_mlx *mlx);

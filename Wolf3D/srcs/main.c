@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 13:20:21 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/04 16:47:43 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/05 15:11:19 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		main(int ac, char **av)
 	mlx->p = parse(av[1], mlx);
 	ft_putstr("Chargement termine !\n");
 	mlx = new_mlx(mlx, av[1]);
-	draw(mlx, mlx->p);
+	draw(mlx);
 	mlx_hook(mlx->win, 2, 0, key, mlx);
 	mlx_loop(mlx->mlx);
 }
