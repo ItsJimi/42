@@ -1,4 +1,4 @@
-<h3><u>Projects @42born2code</u></h3>
+## H2 Projects @42born2code
 
 [X] Libft<br />
 [X] Fillit<br />
@@ -6,6 +6,5 @@
 [X] FdF<br />
 [X] Fract'ol<br />
 [~] Wolf3D<br />
-
 =================================
 Twitter : twitter.com/its_me_jimi
