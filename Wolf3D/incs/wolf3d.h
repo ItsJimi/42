@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 16:51:23 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/05 17:25:40 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/09 16:54:25 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ typedef struct	s_mlx
 	int			w;
 	int			h;
 
-	int			beginx;
-	int			beginy;
+	float		beginx;
+	float		beginy;
 
 	t_point		***p;
 	t_img		*img;

@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/03 18:35:48 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/08 20:45:53 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/09 20:01:58 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	drawx(t_mlx *mlx)
 	{
 		length = line(mlx, 0);
 		printf("%f\n", length);
-		wall = mlx->h / length;
+		wall = mlx->h / (length * 2);
 		drawy(mlx, wall, x);
 		x++;
 	}
