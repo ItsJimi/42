@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 16:51:23 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/09 16:54:25 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/10 16:43:58 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,26 @@ typedef struct	s_mlx
 
 	float		beginx;
 	float		beginy;
+	float		deg;
 
 	t_point		***p;
-	t_img		*img;
+	t_img		*imgview;
+	t_img		*imgmap;
 
 	int			menu;
+	int			map;
 }				t_mlx;
 
 float			line(t_mlx *mlx, float length);
 t_point			***parse(char *av, t_mlx *mlx);
 t_point			*new_point(int x, int y, char *z, t_mlx *mlx);
 t_mlx			*new_mlx(t_mlx *mlx, char *av);
-t_img			*new_img(t_mlx *mlx);
+t_img			*new_img(t_mlx *mlx, int width, int height);
+void			draw_img_view(t_mlx *mlx, int color, int x, int y);
+void			draw_img_map(t_mlx *mlx, int color, int x, int y);
 void			draw(t_mlx *mlx);
+void			drawx(t_mlx *mlx);
+void			map(t_mlx *mlx);
 int				str_exit(int error, char *str);
 int				key(int keycode, t_mlx *mlx);
 void			str_data(t_mlx *mlx);

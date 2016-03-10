@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 17:33:40 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/03 20:47:33 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/10 16:44:44 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ t_point	*new_point(int x, int y, char *z, t_mlx *mlx)
 	return (point);
 }
 
-t_img	*new_img(t_mlx *mlx)
+t_img	*new_img(t_mlx *mlx, int width, int height)
 {
 	t_img	*img;
 
 	if (!(img = (t_img *)malloc(sizeof(*img))))
 		str_exit(-1, "new.c : Error line 55");
-	img->img = mlx_new_image(mlx->mlx, mlx->w, mlx->h);
+	img->img = mlx_new_image(mlx->mlx, width, height);
 	img->addr = mlx_get_data_addr(img->img, &(img->bpp), &(img->size_l),
 		&(img->endian));
 	return (img);
@@ -52,8 +52,11 @@ t_mlx	*new_mlx(t_mlx *mlx, char *av)
 		str_exit(-1, "new.c : Error line 83");
 	if (!(mlx->win = mlx_new_window(mlx->mlx, mlx->w, mlx->h, "W O L F 3 D")))
 		str_exit(-1, "new.c : Error line 86");
-	mlx->img = new_img(mlx);
+	mlx->imgview = new_img(mlx, mlx->w, mlx->h);
+	mlx->imgmap = new_img(mlx, 100, 100);
 	mlx->av = av;
+	mlx->deg = 90;
 	mlx->menu = 0;
+	mlx->map = 0;
 	return (mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 17:20:43 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/09 17:49:32 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/10 15:00:33 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ float		line(t_mlx *mlx, float length)
 	float	dx;
 	float	dy;
 
-	xy2[0] = mlx->beginx - (cos(30 * (PI / 180)) * 100);
-	xy2[1] = mlx->beginy - (sin(30 * (PI / 180)) * 100);
+	xy2[0] = mlx->beginx - (cos(mlx->deg * (PI / 180)) * 100);
+	xy2[1] = mlx->beginy - (sin(mlx->deg * (PI / 180)) * 100);
 	if (ft_abs(xy2[0] - mlx->beginx) >= ft_abs(xy2[1] - mlx->beginy))
 		length = ft_abs(xy2[0] - mlx->beginx);
 	else
