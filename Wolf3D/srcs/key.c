@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 11:23:31 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/10 18:01:38 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/11 19:32:20 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ int				key(int keycode, t_mlx *mlx)
 {
 	mlx->imgview->addr = ft_memset(mlx->imgview->addr, 0, mlx->w * mlx->h * 4 -
 	1);
-	// if (mlx->map == 1)
-	// {
-		// mlx->imgmap->addr = ft_memset(mlx->imgmap->addr, 0, mlx->w * mlx->h * 4
-			// - 1);
-	// }
+	if (mlx->map == 1)
+	{
+		mlx->imgmap->addr = ft_memset(mlx->imgmap->addr, 0, mlx->w * mlx->h * 4
+			- 1);
+	}
 	mlx = key_opt(keycode, mlx);
 	mlx = key_dep(keycode, mlx);
 	draw(mlx);

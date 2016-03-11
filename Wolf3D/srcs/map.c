@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 15:38:30 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/10 18:01:36 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/11 19:38:43 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,21 @@ void	map(t_mlx *mlx)
 {
 	int		x;
 	int		y;
+	int		i;
 
 	y = 0;
-	while (y < mlx->h)
+	i = 10;
+	while (mlx->p[y])
 	{
 		x = 0;
-		while (x < mlx->w)
+		while (mlx->p[y][x])
 		{
 			if (mlx->p[y][x]->z == 1)
-			{
-				draw_img_map(mlx, 0xffffff, x, y);
-			}
+				draw_img_map(mlx, 0xffffff, x * i, y * i);
+			else if (x == mlx->beginx && y == mlx->beginy)
+				draw_img_map(mlx, 0x00ff00, x * i, y * i);
+			else
+				draw_img_map(mlx, 0x000000, x * i, y * i);
 			x++;
 		}
 		y++;
