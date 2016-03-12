@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 11:23:31 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/11 19:32:20 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/12 16:08:07 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ static t_mlx	*key_dep(int keycode, t_mlx *mlx)
 		mlx->p[(int)mlx->beginy - 1][(int)mlx->beginx]->z != 1)
 		mlx->beginy--;
 	if (keycode == 0)
-		mlx->deg -= 0.1;
+		mlx->deg -= 10;
 	if (keycode == 2)
-		mlx->deg += 0.1;
+		mlx->deg += 10;
 	return (mlx);
 }
 

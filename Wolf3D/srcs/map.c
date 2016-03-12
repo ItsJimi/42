@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 15:38:30 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/11 19:38:43 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/12 16:07:33 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,5 @@ void	map(t_mlx *mlx)
 		}
 		y++;
 	}
+	draw_img_map(mlx, 0xff0000, x * i + (mlx->beginx - (cos(mlx->deg * (PI / 180)) * 100)), y * i + (mlx->beginx - (sin(mlx->deg * (PI / 180)) * 100)));
 }

@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 17:20:43 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/11 19:20:22 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/12 23:33:03 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ float		line(t_mlx *mlx, float length)
 		x += dx;
 		y += dy;
 	}
-	printf("--------------------------------\ndx : %f, dy : %f\n", dx, dy);
+	printf("--------------------------------\ndx : %f, dy : %f\n", cos(mlx->deg * (PI / 180)), sin(mlx->deg * (PI / 180)));
 	printf("%f - %f - %d\n", mlx->beginx, mlx->beginy, mlx->p[(int)mlx->beginy][(int)mlx->beginx]->z);
 	printf("x : %f, y : %f\n", x, y);
 	return (sqrt(pow(x - mlx->beginx, 2) + pow(y - mlx->beginy, 2)));
