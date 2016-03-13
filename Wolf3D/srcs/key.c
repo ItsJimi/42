@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 11:23:31 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/12 16:08:07 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/13 19:38:09 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 static t_mlx	*key_dep(int keycode, t_mlx *mlx)
 {
 	if ((keycode == 123 || keycode == 12) &&
-		mlx->p[(int)mlx->beginy][(int)mlx->beginx - 1]->z != 1)
-		mlx->beginx--;
+		mlx->p[(int)mlx->beginy][(int)(mlx->beginx - 0.4)]->z != 1)
+		mlx->beginx -= 0.4;
 	if ((keycode == 124 || keycode == 14) &&
-		mlx->p[(int)mlx->beginy][(int)mlx->beginx + 1]->z != 1)
-		mlx->beginx++;
+		mlx->p[(int)mlx->beginy][(int)(mlx->beginx + 0.4)]->z != 1)
+		mlx->beginx += 0.4;
 	if ((keycode == 125 || keycode == 1) &&
-		mlx->p[(int)mlx->beginy + 1][(int)mlx->beginx]->z != 1)
-		mlx->beginy++;
+		mlx->p[(int)(mlx->beginy + 0.4)][(int)mlx->beginx]->z != 1)
+		mlx->beginy += 0.4;
 	if ((keycode == 126 || keycode == 13) &&
-		mlx->p[(int)mlx->beginy - 1][(int)mlx->beginx]->z != 1)
-		mlx->beginy--;
+		mlx->p[(int)(mlx->beginy - 0.4)][(int)mlx->beginx]->z != 1)
+		mlx->beginy -= 0.4;
 	if (keycode == 0)
 		mlx->deg -= 10;
 	if (keycode == 2)
@@ -50,8 +50,8 @@ int				key(int keycode, t_mlx *mlx)
 	1);
 	if (mlx->map == 1)
 	{
-		mlx->imgmap->addr = ft_memset(mlx->imgmap->addr, 0, mlx->w * mlx->h * 4
-			- 1);
+		mlx->imgmap->addr = ft_memset(mlx->imgmap->addr, 0, mlx->mapw *
+			mlx->maph * 4 - 1);
 	}
 	mlx = key_opt(keycode, mlx);
 	mlx = key_dep(keycode, mlx);

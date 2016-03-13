@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 16:51:23 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/10 16:43:58 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/13 19:13:46 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ typedef struct	s_mlx
 	int			w;
 	int			h;
 
+	int			mapw;
+	int			maph;
+
 	float		beginx;
 	float		beginy;
 	float		deg;
@@ -62,7 +65,7 @@ typedef struct	s_mlx
 	int			map;
 }				t_mlx;
 
-float			line(t_mlx *mlx, float length);
+float			line(t_mlx *mlx, float length, float deg);
 t_point			***parse(char *av, t_mlx *mlx);
 t_point			*new_point(int x, int y, char *z, t_mlx *mlx);
 t_mlx			*new_mlx(t_mlx *mlx, char *av);

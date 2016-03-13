@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 17:33:40 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/11 20:10:22 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/13 16:23:44 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_mlx	*new_mlx(t_mlx *mlx, char *av)
 	if (!(mlx->win = mlx_new_window(mlx->mlx, mlx->w, mlx->h, "W O L F 3 D")))
 		str_exit(-1, "new.c : Error line 86");
 	mlx->imgview = new_img(mlx, mlx->w, mlx->h);
-	mlx->imgmap = new_img(mlx, 190, 190);
+	mlx->imgmap = new_img(mlx, mlx->mapw * 10, mlx->maph * 10);
 	mlx->av = av;
 	mlx->deg = 90;
 	mlx->menu = 0;

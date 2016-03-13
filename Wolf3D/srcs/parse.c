@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 13:20:17 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/03 20:47:34 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/13 19:09:00 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ static t_point	**define(char *line, int y, t_mlx *mlx)
 	}
 	if (x == 0)
 		str_exit(-1, "Are you fucking kidding me ?");
+	mlx->mapw = x;
 	point[x] = NULL;
 	return (point);
 }
@@ -82,12 +83,11 @@ t_point			***parse(char *av, t_mlx *mlx)
 	while ((error = get_next_line(fd, &line)) > 0)
 	{
 		point[y] = define(line, y, mlx);
-		ft_putstr(line);
-		ft_putchar('\n');
 		point = ft_realloc(point, y + 1);
 		free(line);
 		y++;
 	}
+	mlx->maph = y;
 	point[y] = NULL;
 	if (error == 0 && y != 0)
 		return (point);

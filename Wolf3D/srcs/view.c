@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 15:40:53 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/11 20:10:09 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/13 19:35:54 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static void	drawy(t_mlx *mlx, int wall, int x)
 	int		y;
 
 	y = (mlx->h / 2) - (wall / 2);
-	while (y < (mlx->h / 2) + (wall / 2))
+	while (y <= (mlx->h / 2) + (wall / 2))
 	{
-		draw_img_view(mlx, 0x824203, x, y);
+		draw_img_view(mlx, 0xaf946b, x, y);
 		y++;
 	}
 }
@@ -29,16 +29,20 @@ void		drawx(t_mlx *mlx)
 	int		x;
 	float	length;
 	float	wall;
+	float	deg;
 
 	x = 0;
 	length = 0;
 	wall = 0;
-	while (x < mlx->w)
+	deg = mlx->deg - 30;
+	while (x <= mlx->w)
 	{
-		length = line(mlx, 0);
+		length = line(mlx, 0, deg);
 		printf("%f\n", length);
-		wall = mlx->h / (length * 1.3);
+		wall = mlx->h / length;
 		drawy(mlx, wall, x);
+		deg += (60 / (float)mlx->w);
+		printf("----\n%f\n----\n", deg);
 		x++;
 	}
 }
