@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 17:20:43 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/14 20:03:35 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/16 16:41:17 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ float		line(t_mlx *mlx, float length, float deg)
 		x += dx / 500;
 		y += dy / 500;
 	}
+	mlx->color = get_color(mlx, x, y);
 	printf("--------------------------------\ndx : %f, dy : %f\n", cos(mlx->deg * (PI / 180)), sin(mlx->deg * (PI / 180)));
 	printf("%f - %f - %d\n", mlx->beginx, mlx->beginy, mlx->p[(int)mlx->beginy][(int)mlx->beginx]->z);
 	printf("x : %f, y : %f\n", x, y);
