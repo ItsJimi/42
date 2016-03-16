@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 16:51:23 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/14 19:06:59 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/16 12:03:32 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void			draw_img_view(t_mlx *mlx, int color, int x, int y);
 void			draw_img_map(t_mlx *mlx, int color, int x, int y);
 void			draw(t_mlx *mlx);
 void			drawx(t_mlx *mlx);
+int				get_color(t_mlx *mlx, int x, int y);
 void			map(t_mlx *mlx);
 int				str_exit(int error, char *str);
 int				key(int keycode, t_mlx *mlx);
