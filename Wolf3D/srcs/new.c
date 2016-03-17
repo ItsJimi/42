@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 17:33:40 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/15 11:31:58 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/17 18:46:05 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ t_mlx	*new_mlx(t_mlx *mlx, char *av)
 	mlx->imgmap = new_img(mlx, mlx->mapw * 10, mlx->maph * 10);
 	mlx->av = av;
 	mlx->deg = 90;
-	mlx->menu = 0;
 	mlx->map = 0;
 	return (mlx);
 }

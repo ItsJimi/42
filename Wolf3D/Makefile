@@ -6,7 +6,7 @@
 #    By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 12:02:38 by jmaiquez          #+#    #+#              #
-#    Updated: 2016/03/04 16:31:34 by jmaiquez         ###   ########.fr        #
+#    Updated: 2016/03/17 19:05:52 by jmaiquez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,19 +41,22 @@ FLAG =		-g -Wall -Wextra -Werror -I$(IDIR)
 all: $(NAME)
 
 $(NAME): header $(OBCC)
-	@echo "  ${BLU}+ Compilation program:${STD} $@"
+	@echo "  ${BLU}+ Compilation program :${STD} $@"
 	@make -C ./libft/
 	@gcc $(FLAG) $(OBCC) ./libft/libft.a -I./incs/ -L/usr/local/lib/ -I/usr/local/include -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 $(ODIR)%.o: $(SDIR)%.c
-	@echo "  ${GRE}+ Compilation:${STD} $^"
+	@echo "  ${GRE}+ Compilation :${STD} $^"
 	@gcc $^ $(FLAG) -c -o $@
 
 header:
 	@mkdir -p $(ODIR)
 	@echo "${YEL}"
-	@echo "FRACT'OL"
-	@echo "By: IziCrew"
+	@echo "   _____             "
+	@echo "  |_  (_)_ __ ___ (_)"
+	@echo " _  | | | '_ \` _ \| |"
+	@echo "| |_| | | | | | | | |"
+	@echo " \___/|_|_| |_| |_|_|"
 	@echo
 	@echo "${STD}"
 

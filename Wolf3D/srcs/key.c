@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 11:23:31 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/14 20:02:02 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/17 18:28:08 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 static t_mlx	*key_dep(int keycode, t_mlx *mlx)
 {
 	if ((keycode == 123 || keycode == 12) &&
-		mlx->p[(int)mlx->beginy][(int)(mlx->beginx - 0.3)]->z != 1)
-		mlx->beginx -= 0.3;
+		mlx->p[(int)mlx->beginy][(int)(mlx->beginx - 0.5)]->z != 1)
+		mlx->beginx -= 0.4;
 	if ((keycode == 124 || keycode == 14) &&
-		mlx->p[(int)mlx->beginy][(int)(mlx->beginx + 0.3)]->z != 1)
-		mlx->beginx += 0.3;
+		mlx->p[(int)mlx->beginy][(int)(mlx->beginx + 0.5)]->z != 1)
+		mlx->beginx += 0.4;
 	if ((keycode == 125 || keycode == 1) &&
-		mlx->p[(int)(mlx->beginy + 0.3)][(int)mlx->beginx]->z != 1)
-		mlx->beginy += 0.3;
+		mlx->p[(int)(mlx->beginy + 0.5)][(int)mlx->beginx]->z != 1)
+		mlx->beginy += 0.4;
 	if ((keycode == 126 || keycode == 13) &&
-		mlx->p[(int)(mlx->beginy - 0.3)][(int)mlx->beginx]->z != 1)
-		mlx->beginy -= 0.3;
+		mlx->p[(int)(mlx->beginy - 0.5)][(int)mlx->beginx]->z != 1)
+		mlx->beginy -= 0.4;
 	if (keycode == 0)
 		mlx->deg -= 10;
 	if (keycode == 2)
@@ -37,8 +37,6 @@ static t_mlx		*key_opt(int keycode, t_mlx *mlx)
 {
 	if (keycode == 53)
 		str_exit(0, "ESC !");
-	if (keycode == 115)
-		mlx->menu = (mlx->menu == 1) ? 0 : 1;
 	if (keycode == 46)
 		mlx->map = (mlx->map == 1) ? 0 : 1;
 	return (mlx);
