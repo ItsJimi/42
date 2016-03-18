@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/03 18:35:48 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/17 18:04:19 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/18 12:03:47 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,20 @@
 
 int		get_color(t_mlx *mlx, float x, float y)
 {
-	// if (mlx->p[(int)y + 1] && (int)y > 0 && mlx->p[(int)y][(int)x - 1] &&
-	// mlx->p[(int)y][(int)x - 1]->z != 1 && y - (int)y < 0.001)
-	// 	return (0xffffff);
-	if ((int)y > 0 && (int)y < mlx->maph && mlx->p[(int)y][(int)x]->z == 1 && mlx->p[(int)y - 1][(int)x]->z == 0)
-		return (0x00058D);
-	else if ((int)x > 0 && (int)y < mlx->maph && mlx->p[(int)y][(int)x]->z == 1 && (int)x < mlx->mapw && mlx->p[(int)y][(int)x - 1]->z == 0)
-		return (0x0007D1);
-	else if ((int)y > 0 && (int)y < mlx->maph && mlx->p[(int)y][(int)x]->z == 1 && (int)y < mlx->maph - 1 && mlx->p[(int)y + 1][(int)x]->z == 0)
-		return (0x474DFE);
-	else if ((int)x > 0 && (int)y < mlx->maph && mlx->p[(int)y][(int)x]->z == 1 && (int)x < mlx->mapw - 1 && mlx->p[(int)y][(int)x + 1]->z == 0)
-		return (0x797EFE);
+	if (mlx->p[(int)y + 1] && (int)y > 0 && mlx->p[(int)y][(int)x - 1] &&
+	mlx->p[(int)y][(int)x - 1]->z != 1 && y - (int)y < 0.001)
+		return (0xc8a859);
+	else if (mlx->p[(int)y - 1] && (int)y > 0 && mlx->p[(int)y][(int)x + 1] &&
+	mlx->p[(int)y][(int)x + 1]->z != 1 && x - (int)x < 0.001)
+		return (0x96dcb4);
+	else if (mlx->p[(int)y + 1] && (int)y > 0 && mlx->p[(int)y][(int)x - 1] &&
+	mlx->p[(int)y - 1][(int)x]->z != 1 && x - (int)x < 0.001)
+		return (0xdf9fa4);
+	else if (mlx->p[(int)y - 1] && (int)y > 0 && mlx->p[(int)y][(int)x + 1] &&
+	mlx->p[(int)y + 1][(int)x]->z != 1 && y - (int)y < 0.001)
+		return (0x90aada);
 	else
-		return (0x797EFE);
+		return (0xffffff);
 }
 
 void	draw_img_view(t_mlx *mlx, int color, int x, int y)
