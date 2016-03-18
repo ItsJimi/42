@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/03 18:35:48 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/18 12:03:47 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/18 16:33:38 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 int		get_color(t_mlx *mlx, float x, float y)
 {
-	if (mlx->p[(int)y + 1] && (int)y > 0 && mlx->p[(int)y][(int)x - 1] &&
-	mlx->p[(int)y][(int)x - 1]->z != 1 && y - (int)y < 0.001)
+	if ((int)x < mlx->mapw - 1 && mlx->p[(int)y][(int)x + 1]->z == 0 &&
+	x - (int)x > 0.9955)
 		return (0xc8a859);
-	else if (mlx->p[(int)y - 1] && (int)y > 0 && mlx->p[(int)y][(int)x + 1] &&
-	mlx->p[(int)y][(int)x + 1]->z != 1 && x - (int)x < 0.001)
-		return (0x96dcb4);
-	else if (mlx->p[(int)y + 1] && (int)y > 0 && mlx->p[(int)y][(int)x - 1] &&
-	mlx->p[(int)y - 1][(int)x]->z != 1 && x - (int)x < 0.001)
-		return (0xdf9fa4);
-	else if (mlx->p[(int)y - 1] && (int)y > 0 && mlx->p[(int)y][(int)x + 1] &&
-	mlx->p[(int)y + 1][(int)x]->z != 1 && y - (int)y < 0.001)
+	else if ((int)x > 0 && mlx->p[(int)y][(int)x - 1]->z == 0 &&
+	x - (int)x < 0.0045)
 		return (0x90aada);
+	else if ((int)y < mlx->maph - 1 && mlx->p[(int)y + 1][(int)x]->z == 0 &&
+	y - (int)y > 0.9955)
+		return (0x9f4ead);
+	else if ((int)y > 0 && mlx->p[(int)y - 1][(int)x]->z == 0 &&
+	y - (int)y < 0.0045)
+		return (0x4ead62);
 	else
-		return (0xffffff);
+		return (0x000000);
 }
 
 void	draw_img_view(t_mlx *mlx, int color, int x, int y)
