@@ -6,13 +6,13 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 17:33:40 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/17 18:46:05 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/18 19:26:01 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-t_point	*new_point(int x, int y, char *z, t_mlx *mlx)
+t_point			*new_point(int x, int y, char *z, t_mlx *mlx)
 {
 	t_point	*point;
 
@@ -26,13 +26,11 @@ t_point	*new_point(int x, int y, char *z, t_mlx *mlx)
 		mlx->beginx = x;
 		mlx->beginy = y;
 	}
-	point->color = 0xffffff;
-	//point->savecolor = point->color;
 	free(z);
 	return (point);
 }
 
-t_img	*new_img(t_mlx *mlx, int width, int height)
+static t_img	*new_img(t_mlx *mlx, int width, int height)
 {
 	t_img	*img;
 
@@ -44,7 +42,7 @@ t_img	*new_img(t_mlx *mlx, int width, int height)
 	return (img);
 }
 
-t_mlx	*new_mlx(t_mlx *mlx, char *av)
+t_mlx			*new_mlx(t_mlx *mlx, char *av)
 {
 	mlx->w = 1280;
 	mlx->h = 720;

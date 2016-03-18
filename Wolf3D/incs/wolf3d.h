@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 16:51:23 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/17 18:28:21 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/18 19:27:06 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include "../libft/includes/libft.h"
 # include <mlx.h>
 # include <math.h>
-# include <stdio.h>
 
 typedef struct	s_img
 {
@@ -31,14 +30,9 @@ typedef struct	s_img
 
 typedef struct	s_point
 {
-	int			px;
-	int			py;
-
 	int			x;
 	int			y;
 	int			z;
-
-	int			color;
 }				t_point;
 
 typedef struct	s_mlx
@@ -56,6 +50,8 @@ typedef struct	s_mlx
 	float		beginx;
 	float		beginy;
 	float		deg;
+	float		x;
+	float		y;
 
 	t_point		***p;
 	t_img		*imgview;
@@ -69,7 +65,6 @@ float			line(t_mlx *mlx, float length, float deg);
 t_point			***parse(char *av, t_mlx *mlx);
 t_point			*new_point(int x, int y, char *z, t_mlx *mlx);
 t_mlx			*new_mlx(t_mlx *mlx, char *av);
-t_img			*new_img(t_mlx *mlx, int width, int height);
 void			draw_img_view(t_mlx *mlx, int color, int x, int y);
 void			draw_img_map(t_mlx *mlx, int color, int x, int y);
 void			draw(t_mlx *mlx);

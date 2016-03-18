@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 17:20:43 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/18 14:23:57 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/18 19:27:00 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 float		line(t_mlx *mlx, float length, float deg)
 {
 	float	xy2[2];
-	float	x;
-	float	y;
 	float	dx;
 	float	dy;
+	float	x;
+	float	y;
 
 	xy2[0] = mlx->beginx - (cos(deg * (PI / 180)) * 100 * mlx->mapw);
 	xy2[1] = mlx->beginy - (sin(deg * (PI / 180)) * 100 * mlx->maph);
@@ -36,9 +36,6 @@ float		line(t_mlx *mlx, float length, float deg)
 		y += dy / 300;
 	}
 	mlx->color = get_color(mlx, x, y);
-	printf("--------------------------------\ndx : %f, dy : %f\n", cos(mlx->deg * (PI / 180)), sin(mlx->deg * (PI / 180)));
-	printf("%f - %f - %d\n", mlx->beginx, mlx->beginy, mlx->p[(int)mlx->beginy][(int)mlx->beginx]->z);
-	printf("x : %f, y : %f\n", x, y);
 	return (sqrt(pow(x - mlx->beginx, 2) + pow(y - mlx->beginy, 2)) *
 	cos((mlx->deg - deg) * (PI / 180)));
 }

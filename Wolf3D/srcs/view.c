@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 15:40:53 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/16 15:34:38 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/18 19:26:55 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,9 @@ void		drawx(t_mlx *mlx)
 	while (x <= mlx->w)
 	{
 		length = line(mlx, 0, deg);
-		printf("%f\n", length);
 		wall = mlx->h / length;
 		drawy(mlx, wall, x);
 		deg += (60 / (float)mlx->w);
-		printf("----\n%f\n----\n", deg);
 		x++;
 	}
 }

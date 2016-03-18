@@ -6,13 +6,13 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 15:38:30 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/17 16:26:09 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/18 19:26:45 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-void	map1(t_mlx *mlx, int x, int y)
+static void	map1(t_mlx *mlx, int x, int y)
 {
 	int		i;
 	int		j;
@@ -37,7 +37,7 @@ void	map1(t_mlx *mlx, int x, int y)
 	}
 }
 
-void	map(t_mlx *mlx)
+void		map(t_mlx *mlx)
 {
 	int		x;
 	int		y;
