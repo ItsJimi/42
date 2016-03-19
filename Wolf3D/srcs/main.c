@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 13:20:21 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/19 14:06:37 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/19 17:02:32 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ int		main(int ac, char **av)
 {
 	t_mlx	*mlx;
 
-	if (ac < 2)
+	if (ac < 1)
 		str_exit(-1, "No file");
-	if (ac > 2)
+	if (ac > 1)
 		str_exit(-1, "To many arguments");
 	if (!(mlx = (t_mlx *)malloc(sizeof(*mlx))))
 		str_exit(-1, "new.c : Error line 32");
