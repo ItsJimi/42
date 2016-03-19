@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 17:33:40 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/18 19:26:01 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/19 19:46:33 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static t_img	*new_img(t_mlx *mlx, int width, int height)
 	return (img);
 }
 
-t_mlx			*new_mlx(t_mlx *mlx, char *av)
+t_mlx			*new_mlx(t_mlx *mlx)
 {
 	mlx->w = 1280;
 	mlx->h = 720;
@@ -52,7 +52,7 @@ t_mlx			*new_mlx(t_mlx *mlx, char *av)
 		str_exit(-1, "new.c : Error line 86");
 	mlx->imgview = new_img(mlx, mlx->w, mlx->h);
 	mlx->imgmap = new_img(mlx, mlx->mapw * 10, mlx->maph * 10);
-	mlx->av = av;
+	mlx->level = 0;
 	mlx->deg = 90;
 	mlx->map = 0;
 	return (mlx);

@@ -6,11 +6,33 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 15:38:30 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/18 19:26:45 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/19 20:20:25 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
+
+void		tp(t_mlx *mlx)
+{
+	if (mlx->p[(int)mlx->beginy][(int)mlx->beginx]->z == 2)
+	{
+		mlx->level = 1;
+		mlx->p = parse("maps/level1", mlx);
+		draw(mlx);
+	}
+	else if (mlx->p[(int)mlx->beginy][(int)mlx->beginx]->z == 3)
+	{
+		mlx->level = 2;
+		mlx->p = parse("maps/level2", mlx);
+		draw(mlx);
+	}
+	else if (mlx->p[(int)mlx->beginy][(int)mlx->beginx]->z == 4)
+	{
+		mlx->level = 3;
+		mlx->p = parse("maps/level3", mlx);
+		draw(mlx);
+	}
+}
 
 static void	map1(t_mlx *mlx, int x, int y)
 {

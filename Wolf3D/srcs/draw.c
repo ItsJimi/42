@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/03 18:35:48 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/19 16:40:08 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/19 20:22:09 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	draw_img_map(t_mlx *mlx, int color, int x, int y)
 
 void	draw(t_mlx *mlx)
 {
+	tp(mlx);
 	drawx(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->imgview->img, 0, 0);
 	if (mlx->map == 1)
