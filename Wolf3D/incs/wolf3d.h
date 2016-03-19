@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 16:51:23 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/18 19:27:06 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/19 14:10:29 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int				get_color(t_mlx *mlx, float x, float y);
 void			map(t_mlx *mlx);
 int				str_exit(int error, char *str);
 int				key(int keycode, t_mlx *mlx);
+int				mouse(int x, int y, t_mlx *mlx);
 void			str_data(t_mlx *mlx);
 int				gnl_error(char *tab);
 
