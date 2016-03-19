@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/03 18:35:48 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/18 17:46:55 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/19 16:40:08 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,13 @@
 
 int		get_color(t_mlx *mlx, float x, float y)
 {
-	if ((int)x < mlx->mapw - 1 && mlx->p[(int)y][(int)x + 1]->z != 1 &&
+	if (mlx->p[(int)y][(int)x]->z == 2)
+		return (0x200922);
+	if (mlx->p[(int)y][(int)x]->z == 3)
+		return (0x0a1024);
+	if (mlx->p[(int)y][(int)x]->z == 4)
+		return (0x0a251a);
+	else if ((int)x < mlx->mapw - 1 && mlx->p[(int)y][(int)x + 1]->z != 1 &&
 	x - (int)x > 0.9955)
 		return (0xc8a859);
 	else if ((int)x > 0 && mlx->p[(int)y][(int)x - 1]->z != 1 &&

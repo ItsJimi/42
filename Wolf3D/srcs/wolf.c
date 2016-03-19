@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 17:20:43 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/18 19:27:00 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/19 16:41:01 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ float		line(t_mlx *mlx, float length, float deg)
 	dy = (xy2[1] - mlx->beginy) / length;
 	x = mlx->beginx + 0.1;
 	y = mlx->beginy + 0.1;
-	while (mlx->p[(int)y][(int)x]->z != 1)
+	while (mlx->p[(int)y][(int)x]->z != 1 && mlx->p[(int)y][(int)x]->z != 2
+	&& mlx->p[(int)y][(int)x]->z != 3 && mlx->p[(int)y][(int)x]->z != 4)
 	{
 		x += dx / 300;
 		y += dy / 300;
