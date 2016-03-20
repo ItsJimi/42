@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 15:40:53 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/19 16:13:10 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/20 17:19:32 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ static void	drawy(t_mlx *mlx, int wall, int x)
 void		drawx(t_mlx *mlx)
 {
 	int		x;
+	float	val;
 	float	length;
 	float	wall;
 	float	deg;
@@ -73,6 +74,7 @@ void		drawx(t_mlx *mlx)
 	length = 0;
 	wall = 0;
 	deg = mlx->deg - 30;
+	val = (60 / (float)mlx->w);
 	draw_sky(mlx);
 	draw_floor(mlx);
 	while (x <= mlx->w)
@@ -80,7 +82,7 @@ void		drawx(t_mlx *mlx)
 		length = line(mlx, 0, deg);
 		wall = mlx->h / length;
 		drawy(mlx, wall, x);
-		deg += (60 / (float)mlx->w);
+		deg += val;
 		x++;
 	}
 }

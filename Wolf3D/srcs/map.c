@@ -6,37 +6,57 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 15:38:30 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/20 13:09:54 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/20 17:55:02 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
+void		free_struct(t_mlx *mlx)
+{
+	int		i;
+	int		j;
+
+	j = mlx->maph - 1;
+	while (j >= 0)
+	{
+		i = mlx->mapw - 1;
+		while (i >= 0)
+		{
+			free(mlx->p[j][i]);
+			i--;
+		}
+		free(mlx->p[j]);
+		j--;
+	}
+	free(mlx->p);
+}
+
 void		tp(t_mlx *mlx)
 {
 	if (mlx->p[(int)mlx->beginy][(int)mlx->beginx]->z == 2)
 	{
-		mlx->p = parse("maps/level1", mlx);
+		free_struct(mlx);
+		mlx->p = parse("maps/level1", mlx, 0);
 		mlx_destroy_image(mlx->mlx, mlx->imgmap->img);
 		free(mlx->imgmap);
 		mlx->imgmap = new_img(mlx, mlx->mapw * 10, mlx->maph * 10);
-		draw(mlx);
 	}
 	else if (mlx->p[(int)mlx->beginy][(int)mlx->beginx]->z == 3)
 	{
-		mlx->p = parse("maps/level2", mlx);
+		free_struct(mlx);
+		mlx->p = parse("maps/level2", mlx, 0);
 		mlx_destroy_image(mlx->mlx, mlx->imgmap->img);
 		free(mlx->imgmap);
 		mlx->imgmap = new_img(mlx, mlx->mapw * 10, mlx->maph * 10);
-		draw(mlx);
 	}
 	else if (mlx->p[(int)mlx->beginy][(int)mlx->beginx]->z == 4)
 	{
-		mlx->p = parse("maps/level3", mlx);
+		free_struct(mlx);
+		mlx->p = parse("maps/level3", mlx, 0);
 		mlx_destroy_image(mlx->mlx, mlx->imgmap->img);
 		free(mlx->imgmap);
 		mlx->imgmap = new_img(mlx, mlx->mapw * 10, mlx->maph * 10);
-		draw(mlx);
 	}
 }
 

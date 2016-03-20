@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 17:20:43 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/19 18:10:36 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/20 17:40:46 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ float		line(t_mlx *mlx, float length, float deg)
 	while (mlx->p[(int)y][(int)x]->z != 1 && mlx->p[(int)y][(int)x]->z != 2
 	&& mlx->p[(int)y][(int)x]->z != 3 && mlx->p[(int)y][(int)x]->z != 4)
 	{
-		x += dx / 300;
-		y += dy / 300;
+		x += dx / 500;
+		y += dy / 500;
 	}
 	mlx->color = get_color(mlx, x, y);
 	return (sqrt(pow(x - mlx->beginx, 2) + pow(y - mlx->beginy, 2)) *

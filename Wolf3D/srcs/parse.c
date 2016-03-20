@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 13:20:17 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/20 16:52:24 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/20 17:54:26 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ static t_point	***ft_realloc(t_point ***p, int nline, t_mlx *mlx)
 	return (p);
 }
 
-#include <stdio.h>
-
 static t_point	**define(char *line, int y, t_mlx *mlx)
 {
 	t_point	**point;
@@ -54,7 +52,7 @@ static t_point	**define(char *line, int y, t_mlx *mlx)
 	x = 0;
 	tab = ft_strsplit(line, ' ');
 	nbr_case = count_case(tab);
-	if (!(point = (t_point **)malloc(sizeof(**point) * nbr_case)))
+	if (!(point = (t_point **)malloc(sizeof(*point) * nbr_case)))
 		str_exit(-1, "parse.c : Error line 54", mlx);
 	while (x < nbr_case)
 	{
@@ -65,7 +63,6 @@ static t_point	**define(char *line, int y, t_mlx *mlx)
 		x++;
 	}
 	free(tab);
-	while(1);
 	if (x == 0)
 		str_exit(-1, "Are you fucking kidding me ?", mlx);
 	mlx->mapw = x;
@@ -73,11 +70,10 @@ static t_point	**define(char *line, int y, t_mlx *mlx)
 	return (point);
 }
 
-t_point			***parse(char *av, t_mlx *mlx)
+t_point			***parse(char *av, t_mlx *mlx, int error)
 {
 	int		fd;
 	int		y;
-	int		error;
 	char	*line;
 	t_point	***point;
 
