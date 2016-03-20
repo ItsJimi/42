@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 16:51:23 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/20 17:54:37 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/20 18:55:46 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct	s_mlx
 	t_point		***p;
 	t_img		*imgview;
 	t_img		*imgmap;
+	t_img		*imgsky;
 
 	int			color;
 }				t_mlx;

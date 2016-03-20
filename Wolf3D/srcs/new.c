@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 17:33:40 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/20 17:37:01 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/20 18:55:24 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,18 @@ t_point	*new_point(int x, int y, char *z, t_mlx *mlx)
 	return (point);
 }
 
+t_img	*new_xpm(t_mlx *mlx, int w, int h)
+{
+	t_img	*img;
+
+	if (!(img = (t_img *)malloc(sizeof(*img))))
+		str_exit(-1, "new.c : Error line 55", mlx);
+	img->img = mlx_xpm_file_to_image(mlx->mlx, "skybox.xpm", &w, &h);
+	img->addr = mlx_get_data_addr(img->img, &(img->bpp), &(img->size_l),
+		&(img->endian));
+	return (img);
+}
+
 t_img	*new_img(t_mlx *mlx, int width, int height)
 {
 	t_img	*img;
@@ -43,8 +55,8 @@ t_img	*new_img(t_mlx *mlx, int width, int height)
 
 t_mlx	*new_mlx(t_mlx *mlx)
 {
-	mlx->w = 1280;
-	mlx->h = 720;
+	mlx->w = 1285;
+	mlx->h = 725;
 	if (!(mlx->mlx = mlx_init()))
 	{
 		ft_putstr("ERROR\n");
@@ -55,6 +67,7 @@ t_mlx	*new_mlx(t_mlx *mlx)
 		ft_putstr("ERROR\n");
 		exit(-1);
 	}
+	mlx->imgsky = new_xpm(mlx, mlx->w, mlx->h);
 	mlx->imgview = new_img(mlx, mlx->w, mlx->h);
 	mlx->imgmap = new_img(mlx, mlx->mapw * 10, mlx->maph * 10);
 	mlx->deg = 90;
