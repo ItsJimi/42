@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 15:38:30 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/19 20:20:25 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/20 13:09:54 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,26 @@ void		tp(t_mlx *mlx)
 {
 	if (mlx->p[(int)mlx->beginy][(int)mlx->beginx]->z == 2)
 	{
-		mlx->level = 1;
 		mlx->p = parse("maps/level1", mlx);
+		mlx_destroy_image(mlx->mlx, mlx->imgmap->img);
+		free(mlx->imgmap);
+		mlx->imgmap = new_img(mlx, mlx->mapw * 10, mlx->maph * 10);
 		draw(mlx);
 	}
 	else if (mlx->p[(int)mlx->beginy][(int)mlx->beginx]->z == 3)
 	{
-		mlx->level = 2;
 		mlx->p = parse("maps/level2", mlx);
+		mlx_destroy_image(mlx->mlx, mlx->imgmap->img);
+		free(mlx->imgmap);
+		mlx->imgmap = new_img(mlx, mlx->mapw * 10, mlx->maph * 10);
 		draw(mlx);
 	}
 	else if (mlx->p[(int)mlx->beginy][(int)mlx->beginx]->z == 4)
 	{
-		mlx->level = 3;
 		mlx->p = parse("maps/level3", mlx);
+		mlx_destroy_image(mlx->mlx, mlx->imgmap->img);
+		free(mlx->imgmap);
+		mlx->imgmap = new_img(mlx, mlx->mapw * 10, mlx->maph * 10);
 		draw(mlx);
 	}
 }

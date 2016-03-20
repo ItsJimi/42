@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 16:51:23 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/19 20:22:10 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/20 13:39:46 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ typedef struct	s_mlx
 	void		*mlx;
 	void		*win;
 
-	int			level;
-
 	int			w;
 	int			h;
 
@@ -58,13 +56,13 @@ typedef struct	s_mlx
 	t_img		*imgview;
 	t_img		*imgmap;
 
-	int			map;
 	int			color;
 }				t_mlx;
 
 float			line(t_mlx *mlx, float length, float deg);
 t_point			***parse(char *av, t_mlx *mlx);
 t_point			*new_point(int x, int y, char *z, t_mlx *mlx);
+t_img			*new_img(t_mlx *mlx, int width, int height);
 t_mlx			*new_mlx(t_mlx *mlx);
 void			draw_img_view(t_mlx *mlx, int color, int x, int y);
 void			draw_img_map(t_mlx *mlx, int color, int x, int y);
@@ -73,7 +71,7 @@ void			drawx(t_mlx *mlx);
 int				get_color(t_mlx *mlx, float x, float y);
 void			map(t_mlx *mlx);
 void			tp(t_mlx *mlx);
-int				str_exit(int error, char *str);
+int				str_exit(int error, char *str, t_mlx *mlx);
 int				key(int keycode, t_mlx *mlx);
 int				mouse(int x, int y, t_mlx *mlx);
 void			str_data(t_mlx *mlx);

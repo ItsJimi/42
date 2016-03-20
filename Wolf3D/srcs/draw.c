@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/03 18:35:48 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/19 20:22:09 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/20 13:02:05 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,7 @@ void	draw(t_mlx *mlx)
 	tp(mlx);
 	drawx(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->imgview->img, 0, 0);
-	if (mlx->map == 1)
-	{
-		map(mlx);
-		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->imgmap->img, 0, 0);
-	}
+	map(mlx);
+	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->imgmap->img, 0, 0);
 	str_data(mlx);
 }

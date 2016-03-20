@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 13:20:21 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/19 19:35:40 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/20 14:34:14 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ int		main(int ac, char **av)
 {
 	t_mlx	*mlx;
 
-	if (ac > 1 || av[1])
-		str_exit(-1, "To many arguments");
 	if (!(mlx = (t_mlx *)malloc(sizeof(*mlx))))
-		str_exit(-1, "new.c : Error line 32");
+		str_exit(-1, "new.c : Error line 32", mlx);
+	if (ac > 1 || av[1])
+		str_exit(-1, "To many arguments", mlx);
 	ft_putstr("Chargement du niveau ...\n");
 	mlx->p = parse("maps/hub", mlx);
 	ft_putstr("Chargement termine !\n");
@@ -46,4 +46,5 @@ int		main(int ac, char **av)
 	mlx_hook(mlx->win, 2, 0, key, mlx);
 	mlx_hook(mlx->win, 6, 0, mouse, mlx);
 	mlx_loop(mlx->mlx);
+	return (0);
 }

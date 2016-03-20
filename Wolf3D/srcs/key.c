@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 11:23:31 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/19 20:09:46 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/20 13:35:13 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,20 +57,15 @@ static void	key_dep(int keycode, t_mlx *mlx)
 static void	key_opt(int keycode, t_mlx *mlx)
 {
 	if (keycode == 53)
-		str_exit(0, "ESC !");
-	if (keycode == 46)
-		mlx->map = (mlx->map == 1) ? 0 : 1;
+		str_exit(0, "ESC !", mlx);
 }
 
 int			key(int keycode, t_mlx *mlx)
 {
 	mlx->imgview->addr = ft_memset(mlx->imgview->addr, 0, mlx->w * mlx->h * 4 -
 	1);
-	if (mlx->map == 1)
-	{
-		mlx->imgmap->addr = ft_memset(mlx->imgmap->addr, 0, mlx->mapw *
-			mlx->maph * 4 - 1);
-	}
+	mlx->imgmap->addr = ft_memset(mlx->imgmap->addr, 0, mlx->mapw * mlx->maph *
+	4 - 1);
 	key_opt(keycode, mlx);
 	key_dep(keycode, mlx);
 	draw(mlx);
