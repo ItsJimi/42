@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 11:23:31 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/21 13:22:09 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/21 18:54:28 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ static void	key_dep(int keycode, t_mlx *mlx)
 	b = sin(mlx->deg * (PI / 180)) / 4;
 	key_cross(keycode, mlx, a, b);
 	if (keycode == 0)
-		mlx->deg -= 10;
+		mlx->deg -= 5;
 	if (keycode == 2)
-		mlx->deg += 10;
+		mlx->deg += 5;
 }
 
 static void	key_opt(int keycode, t_mlx *mlx)
@@ -62,8 +62,8 @@ static void	key_opt(int keycode, t_mlx *mlx)
 
 int			key(int keycode, t_mlx *mlx)
 {
-	mlx->imgview->addr = ft_memset(mlx->imgview->addr, 0, mlx->w * mlx->h * 4 -
-	1);
+	mlx->imgview->addr = ft_memset(mlx->imgview->addr, 0, mlx->w * mlx->h * 4
+	- 1);
 	mlx->imgmap->addr = ft_memset(mlx->imgmap->addr, 0, mlx->mapw * mlx->maph *
 	4 - 1);
 	key_opt(keycode, mlx);

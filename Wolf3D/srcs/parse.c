@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 13:20:17 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/21 14:07:59 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/21 16:11:19 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,15 @@ static t_point	**define(char *line, int y, t_mlx *mlx)
 	return (point);
 }
 
+int				parse_error(t_mlx *mlx, int i, char *line)
+{
+	if (i == -1)
+		i = (int)ft_strlen(line);
+	else if (i != (int)ft_strlen(line))
+		str_exit(-1, "** ERROR MAP **", mlx);
+	return (i);
+}
+
 t_point			***parse(char *av, t_mlx *mlx, int error)
 {
 	int		i;
@@ -86,10 +95,7 @@ t_point			***parse(char *av, t_mlx *mlx, int error)
 		str_exit(-1, "parse.c : Error line 76", mlx);
 	while ((error = get_next_line(fd, &line)) > 0)
 	{
-		if (i == -1)
-			i = (int)ft_strlen(line);
-		else if (i != (int)ft_strlen(line))
-			str_exit(-1, "** ERROR MAP **", mlx);
+		i = parse_error(mlx, i, line);
 		point[y] = define(line, y, mlx);
 		point = ft_realloc(point, y + 1, mlx);
 		free(line);
@@ -97,6 +103,8 @@ t_point			***parse(char *av, t_mlx *mlx, int error)
 	}
 	mlx->maph = y;
 	point[y] = NULL;
+	if (mlx->beginx == -1 || mlx->beginy == -1)
+		str_exit(-1, "** ERROR MAP **", mlx);
 	close(fd);
 	if (error == 0 && y != 0)
 		return (point);
