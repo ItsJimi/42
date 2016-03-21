@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 17:33:40 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/20 18:55:24 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/21 13:30:56 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ t_img	*new_xpm(t_mlx *mlx, int w, int h)
 
 	if (!(img = (t_img *)malloc(sizeof(*img))))
 		str_exit(-1, "new.c : Error line 55", mlx);
-	img->img = mlx_xpm_file_to_image(mlx->mlx, "skybox.xpm", &w, &h);
+	if (!(img->img = mlx_xpm_file_to_image(mlx->mlx, "skybox.xpm", &w, &h)))
+		str_exit(-1, "No skybox", mlx);
 	img->addr = mlx_get_data_addr(img->img, &(img->bpp), &(img->size_l),
 		&(img->endian));
 	return (img);

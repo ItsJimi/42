@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 13:20:17 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/20 17:54:26 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/21 14:07:59 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,13 @@ static t_point	**define(char *line, int y, t_mlx *mlx)
 
 t_point			***parse(char *av, t_mlx *mlx, int error)
 {
+	int		i;
 	int		fd;
 	int		y;
 	char	*line;
 	t_point	***point;
 
+	i = -1;
 	y = 0;
 	if (!(fd = open(av, O_RDONLY)))
 		str_exit(-1, "Error open", mlx);
@@ -84,6 +86,10 @@ t_point			***parse(char *av, t_mlx *mlx, int error)
 		str_exit(-1, "parse.c : Error line 76", mlx);
 	while ((error = get_next_line(fd, &line)) > 0)
 	{
+		if (i == -1)
+			i = (int)ft_strlen(line);
+		else if (i != (int)ft_strlen(line))
+			str_exit(-1, "** ERROR MAP **", mlx);
 		point[y] = define(line, y, mlx);
 		point = ft_realloc(point, y + 1, mlx);
 		free(line);
