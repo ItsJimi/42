@@ -43,7 +43,7 @@ all: $(NAME)
 $(NAME): header $(OBCC)
 	@echo "${BLU}+ Compilation program :${STD} $@"
 	@make -C ./libft/
-	@gcc $(FLAG) $(OBCC) ./libft/libft.a -I./incs/ -L/usr/local/lib/ -I/usr/local/include -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	@gcc $(FLAG) $(OBCC) ./libft/libft.a -I./incs/ -L/usr/local/lib -I/usr/local/include -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 $(ODIR)%.o: $(SDIR)%.c
 	@echo "${GRE}+ Compilation :${STD} $^"
