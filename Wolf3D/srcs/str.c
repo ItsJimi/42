@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/30 18:41:20 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/23 11:02:51 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/23 14:06:48 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int		str_exit(int error, char *str, t_mlx *mlx)
 {
 	ft_putstr(str);
 	ft_putchar('\n');
-	//mlx_destroy_window(mlx->mlx, mlx->win);
-	mlx->beginx = 0;
+	if (error == 0)
+		mlx_destroy_window(mlx->mlx, mlx->win);
 	exit(error);
 }
 

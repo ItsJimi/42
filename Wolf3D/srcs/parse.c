@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 13:20:17 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/23 12:28:15 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/23 14:07:44 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ t_point			***parse(char *av, t_mlx *mlx, int error)
 		free(line);
 		y++;
 	}
-	close(fd);
+	mlx->maph = y;
+	point[y] = NULL;
+	wall_error(mlx, point, fd);
 	return (gnl_error2(point, mlx, error, y));
 }

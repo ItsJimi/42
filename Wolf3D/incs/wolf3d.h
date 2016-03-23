@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 16:51:23 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/23 12:27:09 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/23 14:10:06 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,6 @@ void			str_data(t_mlx *mlx);
 int				gnl_error1(char *tab);
 t_point			***gnl_error2(t_point ***point, t_mlx *mlx, int error, int y);
 int				parse_error(t_mlx *mlx, int i, char *line);
+void			wall_error(t_mlx *mlx, t_point ***p, int fd);
 
 #endif

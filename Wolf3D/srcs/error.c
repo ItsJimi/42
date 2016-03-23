@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 12:21:26 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/23 13:01:05 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/23 14:08:04 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 t_point	***gnl_error2(t_point ***point, t_mlx *mlx, int error, int y)
 {
-	mlx->maph = y;
-	point[y] = NULL;
 	if (mlx->nbrstart != 1)
 		str_exit(-1, "** ERROR MAP **", mlx);
 	if (mlx->beginx == -1 || mlx->beginy == -1)
@@ -54,19 +52,27 @@ int		parse_error(t_mlx *mlx, int i, char *line)
 	return (i);
 }
 
-void	wall_error()
+void	wall_error(t_mlx *mlx, t_point ***p, int fd)
 {
 	int		x;
 	int		y;
 
 	y = 0;
+	close(fd);
 	while (y < mlx->maph)
 	{
-		x = 0;
-		while (x < mlx->mapw)
+		if (p[y][mlx->mapw - 1]->z != 1)
+			str_exit(-1, "** ERROR MAP **", mlx);
+		if (y == mlx->maph - 1)
 		{
-			/* code */
+			x = 0;
+			while (x < mlx->mapw)
+			{
+				if (p[y][x]->z != 1)
+					str_exit(-1, "** ERROR MAP **", mlx);
+				x++;
+			}
 		}
-		x++;
+		y++;
 	}
 }
