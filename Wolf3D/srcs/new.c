@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 17:33:40 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/23 12:28:05 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/23 14:22:20 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ t_img	*new_img(t_mlx *mlx, int width, int height)
 
 t_mlx	*new_mlx(t_mlx *mlx)
 {
-	mlx->w = 1285;
-	mlx->h = 725;
+	mlx->w = 1280;
+	mlx->h = 720;
 	if (!(mlx->mlx = mlx_init()))
 	{
 		ft_putstr("ERROR");
