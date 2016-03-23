@@ -6,19 +6,23 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 13:20:17 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/21 16:11:19 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/23 12:28:15 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-static int		count_case(char **str)
+static int		count_case(char **str, t_mlx *mlx)
 {
 	int	i;
 
 	i = 0;
 	while (str[i])
+	{
+		if (ft_atoi(str[i]) == 42)
+			mlx->nbrstart++;
 		i++;
+	}
 	return (i);
 }
 
@@ -51,12 +55,12 @@ static t_point	**define(char *line, int y, t_mlx *mlx)
 
 	x = 0;
 	tab = ft_strsplit(line, ' ');
-	nbr_case = count_case(tab);
+	nbr_case = count_case(tab, mlx);
 	if (!(point = (t_point **)malloc(sizeof(*point) * nbr_case)))
 		str_exit(-1, "parse.c : Error line 54", mlx);
 	while (x < nbr_case)
 	{
-		if (gnl_error(tab[x]) == -1)
+		if (gnl_error1(tab[x]) == -1)
 			str_exit(-1, "Are you fucking kidding me ?", mlx);
 		point[x] = new_point(x, y, tab[x], mlx);
 		free(tab[x]);
@@ -70,15 +74,6 @@ static t_point	**define(char *line, int y, t_mlx *mlx)
 	return (point);
 }
 
-int				parse_error(t_mlx *mlx, int i, char *line)
-{
-	if (i == -1)
-		i = (int)ft_strlen(line);
-	else if (i != (int)ft_strlen(line))
-		str_exit(-1, "** ERROR MAP **", mlx);
-	return (i);
-}
-
 t_point			***parse(char *av, t_mlx *mlx, int error)
 {
 	int		i;
@@ -89,8 +84,9 @@ t_point			***parse(char *av, t_mlx *mlx, int error)
 
 	i = -1;
 	y = 0;
+	mlx->nbrstart = 0;
 	if (!(fd = open(av, O_RDONLY)))
-		str_exit(-1, "Error open", mlx);
+		str_exit(-1, "Error open\n", mlx);
 	if (!(point = (t_point ***)malloc(sizeof(***point))))
 		str_exit(-1, "parse.c : Error line 76", mlx);
 	while ((error = get_next_line(fd, &line)) > 0)
@@ -101,14 +97,6 @@ t_point			***parse(char *av, t_mlx *mlx, int error)
 		free(line);
 		y++;
 	}
-	mlx->maph = y;
-	point[y] = NULL;
-	if (mlx->beginx == -1 || mlx->beginy == -1)
-		str_exit(-1, "** ERROR MAP **", mlx);
 	close(fd);
-	if (error == 0 && y != 0)
-		return (point);
-	else
-		str_exit(-1, "Error gnl", mlx);
-	return (0);
+	return (gnl_error2(point, mlx, error, y));
 }

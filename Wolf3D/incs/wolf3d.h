@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 16:51:23 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/20 18:55:46 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/23 12:27:09 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ typedef struct	s_mlx
 	int			w;
 	int			h;
 
+	int			nbrstart;
+
 	int			mapw;
 	int			maph;
 
@@ -76,6 +78,8 @@ int				str_exit(int error, char *str, t_mlx *mlx);
 int				key(int keycode, t_mlx *mlx);
 int				mouse(int x, int y, t_mlx *mlx);
 void			str_data(t_mlx *mlx);
-int				gnl_error(char *tab);
+int				gnl_error1(char *tab);
+t_point			***gnl_error2(t_point ***point, t_mlx *mlx, int error, int y);
+int				parse_error(t_mlx *mlx, int i, char *line);
 
 #endif

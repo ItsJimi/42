@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 17:33:40 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/21 16:12:56 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/23 12:28:05 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_point	*new_point(int x, int y, char *z, t_mlx *mlx)
 	t_point	*point;
 
 	if (!(point = (t_point *)malloc(sizeof(*point))))
-		str_exit(-1, "new.c : Error line 52", mlx);
+		str_exit(-1, "new.c : Error line 52\n", mlx);
 	point->x = x;
 	point->y = y;
 	point->z = ft_atoi(z);
@@ -26,6 +26,10 @@ t_point	*new_point(int x, int y, char *z, t_mlx *mlx)
 		mlx->beginx = x;
 		mlx->beginy = y;
 	}
+	if (y == 0 && ft_atoi(z) != 1)
+		str_exit(-1, "** ERROR MAP **", mlx);
+	if (x == 0 && ft_atoi(z) != 1)
+		str_exit(-1, "** ERROR MAP **", mlx);
 	return (point);
 }
 
@@ -60,12 +64,12 @@ t_mlx	*new_mlx(t_mlx *mlx)
 	mlx->h = 725;
 	if (!(mlx->mlx = mlx_init()))
 	{
-		ft_putstr("ERROR\n");
+		ft_putstr("ERROR");
 		exit(-1);
 	}
 	if (!(mlx->win = mlx_new_window(mlx->mlx, mlx->w, mlx->h, "W O L F 3 D")))
 	{
-		ft_putstr("ERROR\n");
+		ft_putstr("ERROR");
 		exit(-1);
 	}
 	mlx->imgsky = new_xpm(mlx, mlx->w, mlx->h);

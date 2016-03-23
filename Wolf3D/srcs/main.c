@@ -6,29 +6,11 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 13:20:21 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/20 17:54:44 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/23 12:29:07 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
-
-int		gnl_error(char *tab)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	while (tab[i])
-	{
-		if (tab[i] >= 48 && tab[i] <= 57)
-			j++;
-		i++;
-	}
-	if (j == 0)
-		return (-1);
-	return (0);
-}
 
 int		main(int ac, char **av)
 {
