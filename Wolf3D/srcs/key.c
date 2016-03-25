@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 11:23:31 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/23 17:49:28 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/03/23 17:56:56 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,8 @@ int			key(int keycode, t_mlx *mlx)
 	key2(keycode, mlx, a, b);
 	key3(keycode, mlx, a, b);
 	key4(keycode, mlx, a, b);
+	if (keycode == 53)
+		str_exit(0, "ESC", mlx);
 	if (keycode == 0)
 		mlx->deg -= 5;
 	if (keycode == 2)
