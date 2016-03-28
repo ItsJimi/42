@@ -34,13 +34,13 @@ void	place_pattern(char *tab, char **tryresult, int i, int j)
 	h = 0;
 	l = 0;
 	m = 0;
-	while (isupper(tab[h]) == 0)
+	while (ft_isupper(tab[h]) == 0)
 		h++;
 	while (tab[h + l] != '\0')
 	{
 		if (tab[h + l] == '\n')
 			m++;
-		if (isupper(tab[h + l]) == 1)
+		if (ft_isupper(tab[h + l]) == 1)
 			tryresult[i + m][j + l - (m * 5)] = tab[h + l];
 		l++;
 	}

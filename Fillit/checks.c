@@ -12,7 +12,7 @@
 
 #include "fillit.h"
 
-int		isupper(char c)
+int		ft_isupper(char c)
 {
 	if (c >= 65 && c <= 90)
 		return (1);
@@ -30,13 +30,13 @@ int		check_valid_point(char *tab, char **tryresult, int i, int j)
 	h = 0;
 	l = 0;
 	m = 0;
-	while (isupper(tab[h]) == 0 && tab[h] != '\0')
+	while (ft_isupper(tab[h]) == 0 && tab[h] != '\0')
 		h++;
 	while (tab[h + l] != '\0')
 	{
 		if (tab[h + l] == '\n')
 			m++;
-		if (isupper(tab[h + l]) == 1)
+		if (ft_isupper(tab[h + l]) == 1)
 		{
 			k = j + l - (m * 5);
 			if (k < 0 || (i + m) >= (int)ft_strlen(tryresult[0]) ||
