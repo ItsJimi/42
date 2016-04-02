@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 11:23:31 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/03 16:21:29 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2016/04/02 14:59:51 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@ t_mlx	*key_color(int keycode, t_mlx *mlx)
 t_mlx	*key_yolo(int keycode, t_mlx *mlx)
 {
 	if (keycode == 123)
-		mlx->decalx -= 10;
+		mlx->decalx -= 50;
 	if (keycode == 124)
-		mlx->decalx += 10;
+		mlx->decalx += 50;
 	if (keycode == 125)
-		mlx->decaly += 10;
+		mlx->decaly += 50;
 	if (keycode == 126)
-		mlx->decaly -= 10;
+		mlx->decaly -= 50;
 	if (keycode == 8)
 		mlx->dim++;
 	if (keycode == 9)

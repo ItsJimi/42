@@ -6,7 +6,7 @@
 #    By: jmaiquez <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015\11/26 11:16:13 by jmaiquez          #+#    #+#              #
-#    Updated: 2016/02/03 16:55:32 by jmaiquez         ###   ########.fr        #
+#    Updated: 2016/04/02 14:58:57 by jmaiquez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRC = main.c \
 	  point.c \
 	  line.c
 
-FLAG = -Wall -Werror -Wextra
+FLAG = -O3 -Wall -Werror -Wextra
 
 $(NAME):
 	@echo "===========[ \x1b[31mF \x1b[32mD \x1b[34mF \x1b[37m]==========="
