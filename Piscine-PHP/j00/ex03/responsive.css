@@ -1,0 +1,65 @@
+html, body {
+	background: #333;
+	font-family: Arial, sans-serif;
+}
+img{
+	height: 6vw;
+}
+header{
+	text-align: center;
+	font-size: 8vw;
+	color: #fff;
+}
+table{
+	margin: 4vw auto;
+}
+td{
+	width: 6vw;
+	height: 6vw;
+	color: #000;
+	text-align: center;
+	font-size: 1vw;
+}
+.orange{
+	background: rgb(255, 223, 145);
+}
+.green{
+	background: rgb(146, 255, 159);
+}
+.red{
+	background: rgb(255, 197, 145);
+}
+.purple{
+	background: rgb(171, 145, 255);
+}
+.blue{
+	background: rgb(145, 223, 255);
+}
+.yellow{
+	background: rgb(255, 249, 145);
+}
+.pink{
+	background: rgb(249, 145, 255);
+}
+.yell_green{
+	background: rgb(236, 255, 145);
+}
+.green1{
+	background: rgb(210, 255, 145);
+}
+.green2{
+	background: rgb(184, 255, 145);
+}
+.masse{
+	text-align: right;
+	font-size: 1vw;
+}
+.elem{
+	margin-top: 1vw;
+	text-align: center;
+	font-size: 2vw;
+}
+.num{
+	text-align: left;
+	font-size: 1vw;
+}

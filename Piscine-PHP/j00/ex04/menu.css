@@ -1,0 +1,29 @@
+html, body{
+	background: #333;
+	color: #fff;
+}
+#container{
+	width: 500px;
+	height: 400px;
+	background: #00796B;
+}
+#menu li{
+	display: inline-block;
+}
+#menu ul li{
+	display: inherit;
+}
+.plats{
+	display: none;
+}
+.choix{
+	display: none;
+}
+#menu:hover .plats{
+	display: block;
+	list-style: none;
+}
+.plats:hover .choix{
+	display: block;
+	list-style: none;
+}
