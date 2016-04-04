@@ -1,29 +1,75 @@
+@keyframes fade {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
 html, body{
 	background: #333;
 	color: #fff;
+	font-size: 25px;
+	font-family : sans-serif;
 }
-#container{
-	width: 500px;
-	height: 400px;
-	background: #00796B;
+html:hover{
+	animation-name: fade;
+	animation-duration: 4s;
+}
+#menu, #menu ul{
+	padding: 0px;
+	margin: 0px;
+	list-style: none;
+}
+#menu{
+	margin-top: 50px;
+	text-align: center;
 }
 #menu li{
 	display: inline-block;
+	margin-right: 20px;
 }
 #menu ul li{
 	display: inherit;
 }
-.plats{
-	display: none;
-}
-.choix{
-	display: none;
-}
-#menu:hover .plats{
+#menu a{
+	text-decoration: none;
 	display: block;
-	list-style: none;
+	color: #fff;
+	font-size: 20px;
 }
-.plats:hover .choix{
-	display: block;
-	list-style: none;
+#menu .purple:hover{
+	color: #9C27B0;
+}
+#menu .red:hover{
+	color: #F44336;
+}
+#menu .yellow:hover{
+	color: #FFEB3B;
+}
+#menu .blue:hover{
+	color: #2196F3;
+}
+#menu ul{
+	position: absolute;
+	display: none;
+	text-align: left;
+}
+
+#menu li:hover ul{
+    display: block;
+}
+
+/* Colors */
+
+.purple{
+	color: #9C27B0;
+}
+.red{
+	color: #F44336;
+}
+.green{
+	color: #4CAF50;
+}
+.blue{
+	color: #2196F3;
+}
+.yellow{
+	color: #FFEB3B;
 }
