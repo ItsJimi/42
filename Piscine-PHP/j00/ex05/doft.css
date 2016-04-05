@@ -1,0 +1,155 @@
+html, body{
+	background: rgb(80, 80, 80);
+}
+.left{
+	float: left;
+}
+.right{
+	float: right;
+}
+.clear{
+	clear: both;
+}
+header{
+	width: 1400px;
+	height: 120px;
+	margin: 10px auto;
+	padding: 10px;
+	background: rgb(144, 144, 144);
+	border-radius: 10px;
+	box-shadow: 5px 5px 20px #000;
+}
+header #logo{
+	width: 500px;
+}
+#loupe{
+	margin-top: 30px;
+}
+#loupe img{
+	width: 200px;
+}
+#reload img{
+	width: 20px;
+}
+#close{
+	margin-top: 80px;
+}
+#close img{
+	width: 20px;
+}
+#container{
+	width: 1365px;
+	margin: 20px auto;
+}
+.menu{
+	width: 140px;
+	height: 435px;
+	background: rgb(144, 144, 144);
+	border-radius: 10px;
+	box-shadow: 5px 5px 20px #000;
+	text-align: center;
+}
+.icons{
+	display: block;
+	margin: 10px auto;
+	width: 70px;
+}
+.icons_active{
+	border: 5px solid #ff0000;
+	border-radius: 5px;
+}
+#brick{
+	margin: 10px auto;
+	background: url("./resources/brick.jpg") repeat;
+	width: 120px;
+	height: 70px;
+}
+#body{
+	margin: 5px auto;
+	padding: 10px;
+	text-align: center;
+	width: 1025px;
+	background: rgb(144, 144, 144);
+	border-radius: 10px;
+	box-shadow: 5px 5px 20px #000;
+}
+
+/* Backgrpund */
+
+#exterieur{
+	width: 1025px;
+	height: 580px;
+	background: url("./resources/exterieur.jpg") no-repeat;
+}
+#entree{
+	width: 1025px;
+	height: 580px;
+	background: url("./resources/entree.jpg") no-repeat;
+}
+#piscine{
+	width: 1025px;
+	height: 580px;
+	background: url("./resources/cluster.jpg") no-repeat;
+}
+#playstation{
+	width: 1025px;
+	height: 580px;
+	background: url("./resources/playstation.jpg") no-repeat;
+}
+#lounge{
+	width: 1025px;
+	height: 580px;
+	background: url("./resources/lounge.jpg") no-repeat;
+}
+#terrasse{
+	width: 1025px;
+	height: 580px;
+	background: url("./resources/terrasse.jpg") no-repeat;
+}
+
+#chair{
+	position: absolute;
+	left: 550px;
+	top: 500px;
+	width: 200px;
+	height: 250px;
+}
+#mac{
+	position: absolute;
+	left: 1050px;
+	top: 500px;
+	width: 220px;
+	height: 180px;
+}
+#green_container{
+	margin-top: -90px;
+	margin-left: -60px;
+	padding: 10px;
+	width: 480px;
+	height: 160px;
+	background: rgb(136, 255, 137);
+	border-radius: 10px;
+	box-shadow: 5px 5px 20px #000;
+	font-size: 18px;
+	font-family: sans-serif;
+}
+#enter{
+	font-size: 30px;
+	font-family: serif;
+}
+#shadow{
+	text-shadow: 5px 5px 6px #ff0000;
+}
+#italic{
+	font-style: italic;
+}
+#text{
+	width: 380px;
+}
+#button{
+	font-family: sans-serif;
+	height: 18px;
+	border-radius: 1px;
+	background: rgb(231, 231, 231);
+	border: 1px solid rgb(153, 158, 153);
+}
