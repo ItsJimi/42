@@ -79,16 +79,16 @@ header #logo{
 	background: url("./resources/cluster.jpg") no-repeat;
 }
 #chair{
-	position: absolute;
-	left: 550px;
-	top: 500px;
+	position: relative;
+	left: 300px;
+	top: 320px;
 	width: 200px;
 	height: 250px;
 }
 #mac{
-	position: absolute;
-	left: 1050px;
-	top: 500px;
+	position: relative;
+	left: 800px;
+	top: 70px;
 	width: 220px;
 	height: 180px;
 }
