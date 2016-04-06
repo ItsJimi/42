@@ -8,9 +8,6 @@
 		elseif (strpos($argv[2], "-") !== false) {
 			$result = $argv[1] - $argv[3];
 		}
-		elseif (strpos($argv[2], "*") !== false) {
-			$result = $argv[1] * $argv[3];
-		}
 		elseif (strpos($argv[2], "/") !== false) {
 			$result = $argv[1] / $argv[3];
 		}
@@ -18,11 +15,9 @@
 			$result = $argv[1] % $argv[3];
 		}
 		else {
-			$error = true;
+			$result = $argv[1] * $argv[3];
 		}
-		if ($error != true)
-			echo $result;
-		echo "\n";
+		echo $result."\n";
 	}
 	else
 		echo "Incorrect Parameters\n";

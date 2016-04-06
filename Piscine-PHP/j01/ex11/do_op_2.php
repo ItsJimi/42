@@ -3,7 +3,7 @@
 	function ft_split($str, $operator) {
 		$tab = explode($operator, $str);
 		$tab = array_values(array_filter($tab));
-		if (ctype_digit(trim($tab[0])) && ctype_digit(trim($tab[1])))
+		if (is_numeric(trim($tab[0])) && is_numeric(trim($tab[1])))
 			return ($tab);
 		echo "Syntax Error\n";
 		exit (-1);
