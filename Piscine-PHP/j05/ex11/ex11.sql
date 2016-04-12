@@ -1,1 +1,1 @@
-SELECT UPPER(nom) AS NOM, prenom, prix FROM (fiche_personne fp INNER JOIN membre m ON fp.id_perso=m.id_fiche_perso) NATURAL JOIN abonnement;
+SELECT UPPER(nom) AS NOM, prenom, prix FROM (fiche_personne fp INNER JOIN (SELECT prix, id_fiche_perso FROM membre NATURAL JOIN abonnement WHERE prix > 42) m ON fp.id_perso=m.id_fiche_perso) ORDER BY nom, prenom ASC;
