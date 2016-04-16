@@ -10,33 +10,37 @@ if (document.cookie && document.cookie != '') {
 		var firstChild = parentElement.firstChild;
 
 		var added = document.createElement("div");
-		added.setAttribute("id", name_value[0]);
-		added.setAttribute("onclick", "del('" + name_value[0] + "');");
+		added.setAttribute("id", name_value[0].trim());
+		added.setAttribute("onclick", "del('" + name_value[0].trim() + "');");
 		var text = document.createTextNode(name_value[1]);
 		added.appendChild(text);
 
 		parentElement.insertBefore(added, firstChild);
-    }
+		var number = name_value[0].split('o');
+		var nbr = parseInt(number[2]);
+	}
 }
 
+if (nbr > 0)
+	i = nbr + 1;
+
 function add() {
-	console.log("New todo !");
-	var todo = prompt("Inscrivez votre nouvelle tâche ci-dessous :");
+	if (todo = prompt("Inscrivez votre nouvelle tâche ci-dessous :")) {
+		var parentElement = document.getElementById("ft_list");
+		var firstChild = parentElement.firstChild;
 
-	var parentElement = document.getElementById("ft_list");
-	var firstChild = parentElement.firstChild;
+		var added = document.createElement("div");
+		added.setAttribute("id", "todo" + i);
+		added.setAttribute("onclick", "del('todo" + i + "');");
+		var text = document.createTextNode(todo);
+		added.appendChild(text);
 
-	var added = document.createElement("div");
-	added.setAttribute("id", "todo" + i);
-	added.setAttribute("onclick", "del('todo" + i + "');");
-	var text = document.createTextNode(todo);
-	added.appendChild(text);
+		parentElement.insertBefore(added, firstChild);
 
-	parentElement.insertBefore(added, firstChild);
+		document.cookie = "todo" + i + "=" + todo + ";";
 
-	document.cookie = "todo" + i + "=" + todo + ";";
-
-	i++;
+		i++;
+	}
 }
 
 function del(id) {

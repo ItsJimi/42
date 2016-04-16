@@ -31,7 +31,7 @@
 				var right = parseInt(form['right'].value);
 				var select = form['select'].value;
 
-				if (left >= 0 && right >= 0 && !isNaN(left) && !isNaN(right)) {
+				if (left == parseFloat(form['left'].value) && right == parseFloat(form['right'].value) && left >= 0 && right >= 0 && !isNaN(left) && !isNaN(right)) {
 					switch (select) {
 						case '+':
 							calcul(left + right);
