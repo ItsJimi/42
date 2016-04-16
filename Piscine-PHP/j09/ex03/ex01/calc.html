@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Calc</title>
+	</head>
+	<body>
+		<form name="calc" onsubmit="calculate(); return false;" >
+			<input type="text" name="left" />
+			<select name="select">
+				<option value="+">+</option>
+				<option value="-">-</option>
+				<option value="*">*</option>
+				<option value="/">/</option>
+				<option value="%">%</option>
+			</select>
+			<input type="text" name="right" />
+			<input type="submit" name="submit" value="Try me !" />
+		</form>
+		<script type="text/javascript">
+			setInterval(function() {
+				alert("Please, use me...");
+			}, 30000);
+			function calcul(result) {
+				console.log(result);
+				alert(result);
+			}
+			function calculate() {
+				var form = document.forms['calc'];
+				var left = parseInt(form['left'].value);
+				var right = parseInt(form['right'].value);
+				var select = form['select'].value;
+
+				if (left == parseFloat(form['left'].value) && right == parseFloat(form['right'].value) && left >= 0 && right >= 0 && !isNaN(left) && !isNaN(right)) {
+					switch (select) {
+						case '+':
+							calcul(left + right);
+							break;
+						case '-':
+							calcul(left - right);
+							break;
+						case '*':
+							calcul(left * right);
+							break;
+						case '/':
+							if (right == 0)
+								calcul("It's over 9000!");
+							else
+								calcul(left / right);
+							break;
+						case '%':
+							if (right == 0)
+								calcul("It's over 9000!");
+							else
+								calcul(left % right);
+							break;
+						default:
+							calcul("Error :(");
+					}
+				}
+				else {
+					calcul("Error :(");
+				}
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Calc</title>
+	</head>
+	<body>
+		<input id="left" type="text" name="left" />
+		<select id="select" name="select">
+			<option value="+">+</option>
+			<option value="-">-</option>
+			<option value="*">*</option>
+			<option value="/">/</option>
+			<option value="%">%</option>
+		</select>
+		<input id="right" type="text" name="right" />
+		<input id="submit" type="submit" name="submit" value="Try me !" />
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+		<script type="text/javascript">
+			setInterval(function() {
+				alert("Please, use me...");
+			}, 30000);
+			function calcul(result) {
+				console.log(result);
+				alert(result);
+			}
+			$(document).ready(function() {
+				$("#submit").click(function() {
+					var left = parseInt($("#left").val());
+					var right = parseInt($("#right").val());
+					var select = $("#select").val();
+
+					if (left == parseFloat($("#left").val()) && right == parseFloat($("#right").val()) && left >= 0 && right >= 0 && !isNaN(left) && !isNaN(right)) {
+						switch (select) {
+							case '+':
+								calcul(left + right);
+								break;
+							case '-':
+								calcul(left - right);
+								break;
+							case '*':
+								calcul(left * right);
+								break;
+							case '/':
+								if (right == 0)
+									calcul("It's over 9000!");
+								else
+									calcul(left / right);
+								break;
+							case '%':
+								if (right == 0)
+									calcul("It's over 9000!");
+								else
+									calcul(left % right);
+								break;
+							default:
+								calcul("Error :(");
+						}
+					}
+					else {
+						calcul("Error :(");
+					}
+				});
+			});
+		</script>
+	</body>
+</html>

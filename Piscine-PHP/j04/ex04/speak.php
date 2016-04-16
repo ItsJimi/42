@@ -35,7 +35,7 @@
 						file_put_contents('../private/chat', $new_msg);
 						flock($fp, LOCK_UN);
 					}
-					fclose($fp);
+					fclose($fp); 
 				}
 			}
 	?>
