@@ -1,24 +1,25 @@
 $(document).ready(function() {
-	var i = 0;
-	var cookies = {};
+	var i;
+	var tab = {};
 
-	if (document.cookie && document.cookie != '') {
-	    var split = document.cookie.split(';');
-	    for (var i = 0; i < split.length; i++) {
-	        var name_value = split[i].split("=");
-			$("#ft_list").prepend("<div id=\"" + name_value[0].trim() + "\">" + name_value[1] + "</div>");
-			var nbr = parseInt(name_value[0]);
-		}
-	}
-
-	if (nbr > 0)
-		i = parseInt(nbr) + 1;
+	$.get("select.php", function(data, status) {
+		if (data)
+			tab = JSON.parse(data);
+		else
+			tab = [];
+		tab.forEach(function(element) {
+			$("#ft_list").prepend("<div id=\"" + element[0] + "\">" + element[1] + "</div>");
+		});
+		i = get_id();
+	});
 
 	$("#new").click(function() {
 		if (todo = prompt("Inscrivez votre nouvelle tâche ci-dessous :")) {
 			$("#ft_list").prepend("<div id=\"" + i + "\">" + todo + "</div>");
-
-			document.cookie = i + "=" + todo + ";";
+			$.post("insert.php", {
+				id: i,
+				content: todo
+			});
 			i++;
 		}
 	});
@@ -28,8 +29,19 @@ $(document).ready(function() {
 		if ($.isNumeric(target)) {
 			if (confirm("Voulez vous supprimer cette tâche ?")) {
 				$("#" + target).remove();
-				document.cookie = target + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+				$.post("delete.php", {
+					id: tab[target][0]
+				});
 			}
 		}
 	});
+
+	function get_id() {
+		var id = -1;
+		tab.forEach(function(element) {
+			if (id < parseInt(element[0]))
+				id = parseInt(element[0]);
+		});
+		return (id + 1);
+	}
 });
