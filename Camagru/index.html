@@ -2,136 +2,55 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<link rel="stylesheet" href="css/master.css" media="screen" charset="utf-8">
-		<title>Camagru</title>
+		<link rel="stylesheet" href="css/fonts.css" charset="utf-8">
+		<link rel="stylesheet" href="css/screen.css" media="screen" charset="utf-8">
+		<link rel="stylesheet" href="css/mobile.css" media="(max-width: 800px)" charset="utf-8">
+		<title></title>
 	</head>
 	<body>
-		<div class="camera">
-			<video id="video">Video stream not available.</video>
-			<button id="startbutton">Take photo</button>
+		<header>
+			<div class="container">
+				<a href="#">Instagram</a>
+			</div>
+		</header>
+		<div class="container">
+			<section>
+				Salut
+			</section>
+			<aside>
+				<img src="http://portra.wpshower.com/wp-content/uploads/2014/03/martin-schoeller-barack-obama-portrait-up-close-and-personal.jpg" alt="pp">
+				<div class="aside_logo_box">
+					<div class="aside_logo left">
+						<svg style="height: 100%" viewBox="0 0 24 24">
+						    <path fill="#c0392b" d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" />
+						</svg>
+						<div class="aside_logo_val">
+							638
+						</div>
+					</div>
+					<div class="aside_logo right">
+						<svg style="height: 100%" viewBox="0 0 24 24">
+						    <path fill="#2980b9" d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" />
+						</svg>
+						<div class="aside_logo_val">
+							46
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="aside_box">
+					<div class="title">Bio</div>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				</div>
+				<div class="aside_box">
+					<div class="title">Test</div>
+					test
+				</div>
+			</aside>
+			<div class="clear"></div>
 		</div>
-		<canvas id="canvas">
-		</canvas>
-		<div class="output">
-			<img id="photo" alt="The screen capture will appear in this box.">
-		</div>
-		<script type="text/javascript">
-			(function() {
-				// The width and height of the captured photo. We will set the
-				// width to the value defined here, but the height will be
-				// calculated based on the aspect ratio of the input stream.
+		<footer>
 
-				var width = 800;    // We will scale the photo width to this
-				var height = 0;     // This will be computed based on the input stream
-
-				// |streaming| indicates whether or not we're currently streaming
-				// video from the camera. Obviously, we start at false.
-
-				var streaming = false;
-
-				// The various HTML elements we need to configure or control. These
-				// will be set by the startup() function.
-
-				var video = null;
-				var canvas = null;
-				var photo = null;
-				var startbutton = null;
-
-				function startup() {
-				video = document.getElementById('video');
-				canvas = document.getElementById('canvas');
-				photo = document.getElementById('photo');
-				startbutton = document.getElementById('startbutton');
-
-				navigator.getMedia = ( navigator.getUserMedia ||
-									   navigator.webkitGetUserMedia ||
-									   navigator.mozGetUserMedia ||
-									   navigator.msGetUserMedia);
-
-				navigator.getMedia(
-				  {
-					video: true,
-					audio: false
-				  },
-				  function(stream) {
-					if (navigator.mozGetUserMedia) {
-					  video.mozSrcObject = stream;
-					} else {
-					  var vendorURL = window.URL || window.webkitURL;
-					  video.src = vendorURL.createObjectURL(stream);
-					}
-					video.play();
-				  },
-				  function(err) {
-					console.log("An error occured! " + err);
-				  }
-				);
-
-				video.addEventListener('canplay', function(ev){
-				  if (!streaming) {
-					height = video.videoHeight / (video.videoWidth/width);
-
-					// Firefox currently has a bug where the height can't be read from
-					// the video, so we will make assumptions if this happens.
-
-					if (isNaN(height)) {
-					  height = width / (4/3);
-					}
-
-					video.setAttribute('width', width);
-					video.setAttribute('height', height);
-					canvas.setAttribute('width', width);
-					canvas.setAttribute('height', height);
-					context.translate(width, 0);
-      				context.scale(-1, 1);
-					streaming = true;
-				  }
-				}, false);
-
-				startbutton.addEventListener('click', function(ev){
-				  takepicture();
-				  ev.preventDefault();
-			  }, false);
-
-				clearphoto();
-				}
-
-				// Fill the photo with an indication that none has been
-				// captured.
-
-				function clearphoto() {
-				var context = canvas.getContext('2d');
-				context.fillStyle = "#AAA";
-				context.fillRect(0, 0, canvas.width, canvas.height);
-
-				var data = canvas.toDataURL('image/png');
-				photo.setAttribute('src', data);
-				}
-
-				// Capture a photo by fetching the current contents of the video
-				// and drawing it into a canvas, then converting that to a PNG
-				// format data URL. By drawing it on an offscreen canvas and then
-				// drawing that to the screen, we can change its size and/or apply
-				// other changes before drawing it.
-
-				function takepicture() {
-				var context = canvas.getContext('2d');
-				if (width && height) {
-				  canvas.width = width;
-				  canvas.height = height;
-				  context.drawImage(video, 0, 0, width, height);
-
-				  var data = canvas.toDataURL('image/png');
-				  photo.setAttribute('src', data);
-				} else {
-				  clearphoto();
-				}
-				}
-
-				// Set up our event listener to run the startup process
-				// once loading is complete.
-				window.addEventListener('load', startup, false);
-			})();
-		</script>
+		</footer>
 	</body>
 </html>

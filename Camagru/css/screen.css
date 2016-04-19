@@ -1,0 +1,92 @@
+html, body {
+	padding: 0px;
+	margin: 0px;
+	width: 100%;
+	height: 100%;
+	background: #333;
+	font-family: "lato", sans-serif;
+}
+.container {
+	width: 800px;
+	margin: 0px auto;
+}
+.left {
+	float: left;
+}
+.right {
+	float: right;
+}
+header {
+	width: 100%;
+	height: 80px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	background: #2ecc71;
+}
+@keyframes fade_title {
+	from {
+		border-top: 1px solid rgba(236, 240, 241, 0);
+		border-bottom: 1px solid rgba(236, 240, 241, 0);
+	}
+    50% {
+		border-top: 1px solid rgba(236, 240, 241, 1);
+		border-bottom: 1px solid rgba(236, 240, 241, 1);
+	}
+	to {
+		border-top: 1px solid rgba(236, 240, 241, 0);
+		border-bottom: 1px solid rgba(236, 240, 241, 0);
+	}
+}
+header a{
+	text-decoration: none;
+	color: #ecf0f1;
+	font-size: 60px;
+	-webkit-animation: fade_title 4s infinite;
+	-moz-animation: fade_title 4s infinite;
+	-o-animation: fade_title 4s infinite;
+	animation: fade_title 4s infinite;
+}
+section {
+	float: left;
+	width: 500px;
+	background: rgba(236, 240, 241, 1);
+}
+aside {
+	margin-top: -100px;
+	float: right;
+	width: 280px;
+}
+aside img{
+	width: 272px;
+	border: 4px solid rgba(39, 174, 96, 1);
+	border-radius: 2px;
+}
+.aside_box{
+	background: rgba(236, 240, 241, 1);
+	margin-top: 10px;
+	border-radius: 2px;
+	padding: 10px;
+}
+.aside_box .title{
+	text-align: center;
+	font-size: 25px;
+	border-bottom: 0.1px solid rgba(0, 0, 0, 0.2);
+}
+.aside_logo_box {
+	margin-top: 10px;
+	border-radius: 2px;
+	padding: 10px;
+	height: 100px;
+}
+.aside_logo{
+	width: 120px;
+	height: 50px;
+	text-align: center;
+}
+.aside_logo_val{
+	color: rgba(236, 240, 241, 1);
+	padding: 10px;
+	background: rgba(39, 174, 96, 1);
+	border: 1px solid rgba(39, 174, 96, 0.8);
+	border-radius: 2px;
+}
