@@ -1,13 +1,29 @@
+::-webkit-scrollbar {
+	width: 14px;
+	height: 14px;
+	background: #333 0 0 repeat;
+}
+::-webkit-scrollbar-thumb {
+	background-color: #222;
+}
 html, body {
 	padding: 0px;
 	margin: 0px;
 	width: 100%;
 	height: 100%;
-	background: #333;
-	font-family: "lato", sans-serif;
+	background: url("../img/background.jpg") no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	font-family: "latothin", sans-serif;
+}
+a {
+	text-decoration: none;
+	color: #27ae60;
 }
 .container {
-	width: 800px;
+	width: 1000px;
 	margin: 0px auto;
 }
 .left {
@@ -38,6 +54,7 @@ header {
 	}
 }
 header a{
+	float: right;
 	text-decoration: none;
 	color: #ecf0f1;
 	font-size: 60px;
@@ -47,13 +64,81 @@ header a{
 	animation: fade_title 4s infinite;
 }
 section {
-	float: left;
-	width: 500px;
+	float: right;
+	width: 700px;
+}
+.button_aff {
+	width: 700px;
+	margin: 20px auto;
+}
+.button_all {
+	text-align: center;
+	width: 325px;
+	padding: 10px;
+	display: inline-block;
+	background: rgba(52, 152, 219, 1);
+	border: 1px solid rgba(52, 152, 219, 0.8);
+	border-radius: 2px;
+	color: rgba(236, 240, 241, 1);
+}
+.button_follow {
+	text-align: center;
+	width: 325px;
+	padding: 10px;
+	display: inline-block;
+	background: rgba(52, 152, 219, 1);
+	border: 1px solid rgba(52, 152, 219, 0.8);
+	border-radius: 2px;
+	color: rgba(236, 240, 241, 1);
+}
+article {
+	padding: 20px;
 	background: rgba(236, 240, 241, 1);
+	border-radius: 2px;
+	margin-bottom: 20px;
+}
+article img {
+	width: 652px;
+	border: 4px solid rgba(39, 174, 96, 1);
+}
+.tools {
+	width: 660px;
+	height: 40px;
+	font-size: 20px;
+}
+.tools_help {
+	display: inline-block;
+	height: 20px;
+	width: 284px;
+	padding: 10px;
+	border-radius: 2px;
+	font-family: "latolight", sans-serif;
+}
+.tools_like {
+	text-align: center;
+	display: inline-block;
+	height: 20px;
+	width: 150px;
+	color: rgba(236, 240, 241, 1);
+	padding: 10px;
+	background: rgba(192, 57, 43, 1);
+	border: 1px solid rgba(192, 57, 43, 0.8);
+	border-radius: 2px;
+}
+.tools_follow {
+	text-align: center;
+	display: inline-block;
+	height: 20px;
+	width: 150px;
+	color: rgba(236, 240, 241, 1);
+	padding: 10px;
+	background: rgba(52, 152, 219, 1);
+	border: 1px solid rgba(52, 152, 219, 0.8);
+	border-radius: 2px;
 }
 aside {
+	position: fixed;
 	margin-top: -100px;
-	float: right;
 	width: 280px;
 }
 aside img{
@@ -66,11 +151,15 @@ aside img{
 	margin-top: 10px;
 	border-radius: 2px;
 	padding: 10px;
+	font-family: "latolight", sans-serif;
+	text-align: justify;
+	color: #333;
 }
 .aside_box .title{
 	text-align: center;
 	font-size: 25px;
 	border-bottom: 0.1px solid rgba(0, 0, 0, 0.2);
+	font-family: "latolight", sans-serif;
 }
 .aside_logo_box {
 	margin-top: 10px;
@@ -89,4 +178,42 @@ aside img{
 	background: rgba(39, 174, 96, 1);
 	border: 1px solid rgba(39, 174, 96, 0.8);
 	border-radius: 2px;
+}
+.facebook {
+	text-align: center;
+	margin-top: 10px;
+	width: 238px;
+	color: rgba(236, 240, 241, 1);
+	padding: 10px;
+	background: rgba(58, 87, 149, 1);
+	border: 1px solid rgba(58, 87, 149, 0.8);
+	border-radius: 2px;
+}
+.twitter {
+	text-align: center;
+	margin-top: 10px;
+	width: 238px;
+	color: rgba(236, 240, 241, 1);
+	padding: 10px;
+	background: rgba(29, 161, 242, 1);
+	border: 1px solid rgba(29, 161, 242, 0.8);
+	border-radius: 2px;
+}
+.youtube {
+	text-align: center;
+	margin-top: 10px;
+	width: 238px;
+	color: rgba(236, 240, 241, 1);
+	padding: 10px;
+	background: rgba(230, 33, 23, 1);
+	border: 1px solid rgba(230, 33, 23, 0.8);
+	border-radius: 2px;
+}
+footer {
+	text-align: center;
+	color: rgba(236, 240, 241, 0.6);
+}
+footer a{
+	color: rgba(236, 240, 241, 0.8);
+	text-decoration: none;
 }
