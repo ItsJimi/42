@@ -1,11 +1,3 @@
-::-webkit-scrollbar {
-	width: 14px;
-	height: 14px;
-	background: #333 0 0 repeat;
-}
-::-webkit-scrollbar-thumb {
-	background-color: #222;
-}
 html, body {
 	padding: 0px;
 	margin: 0px;
@@ -20,7 +12,7 @@ html, body {
 }
 a {
 	text-decoration: none;
-	color: #27ae60;
+	color: #2ecc71;
 }
 .container {
 	width: 1000px;
@@ -54,7 +46,6 @@ header {
 	}
 }
 header a{
-	float: right;
 	text-decoration: none;
 	color: #ecf0f1;
 	font-size: 60px;
@@ -64,12 +55,13 @@ header a{
 	animation: fade_title 4s infinite;
 }
 section {
-	float: right;
+	float: left;
 	width: 700px;
 }
 .button_aff {
 	width: 700px;
-	margin: 20px auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
 .button_all {
 	text-align: center;
@@ -137,8 +129,8 @@ article img {
 	border-radius: 2px;
 }
 aside {
-	position: fixed;
-	margin-top: -100px;
+	margin-top: -180px;
+	float: right;
 	width: 280px;
 }
 aside img{
@@ -216,4 +208,7 @@ footer {
 footer a{
 	color: rgba(236, 240, 241, 0.8);
 	text-decoration: none;
+}
+#video {
+	
 }
