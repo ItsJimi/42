@@ -5,14 +5,14 @@
 
 	// Is Admin
 	function is_admin() {
-		if ($_SESSION['uuid'] && $_SESSION['uuid'] !== "" && $_SESSION['rank'] == 1)
+		if (isset($_SESSION['uuid']) && isset($_SESSION['rank']) && $_SESSION['uuid'] !== "" && $_SESSION['rank'] == 1)
 			return (true);
 		return (false);
 	}
 
 	// Is Connected
 	function is_connected() {
-		if ($_SESSION['uuid'] && $_SESSION['uuid'] !== "")
+		if (isset($_SESSION['uuid']) && $_SESSION['uuid'] !== "")
 			return (true);
 		return (false);
 	}
@@ -78,7 +78,7 @@
 			if (mysqli_num_rows($result) > 0) {
 				$user = mysqli_fetch_assoc($result);
 				if ($user['mail'] === $post['mail'] && $user['password'] === pass_hash($post['mail'], $post['password'])) {
-					$_SESSION['uuid'] = $user['uuid'];
+					$_SESSION['id'] = $user['id'];
 					$_SESSION['mail'] = $user['mail'];
 					$_SESSION['rank'] = $user['rank'];
 					$_SESSION['create_at'] = $user['create_at'];
