@@ -8,6 +8,14 @@ var Z = new function(v) {
 		}
 	}
 
+	this.id = function(id) {
+		return document.getElementById(id);
+	}
+
+	this.class = function(c) {
+		return document.getElementsByClassName(c);
+	}
+
 	this.get = function(url, values, good, bad) {
 		var xhttp = new XMLHttpRequest();
 		if (values) {
@@ -49,7 +57,7 @@ var Z = new function(v) {
 			for (var k in values) {
 				url += k + "=" + values[k] + "&";
 			}
-			if (k.length > 1) {
+			if (values.length > 1) {
 				url = url.slice(0, -1);
 			}
 		}
