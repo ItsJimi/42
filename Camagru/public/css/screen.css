@@ -54,6 +54,9 @@ header a{
 	-o-animation: fade_title 4s infinite;
 	animation: fade_title 4s infinite;
 }
+/*#signout_submit {
+	display: none;
+}*/
 section {
 	float: left;
 	width: 700px;
@@ -210,5 +213,5 @@ footer a{
 	text-decoration: none;
 }
 #video {
-	
+
 }

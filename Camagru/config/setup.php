@@ -27,7 +27,7 @@
 			mail VARCHAR(255) NOT NULL,
 			followers INT DEFAULT 0,
 			hearts INT DEFAULT 0,
-			valid INT(1),
+			valid INT(1) DEFAULT 0,
 			create_at TIMESTAMP
 		)";
     	$connect->exec($sql);

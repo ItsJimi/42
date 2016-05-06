@@ -29,43 +29,69 @@
 				if ($post['password1'] === $post['password2']) {
 					$sql = "UPDATE users SET mail, password FROM users WHERE id='".htmlspecialchars($_SESSION['id'])."'";
 					if (mysqli_query($connect, $sql)) {
-						return (true);
+						return ("Vos informations ont été modifiées.");
 					}
 				}
+				else
+					return ("Les mots de passe ne correspondent pas.");
 			}
 			else
-				$_SESSION['error'] = "L'adresse email doit être correctement formatée.";
+				return ("L'adresse mail doit être sous la forme test@test.test");
 		}
+		else
+			return ("Veuillez remplir tous les champs.");
 		return (false);
 	}
 
 	// SignUp
 	function signup($post, $connect) {
-		if (!empty($post['mail']) && !empty($post['password1']) && !empty($post['password1'])) {
-			if (preg_match('/@.+\./', $post['mail'])) {
-				$sql = "SELECT id, mail, password, create_at, rank, accesstoken FROM users WHERE mail='".htmlspecialchars($post['mail'])."'";
-				$result = mysqli_query($connect, $sql);
-				if (mysqli_num_rows($result) == 0) {
-					if ($post['password1'] === $post['password2']) {
-						$sql = "INSERT INTO users (id, mail, password, rank, create_at)
-						VALUES ('".id()."', '".$post['mail']."', '".pass_hash($post['mail'], $post['password1'])."', 0, NOW())";
-						if (mysqli_query($connect, $sql)) {
-							$_SESSION['error'] = "";
-						    return (true);
-						}
-						else {
-						    $_SESSION['error'] = "Une erreur est survenue.";
-						}
-					}
-					else
-						$_SESSION['error'] = "Les mots de passes de correspondent pas.";
+		if (!empty($post['signup_user']) && !empty($post['signup_mail']) && !empty($post['signup_pass1']) && !empty($post['signup_pass2'])) {
+			if (preg_match('/@.+\./', $post['signup_mail'])) {
+				try {
+					$db = new PDO('mysql:host=localhost;dbname=db_instapics;charset=utf8', 'root', 'pass');
 				}
-				else
-					$_SESSION['error'] = "L'adresse email est déjà prise.";
+				catch(Exception $e) {
+				    die('Erreur : '.$e->getMessage());
+				}
+				$sql = "SELECT id, user, mail FROM users WHERE user='".htmlspecialchars($post['signup_user'])."'";
+				$result = $db->query($sql);
+				if ($result->rowCount() > 0) {
+					return ("Le nom d'utilisateur est déjà pris.");
+				}
+				else {
+					$sql = "SELECT id, user, mail FROM users WHERE mail='".htmlspecialchars($post['signup_mail'])."'";
+					$result = $db->query($sql);
+					if ($result->rowCount() > 0) {
+						return ("L'adresse mail est déjà prise.");
+					}
+					else {
+						if ($post['signup_pass1'] === $post['signup_pass2']) {
+							$sql = $db->prepare('INSERT INTO users (user, password, mail) VALUES (:user, :password, :mail)');
+							$sql->execute(array(
+								'user' => htmlspecialchars($post['signup_user']),
+								'password' => pass_hash($post['signup_user'], $post['signup_pass1']),
+								'mail' => htmlspecialchars($post['signup_mail'])
+							));
+							$to = $post['signup_mail'];
+						    $subject = 'Vérification InstaPics';
+						    $message = "Bonjour ".$post['signup_user'].",\n
+							Pour vérifier votre compte, il vous suffit de cliquer sur le lien ci dessous.\n
+							http://localhost/Camagru/verif.php?v=".$post['signup_user']."&l=".sha1($post['signup_user']."quarante");
+						    $headers = 'From: verif@instapics.fr' . "\r\n";
+
+						    mail($to, $subject, $message, $headers);
+							return ("Un mail de vérification a été envoyé.");
+						}
+						else
+							return ("Les mots de passe ne correspondent pas.");
+					}
+				}
 			}
 			else
-				$_SESSION['error'] = "L'adresse email doit être correctement formatée.";
+				return ("L'adresse mail doit être sous la forme test@test.test");
 		}
+		else
+			return ("Veuillez remplir tous les champs.");
 		return (false);
 	}
 
@@ -73,35 +99,48 @@
 	function signin($post, $connect) {
 		if (!empty($post['signin_user']) && !empty($post['signin_pass']))
 		{
-			$sql = "SELECT id, pic, user, password, mail, followers FROM users WHERE user='".htmlspecialchars($post['signin_user'])."'";
-			$result = $connect->query($sql);
+			try {
+				$db = new PDO('mysql:host=localhost;dbname=db_instapics;charset=utf8', 'root', 'pass');
+			}
+			catch(Exception $e) {
+			    die('Erreur : '.$e->getMessage());
+			}
+			$sql = "SELECT id, pic, user, password, mail, followers, valid FROM users WHERE user='".htmlspecialchars($post['signin_user'])."'";
+			$result = $db->query($sql);
 			if ($result->rowCount() > 0) {
 				$user = $result->fetch();
-				if ($user['signin_user'] === $post['signin_user'] && $user['signin_pass'] === pass_hash($post['signin_user'], $post['signin_pass'])) {
-					$_SESSION['id'] = $user['id'];
-					$_SESSION['pic'] = $user['pic'];
-					$_SESSION['user'] = $user['user'];
-					$_SESSION['password'] = $user['password'];
-					$_SESSION['mail'] = $user['mail'];
-					$_SESSION['followers'] = $user['followers'];
-					$_SESSION['hearts'] = $user['hearts'];
-					$_SESSION['create_at'] = $user['create_at'];
-					return (true);
+				if ($user['user'] === $post['signin_user'] && $user['password'] === pass_hash($post['signin_user'], $post['signin_pass'])) {
+					if ($user['valid'] == 1) {
+						$_SESSION['id'] = $user['id'];
+						$_SESSION['pic'] = $user['pic'];
+						$_SESSION['user'] = $user['user'];
+						$_SESSION['password'] = $user['password'];
+						$_SESSION['mail'] = $user['mail'];
+						$_SESSION['followers'] = $user['followers'];
+						$_SESSION['hearts'] = $user['hearts'];
+						$_SESSION['create_at'] = $user['create_at'];
+						return ("Vous êtes connecté ! ;)");
+					}
+					else
+						return ("Vous devez d'abord vérifier votre compte.");
 				}
 				else
-					$_SESSION['error'] = "Informations incorrectes.";
+					return ("Les informations entrées sont incorrectes.");
 			}
+			else
+				return ("Les informations entrées sont incorrectes.");
 		}
-		return (false);
+		else
+			return ("Veuillez remplir tous les champs.");
+		return ("Erreur");
 	}
 
-	// Logout
-	function logout() {
-		if ($_SESSION['id'] && $_SESSION['id'] !== "") {
-			$current = $_SESSION['current'];
+	// SignOut
+	function signout() {
+		if (isset($_SESSION['id']) && $_SESSION['id'] !== "") {
 			session_destroy();
-			header('Location: '.$current);
+			return ("Vous êtes déconnecté ! ;)");
 		}
-		header('Location: '.$_SESSION['current']);
+		return ("Erreur");
 	}
 ?>
