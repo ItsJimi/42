@@ -17,7 +17,7 @@
 	<?php
 		$sql = "SELECT uuid, name, img, price, stock FROM articles LIMIT 3";
 		$result = mysqli_query($connect, $sql);
-		if (mysqli_num_rows($result) > 0) {
+		if ($result != false && mysqli_num_rows($result) > 0) {
 			$article = mysqli_fetch_all($result, MYSQLI_ASSOC);
 			foreach ($article as $value) {
 			?>

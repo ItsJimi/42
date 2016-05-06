@@ -12,12 +12,12 @@ function signin() {
 	var signin_submit = Z.id("signin_submit").innerHTML;
 	Z.id("signin_pass").value = "";
 
-	Z.l(signin_user + " : " + signin_pass + " : " + signin_submit, "blue");
 	Z.post("model/login.php", {
 		signin_user: signin_user,
 		signin_pass: signin_pass,
 		signin_submit: signin_submit
 	}, function(response) {
-		Z.id("info").innerHTML = response;
+		if (response != 0)
+			Z.id("info").innerHTML = response;
 	});
 }

@@ -6,6 +6,7 @@ function signout() {
 	Z.post("model/logout.php", {
 		signout_submit: signout_submit
 	}, function(response) {
-		Z.l(response, "red");
+		if (response != 0)
+			Z.id("info").innerHTML = response;
 	});
 }

@@ -22,6 +22,7 @@ function signup() {
 		signup_pass2: signup_pass2,
 		signup_submit: signup_submit
 	}, function(response) {
-		Z.id("info").innerHTML = response;
+		if (response != 0)
+			Z.id("info").innerHTML = response;
 	});
 }

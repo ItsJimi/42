@@ -57,6 +57,9 @@ header a{
 /*#signout_submit {
 	display: none;
 }*/
+/*body {
+	display: none;
+}*/
 section {
 	float: left;
 	width: 700px;
