@@ -6,7 +6,7 @@
 [X] FdF 125/125<br />
 [X] Fract'ol 116/118<br />
 [X] Wolf3D 121/125<br />
-[X] Piscine PHP 82/100<br />
+[X] Piscine PHP 69/100<br />
 [~] Camagru<br />
 
 =================================
