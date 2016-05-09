@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	require_once('../controller/auth.php');
-	require_once('../config/database.php');
-	require_once('../config/setup.php');
+	include('../controller/auth.php');
+	include('../config/database.php');
+	include('../config/setup.php');
 ?>

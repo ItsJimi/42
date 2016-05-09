@@ -47,26 +47,20 @@
 	function signup($post, $connect) {
 		if (!empty($post['signup_user']) && !empty($post['signup_mail']) && !empty($post['signup_pass1']) && !empty($post['signup_pass2'])) {
 			if (preg_match('/@.+\./', $post['signup_mail'])) {
-				try {
-					$db = new PDO('mysql:host=localhost;dbname=db_instapics;charset=utf8', 'root', 'pass');
-				}
-				catch(Exception $e) {
-				    die('Erreur : '.$e->getMessage());
-				}
 				$sql = "SELECT id, user, mail FROM users WHERE user='".htmlspecialchars($post['signup_user'])."'";
-				$result = $db->query($sql);
+				$result = $connect->query($sql);
 				if ($result->rowCount() > 0) {
 					return ("Le nom d'utilisateur est déjà pris.");
 				}
 				else {
 					$sql = "SELECT id, user, mail FROM users WHERE mail='".htmlspecialchars($post['signup_mail'])."'";
-					$result = $db->query($sql);
+					$result = $connect->query($sql);
 					if ($result->rowCount() > 0) {
 						return ("L'adresse mail est déjà prise.");
 					}
 					else {
 						if ($post['signup_pass1'] === $post['signup_pass2']) {
-							$sql = $db->prepare('INSERT INTO users (user, password, mail) VALUES (:user, :password, :mail)');
+							$sql = $connect->prepare('INSERT INTO users (user, password, mail) VALUES (:user, :password, :mail)');
 							$sql->execute(array(
 								'user' => htmlspecialchars($post['signup_user']),
 								'password' => pass_hash($post['signup_user'], $post['signup_pass1']),
@@ -99,14 +93,8 @@
 	function signin($post, $connect) {
 		if (!empty($post['signin_user']) && !empty($post['signin_pass']))
 		{
-			try {
-				$db = new PDO('mysql:host=localhost;dbname=db_instapics;charset=utf8', 'root', 'pass');
-			}
-			catch(Exception $e) {
-			    die('Erreur : '.$e->getMessage());
-			}
-			$sql = "SELECT id, pic, user, password, mail, followers, valid FROM users WHERE user='".htmlspecialchars($post['signin_user'])."'";
-			$result = $db->query($sql);
+			$sql = "SELECT * FROM users WHERE user='".htmlspecialchars($post['signin_user'])."'";
+			$result = $connect->query($sql);
 			if ($result->rowCount() > 0) {
 				$user = $result->fetch();
 				if ($user['user'] === $post['signin_user'] && $user['password'] === pass_hash($post['signin_user'], $post['signin_pass'])) {
@@ -114,7 +102,6 @@
 						$_SESSION['id'] = $user['id'];
 						$_SESSION['pic'] = $user['pic'];
 						$_SESSION['user'] = $user['user'];
-						$_SESSION['password'] = $user['password'];
 						$_SESSION['mail'] = $user['mail'];
 						$_SESSION['followers'] = $user['followers'];
 						$_SESSION['hearts'] = $user['hearts'];
