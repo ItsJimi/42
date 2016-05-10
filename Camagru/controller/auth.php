@@ -86,7 +86,7 @@
 		}
 		else
 			return ("Veuillez remplir tous les champs.");
-		return (false);
+		return ("Erreur");
 	}
 
 	// SignIn
