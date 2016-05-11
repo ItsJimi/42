@@ -1,0 +1,210 @@
+html, body {
+	padding: 0px;
+	margin: 0px;
+	width: 100%;
+	height: 100%;
+	background: #333;
+	font-family: "latothin", sans-serif;
+}
+a {
+	text-decoration: none;
+	color: #2ecc71;
+}
+.container {
+	width: 100%;
+	margin: 0px auto;
+}
+header {
+	width: 100%;
+	height: 80px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	background: #2ecc71;
+}
+@keyframes fade_title {
+	from {
+		border-top: 1px solid rgba(236, 240, 241, 0);
+		border-bottom: 1px solid rgba(236, 240, 241, 0);
+	}
+    50% {
+		border-top: 1px solid rgba(236, 240, 241, 1);
+		border-bottom: 1px solid rgba(236, 240, 241, 1);
+	}
+	to {
+		border-top: 1px solid rgba(236, 240, 241, 0);
+		border-bottom: 1px solid rgba(236, 240, 241, 0);
+	}
+}
+header a{
+	text-decoration: none;
+	color: #ecf0f1;
+	font-size: 60px;
+	-webkit-animation: fade_title 4s infinite;
+	-moz-animation: fade_title 4s infinite;
+	-o-animation: fade_title 4s infinite;
+	animation: fade_title 4s infinite;
+}
+section {
+	width: 100%;
+	margin: 0px auto;
+}
+.button_aff {
+	width: 100%;
+}
+.button_all {
+	margin: 0px auto;
+	width: 90vw;
+	display: block;
+	text-align: center;
+	padding: 10px;
+	background: rgba(52, 152, 219, 1);
+	border: 1px solid rgba(52, 152, 219, 0.8);
+	border-radius: 2px;
+	color: rgba(236, 240, 241, 1);
+}
+.button_follow {
+	margin-top: 5px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 90vw;
+	display: block;
+	text-align: center;
+	padding: 10px;
+	background: rgba(52, 152, 219, 1);
+	border: 1px solid rgba(52, 152, 219, 0.8);
+	border-radius: 2px;
+	color: rgba(236, 240, 241, 1);
+}
+article {
+	width: 85vw;
+	margin: 0px auto;
+	text-align: center;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	background: rgba(236, 240, 241, 1);
+	border-radius: 2px;
+	margin-bottom: 20px;
+}
+article img {
+	border: 4px solid rgba(39, 174, 96, 1);
+	width: 82vw;
+}
+.tools {
+	width: 80vw;
+	height: 140px;
+	font-size: 20px;
+}
+.tools_help {
+	height: 20px;
+	width: 80vw;
+	border-radius: 2px;
+	font-family: "latolight", sans-serif;
+}
+.tools_like {
+	display: block;
+	width: 80vw;
+	text-align: center;
+	height: 20px;
+	margin-top: 10px;
+	color: rgba(236, 240, 241, 1);
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background: rgba(192, 57, 43, 1);
+	border: 1px solid rgba(192, 57, 43, 0.8);
+	border-radius: 2px;
+}
+.tools_follow {
+	display: block;
+	width: 100%;
+	text-align: center;
+	height: 20px;
+	margin-top: 10px;
+	color: rgba(236, 240, 241, 1);
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background: rgba(52, 152, 219, 1);
+	border: 1px solid rgba(52, 152, 219, 0.8);
+	border-radius: 2px;
+}
+aside {
+	display: none;
+	margin-top: -100px;
+	float: right;
+	width: 280px;
+}
+aside img{
+	width: 272px;
+	border: 4px solid rgba(39, 174, 96, 1);
+	border-radius: 2px;
+}
+.aside_box{
+	background: rgba(236, 240, 241, 1);
+	margin-top: 10px;
+	border-radius: 2px;
+	padding: 10px;
+	font-family: "latolight", sans-serif;
+	text-align: justify;
+	color: #333;
+}
+.aside_box .title{
+	text-align: center;
+	font-size: 25px;
+	border-bottom: 0.1px solid rgba(0, 0, 0, 0.2);
+	font-family: "latolight", sans-serif;
+}
+.aside_logo_box {
+	margin-top: 10px;
+	border-radius: 2px;
+	padding: 10px;
+	height: 100px;
+}
+.aside_logo{
+	width: 120px;
+	height: 50px;
+	text-align: center;
+}
+.aside_logo_val{
+	color: rgba(236, 240, 241, 1);
+	padding: 10px;
+	background: rgba(39, 174, 96, 1);
+	border: 1px solid rgba(39, 174, 96, 0.8);
+	border-radius: 2px;
+}
+.facebook {
+	text-align: center;
+	margin-top: 10px;
+	width: 238px;
+	color: rgba(236, 240, 241, 1);
+	padding: 10px;
+	background: rgba(58, 87, 149, 1);
+	border: 1px solid rgba(58, 87, 149, 0.8);
+	border-radius: 2px;
+}
+.twitter {
+	text-align: center;
+	margin-top: 10px;
+	width: 238px;
+	color: rgba(236, 240, 241, 1);
+	padding: 10px;
+	background: rgba(29, 161, 242, 1);
+	border: 1px solid rgba(29, 161, 242, 0.8);
+	border-radius: 2px;
+}
+.youtube {
+	text-align: center;
+	margin-top: 10px;
+	width: 238px;
+	color: rgba(236, 240, 241, 1);
+	padding: 10px;
+	background: rgba(230, 33, 23, 1);
+	border: 1px solid rgba(230, 33, 23, 0.8);
+	border-radius: 2px;
+}
+footer {
+	text-align: center;
+	color: rgba(236, 240, 241, 0.6);
+}
+footer a{
+	color: rgba(236, 240, 241, 0.8);
+	text-decoration: none;
+}
