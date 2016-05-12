@@ -6,8 +6,8 @@
 	// Is Admin
 	function is_admin() {
 		if (isset($_SESSION['id']) && isset($_SESSION['rank']) && $_SESSION['id'] !== "" && $_SESSION['rank'] == 1)
-			return (true);
-		return (false);
+			return (1);
+		return (0);
 	}
 
 	// Is Connected

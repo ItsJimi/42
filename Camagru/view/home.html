@@ -85,7 +85,16 @@
 	</article>
 </section>
 <aside>
-	<img src="http://portra.wpshower.com/wp-content/uploads/2014/03/martin-schoeller-barack-obama-portrait-up-close-and-personal.jpg" alt="pp">
+	<!-- <img src="http://portra.wpshower.com/wp-content/uploads/2014/03/martin-schoeller-barack-obama-portrait-up-close-and-personal.jpg" alt="pp"> -->
+	<video id="video" autoplay></video>
+	<canvas id="canvas"></canvas>
+	<div id="filter" ondrop="drop(event)" ondragover="allowDrop(event)">
+	</div>
+	<div id="video_tools">
+		<button id="snap">Photographier</button>
+		<button id="save">Sauvegarder</button>
+		<button id="clear">Réinitialiser</button>
+	</div>
 	<div class="aside_logo_box">
 		<div class="aside_logo left">
 			<svg style="height: 100%" viewBox="0 0 24 24">
@@ -105,9 +114,18 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	<div class="aside_box">
-		<div class="title">Bio</div>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+	<div id="aside_box_filters" ondrop="drop(event)" ondragover="allowDrop(event)">
+		<div class="title">Filtres</div>
+		<img id="filter_chap1" src="public/img/chap1.png" draggable="true" ondragstart="drag(event)" />
+		<img id="filter_chap2" src="public/img/chap2.png" draggable="true" ondragstart="drag(event)" />
+		<img id="filter_chap3" src="public/img/chap3.png" draggable="true" ondragstart="drag(event)" />
+		<img id="filter_chap4" src="public/img/chap4.png" draggable="true" ondragstart="drag(event)" />
+		<img id="filter_chap5" src="public/img/chap5.png" draggable="true" ondragstart="drag(event)" />
+		<img id="filter_chap6" src="public/img/chap6.png" draggable="true" ondragstart="drag(event)" />
+		<img id="filter_chap7" src="public/img/chap7.png" draggable="true" ondragstart="drag(event)" />
+		<img id="filter_chap8" src="public/img/chap8.png" draggable="true" ondragstart="drag(event)" />
+		<img id="filter_chap9" src="public/img/chap9.png" draggable="true" ondragstart="drag(event)" />
+		<img id="filter_chap10" src="public/img/chap10.png" draggable="true" ondragstart="drag(event)" />
 	</div>
 	<div class="aside_box">
 		<div class="title">Social</div>
