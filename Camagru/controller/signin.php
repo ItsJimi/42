@@ -10,7 +10,6 @@
 				if ($user['user'] === $post['signin_user'] && $user['password'] === pass_hash($post['signin_user'], $post['signin_pass'])) {
 					if ($user['valid'] == 1) {
 						$_SESSION['id'] = $user['id'];
-						$_SESSION['pic'] = $user['pic'];
 						$_SESSION['user'] = $user['user'];
 						$_SESSION['mail'] = $user['mail'];
 						$_SESSION['followers'] = $user['followers'];
@@ -18,6 +17,11 @@
 						$_SESSION['create_at'] = $user['create_at'];
 
 						$res['end'] = true;
+						$res['user'] =  $user['user'];
+						$res['mail'] =  $user['mail'];
+						$res['hearts'] =  $user['hearts'];
+						$res['followers'] =  $user['followers'];
+						$res['create_at'] =  $user['create_at'];
 						$res['info'] = "Vous êtes connecté ! ;)";
 
 						return (json_encode($res));

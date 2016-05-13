@@ -41,7 +41,6 @@
 			id INT PRIMARY KEY AUTO_INCREMENT,
 			pic MEDIUMTEXT NOT NULL,
 			user VARCHAR(255) NOT NULL,
-			followers INT DEFAULT 0,
 			hearts INT DEFAULT 0,
 			create_at TIMESTAMP
 		)";

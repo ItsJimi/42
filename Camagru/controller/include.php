@@ -6,4 +6,6 @@
 	require_once('controller/signin.php');
 	require_once('controller/signup.php');
 	require_once('controller/signout.php');
+	require_once('controller/save.php');
+	require_once('controller/pics.php');
 ?>

@@ -1,4 +1,7 @@
 Z.id("canvas").style.display = "none";
+var fullscreen = 0;
+var filters = ["chap1.png", "chap2.png", "chap3.png", "chap4.png", "chap5.png", "chap6.png", "chap7.png", "chap8.png", "chap9.png", "chap10.png"];
+var key_filter = 0;
 
 window.addEventListener("DOMContentLoaded", function() {
 	// Grab elements, create settings, etc.
@@ -39,7 +42,17 @@ window.addEventListener("DOMContentLoaded", function() {
 	});
 
 	Z.id("save").addEventListener("click", function() {
-		Z.l(canvas.toDataURL("image/png"));
+		Z.post("model/save.php", {
+			pic: encodeURIComponent(canvas.toDataURL("image/png")),
+			filter: filters[key_filter]
+		}, function(res) {
+			if (res != 0) {
+				res = JSON.parse(res);
+				Z.l(res);
+				Z.id("info").style.display = "block";
+				Z.id("info_text").innerHTML = res.info;
+			}
+		});
 	});
 
 	Z.id("clear").addEventListener("click", function() {
@@ -48,39 +61,53 @@ window.addEventListener("DOMContentLoaded", function() {
 	});
 }, false);
 
-var fullscreen = 0;
 Z.id("filter").addEventListener("click", function() {
 	if (fullscreen == 0) {
 		fullscreen = 1;
+		Z.id("section").style.margin = "765px 0px 0px 0px";
 		Z.id("video").style.width = "1000px";
 		Z.id("video").style.height = "750px";
 		Z.id("video").style.margin = "100px 0px 0px -705px";
+		Z.id("canvas").style.width = "1000px";
+		Z.id("canvas").style.height = "750px";
+		Z.id("canvas").style.margin = "100px 0px 0px -705px";
 		Z.id("filter").style.width = "1000px";
 		Z.id("filter").style.height = "750px";
 		Z.id("filter").style.margin = "-762px 0px 0px -705px";
+		Z.id("filter_img").style.width = "1000px";
+		Z.id("filter_img").style.height = "750px";
 	}
 	else {
 		fullscreen = 0;
+		Z.id("section").style.margin = "";
 		Z.id("video").style.width = "";
 		Z.id("video").style.height = "";
 		Z.id("video").style.margin = "";
+		Z.id("canvas").style.width = "";
+		Z.id("canvas").style.height = "";
+		Z.id("canvas").style.margin = "";
 		Z.id("filter").style.width = "";
 		Z.id("filter").style.height = "";
 		Z.id("filter").style.margin = "";
+		Z.id("filter_img").style.width = "";
+		Z.id("filter_img").style.height = "";
 	}
-	Z.l(fullscreen);
 });
 
-function allowDrop(ev) {
-	ev.preventDefault();
-}
+Z.id("filters_left").addEventListener("click", function() {
+	if (key_filter == 0)
+		key_filter = 9;
+	else if (key_filter > 0)
+		key_filter--;
+	Z.id("filter_img").src = "public/img/" + filters[key_filter];
+	Z.id("filters_name").innerHTML = "Chapeau " + key_filter;
+});
 
-function drag(ev) {
-	ev.dataTransfer.setData("text", ev.target.id);
-}
-
-function drop(ev) {
-	ev.preventDefault();
-	var data = ev.dataTransfer.getData("text");
-	ev.target.appendChild(document.getElementById(data));
-}
+Z.id("filters_right").addEventListener("click", function() {
+	if (key_filter == 9)
+		key_filter = 0;
+	else if (key_filter < 9)
+		key_filter++;
+	Z.id("filter_img").src = "public/img/" + filters[key_filter];
+	Z.id("filters_name").innerHTML = "Chapeau " + key_filter;
+});
