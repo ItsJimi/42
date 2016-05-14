@@ -1,11 +1,12 @@
-pics();
+var nbr_pics = 0;
 
-function pics() {
+pics(nbr_pics);
+
+function pics(nbr) {
 	Z.post("model/pics.php", {
-		nbr: 0
+		nbr: nbr
 	}, function(res) {
 		res = JSON.parse(res);
-		Z.id("all_pics").innerHTML = "";
 		res.forEach(function(pic) {
  			Z.id("all_pics").innerHTML += '<article>'
 +				'<img src="' + pic.pic + '">'
@@ -26,3 +27,8 @@ function pics() {
 		});
 	});
 }
+
+Z.id("more_pics").addEventListener("click", function() {
+	nbr_pics += 5;
+	pics(nbr_pics);
+});

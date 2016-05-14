@@ -14,6 +14,20 @@ a {
 	text-decoration: none;
 	color: #2ecc71;
 }
+button {
+	text-align: center;
+	border-radius: 2px;
+	border: 1px solid #2c3e50;
+	background: #34495e;
+	color: #ecf0f1;
+	font-family: "latolight", sans-serif;
+}
+button:hover {
+	cursor: pointer;
+}
+button:focus {
+	outline: 0;
+}
 .clear {
 	clear: both;
 }
@@ -87,12 +101,6 @@ header {
 	-o-animation: fade_title 4s infinite;
 	animation: fade_title 4s infinite;
 }
-/*#signout_submit {
-	display: none;
-}*/
-/*body {
-	display: none;
-}*/
 section {
 	float: left;
 	width: 680px;
@@ -102,25 +110,10 @@ section {
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
-.button_all {
-	text-align: center;
-	width: 315px;
-	padding: 10px;
-	display: inline-block;
-	background: rgba(52, 152, 219, 1);
-	border: 1px solid rgba(52, 152, 219, 0.8);
-	border-radius: 2px;
-	color: rgba(236, 240, 241, 1);
-}
-.button_follow {
-	text-align: center;
-	width: 315px;
-	padding: 10px;
-	display: inline-block;
-	background: rgba(52, 152, 219, 1);
-	border: 1px solid rgba(52, 152, 219, 0.8);
-	border-radius: 2px;
-	color: rgba(236, 240, 241, 1);
+.button_aff button{
+	width: 337px;
+	padding: 15px;
+	font-size: 15px;
 }
 article {
 	padding: 20px;
@@ -167,12 +160,19 @@ article img {
 	border: 1px solid rgba(52, 152, 219, 0.8);
 	border-radius: 2px;
 }
+#more_pics {
+	margin-bottom: 20px;
+	width: 680px;
+	padding: 20px;
+	font-size: 15px;
+}
 aside {
 	margin-top: -90px;
 	float: right;
 	width: 300px;
 }
 aside #video{
+	display: block;
 	background: #333;
 	width: 300px;
 	height: 225px;
@@ -192,7 +192,7 @@ aside #canvas{
 	width: 300px;
 	height: 225px;
 	border: 4px solid rgba(39, 174, 96, 0);
-	margin-top: -237px;
+	margin-top: -232px;
 }
 #filter img{
 	position: relative;
@@ -239,37 +239,16 @@ aside #canvas{
 	margin-top: 20px;
 }
 #save {
-	border-radius: 2px;
-	border: 1px solid #2c3e50;
-	background: #34495e;
-	color: #ecf0f1;
 	width: 85px;
 	height: 40px;
 }
-#save:hover {
-	cursor: pointer;
-}
 #snap {
-	border-radius: 2px;
-	border: 1px solid #2c3e50;
-	background: #34495e;
-	color: #ecf0f1;
 	width: 120px;
 	height: 50px;
 }
-#snap:hover {
-	cursor: pointer;
-}
 #clear {
-	border-radius: 2px;
-	border: 1px solid #2c3e50;
-	background: #34495e;
-	color: #ecf0f1;
 	width: 85px;
 	height: 40px;
-}
-#clear:hover {
-	cursor: pointer;
 }
 .aside_box{
 	background: rgba(236, 240, 241, 1);
@@ -300,47 +279,11 @@ aside #canvas{
 	text-align: center;
 }
 .aside_logo_val{
-	color: rgba(236, 240, 241, 1);
 	padding: 10px;
-	background: rgba(39, 174, 96, 1);
-	border: 1px solid rgba(39, 174, 96, 0.8);
 	border-radius: 2px;
-}
-.facebook {
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
-	margin-top: 10px;
-	width: 238px;
-	color: rgba(236, 240, 241, 1);
-	padding: 10px;
-	background: rgba(58, 87, 149, 1);
-	border: 1px solid rgba(58, 87, 149, 0.8);
-	border-radius: 2px;
-}
-.twitter {
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
-	margin-top: 10px;
-	width: 238px;
-	color: rgba(236, 240, 241, 1);
-	padding: 10px;
-	background: rgba(29, 161, 242, 1);
-	border: 1px solid rgba(29, 161, 242, 0.8);
-	border-radius: 2px;
-}
-.youtube {
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
-	margin-top: 10px;
-	width: 238px;
-	color: rgba(236, 240, 241, 1);
-	padding: 10px;
-	background: rgba(230, 33, 23, 1);
-	border: 1px solid rgba(230, 33, 23, 0.8);
-	border-radius: 2px;
+	border: 1px solid #27ae60;
+	background: #2ecc71;
+	color: #ecf0f1;
 }
 footer {
 	text-align: center;

@@ -1,6 +1,7 @@
 Z.id("info").style.display = "none";
 Z.id("login_bar").style.display = "none";
 Z.id("member_bar").style.display = "none";
+var logged = false;
 
 if (Z.id("info_cross"))
 	Z.id("info_cross").addEventListener("click", hide_info);
@@ -17,6 +18,7 @@ function is_connected() {
 	}, function(res) {
 		res = JSON.parse(res);
 		if (res.logged == true) {
+			logged = true;
 			Z.id("login_bar").style.display = "none";
 			Z.id("member_bar").style.display = "block";
 			Z.id("member_user").innerHTML = res.user;
@@ -25,12 +27,13 @@ function is_connected() {
 			Z.id("member_followers").innerHTML = res.followers;
 		}
 		else {
+			logged = false;
 			Z.id("login_bar").style.display = "block";
 			Z.id("member_bar").style.display = "none";
 			Z.id("member_user").innerHTML = "";
 			Z.id("member_mail").innerHTML = "";
-			Z.id("member_hearts").innerHTML = "";
-			Z.id("member_followers").innerHTML = "";
+			Z.id("member_hearts").innerHTML = "?";
+			Z.id("member_followers").innerHTML = "?";
 		}
 	});
 }
