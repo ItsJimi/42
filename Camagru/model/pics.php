@@ -1,6 +1,6 @@
 <?php
 	require_once("include.php");
 
-	$request = pics($nbr, $connect);
+	$request = pics($_POST['nbr'], $connect);
 	echo $request;
 ?>

@@ -26,6 +26,8 @@ function signin() {
 				Z.id("member_bar").style.display = "block";
 				Z.id("member_user").innerHTML = res.user;
 				Z.id("member_mail").innerHTML = res.mail;
+				Z.id("member_hearts").innerHTML = res.hearts;
+				Z.id("member_followers").innerHTML = res.followers;
 			}
 		}
 	});

@@ -7,7 +7,7 @@ function pics() {
 		res = JSON.parse(res);
 		Z.id("all_pics").innerHTML = "";
 		res.forEach(function(pic) {
-			Z.id("all_pics").innerHTML += '<article>'
+ 			Z.id("all_pics").innerHTML += '<article>'
 +				'<img src="' + pic.pic + '">'
 +				'<div class="tools">'
 +					'<div class="tools_help">'

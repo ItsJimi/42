@@ -51,8 +51,11 @@ window.addEventListener("DOMContentLoaded", function() {
 				Z.l(res);
 				Z.id("info").style.display = "block";
 				Z.id("info_text").innerHTML = res.info;
+				pics();
 			}
 		});
+		Z.id("video").style.display = "block";
+		Z.id("canvas").style.display = "none";
 	});
 
 	Z.id("clear").addEventListener("click", function() {
