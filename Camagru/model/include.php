@@ -9,4 +9,6 @@
 	require_once('../controller/save.php');
 	require_once('../controller/pics.php');
 	require_once('../controller/reset.php');
+	require_once('../controller/getlike.php');
+	require_once('../controller/like.php');
 ?>

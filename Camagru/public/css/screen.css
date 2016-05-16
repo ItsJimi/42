@@ -126,28 +126,15 @@ article img {
 	border: 4px solid rgba(39, 174, 96, 1);
 }
 .tools {
-	width: 500px;
+	padding-top: 10px;
+	width: 635px;
 	height: 40px;
 	font-size: 20px;
 }
 .tools_help {
-	display: inline;
-	height: 20px;
-	width: 284px;
-	padding: 10px;
-	border-radius: 2px;
 	font-family: "latolight", sans-serif;
 }
 .tools_like {
-	text-align: center;
-	display: inline;
-	height: 20px;
-	width: 100px;
-	color: rgba(236, 240, 241, 1);
-	padding: 10px;
-	background: rgba(192, 57, 43, 1);
-	border: 1px solid rgba(192, 57, 43, 0.8);
-	border-radius: 2px;
 }
 .tools_follow {
 	text-align: center;

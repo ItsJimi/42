@@ -64,7 +64,7 @@ window.addEventListener("DOMContentLoaded", function() {
 					res = JSON.parse(res);
 					Z.id("info").style.display = "block";
 					Z.id("info_text").innerHTML = res.info;
-					pics(5);
+					pics(nbr_pics);
 				}
 			});
 			if (logged == true) {
