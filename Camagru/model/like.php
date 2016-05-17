@@ -2,7 +2,7 @@
 	require_once("include.php");
 
 	if (is_connected())
-		$request = like($connect);
+		$request = like($_POST, $connect);
 	else
 		$request = 0;
 	echo $request;

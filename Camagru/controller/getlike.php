@@ -1,11 +1,11 @@
 <?php
-	function getLike($connect) {
-		$sql = "SELECT hearts FROM pics WHERE id='".htmlspecialchars($post['id'])."'";
+	function getLike($post, $connect) {
+		$sql = "SELECT COUNT(*) AS 'count' FROM likes WHERE pic='".intval($post['id'])."'";
 		$result = $connect->query($sql);
 		if ($result->rowCount() > 0) {
 			$pic = $result->fetch();
 			$res['end'] = true;
-			$res['hearts'] = $pic['hearts'];
+			$res['hearts'] = $pic['count'];
 
 			return (json_encode($res));
 		}

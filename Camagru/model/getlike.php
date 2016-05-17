@@ -1,6 +1,6 @@
 <?php
 	require_once("include.php");
 
-	$request = getLike($connect);
+	$request = getLike($_POST, $connect);
 	echo $request;
 ?>

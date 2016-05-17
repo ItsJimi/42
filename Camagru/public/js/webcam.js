@@ -40,12 +40,14 @@ window.addEventListener("DOMContentLoaded", function() {
 	// Trigger photo take
 	Z.id("snap").addEventListener("click", function() {
 		if (logged == true) {
-			canvas.width = 640;
-			canvas.height = 480;
-			context.drawImage(video, 0, 0, 640, 480);
-			Z.id("video").style.display = "none";
-			Z.id("canvas").style.display = "block";
-			snap = 1;
+			if (snap == 0) {
+				canvas.width = 640;
+				canvas.height = 480;
+				context.drawImage(video, 0, 0, 640, 480);
+				Z.id("video").style.display = "none";
+				Z.id("canvas").style.display = "block";
+				snap = 1;
+			}
 		}
 		else {
 			Z.id("info").style.display = "block";
@@ -86,9 +88,44 @@ window.addEventListener("DOMContentLoaded", function() {
 
 	Z.id("clear").addEventListener("click", function() {
 		snap = 0;
+		Z.id("upload_file").value = "";
 		Z.id("video").style.display = "block";
 		Z.id("canvas").style.display = "none";
 	});
+
+	Z.id('upload_file').addEventListener('change', function() {
+
+		if (logged == true) {
+			var reader = new FileReader();
+			reader.addEventListener('load', function() {
+				var ext = Z.id('upload_file').files[0].name.substr(Z.id('upload_file').files[0].name.length - 3);;
+				if (ext != 'png' && ext != 'jpg') {
+					Z.id("info").style.display = "block";
+					Z.id("info_text").innerHTML = "Votre photo doit être au format png !";
+				}
+				else {
+					canvas.width = 640;
+					canvas.height = 480;
+					var b64 = reader.result;
+					var img = new Image();
+					img.onload = function() {
+						context.drawImage(img, 0, 0, 640, 480);
+						Z.id("video").style.display = "none";
+						Z.id("canvas").style.display = "block";
+						snap = 1;
+					};
+					img.src = b64;
+				}
+			});
+			if (Z.id('upload_file').files)
+				reader.readAsDataURL(Z.id('upload_file').files[0]);
+		}
+		else {
+			Z.id("info").style.display = "block";
+			Z.id("info_text").innerHTML = "Vous devez être connecté pour choisir des photos.";
+		}
+	});
+
 }, false);
 
 Z.id("filter").addEventListener("click", function() {

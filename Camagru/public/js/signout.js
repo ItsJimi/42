@@ -21,5 +21,14 @@ function signout() {
 				Z.id("member_followers").innerHTML = "?";
 			}
 		}
+		else {
+			Z.id("login_bar").style.display = "block";
+			Z.id("member_bar").style.display = "none";
+			Z.id("signin_user").value = "";
+			Z.id("member_user").innerHTML = "";
+			Z.id("member_mail").innerHTML = "";
+			Z.id("member_hearts").innerHTML = "?";
+			Z.id("member_followers").innerHTML = "?";
+		}
 	});
 }
