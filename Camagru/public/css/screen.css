@@ -134,18 +134,9 @@ article img {
 .tools_help {
 	font-family: "latolight", sans-serif;
 }
-.tools_like {
-}
-.tools_follow {
-	text-align: center;
-	display: inline;
-	height: 20px;
-	width: 100px;
-	color: rgba(236, 240, 241, 1);
-	padding: 10px;
-	background: rgba(52, 152, 219, 1);
-	border: 1px solid rgba(52, 152, 219, 0.8);
-	border-radius: 2px;
+#nbr_like {
+	margin-top: 5px;
+	float: right;
 }
 #more_pics {
 	margin-bottom: 20px;
@@ -241,6 +232,9 @@ aside #canvas{
 	height: 40px;
 }
 #upload_file {
+	padding: 10px;
+	width: 278px;
+	margin-top: 20px;
 	text-align: center;
 	border-radius: 2px;
 	border: 1px solid #2c3e50;

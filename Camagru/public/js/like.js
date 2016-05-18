@@ -30,7 +30,7 @@ function like(id) {
 		}
 		else {
 			Z.id("info").style.display = "block";
-			Z.id("info_text").innerHTML = "Vous devez être connecté pour liker un photo.";
+			Z.id("info_text").innerHTML = "Vous devez être connecté pour liker une photo.";
 		}
 	});
 }

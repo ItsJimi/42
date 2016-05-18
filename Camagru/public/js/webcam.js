@@ -58,6 +58,7 @@ window.addEventListener("DOMContentLoaded", function() {
 	Z.id("save").addEventListener("click", function() {
 		if (snap == 1) {
 			snap = 0;
+			top_pic = 1;
 			Z.post("model/save.php", {
 				pic: encodeURIComponent(canvas.toDataURL("image/png")),
 				filter: filters[key_filter]
@@ -66,7 +67,9 @@ window.addEventListener("DOMContentLoaded", function() {
 					res = JSON.parse(res);
 					Z.id("info").style.display = "block";
 					Z.id("info_text").innerHTML = res.info;
-					pics(nbr_pics);
+					pics(nbr_pics, function() {
+						top_pic = 0;
+					});
 				}
 			});
 			if (logged == true) {

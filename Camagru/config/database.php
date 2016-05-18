@@ -1,8 +1,5 @@
 <?php
-	// $DB_DSN = "mysql:host=sql.fruitice.fr;port=4040;charset=utf8";
-	// $DB_USER = "jmaiquez";
-	// $DB_PASSWORD = "";
-	$DB_DSN = "mysql:host=localhost;charset=utf8";
-	$DB_USER = "root";
-	$DB_PASSWORD = "test";
+	$DB_DSN = "mysql:host=sql.fruitice.fr;port=4040;charset=utf8";
+	$DB_USER = "jmaiquez";
+	$DB_PASSWORD = "";
 ?>
