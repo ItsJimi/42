@@ -11,4 +11,5 @@
 	require_once('../controller/reset.php');
 	require_once('../controller/getlike.php');
 	require_once('../controller/like.php');
+	require_once('../controller/comments.php');
 ?>

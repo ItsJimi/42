@@ -19,6 +19,11 @@
 				$fetch1[$key]['islike'] = 1;
 			else
 				$fetch1[$key]['islike'] = 0;
+
+			$sql = "SELECT user, pic, comment, create_at FROM comments WHERE pic='".$value['id']."' ORDER BY id DESC";
+			$result = $connect->query($sql);
+			$fetch3 = $result->fetchAll(PDO::FETCH_ASSOC);
+			$fetch1[$key]['comments'] = $fetch3;
 		}
 		$res = json_encode($fetch1);
 		return ($res);

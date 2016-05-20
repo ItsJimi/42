@@ -61,4 +61,18 @@
 	catch(PDOException $e) {
     	echo $sql . "<br>" . $e->getMessage();
     }
+	// CREATE TABLE COMMENTS
+	try {
+		$sql = "CREATE TABLE IF NOT EXISTS comments (
+			id INT PRIMARY KEY AUTO_INCREMENT,
+			pic INT NOT NULL,
+			comment TEXT NOT NULL,
+			user VARCHAR(255) NOT NULL,
+			create_at TIMESTAMP
+		)";
+    	$connect->query($sql);
+    }
+	catch(PDOException $e) {
+    	echo $sql . "<br>" . $e->getMessage();
+    }
 ?>

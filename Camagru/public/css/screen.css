@@ -42,10 +42,14 @@ button:focus {
 	float: right;
 }
 #info {
+	position: fixed;
+	top: 0;
+	left: 0;
 	display: none;
 	background: #333;
 	color: #fff;
-	padding: 5px;
+	width: 100%;
+	padding: 6px;
 }
 #info_text {
 	float: left;
@@ -104,22 +108,14 @@ header {
 section {
 	float: left;
 	width: 680px;
-}
-.button_aff {
-	width: 680px;
 	margin-top: 20px;
-	margin-bottom: 20px;
-}
-.button_aff button{
-	width: 337px;
-	padding: 15px;
-	font-size: 15px;
 }
 article {
 	padding: 20px;
 	background: rgba(236, 240, 241, 1);
 	border-radius: 2px;
 	margin-bottom: 20px;
+	font-family: "latolight", sans-serif;
 }
 article img {
 	width: 635px;
@@ -131,12 +127,15 @@ article img {
 	height: 40px;
 	font-size: 20px;
 }
-.tools_help {
-	font-family: "latolight", sans-serif;
+.tools_like svg:hover{
+	cursor: pointer;
 }
 #nbr_like {
 	margin-top: 5px;
 	float: right;
+}
+.comments_user {
+	color: rgba(39, 174, 96, 1);
 }
 #more_pics {
 	margin-bottom: 20px;

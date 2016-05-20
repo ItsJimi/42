@@ -134,7 +134,7 @@ window.addEventListener("DOMContentLoaded", function() {
 Z.id("filter").addEventListener("click", function() {
 	if (fullscreen == 0) {
 		fullscreen = 1;
-		Z.id("section").style.margin = "765px 0px 0px 0px";
+		Z.id("section").style.margin = "785px 0px 0px 0px";
 		Z.id("video").style.width = "1000px";
 		Z.id("video").style.height = "750px";
 		Z.id("video").style.margin = "100px 0px 0px -705px";
