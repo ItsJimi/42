@@ -1,5 +1,5 @@
 <?php
-	function comments($post, $connect) {
+	function postComments($post, $connect) {
 		if (isset($post['comment']) && $post['comment'] !== "") {
 			$sql = $connect->prepare('INSERT INTO comments (pic, comment, user) VALUES (:pic, :comment, :user)');
 			$sql->execute(array(
@@ -35,6 +35,23 @@
 		else {
 			$res['end'] = false;
 			$res['info'] = "Un commentaire ne peut pas être vide.";
+			return (json_encode($res));
+		}
+	}
+
+	function getComments($post, $connect) {
+		$sql = "SELECT user, comment FROM comments WHERE pic='".$post['id']."' ORDER BY id ASC";
+		$result = $connect->query($sql);
+		if ($result->rowCount() > 0) {
+			$fetch = $result->fetchAll(PDO::FETCH_ASSOC);
+			$res['comments'] = $fetch;
+			$res['end'] = true;
+			$res['info'] = "Un commentaire ne peut pas être vide.";
+			return (json_encode($res));
+		}
+		else {
+			$res['end'] = false;
+			$res['info'] = "Erreur.";
 			return (json_encode($res));
 		}
 	}

@@ -21,12 +21,9 @@
 	try {
 		$sql = "CREATE TABLE IF NOT EXISTS users (
 			id INT PRIMARY KEY AUTO_INCREMENT,
-			pic MEDIUMTEXT,
 			user VARCHAR(255) NOT NULL,
 			password VARCHAR(128) NOT NULL,
 			mail VARCHAR(255) NOT NULL,
-			followers INT DEFAULT 0,
-			hearts INT DEFAULT 0,
 			valid INT(1) DEFAULT 0,
 			create_at TIMESTAMP
 		)";
@@ -54,7 +51,8 @@
 		$sql = "CREATE TABLE IF NOT EXISTS likes (
 			id INT PRIMARY KEY AUTO_INCREMENT,
 			pic INT NOT NULL,
-			user VARCHAR(255) NOT NULL
+			user VARCHAR(255) NOT NULL,
+			pic_user VARCHAR(255) NOT NULL
 		)";
     	$connect->query($sql);
     }

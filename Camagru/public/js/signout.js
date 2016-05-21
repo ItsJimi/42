@@ -8,7 +8,6 @@ function signout() {
 	}, function(res) {
 		if (res != 0) {
 			res = JSON.parse(res);
-			//Z.id("login_bar").style.display = "none";
 			Z.id("info").style.display = "block";
 			Z.id("info_text").innerHTML = res.info;
 			if (res.end == true) {

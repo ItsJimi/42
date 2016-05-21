@@ -14,10 +14,15 @@
 				return (json_encode($res));
 			}
 			else {
-				$sql = $connect->prepare('INSERT INTO likes (pic, user) VALUES (:pic, :user)');
+				$sql = "SELECT user FROM pics WHERE id='".intval($post['id'])."'";
+				$result = $connect->query($sql);
+				$fetch = $result->fetch(PDO::FETCH_ASSOC);
+
+				$sql = $connect->prepare('INSERT INTO likes (pic, user, pic_user) VALUES (:pic, :user, :pic_user)');
 				$sql->execute(array(
 					'pic' => intval($post['id']),
-					'user' => htmlspecialchars($_SESSION['user'])
+					'user' => htmlspecialchars($_SESSION['user']),
+					'pic_user' => htmlspecialchars($fetch['user'])
 				));
 				$res['end'] = true;
 				$res['info'] = "Vous venez de like une photo !";

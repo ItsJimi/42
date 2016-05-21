@@ -25,10 +25,14 @@
 			if ($result->rowCount() > 0) {
 				$user = $result->fetch();
 
+				$sql = "SELECT COUNT(*) AS 'count' FROM likes WHERE pic_user='".$user['user']."'";
+				$result = $connect->query($sql);
+				$fetch = $result->fetch();
+
 				$_SESSION['user'] = $user['user'];
 				$_SESSION['mail'] = $user['mail'];
 				$_SESSION['followers'] = $user['followers'];
-				$_SESSION['hearts'] = $user['hearts'];
+				$_SESSION['hearts'] = $fetch['count'];
 				$_SESSION['create_at'] = $user['create_at'];
 				return (1);
 			}

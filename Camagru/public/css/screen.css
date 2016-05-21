@@ -137,6 +137,19 @@ article img {
 .comments_user {
 	color: rgba(39, 174, 96, 1);
 }
+.comments_tool {
+
+}
+.comments_tool input{
+	margin-top: 10px;
+	width: 625px;
+	padding: 5px;
+}
+.comments_tool button{
+	margin-top: 5px;
+	width: 640px;
+	height: 30px;
+}
 #more_pics {
 	margin-bottom: 20px;
 	width: 680px;
@@ -268,6 +281,7 @@ aside #canvas{
 	width: 120px;
 	height: 50px;
 	text-align: center;
+	margin: 0px auto;
 }
 .aside_logo_val{
 	padding: 10px;
@@ -275,6 +289,13 @@ aside #canvas{
 	border: 1px solid #27ae60;
 	background: #2ecc71;
 	color: #ecf0f1;
+}
+#my_pics {
+	text-align: center;
+}
+#my_pics img {
+	width: 200px;
+	margin-top: 20px;
 }
 footer {
 	text-align: center;
