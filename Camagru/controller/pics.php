@@ -10,12 +10,14 @@
 			$fetch2 = $result->fetch(PDO::FETCH_ASSOC);
 			$fetch1[$key]['likes'] = $fetch2['count'];
 
-			$sql = "SELECT * FROM likes WHERE pic='".intval($value['id'])."' AND user='".htmlspecialchars($_SESSION['user'])."'";
-			$result = $connect->query($sql);
-			if ($result->fetch())
-				$fetch1[$key]['islike'] = 1;
-			else
-				$fetch1[$key]['islike'] = 0;
+			if (is_connected()) {
+				$sql = "SELECT * FROM likes WHERE pic='".intval($value['id'])."' AND user='".htmlspecialchars($_SESSION['user'])."'";
+				$result = $connect->query($sql);
+				if ($result->fetch())
+					$fetch1[$key]['islike'] = 1;
+				else
+					$fetch1[$key]['islike'] = 0;
+			}
 
 			$sql = "SELECT user, comment FROM comments WHERE pic='".$value['id']."' ORDER BY id ASC";
 			$result = $connect->query($sql);

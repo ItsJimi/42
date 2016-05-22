@@ -30,6 +30,7 @@ function signin() {
 				Z.id("member_mail").innerHTML = res.mail;
 				Z.id("member_hearts").innerHTML = res.hearts;
 				Z.id("signin_user").value = "";
+				pics(0);
 			}
 		}
 	});

@@ -1,6 +1,9 @@
 <?php
 	require_once("include.php");
 
-	$request = myPics($_POST, $connect);
+	if (is_connected())
+		$request = myPics($_POST, $connect);
+	else
+		$request = 0;
 	echo $request;
 ?>

@@ -99,10 +99,10 @@ window.addEventListener("DOMContentLoaded", function() {
 		if (logged == true) {
 			var reader = new FileReader();
 			reader.addEventListener('load', function() {
-				var ext = Z.id('upload_file').files[0].name.substr(Z.id('upload_file').files[0].name.length - 3);;
+				var ext = Z.id('upload_file').files[0].name.substr(Z.id('upload_file').files[0].name.length - 3).toLowerCase();
 				if (ext != 'png' && ext != 'jpg') {
 					Z.id("info").style.display = "block";
-					Z.id("info_text").innerHTML = "Votre photo doit être au format png !";
+					Z.id("info_text").innerHTML = "Votre photo doit être au format png ou jpg !";
 				}
 				else {
 					canvas.width = 640;

@@ -28,7 +28,7 @@
 			}
 
 			$res['end'] = true;
-			$res['info'] = "Un commentaire été posté.";
+			$res['info'] = "Un commentaire a été posté.";
 
 			return (json_encode($res));
 		}
