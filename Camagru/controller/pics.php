@@ -1,10 +1,7 @@
 <?php
 	// Pics
 	function pics($post, $connect) {
-		if ($post['top_pic'] === "true")
-			$sql = "SELECT * FROM pics ORDER BY id ASC LIMIT ".intval($post['nbr']).", 2";
-		else
-			$sql = "SELECT * FROM pics ORDER BY id DESC LIMIT ".intval($post['nbr']).", 2";
+		$sql = "SELECT * FROM pics ORDER BY id DESC LIMIT ".intval($post['nbr']).", 2";
 		$result = $connect->query($sql);
 		$fetch1 = $result->fetchAll(PDO::FETCH_ASSOC);
 		foreach ($fetch1 as $key => $value) {

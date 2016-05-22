@@ -1,14 +1,14 @@
 var nbr_pics = 0;
-var top_pic = 0;
 
 pics(nbr_pics);
 
 function pics(nbr, callback) {
 	Z.post("model/pics.php", {
-		nbr: nbr,
-		top_pic: top_pic
+		nbr: nbr
 	}, function(res) {
 		res = JSON.parse(res);
+		if (nbr == 0)
+			Z.id("all_pics").innerHTML = "";
 		res.forEach(function(pic) {
 			Z.id("all_pics").innerHTML += '<article>'
 				+ '<img src="' + pic.pic + '">'
@@ -38,7 +38,7 @@ function pics(nbr, callback) {
 				+ '</div>'
 				+ '<div id="comments_' + pic.id + '">'
 				+ '</div>'
-				+ '<div class="comments_tool"><input id="comments_input_' + pic.id + '" type="text" ><button id="comments_button" onclick="postComments(' + pic.id + ')">Envoyer</button></div>'
+				+ '<div class="comments_tool"><input id="comments_input_' + pic.id + '" type="text" placeholder="Poster un commentaire ..." ><button id="comments_button" onclick="postComments(' + pic.id + ')">Envoyer</button></div>'
 			+ '</article>';
 			if (pic.islike)
 				Z.id("like_" + pic.id).innerHTML = '<path fill="#c0392b" d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" />';
@@ -68,8 +68,17 @@ function delPic(id) {
 	Z.post("model/delpic.php", {
 		id: id
 	}, function(res) {
-		res = JSON.parse(res);
-		myPics();
+		if (res != 0) {
+			res = JSON.parse(res);
+			Z.id("info").style.display = "block";
+			Z.id("info_text").innerHTML = res.info;
+			pics(0);
+			myPics();
+		}
+		else {
+			Z.id("info").style.display = "block";
+			Z.id("info_text").innerHTML = "Vous devez être connecté pour supprimé une photo.";
+		}
 	});
 }
 

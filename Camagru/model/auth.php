@@ -6,7 +6,6 @@
 		$res['logged'] = true;
 		$res['user'] = $_SESSION['user'];
 		$res['mail'] = $_SESSION['mail'];
-		$res['followers'] = $_SESSION['followers'];
 		$res['hearts'] = $_SESSION['hearts'];
 		$res['create_at'] = $_SESSION['create_at'];
 

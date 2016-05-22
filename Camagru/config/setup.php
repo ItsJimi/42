@@ -32,6 +32,18 @@
 	catch(PDOException $e) {
     	echo $sql . "<br>" . $e->getMessage();
     }
+	// CREATE TABLE CODES
+	try {
+		$sql = "CREATE TABLE IF NOT EXISTS codes (
+			id INT PRIMARY KEY AUTO_INCREMENT,
+			mail VARCHAR(255) NOT NULL,
+			code VARCHAR(255) NOT NULL
+		)";
+    	$connect->query($sql);
+    }
+	catch(PDOException $e) {
+    	echo $sql . "<br>" . $e->getMessage();
+    }
 	// CREATE TABLE PICS
 	try {
 		$sql = "CREATE TABLE IF NOT EXISTS pics (

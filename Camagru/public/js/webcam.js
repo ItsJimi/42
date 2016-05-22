@@ -11,7 +11,8 @@ window.addEventListener("DOMContentLoaded", function() {
 		video = Z.id("video"),
 		videoObj = { "video": true },
 		errBack = function(error) {
-			Z.l("Video capture error: ", error.code);
+			Z.id("info").style.display = "block";
+			Z.id("info_text").innerHTML = "Video capture error: ", error.code;
 		};
 
 	// Put video listeners into place
@@ -58,7 +59,6 @@ window.addEventListener("DOMContentLoaded", function() {
 	Z.id("save").addEventListener("click", function() {
 		if (snap == 1) {
 			snap = 0;
-			top_pic = 1;
 			Z.post("model/save.php", {
 				pic: encodeURIComponent(canvas.toDataURL("image/png")),
 				filter: filters[key_filter]
@@ -67,14 +67,12 @@ window.addEventListener("DOMContentLoaded", function() {
 					res = JSON.parse(res);
 					Z.id("info").style.display = "block";
 					Z.id("info_text").innerHTML = res.info;
-					pics(nbr_pics, function() {
-						top_pic = 0;
-					});
+					pics(0);
 				}
 			});
 			if (logged == true) {
 				Z.id("info").style.display = "block";
-				Z.id("info_text").innerHTML = "Envoie de la photo en cours ...";
+				Z.id("info_text").innerHTML = "Envoi de la photo en cours ...";
 			}
 			else {
 				Z.id("info").style.display = "block";

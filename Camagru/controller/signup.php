@@ -21,31 +21,40 @@
 						return (json_encode($res));
 					}
 					else {
-						if ($post['signup_pass1'] === $post['signup_pass2']) {
-							$sql = $connect->prepare('INSERT INTO users (user, password, mail) VALUES (:user, :password, :mail)');
-							$sql->execute(array(
-								'user' => htmlspecialchars($post['signup_user']),
-								'password' => pass_hash($post['signup_user'], $post['signup_pass1']),
-								'mail' => htmlspecialchars($post['signup_mail'])
-							));
-							$to = $post['signup_mail'];
-							$subject = 'Vérification InstaPics';
-							$message = "Bonjour ".$post['signup_user'].",\nPour vérifier votre compte, il vous suffit de cliquer sur le lien ci dessous.\nhttp://localhost:8080/Camagru/verif.php?v=".$post['signup_user']."&l=".sha1($post['signup_user']."quarante");
-							$headers = 'From: verif@instapics.fr';
+						if (strlen($post['signup_pass1']) >= 6) {
+							if ($post['signup_pass1'] === $post['signup_pass2']) {
+								$sql = $connect->prepare('INSERT INTO users (user, password, mail) VALUES (:user, :password, :mail)');
+								$sql->execute(array(
+									'user' => htmlspecialchars($post['signup_user']),
+									'password' => pass_hash($post['signup_user'], $post['signup_pass1']),
+									'mail' => htmlspecialchars($post['signup_mail'])
+								));
+								$to = $post['signup_mail'];
+								$subject = 'Vérification InstaPics';
+								$message = "Bonjour ".$post['signup_user'].",\nPour vérifier votre compte, il vous suffit de cliquer sur le lien ci dessous.\nhttp://localhost:8080/Camagru/verif.php?v=".$post['signup_user']."&l=".sha1($post['signup_user']."quarante");
+								$headers = 'From: verif@instapics.fr';
 
-							mail($to, $subject, $message, $headers);
+								mail($to, $subject, $message, $headers);
 
-							$res['end'] = true;
-							$res['info'] = "Un mail de vérification a été envoyé.";
+								$res['end'] = true;
+								$res['info'] = "Un mail de vérification a été envoyé.";
 
-							return (json_encode($res));
+								return (json_encode($res));
+							}
+							else {
+								$res['end'] = false;
+								$res['info'] = "Les mots de passe ne correspondent pas.";
+
+								return (json_encode($res));
+							}
 						}
 						else {
 							$res['end'] = false;
-							$res['info'] = "Les mots de passe ne correspondent pas.";
+							$res['info'] = "Le mot de passe doit faire au moins 6 caractères.";
 
 							return (json_encode($res));
 						}
+
 					}
 				}
 			}

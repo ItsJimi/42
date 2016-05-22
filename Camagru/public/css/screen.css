@@ -52,10 +52,10 @@ button:focus {
 	padding: 6px;
 }
 #info_text {
-	float: left;
+	margin-left: 50px;
 }
 #info_cross {
-	float: right;
+	float: left;
 }
 #info_cross:hover {
 	cursor: pointer;
@@ -63,17 +63,29 @@ button:focus {
 .login_title {
 	color: #fff;
 	border-bottom: 1px solid #fff;
+	margin-bottom: 5px;
 }
 #login_bar {
 	display: none;
 	background: rgba(39, 174, 96, 1);
 	padding: 5px;
 }
+#reset {
+	display: none;
+}
 #member_bar {
 	display: none;
 	background: rgba(39, 174, 96, 1);
 	padding: 5px;
 	color: #fff;
+}
+#member_user {
+	color: #333;
+	margin-right: 40px;
+}
+#member_mail {
+	color: #333;
+	margin-right: 40px;
 }
 header {
 	width: 100%;
@@ -157,6 +169,7 @@ article img {
 	font-size: 15px;
 }
 aside {
+	display: none;
 	margin-top: -90px;
 	float: right;
 	width: 300px;
@@ -243,10 +256,14 @@ aside #canvas{
 	width: 85px;
 	height: 40px;
 }
+#upload_title {
+	text-align: center;
+	margin-top: 20px;
+	color: #fff;
+}
 #upload_file {
 	padding: 10px;
 	width: 278px;
-	margin-top: 20px;
 	text-align: center;
 	border-radius: 2px;
 	border: 1px solid #2c3e50;
@@ -294,7 +311,7 @@ aside #canvas{
 	text-align: center;
 }
 #my_pics img {
-	width: 200px;
+	width: 250px;
 	margin-top: 20px;
 }
 footer {
@@ -307,4 +324,9 @@ footer a{
 }
 #video {
 
+}
+#up {
+	position: fixed;
+	bottom: 20px;
+	left: 20px;
 }

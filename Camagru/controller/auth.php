@@ -31,7 +31,6 @@
 
 				$_SESSION['user'] = $user['user'];
 				$_SESSION['mail'] = $user['mail'];
-				$_SESSION['followers'] = $user['followers'];
 				$_SESSION['hearts'] = $fetch['count'];
 				$_SESSION['create_at'] = $user['create_at'];
 				return (1);

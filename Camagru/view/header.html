@@ -10,17 +10,25 @@
 	</head>
 	<body id="body">
 		<div id="info">
-			<div id="info_text"></div>
 			<div id="info_cross">X</div>
+			<div id="info_text"></div>
 			<div class="clear"></div>
 		</div>
 		<div id="login_bar">
 			<div class="container">
-				<div class="login_title">Se connecter</div>
-				<input id="signin_user" type="text" placeholder="Pseudo">
-				<input id="signin_pass" type="password" placeholder="Mot de passe">
-				<button id="signin_submit">Connexion</button>
-				<button id="reset_submit">Mot de passe oublié</button>
+				<div id="signin">
+					<div class="login_title">Se connecter</div>
+					<input id="signin_user" type="text" placeholder="Pseudo">
+					<input id="signin_pass" type="password" placeholder="Mot de passe">
+					<button id="signin_submit">Connexion</button>
+					<button id="switch_reset_submit">Mot de passe oublié</button>
+				</div>
+				<div id="reset">
+					<div class="login_title">Mot de passe oublié</div>
+					<input id="reset_mail" type="text" placeholder="Mail">
+					<button id="reset_submit">Réinitialiser</button>
+					<button id="switch_signin_submit">Se connecter</button>
+				</div>
 				<div class="login_title">S'inscrire</div>
 				<input id="signup_user" type="text" placeholder="Pseudo">
 				<input id="signup_mail" type="text" placeholder="Mail">
@@ -31,7 +39,9 @@
 		</div>
 		<div id="member_bar">
 			<div class="container">
+				Pseudo :
 				<span id="member_user"></span>
+				Mail :
 				<span id="member_mail"></span>
 				<button id="signout_submit">Déconnexion</button>
 			</div>

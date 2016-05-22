@@ -9,7 +9,8 @@ function postComments(id) {
 			res = JSON.parse(res);
 			Z.id("info").style.display = "block";
 			Z.id("info_text").innerHTML = res.info;
-			getComments(id);
+			if (res.end == true)
+				getComments(id);
 		}
 		else {
 			Z.id("info").style.display = "block";

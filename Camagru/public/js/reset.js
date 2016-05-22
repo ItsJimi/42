@@ -2,7 +2,9 @@ if (Z.id("reset_submit"))
 	Z.id("reset_submit").addEventListener("click", reset);
 
 function reset() {
-	var reset_mail = prompt("Veuillez saisir votre addresse mail.")
+	var reset_mail = Z.id("reset_mail").value;
+
+	Z.l(reset_mail);
 
 	Z.post("model/reset.php", {
 		reset_mail: reset_mail,
@@ -12,10 +14,7 @@ function reset() {
 			res = JSON.parse(res);
 			Z.id("info").style.display = "block";
 			Z.id("info_text").innerHTML = res.info;
-			if (res.end == true) {
-				Z.id("signup_user").value = "";
-				Z.id("signup_mail").value = "";
-			}
+			Z.id("reset_mail").value = "";
 		}
 	});
 }

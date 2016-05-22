@@ -26,7 +26,7 @@
 				'pic' => "data:image/png;base64,".base64_encode($final_pic)
 			));
 			$res['end'] = true;
-			$res['info'] = "Votre photo a été envoyé ! ;)";
+			$res['info'] = "Votre photo a été envoyée ! ;)";
 			$res = json_encode($res);
 			return($res);
 		}

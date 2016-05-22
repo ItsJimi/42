@@ -12,7 +12,6 @@ function getLike(id) {
 }
 
 function like(id) {
-	Z.l(id);
 	Z.post("model/like.php", {
 		id: id
 	}, function(res) {
