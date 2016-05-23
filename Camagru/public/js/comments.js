@@ -14,7 +14,7 @@ function postComments(id) {
 		}
 		else {
 			Z.id("info").style.display = "block";
-			Z.id("info_text").innerHTML = "Vous devez être conecté pour posté un commentaire.";
+			Z.id("info_text").innerHTML = "Vous devez être conecté pour poster un commentaire.";
 		}
 	});
 }

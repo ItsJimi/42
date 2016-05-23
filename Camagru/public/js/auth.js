@@ -2,6 +2,9 @@ Z.id("info").style.display = "none";
 Z.id("login_bar").style.display = "none";
 Z.id("member_bar").style.display = "none";
 
+if (window.innerWidth > 1020)
+	Z.id("take_pictures").style.display = "none";
+
 var logged = false;
 
 if (Z.id("info_cross"))
@@ -30,11 +33,14 @@ window.addEventListener("DOMContentLoaded", function() {
 			logged = true;
 			Z.id("login_bar").style.display = "none";
 			Z.id("member_bar").style.display = "block";
-			//Z.id("aside").style.display = "block";
+			if (window.innerWidth > 1020)
+				Z.id("aside").style.display = "block";
 			Z.id("member_user").innerHTML = res.user;
 			Z.id("member_mail").innerHTML = res.mail;
 			Z.id("member_hearts").innerHTML = res.hearts;
-			pics(0);
+			if (!Number.isInteger(parseInt(val.p))) {
+				pics(0);
+			}
 		}
 		else {
 			logged = false;

@@ -330,3 +330,9 @@ footer a{
 	bottom: 20px;
 	left: 20px;
 }
+#take_picture {
+	display: none;
+}
+#all_pictures {
+	display: none;
+}

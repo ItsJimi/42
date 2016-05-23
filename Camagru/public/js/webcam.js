@@ -3,8 +3,52 @@ var fullscreen = 0;
 var filters = ["chap1.png", "chap2.png", "chap3.png", "chap4.png", "chap5.png", "chap6.png", "chap7.png", "chap8.png", "chap9.png", "chap10.png"];
 var key_filter = 0;
 var snap = 0;
+var picture = 0;
+var width = window.innerWidth;
 
 window.addEventListener("DOMContentLoaded", function() {
+
+	window.onresize = function() {
+		width = window.innerWidth;
+
+		if (width > 1020) {
+			picture = 0;
+			if (logged == true)
+				Z.id("aside").style.display = "block";
+			Z.id("section").style.display = "block";
+			Z.id("all_pictures").style.display = "none";
+			Z.id("take_pictures").style.display = "none";
+		}
+		else if (width <= 1020 && picture == 0) {
+			Z.id("aside").style.display = "none";
+			Z.id("take_pictures").style.display = "block";
+		}
+	};
+
+	Z.id("take_pictures").addEventListener("click", function() {
+		if (width <= 1020 && logged == true) {
+			picture = 1;
+			Z.id("aside").style.display = "block";
+			Z.id("section").style.display = "none";
+			Z.id("take_pictures").style.display = "none";
+			Z.id("all_pictures").style.display = "block";
+		}
+		else {
+			Z.id("info").style.display = "block";
+			Z.id("info_text").innerHTML = "Vous devez être connecté pour prendre des photos.";
+		}
+	}, false);
+
+	Z.id("all_pictures").addEventListener("click", function() {
+		if (width <= 1020) {
+			picture = 0;
+			Z.id("aside").style.display = "none";
+			Z.id("section").style.display = "block";
+			Z.id("take_pictures").style.display = "block";
+			Z.id("all_pictures").style.display = "none";
+		}
+	}, false);
+
 	// Grab elements, create settings, etc.
 	var canvas = Z.id("canvas"),
 		context = canvas.getContext("2d"),
@@ -54,7 +98,7 @@ window.addEventListener("DOMContentLoaded", function() {
 			Z.id("info").style.display = "block";
 			Z.id("info_text").innerHTML = "Vous devez être connecté pour prendre des photos.";
 		}
-	});
+	}, false);
 
 	Z.id("save").addEventListener("click", function() {
 		if (snap == 1) {
@@ -78,6 +122,7 @@ window.addEventListener("DOMContentLoaded", function() {
 				Z.id("info").style.display = "block";
 				Z.id("info_text").innerHTML = "Vous devez être connecté pour prendre des photos.";
 			}
+			Z.id("upload_file").value = "";
 			Z.id("video").style.display = "block";
 			Z.id("canvas").style.display = "none";
 		}
@@ -85,14 +130,14 @@ window.addEventListener("DOMContentLoaded", function() {
 			Z.id("info").style.display = "block";
 			Z.id("info_text").innerHTML = "Vous devez prendre la photo avant de la sauvegarder.";
 		}
-	});
+	}, false);
 
 	Z.id("clear").addEventListener("click", function() {
 		snap = 0;
 		Z.id("upload_file").value = "";
 		Z.id("video").style.display = "block";
 		Z.id("canvas").style.display = "none";
-	});
+	}, false);
 
 	Z.id('upload_file').addEventListener('change', function() {
 
@@ -125,57 +170,57 @@ window.addEventListener("DOMContentLoaded", function() {
 			Z.id("info").style.display = "block";
 			Z.id("info_text").innerHTML = "Vous devez être connecté pour choisir des photos.";
 		}
-	});
+	}, false);
+
+	Z.id("filter").addEventListener("click", function() {
+		if (fullscreen == 0 && width > 1020) {
+			fullscreen = 1;
+			Z.id("section").style.margin = "785px 0px 0px 0px";
+			Z.id("video").style.width = "1000px";
+			Z.id("video").style.height = "750px";
+			Z.id("video").style.margin = "100px 0px 0px -705px";
+			Z.id("canvas").style.width = "1000px";
+			Z.id("canvas").style.height = "750px";
+			Z.id("canvas").style.margin = "100px 0px 0px -705px";
+			Z.id("filter").style.width = "1000px";
+			Z.id("filter").style.height = "750px";
+			Z.id("filter").style.margin = "-758px 0px 0px -705px";
+			Z.id("filter_img").style.width = "1000px";
+			Z.id("filter_img").style.height = "750px";
+		}
+		else {
+			fullscreen = 0;
+			Z.id("section").style.margin = "";
+			Z.id("video").style.width = "";
+			Z.id("video").style.height = "";
+			Z.id("video").style.margin = "";
+			Z.id("canvas").style.width = "";
+			Z.id("canvas").style.height = "";
+			Z.id("canvas").style.margin = "";
+			Z.id("filter").style.width = "";
+			Z.id("filter").style.height = "";
+			Z.id("filter").style.margin = "";
+			Z.id("filter_img").style.width = "";
+			Z.id("filter_img").style.height = "";
+		}
+	}, false);
+
+	Z.id("filters_left").addEventListener("click", function() {
+		if (key_filter == 0)
+			key_filter = 9;
+		else if (key_filter > 0)
+			key_filter--;
+		Z.id("filter_img").src = "public/img/" + filters[key_filter];
+		Z.id("filters_name").innerHTML = "Chapeau " + key_filter;
+	}, false);
+
+	Z.id("filters_right").addEventListener("click", function() {
+		if (key_filter == 9)
+			key_filter = 0;
+		else if (key_filter < 9)
+			key_filter++;
+		Z.id("filter_img").src = "public/img/" + filters[key_filter];
+		Z.id("filters_name").innerHTML = "Chapeau " + key_filter;
+	}, false);
 
 }, false);
-
-Z.id("filter").addEventListener("click", function() {
-	if (fullscreen == 0) {
-		fullscreen = 1;
-		Z.id("section").style.margin = "785px 0px 0px 0px";
-		Z.id("video").style.width = "1000px";
-		Z.id("video").style.height = "750px";
-		Z.id("video").style.margin = "100px 0px 0px -705px";
-		Z.id("canvas").style.width = "1000px";
-		Z.id("canvas").style.height = "750px";
-		Z.id("canvas").style.margin = "100px 0px 0px -705px";
-		Z.id("filter").style.width = "1000px";
-		Z.id("filter").style.height = "750px";
-		Z.id("filter").style.margin = "-758px 0px 0px -705px";
-		Z.id("filter_img").style.width = "1000px";
-		Z.id("filter_img").style.height = "750px";
-	}
-	else {
-		fullscreen = 0;
-		Z.id("section").style.margin = "";
-		Z.id("video").style.width = "";
-		Z.id("video").style.height = "";
-		Z.id("video").style.margin = "";
-		Z.id("canvas").style.width = "";
-		Z.id("canvas").style.height = "";
-		Z.id("canvas").style.margin = "";
-		Z.id("filter").style.width = "";
-		Z.id("filter").style.height = "";
-		Z.id("filter").style.margin = "";
-		Z.id("filter_img").style.width = "";
-		Z.id("filter_img").style.height = "";
-	}
-});
-
-Z.id("filters_left").addEventListener("click", function() {
-	if (key_filter == 0)
-		key_filter = 9;
-	else if (key_filter > 0)
-		key_filter--;
-	Z.id("filter_img").src = "public/img/" + filters[key_filter];
-	Z.id("filters_name").innerHTML = "Chapeau " + key_filter;
-});
-
-Z.id("filters_right").addEventListener("click", function() {
-	if (key_filter == 9)
-		key_filter = 0;
-	else if (key_filter < 9)
-		key_filter++;
-	Z.id("filter_img").src = "public/img/" + filters[key_filter];
-	Z.id("filters_name").innerHTML = "Chapeau " + key_filter;
-});
