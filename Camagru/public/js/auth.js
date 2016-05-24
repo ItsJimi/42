@@ -1,11 +1,12 @@
+var val = Z.getVal();
+var logged = false;
+
 Z.id("info").style.display = "none";
 Z.id("login_bar").style.display = "none";
 Z.id("member_bar").style.display = "none";
 
 if (window.innerWidth > 1020)
 	Z.id("take_pictures").style.display = "none";
-
-var logged = false;
 
 if (Z.id("info_cross"))
 	Z.id("info_cross").addEventListener("click", hide_info);
@@ -38,9 +39,10 @@ window.addEventListener("DOMContentLoaded", function() {
 			Z.id("member_user").innerHTML = res.user;
 			Z.id("member_mail").innerHTML = res.mail;
 			Z.id("member_hearts").innerHTML = res.hearts;
-			if (!Number.isInteger(parseInt(val.p))) {
+			if (Number.isInteger(parseInt(val.p)))
+				pics(val.p, true);
+			else
 				pics(0);
-			}
 		}
 		else {
 			logged = false;
@@ -50,6 +52,10 @@ window.addEventListener("DOMContentLoaded", function() {
 			Z.id("member_user").innerHTML = "";
 			Z.id("member_mail").innerHTML = "";
 			Z.id("member_hearts").innerHTML = "?";
+			if (Number.isInteger(parseInt(val.p)))
+				pics(val.p, true);
+			else
+				pics(0);
 		}
 	});
 });

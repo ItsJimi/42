@@ -19,7 +19,7 @@
 					if ($user['user'] !== $_SESSION['user']) {
 						$to = $user['mail'];
 						$subject = '[InstaPics] Nouveau commentaire';
-						$message = "Bonjour ".htmlspecialchars($user['user']).",\n".htmlspecialchars($_SESSION['user'])." a posté \"".$post['comment']."\" sur votre photo.";
+						$message = "Bonjour ".htmlspecialchars($user['user']).",\n".htmlspecialchars($_SESSION['user'])." a posté \"".$post['comment']."\" sur la photo : http://localhost:8080/Camagru/?p=".$post['id'];
 						$headers = 'From: comments@instapics.fr';
 
 						mail($to, $subject, $message, $headers);
@@ -46,12 +46,11 @@
 			$fetch = $result->fetchAll(PDO::FETCH_ASSOC);
 			$res['comments'] = $fetch;
 			$res['end'] = true;
-			$res['info'] = "Un commentaire ne peut pas être vide.";
 			return (json_encode($res));
 		}
 		else {
 			$res['end'] = false;
-			$res['info'] = "Erreur.";
+			$res['info'] = "Une erreur est survenue.";
 			return (json_encode($res));
 		}
 	}

@@ -16,20 +16,34 @@
 			else {
 				$sql = "SELECT user FROM pics WHERE id='".intval($post['id'])."'";
 				$result = $connect->query($sql);
-				$fetch = $result->fetch(PDO::FETCH_ASSOC);
+				if ($result->rowCount() > 0) {
+					$fetch = $result->fetch(PDO::FETCH_ASSOC);
 
-				$sql = $connect->prepare('INSERT INTO likes (pic, user, pic_user) VALUES (:pic, :user, :pic_user)');
-				$sql->execute(array(
-					'pic' => intval($post['id']),
-					'user' => htmlspecialchars($_SESSION['user']),
-					'pic_user' => htmlspecialchars($fetch['user'])
-				));
-				$res['end'] = true;
-				$res['info'] = "Vous venez de like une photo !";
-				$res['islike'] = 1;
+					$sql = $connect->prepare('INSERT INTO likes (pic, user, pic_user) VALUES (:pic, :user, :pic_user)');
+					$sql->execute(array(
+						'pic' => intval($post['id']),
+						'user' => htmlspecialchars($_SESSION['user']),
+						'pic_user' => htmlspecialchars($fetch['user'])
+					));
+					$res['end'] = true;
+					$res['info'] = "Vous venez de like une photo !";
+					$res['islike'] = 1;
 
-				return (json_encode($res));
+					return (json_encode($res));
+				}
+				else {
+					$res['end'] = false;
+					$res['info'] = "Une erreur est survenue.";
+
+					return (json_encode($res));
+				}
 			}
+		}
+		else {
+			$res['end'] = false;
+			$res['info'] = "Une erreur est survenue.";
+
+			return (json_encode($res));
 		}
 	}
 ?>

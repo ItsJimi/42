@@ -9,5 +9,9 @@
 
 			return (json_encode($res));
 		}
+		else {
+			$res['end'] = false;
+			$res['hearts'] = "Une erreur est survenue.";
+		}
 	}
 ?>

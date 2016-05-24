@@ -18,6 +18,7 @@ function signout() {
 				Z.id("member_user").innerHTML = "";
 				Z.id("member_mail").innerHTML = "";
 				Z.id("member_hearts").innerHTML = "?";
+				Z.id("my_pics").innerHTML = "";
 			}
 		}
 		else {
@@ -28,6 +29,7 @@ function signout() {
 			Z.id("member_user").innerHTML = "";
 			Z.id("member_mail").innerHTML = "";
 			Z.id("member_hearts").innerHTML = "?";
+			Z.id("my_pics").innerHTML = "";
 		}
 	});
 }

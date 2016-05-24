@@ -3,9 +3,17 @@
 	function myPics($post, $connect) {
 		$sql = "SELECT * FROM pics WHERE user='".htmlspecialchars($_SESSION['user'])."' ORDER BY id DESC";
 		$result = $connect->query($sql);
-		$fetch1 = $result->fetchAll(PDO::FETCH_ASSOC);
+		if ($result->rowCount() > 0) {
+			$fetch1['data'] = $result->fetchAll(PDO::FETCH_ASSOC);
+			$fetch1['end'] = true;
+			$res = json_encode($fetch1);
+			return ($res);
+		}
+		else {
+			$res['end'] = false;
+			$res['info'] = "Il n'y a aucune photo à afficher.";
 
-		$res = json_encode($fetch1);
-		return ($res);
+			return (json_encode($res));
+		}
 	}
 ?>
