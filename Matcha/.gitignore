@@ -1,0 +1,4 @@
+./node_modules
+./app/config/database.js
+.DS_Store
+._.DS_Store
