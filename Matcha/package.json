@@ -4,12 +4,16 @@
   "description": "Match or match",
   "main": "./app/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./app/server.js"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/ItsJimi/42/tree/master/Matcha"
   },
   "author": "Jimi M",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.13.4",
+    "serve-favicon": "^2.3.0"
+  }
 }
