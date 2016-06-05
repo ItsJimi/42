@@ -1,7 +1,11 @@
 if !ajax
 	include ./includes/header.pug
-#container
-	a(href='home', rel='no-refresh') home
+if !ajax
+	.container
+		a(class='link1', href='home') home
+		p= "Oui et toi ?"
+else
+	a(class='link1', href='home') home
 	p= "Oui et toi ?"
 if !ajax
 	include ./includes/footer.pug

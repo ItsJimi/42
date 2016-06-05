@@ -2,8 +2,18 @@ doctype html
 html
 	head
 		title=title
-		link(src='/css/screen.css')
-		link(src='/css/mobile.css')
+		meta(name='viewport', content='width=device-width, initial-scale=1.0')
+		link(rel='stylesheet', type='text/css', href='css/screen.css')
 	body
 		header
-			h1= "Search"
+			| Matcha
+		nav
+			ul.navigation
+				li
+					a Home
+				li
+					a Pofiles
+				li
+					a About
+				li
+					a Contact

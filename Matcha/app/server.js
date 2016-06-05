@@ -17,10 +17,12 @@ app.get('/', function (req, res) {
 });
 app.get('/home', function (req, res) {
 	var ajax = (req.query.type === "ajax");
+	console.log(ajax);
 	res.render('home', { title: 'Home', ajax: ajax });
 });
 app.get('/test', function (req, res) {
 	var ajax = (req.query.type === "ajax");
+	console.log(ajax);
 	res.render('test', { title: 'Home', ajax: ajax });
 });
 
