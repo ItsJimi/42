@@ -1,4 +1,4 @@
-./matcha/node_modules
-./matcha/app/config/database.js
+matcha/node_modules
+matcha/app/config/database.js
 .DS_Store
 ._.DS_Store
