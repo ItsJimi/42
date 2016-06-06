@@ -40,18 +40,34 @@ html, body {
 }
 a {
 	color: #1abc9c;
+	-webkit-transition: color 0.5s;
+    transition: color 0.5s;
 }
 a:hover {
 	color: #16a085;
+}
+p {
+	text-align: justify;
 }
 
 /* HEADER */
 header, footer {
     height: 100px;
-    line-height: 100px;
+	line-height: 100px;
     text-align: center;
     background-color: #1abc9c;
+}
+header {
+	line-height: 85px;
 	font-family: "yorkwhite", sans-serif;
+	font-size: 4em;
+}
+footer {
+
+}
+header a, footer a {
+	text-decoration: none;
+	color: #efefef;
 }
 
 /* NAV */
@@ -80,6 +96,9 @@ li {
 li a{
     color: #eee;
 	text-decoration: none;
+}
+li a:hover{
+    color: #efefef;
 }
 
 /* MAIN */

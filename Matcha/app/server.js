@@ -2,14 +2,23 @@
 var c = require('../config.json');
 
 // Modules
+var server = require('http').createServer();
+var WebSocketServer = require('ws').Server;
+var wss = new WebSocketServer({
+	server: server
+});
 var favicon = require('serve-favicon');
 var express = require('express');
 var app = express();
 
 // Controllers
-var db = require('./config/database.js');
+var db = require('./controllers/database.js');
 
-console.log(db);
+// Global var
+
+db.connect(function(database) {
+
+});
 
 // Set
 app.set('view engine', 'pug');
@@ -21,7 +30,15 @@ app.use(favicon('./app/public/img/img1.jpg'));
 
 // Routes
 app.get('/', function (req, res) {
-	res.render('home', { name: c.site.name, author: c.site.author, title: 'Home' });
+	db.getUsers(function(json) {
+		var users = json;
+		res.render('home', {
+			name: c.site.name,
+			author: c.site.author,
+			title: 'Home',
+			users: users
+		});
+    });
 });
 app.get('/home', function (req, res) {
 	var ajax = (req.query.type === "ajax");
@@ -35,6 +52,7 @@ app.get('/test', function (req, res) {
 });
 
 // Server
+server.on('request', app);
 app.listen(3001, function() {
 	console.log('Start at 3001');
 });

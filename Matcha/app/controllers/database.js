@@ -10,11 +10,25 @@ MongoClient.connect('mongodb://' + c.db.user + ':' + c.db.password + '@' + c.db.
 		callback(database);
 });
 
-module.export = {
+module.exports = {
 	connect : function(cb) {
 		if (database)
 			cb(database);
 		else
 			callback = cb;
+	},
+	insert : function() {
+
+	},
+	getUsers: function(cb) {
+	    // Get the documents collection
+	    var collection = database.collection('users');
+	    // Find some documents
+	    collection.find({}).toArray(function(err, docs) {
+			if (err)
+				throw err;
+			console.log(docs);
+	        cb(docs);
+	    });
 	}
 };
