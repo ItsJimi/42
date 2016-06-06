@@ -17,14 +17,15 @@ module.exports = {
 		else
 			callback = cb;
 	},
-	insert : function() {
-
+	insert : function(name, obj) {
+		var collection = database.collection(name);
+		collection.insert(obj);
 	},
-	getUsers: function(cb) {
+	get : function(name, cb, obj) {
 	    // Get the documents collection
-	    var collection = database.collection('users');
+	    var collection = database.collection(name);
 	    // Find some documents
-	    collection.find({}).toArray(function(err, docs) {
+	    collection.find(obj).toArray(function(err, docs) {
 			if (err)
 				throw err;
 			console.log(docs);

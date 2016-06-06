@@ -30,7 +30,7 @@ app.use(favicon('./app/public/img/img1.jpg'));
 
 // Routes
 app.get('/', function (req, res) {
-	db.getUsers(function(json) {
+	db.get("users", function(json) {
 		var users = json;
 		res.render('home', {
 			name: c.site.name,
@@ -38,7 +38,7 @@ app.get('/', function (req, res) {
 			title: 'Home',
 			users: users
 		});
-    });
+    }, {});
 });
 app.get('/home', function (req, res) {
 	var ajax = (req.query.type === "ajax");

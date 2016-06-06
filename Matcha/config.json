@@ -1,13 +1,13 @@
 {
 	"db" : {
-		"user" : "",
+		"user" : "matcha",
 		"password" : "",
-		"host" : "",
-		"port" : "",
-		"database" : ""
+		"host" : "maiquez.fr",
+		"port" : "27017",
+		"database" : "matcha"
 	},
 	"site" : {
-		"name" : "Matcha",
+		"name" : "matcha",
 		"author" : "Jimi M"
 	}
 }
