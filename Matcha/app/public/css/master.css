@@ -1,0 +1,113 @@
+/* FONTS */
+@font-face {
+    font-family: 'latothin';
+    src: url('../fonts/lato-hairline-webfont.eot');
+    src: url('../fonts/lato-hairline-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/lato-hairline-webfont.woff2') format('woff2'),
+         url('../fonts/lato-hairline-webfont.woff') format('woff'),
+         url('../fonts/lato-hairline-webfont.ttf') format('truetype'),
+         url('../fonts/lato-hairline-webfont.svg#latohairline') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'latolight';
+    src: url('../fonts/lato-light-webfont.eot');
+    src: url('../fonts/lato-light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/lato-light-webfont.woff2') format('woff2'),
+         url('../fonts/lato-light-webfont.woff') format('woff'),
+         url('../fonts/lato-light-webfont.ttf') format('truetype'),
+         url('../fonts/lato-light-webfont.svg#latohairline') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'yorkwhite';
+    src: url('../fonts/yorkwhiteletter-webfont.woff2') format('woff2'),
+         url('../fonts/yorkwhiteletter-webfont.woff') format('woff'),
+		 url('../fonts/yorkwhiteletter-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* GLOBAL */
+html, body {
+	padding: 0px;
+	margin: 0px;
+    color: #efefef;
+    font-size: 1.1em;
+    font-family: 'latothin', sans-serif;
+}
+a {
+	color: #1abc9c;
+}
+a:hover {
+	color: #16a085;
+}
+
+/* HEADER */
+header, footer {
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    background-color: #1abc9c;
+	font-family: "yorkwhite", sans-serif;
+}
+
+/* NAV */
+nav {
+
+}
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background-color: #16a085;
+    color: #eee;
+    -webkit-display: -webkit-box;
+    -webkit-display: -webkit-flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-justify-content: space-between;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+li {
+    padding: 1em;
+}
+li a{
+    color: #eee;
+	text-decoration: none;
+}
+
+/* MAIN */
+section, aside {
+    background-color: #333;
+    color: #eee;
+    padding: 3em 1.5em;
+}
+section {
+    -webkit-flex: 2 1 500px;
+    -webkit-box-flex: 2;
+    -ms-flex: 2 1 500px;
+    flex: 2 1 500px;
+}
+aside {
+    -webkit-flex: 1 2 250px;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 2 250px;
+    flex: 1 2 250px;
+}
+.container {
+    -webkit-display: -webkit-box;
+    -webkit-display: -webkit-flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+}

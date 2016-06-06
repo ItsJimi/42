@@ -3,17 +3,19 @@ html
 	head
 		title=title
 		meta(name='viewport', content='width=device-width, initial-scale=1.0')
-		link(rel='stylesheet', type='text/css', href='css/screen.css')
+		link(rel='stylesheet', type='text/css', media='all', href='css/master.css')
+		link(rel='stylesheet', type='text/css', media='(min-width: 1000px)', href='css/screen.css')
+		link(rel='stylesheet', type='text/css', media='(max-width: 999px)', href='css/small-screen.css')
+		link(rel='stylesheet', type='text/css', media='(max-width: 500px)', href='css/mobile.css')
 	body
-		header
-			| Matcha
+		header=name
 		nav
-			ul.navigation
+			ul
 				li
-					a Home
+					a(href="#") Home
 				li
-					a Pofiles
+					a(href="#") Profiles
 				li
-					a About
+					a(href="#") About
 				li
-					a Contact
+					a(href="#") Contact

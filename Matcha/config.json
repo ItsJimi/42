@@ -1,0 +1,13 @@
+{
+	"db" : {
+		"user" : "",
+		"password" : "",
+		"host" : "",
+		"port" : "",
+		"database" : ""
+	},
+	"site" : {
+		"name" : "Matcha",
+		"author" : "Jimi M"
+	}
+}
