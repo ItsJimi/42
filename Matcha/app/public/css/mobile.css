@@ -1,4 +1,4 @@
-.container {
+.content {
 	-webkit-flex-direction: column;
 	-webkit-box-orient: vertical;
 	-webkit-box-direction: normal;
@@ -21,4 +21,9 @@ nav ul {
 }
 li {
 	text-align: center;
+}
+
+/* Home */
+.slogan {
+	
 }

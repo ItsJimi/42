@@ -30,43 +30,51 @@ app.use(favicon('./app/public/img/img1.jpg'));
 
 // Routes
 app.get('/', function (req, res) {
+	var ajax = (req.query.ajax === '') ? true : false;
 	res.render('./layouts/home', {
 		name: c.site.name,
 		author: c.site.author,
+		ajax: ajax,
 		page: 'Home'
 	});
 });
 app.get('/home', function (req, res) {
+	var ajax = (req.query.ajax === '') ? true : false;
 	res.render('./layouts/home', {
 		name: c.site.name,
 		author: c.site.author,
+		ajax: ajax,
 		page: 'Home'
 	});
 });
 app.get('/profiles', function (req, res) {
+	var ajax = (req.query.ajax === '') ? true : false;
 	db.get("users", function(json) {
 		var users = json;
 		res.render('./layouts/profiles', {
 			name: c.site.name,
 			author: c.site.author,
+			ajax: ajax,
 			page: 'Profiles',
 			users: users
 		});
     }, {});
 });
 app.get('/about', function (req, res) {
+	var ajax = (req.query.ajax === '') ? true : false;
 	res.render('./layouts/about', {
 		name: c.site.name,
 		author: c.site.author,
+		ajax: ajax,
 		page: 'About'
 	});
 });
 app.get('/contact', function (req, res) {
+	var ajax = (req.query.ajax === '') ? true : false;
 	res.render('./layouts/contact', {
-		info: {
-			name: c.site.name,
-			author: c.site.author,
-		},
+		name: c.site.name,
+		author: c.site.author,
+		ajax: ajax,
 		page: 'Contact'
 	});
 });

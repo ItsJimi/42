@@ -1,12 +1,15 @@
 extends ../index.pug
 
-mixin list
-	ul
-		each val, index in user
-			li= index + " : " + val
+mixin user
+	.user
+		if (user.img)
+			img(src=user.img[0])
+		.name=user.name
+		.age=user.age
+		.gender=user.gender
 
 block content
 	section
 		h1=page
 		each user in users
-			+list
+			+user

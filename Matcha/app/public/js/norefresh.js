@@ -1,41 +1,34 @@
 $(document).ready(function() {
-	console.log("Coucou !");
-	$(".link1").on('click', function (e) {
-	    pageUrl = $(this).attr('href');
-		console.log(pageUrl);
-		$.ajax({
-	        url: pageUrl + '?type=ajax',
-	        success: function (data) {
-	            $('.container').html(data);
-				console.log("success");
-	        }
-	    });
-	    if (pageUrl != window.location) {
-	        window.history.pushState({ path: pageUrl }, '', pageUrl);
-	    }
-	    e.preventDefault();
-	});
-	$(".link2").on('click', function (e) {
-	    pageUrl = $(this).attr('href');
-		console.log(pageUrl);
-		$.ajax({
-	        url: pageUrl + '?type=ajax',
-	        success: function (data) {
-	            $('.container').html(data);
-				console.log("success");
-	        }
-	    });
-	    if (pageUrl != window.location) {
-	        window.history.pushState({ path: pageUrl }, '', pageUrl);
-	    }
-	    e.preventDefault();
-	});
-	$(window).on('popstate', function () {
+    setAct();
+    $(window).on('popstate', function () {
+		NProgress.start();
         $.ajax({
-            url: location.pathname + '?type=ajax',
+            url: location.pathname + '?ajax',
             success: function (data) {
-                $('.container').html(data);
+				NProgress.inc();
+                $('.content').html(data);
+				NProgress.done();
             }
         });
     });
 });
+
+function setAct() {
+    $(".no-refresh").on('click', function (e) {
+		NProgress.start();
+        pageUrl = $(this).attr('href');
+		NProgress.inc();
+        $.ajax({
+            url: pageUrl + '?ajax',
+            success: function (data) {
+				NProgress.inc();
+                $('.content').html(data);
+				NProgress.done();
+            }
+        });
+        if (pageUrl != window.location) {
+            window.history.pushState({ path: pageUrl }, '', pageUrl);
+        }
+        e.preventDefault();
+    });
+}

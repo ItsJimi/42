@@ -37,6 +37,9 @@ html, body {
     color: #efefef;
     font-size: 1.1em;
     font-family: 'latothin', sans-serif;
+	background: url("../img/bg.jpg") no-repeat center fixed;
+	-webkit-background-size: cover;
+	background-size: cover;
 }
 a {
 	color: #1abc9c;
@@ -49,16 +52,22 @@ a:hover {
 p {
 	text-align: justify;
 }
+.container {
+	width: 100%;
+}
+textarea {
+  resize: none;
+}
 
 /* HEADER */
 header, footer {
-    height: 100px;
-	line-height: 100px;
+    height: 150px;
+	line-height: 150px;
     text-align: center;
     background-color: #1abc9c;
 }
 header {
-	line-height: 85px;
+	line-height: 130px;
 	font-family: "yorkwhite", sans-serif;
 	font-size: 4em;
 }
@@ -88,7 +97,7 @@ nav ul {
     -webkit-justify-content: space-between;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 li {
     padding: 1em;
@@ -119,7 +128,7 @@ aside {
     -ms-flex: 1 2 250px;
     flex: 1 2 250px;
 }
-.container {
+.content {
     -webkit-display: -webkit-box;
     -webkit-display: -webkit-flex;
     display: -webkit-box;
@@ -129,4 +138,63 @@ aside {
     -webkit-box-align: stretch;
     -ms-flex-align: stretch;
     align-items: stretch;
+	flex-wrap: wrap;
+}
+
+/* Home */
+.slogan {
+	width: 100%;
+	height: 300px;
+	font-size: 30px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+}
+.slogan div {
+	flex: 2 1;
+	align-self: center;
+}
+.slogan #search_bar{
+	width: 100%;
+	padding: 5px;
+	height: 50px;
+	border-left: 2px solid #fff;
+	border-top: 2px solid #fff;
+	border-bottom: 2px solid #fff;
+	border-right: none;
+	border-radius: 10px 0px 0px 10px;
+	background: rgba(255, 255, 255, 0);
+	color: #fff;
+	font-size: 40px;
+	font-family: "latothin", sans-serif;
+	overflow: hidden;
+}
+.slogan #search_bar:focus {
+	outline: 0;
+}
+.slogan #search_button {
+	width: 100%;
+	line-height: 70px;
+	padding-left: 15px;
+	height: 60px;
+	border: 2px solid #fff;
+	border-radius: 0px 10px 10px 0px;
+	background: rgba(255, 255, 255, 1);
+	color: #fff;
+	font-size: 40px;
+	font-family: "latothin", sans-serif;
+}
+.slogan #search:hover {
+	cursor: pointer;
+}
+
+/* Profiles */
+.user {
+
+}
+.user img {
+	width: 240px;
+}
+.name {
+
 }

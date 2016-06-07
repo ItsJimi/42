@@ -1,26 +1,34 @@
-doctype html
-html
-	head
-		title=title
-		meta(name='viewport', content='width=device-width, initial-scale=1.0')
-		link(rel='stylesheet', type='text/css', media='all', href='css/master.css')
-		link(rel='stylesheet', type='text/css', media='(min-width: 1000px)', href='css/screen.css')
-		link(rel='stylesheet', type='text/css', media='(max-width: 999px)', href='css/small-screen.css')
-		link(rel='stylesheet', type='text/css', media='(max-width: 600px)', href='css/mobile.css')
-	body
-		header!="<a href=\"home\">Îé" + name + "éÏ</a>"
-		nav
-			ul
-				li
-					a(href="home") Home
-				li
-					a(href="profiles") Profiles
-				li
-					a(href="about") About
-				li
-					a(href="contact") Contact
-		.container
-			block content
-		footer!= "Made by <a href=\"#\">" + author + "</a>"
-		script(src='https://code.jquery.com/jquery-2.2.4.min.js')
-		//script(src='js/norefresh.js')
+- if (!ajax) {
+	doctype html
+	html
+		head
+			title="Search"
+			meta(name='viewport', content='width=device-width, initial-scale=1.0')
+			link(rel='stylesheet', type='text/css', media='all', href='css/master.css')
+			link(rel='stylesheet', type='text/css', media='all', href='css/nprogress.css')
+			link(rel='stylesheet', type='text/css', media='(min-width: 1200px)', href='css/screen.css')
+			link(rel='stylesheet', type='text/css', media='(max-width: 600px)', href='css/mobile.css')
+		body
+			| <div class="container">
+			header!="<a class=\"no-refresh\" href=\"home\">Îééé" + name + "éééÏ</a>"
+			nav
+				ul
+					li
+						a(class="no-refresh", href="home") Home
+					li
+						a(class="no-refresh", href="profiles") Profiles
+					li
+						a(class="no-refresh", href="about") About
+					li
+						a(class="no-refresh", href="contact") Contact
+			| <div class="content">
+- }
+block content
+- if (!ajax) {
+	| </div>
+	footer!= "Made by <a href=\"#\">" + author + "</a>"
+	| </div>
+	script(src='https://code.jquery.com/jquery-2.2.4.min.js')
+	script(src='js/norefresh.js')
+	script(src='js/nprogress.js')
+- }
