@@ -17,7 +17,7 @@ var db = require('./controllers/database.js');
 // Global var
 
 db.connect(function(database) {
-
+	// ???
 });
 
 // Set
@@ -30,25 +30,45 @@ app.use(favicon('./app/public/img/img1.jpg'));
 
 // Routes
 app.get('/', function (req, res) {
+	res.render('./layouts/home', {
+		name: c.site.name,
+		author: c.site.author,
+		page: 'Home'
+	});
+});
+app.get('/home', function (req, res) {
+	res.render('./layouts/home', {
+		name: c.site.name,
+		author: c.site.author,
+		page: 'Home'
+	});
+});
+app.get('/profiles', function (req, res) {
 	db.get("users", function(json) {
 		var users = json;
-		res.render('home', {
+		res.render('./layouts/profiles', {
 			name: c.site.name,
 			author: c.site.author,
-			title: 'Home',
+			page: 'Profiles',
 			users: users
 		});
     }, {});
 });
-app.get('/home', function (req, res) {
-	var ajax = (req.query.type === "ajax");
-	console.log(ajax);
-	res.render('home', { title: 'Home', ajax: ajax });
+app.get('/about', function (req, res) {
+	res.render('./layouts/about', {
+		name: c.site.name,
+		author: c.site.author,
+		page: 'About'
+	});
 });
-app.get('/test', function (req, res) {
-	var ajax = (req.query.type === "ajax");
-	console.log(ajax);
-	res.render('test', { title: 'Home', ajax: ajax });
+app.get('/contact', function (req, res) {
+	res.render('./layouts/contact', {
+		info: {
+			name: c.site.name,
+			author: c.site.author,
+		},
+		page: 'Contact'
+	});
 });
 
 // Server

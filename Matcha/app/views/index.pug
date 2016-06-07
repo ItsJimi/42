@@ -8,14 +8,19 @@ html
 		link(rel='stylesheet', type='text/css', media='(max-width: 999px)', href='css/small-screen.css')
 		link(rel='stylesheet', type='text/css', media='(max-width: 600px)', href='css/mobile.css')
 	body
-		header!="<a href=\"http://localhost:3001\">Îé" + name + "éÏ</a>"
+		header!="<a href=\"home\">Îé" + name + "éÏ</a>"
 		nav
 			ul
 				li
-					a(href="#") Home
+					a(href="home") Home
 				li
-					a(href="#") Profiles
+					a(href="profiles") Profiles
 				li
-					a(href="#") About
+					a(href="about") About
 				li
-					a(href="#") Contact
+					a(href="contact") Contact
+		.container
+			block content
+		footer!= "Made by <a href=\"#\">" + author + "</a>"
+		script(src='https://code.jquery.com/jquery-2.2.4.min.js')
+		//script(src='js/norefresh.js')

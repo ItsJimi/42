@@ -1,13 +1,11 @@
-include ./includes/header.pug
-.container
+extends ../index.pug
+
+block content
 	section
-		h1=title
-		each user in users
-			ul
-				each val, index in user
-					li= index + " : " + val
+		h1=page
+		p
+			| Search est un site de rencontre ...
 	aside
 		h1= "Informations"
 		p
 			| Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, qui totam placeat ullam eligendi itaque perferendis similique aliquam inventore tenetur. Eveniet quisquam unde vitae expedita voluptates soluta in obcaecati recusandae.
-include ./includes/footer.pug
