@@ -9,6 +9,7 @@
 			link(rel='stylesheet', type='text/css', media='(min-width: 1200px)', href='css/screen.css')
 			link(rel='stylesheet', type='text/css', media='(max-width: 600px)', href='css/mobile.css')
 		body
+			video(id="background_video" loop muted)
 			| <div class="container">
 			header!="<a class=\"no-refresh\" href=\"home\">Îééé" + name + "éééÏ</a>"
 			nav
@@ -31,4 +32,6 @@ block content
 	script(src='https://code.jquery.com/jquery-2.2.4.min.js')
 	script(src='js/norefresh.js')
 	script(src='js/nprogress.js')
+	script(src='js/bideo.js')
+	script(src='js/bg.js')
 - }

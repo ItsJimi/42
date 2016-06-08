@@ -79,6 +79,15 @@ app.get('/contact', function (req, res) {
 	});
 });
 
+app.use(function(req, res, next) {
+	res.status(404).render('./layouts/404', {
+		name: c.site.name,
+		author: c.site.author,
+		ajax: false,
+		page: '404'
+	});
+});
+
 // Server
 server.on('request', app);
 app.listen(3001, function() {

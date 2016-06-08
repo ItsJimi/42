@@ -2,9 +2,9 @@ extends ../index.pug
 
 block content
 	.slogan
-		#search_bar(contenteditable)
+		#search_bar(data-text="Search your mate ...", contenteditable="true")
 		#search_button
-			include ../../public/svg/search.svg
+			| ok
 	section
 		h1=page
 		p
