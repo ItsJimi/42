@@ -3,20 +3,24 @@ extends ../index.pug
 mixin user
 	.user
 		if (user.img)
-			img(src=user.img[0], style="border-right: 10px solid " + user.color + ";")
+			img(class="img", class=user.color, src=user.img[0])
 		else
-			img(src="img/pp.png", style="border-right: 10px solid " + user.color + ";")
+			img(class="img", class=user.color, src="img/pp.png")
 		if (user.firstname)
-		.name=user.firstname
+			| <div class="name"> #{user.firstname}
 		if (user.lastname)
-			.name=user.lastname
+			|  #{user.lastname} </div>
 		if (user.age)
 			.age=user.age + " years old"
 		if (user.gender)
 			.gender=user.gender
 		if (user.score)
 			.score=user.score + " hearts"
-
+		if (user.bio)
+			.bio=user.bio
+		if (user.tags)
+			each tag in user.tags
+				.tag="#" + tag
 block content
 	.slogan
 		| Propulse your dreams !
@@ -24,8 +28,7 @@ block content
 		#search_bar(data-text="Search ...", contenteditable="true")
 		#search_button
 			include ../../public/svg/search.svg
-	.page_title
-		| Most popular
 	section
+		h1="Most popular"
 		each user in users
 			+user

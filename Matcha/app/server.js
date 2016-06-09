@@ -4,9 +4,8 @@ var c = require('../config.json');
 // Modules
 var server = require('http').createServer();
 var WebSocketServer = require('ws').Server;
-var wss = new WebSocketServer({
-	server: server
-});
+var wss = new WebSocketServer({ server: server });
+
 var favicon = require('serve-favicon');
 var express = require('express');
 var app = express();
@@ -18,6 +17,30 @@ var db = require('./controllers/database.js');
 
 db.connect(function(database) {
 	// ???
+});
+
+// WS
+wss.on('connection', function(ws) {
+	console.log(ws);
+	ws.on('message', function(data) {
+		try {
+			var res = JSON.parse(data);
+
+			if (res.act === "search") {
+				db.sort("users", {
+					name: 1,
+					score: -1
+				}, function(json) {
+					console.log(json);
+				}, {
+					name: res.message
+				});
+			}
+		}
+		catch (e) {
+			console.log("Error : " + e);
+		}
+	});
 });
 
 // Set
@@ -90,13 +113,20 @@ app.get('/contact', function (req, res) {
 });
 
 app.use(function(req, res, next) {
-	res.status(404).render('./layouts/404', {
-		name: c.site.name,
-		author: c.site.author,
-		ajax: false,
-		search: true,
-		page: '404'
-	});
+	var ajax = (req.query.ajax === '') ? true : false;
+	db.sortl("users", 3, {
+		score: -1,
+		firstname: 1
+	}, function(json) {
+		var users = json;
+		res.status(404).render('./layouts/404', {
+			name: c.site.name,
+			author: c.site.author,
+			ajax: ajax,
+			page: '404',
+			users: users
+		});
+    });
 });
 
 // Server

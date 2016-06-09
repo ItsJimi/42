@@ -70,6 +70,7 @@ textarea {
 .page_title {
 	width: 100%;
 	font-size: 50px;
+	text-align: center;
 }
 
 /* HEADER */
@@ -159,7 +160,6 @@ aside {
 /* Search */
 .search {
 	width: 90%;
-	height: 15vw;
 	margin: 0px auto;
 
 	display: -ms-flexbox;
@@ -185,6 +185,7 @@ aside {
 	width: 100%;
 	padding: 5px;
 	height: 50px;
+	text-indent: 5px;
 	border-left: 2px solid #fff;
 	border-top: 2px solid #fff;
 	border-bottom: 2px solid #fff;
@@ -195,12 +196,15 @@ aside {
 	font-size: 40px;
 	font-family: "latothin", sans-serif;
 	overflow: hidden;
+	-webkit-transition: background 0.5s;
+    transition: background 0.5s;
 }
 [contentEditable=true]:empty:not(:focus):before {
     content:attr(data-text)
 }
 .search #search_bar:focus {
 	outline: 0;
+	background: rgba(255, 255, 255, 0.3);
 }
 .search #search_button {
 	width: 15%;
@@ -222,7 +226,6 @@ aside {
 /* SLogan */
 .slogan {
 	width: 90%;
-	height: 15vw;
 	margin: 0px auto;
 	text-align: center;
 	line-height: 12vw;
@@ -244,20 +247,55 @@ aside {
 	border-radius: 5px;
 	color: #333;
 	margin-top: 10px;
+	padding-bottom: 0px;
 }
 .user img {
 	border-radius: 5px 0px 0px 5px;
-	border-right: 10px solid #333;
 	width: 240px;
 	float: left;
 }
+.img {
+	border-bottom: none;
+	border-right: 10px solid #333;
+}
+.turquoise {
+	border-right: 10px solid #1abc9c;
+}
+.emerald {
+	border-right: 10px solid #2ecc71;
+}
+.river {
+	border-right: 10px solid #3498db;
+}
+.amethyst {
+	border-right: 10px solid #9b59b6;
+}
+.asphalt {
+	border-right: 10px solid #34495e;
+}
+.flower {
+	border-right: 10px solid #f1c40f;
+}
+.orange {
+	border-right: 10px solid #f39c12;
+}
+.red {
+	border-right: 10px solid #c0392b;
+}
+.gray {
+	border-right: 10px solid #7f8c8d;
+}
 .user div {
 	display: inline-block;
-	margin-top: 10px;
-	margin-left: 10px;
+	margin: 10px;
 	padding: 5px;
 	border-radius: 5px;
-	text-align: left;
+	-webkit-transition: opacity 0.5s;
+	transition: opacity 0.5s;
+}
+.user div:hover {
+	cursor: pointer;
+	opacity: 0.6;
 }
 .name {
 	border-left: 6px solid #2e8dcd;
@@ -278,6 +316,19 @@ aside {
 	border-bottom: 1px solid #f1c40f;
 }
 .score {
+	border-left: 6px solid #c0392b;
+	border-top: 1px solid #e74c3c;
+	border-right: 1px solid #e74c3c;
+	border-bottom: 1px solid #e74c3c;
+}
+.bio {
+	text-align: justify;
+	border-left: 6px solid #2c3e50;
+	border-top: 1px solid #34495e;
+	border-right: 1px solid #34495e;
+	border-bottom: 1px solid #34495e;
+}
+.tag {
 	border-left: 6px solid #27ae60;
 	border-top: 1px solid #2ecc71;
 	border-right: 1px solid #2ecc71;
