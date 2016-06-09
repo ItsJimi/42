@@ -3,10 +3,19 @@ extends ../index.pug
 mixin user
 	.user
 		if (user.img)
-			img(src=user.img[0])
-		.name=user.name
-		.age=user.age
-		.gender=user.gender
+			img(src=user.img[0], style="border-right: 10px solid " + user.color + ";")
+		else
+			img(src="img/pp.png", style="border-right: 10px solid " + user.color + ";")
+		if (user.firstname)
+		.name=user.firstname
+		if (user.lastname)
+			.name=user.lastname
+		if (user.age)
+			.age=user.age + " years old"
+		if (user.gender)
+			.gender=user.gender
+		if (user.score)
+			.score=user.score + " hearts"
 
 block content
 	section

@@ -28,7 +28,36 @@ module.exports = {
 	    collection.find(obj).toArray(function(err, docs) {
 			if (err)
 				throw err;
-			console.log(docs);
+	        cb(docs);
+	    });
+	},
+	limit : function(name, nbr, cb, obj) {
+	    // Get the documents collection
+	    var collection = database.collection(name);
+	    // Find some documents
+	    collection.find(obj).limit(nbr).toArray(function(err, docs) {
+			if (err)
+				throw err;
+	        cb(docs);
+	    });
+	},
+	sort : function(name, obj1, cb, obj2) {
+	    // Get the documents collection
+	    var collection = database.collection(name);
+	    // Find some documents
+	    collection.find(obj2).sort(obj1).toArray(function(err, docs) {
+			if (err)
+				throw err;
+	        cb(docs);
+	    });
+	},
+	sortl : function(name, nbr, obj1, cb, obj2) {
+	    // Get the documents collection
+	    var collection = database.collection(name);
+	    // Find some documents
+	    collection.find(obj2).sort(obj1).limit(nbr).toArray(function(err, docs) {
+			if (err)
+				throw err;
 	        cb(docs);
 	    });
 	}

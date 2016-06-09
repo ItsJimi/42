@@ -1,15 +1,31 @@
 extends ../index.pug
 
+mixin user
+	.user
+		if (user.img)
+			img(src=user.img[0], style="border-right: 10px solid " + user.color + ";")
+		else
+			img(src="img/pp.png", style="border-right: 10px solid " + user.color + ";")
+		if (user.firstname)
+		.name=user.firstname
+		if (user.lastname)
+			.name=user.lastname
+		if (user.age)
+			.age=user.age + " years old"
+		if (user.gender)
+			.gender=user.gender
+		if (user.score)
+			.score=user.score + " hearts"
+
 block content
 	.slogan
-		#search_bar(data-text="Search your mate ...", contenteditable="true")
+		| Propulse your dreams !
+	.search
+		#search_bar(data-text="Search ...", contenteditable="true")
 		#search_button
-			| ok
+			include ../../public/svg/search.svg
+	.page_title
+		| Most popular
 	section
-		h1=page
-		p
-			| Bienvenue sur Search !
-	aside
-		h1= "Informations"
-		p
-			| Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, qui totam placeat ullam eligendi itaque perferendis similique aliquam inventore tenetur. Eveniet quisquam unde vitae expedita voluptates soluta in obcaecati recusandae.
+		each user in users
+			+user

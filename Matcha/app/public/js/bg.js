@@ -22,14 +22,13 @@
     // of different video formats to add
     src: [
       {
-        src: 'movies/bg1.mp4',
+        src: 'movies/bg.mp4',
         type: 'video/mp4'
       }
     ],
 
     // What to do once video loads (initial frame)
     onLoad: function () {
-		console.log("finish");
     }
   });
 }());

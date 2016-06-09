@@ -31,25 +31,35 @@ app.use(favicon('./app/public/img/img1.jpg'));
 // Routes
 app.get('/', function (req, res) {
 	var ajax = (req.query.ajax === '') ? true : false;
-	res.render('./layouts/home', {
+	res.render('./layouts/login', {
 		name: c.site.name,
 		author: c.site.author,
 		ajax: ajax,
-		page: 'Home'
+		page: 'Login'
 	});
 });
 app.get('/home', function (req, res) {
 	var ajax = (req.query.ajax === '') ? true : false;
-	res.render('./layouts/home', {
-		name: c.site.name,
-		author: c.site.author,
-		ajax: ajax,
-		page: 'Home'
-	});
+	db.sortl("users", 3, {
+		score: -1,
+		firstname: 1
+	}, function(json) {
+		var users = json;
+		res.render('./layouts/home', {
+			name: c.site.name,
+			author: c.site.author,
+			ajax: ajax,
+			page: 'Home',
+			users: users
+		});
+    });
 });
 app.get('/profiles', function (req, res) {
 	var ajax = (req.query.ajax === '') ? true : false;
-	db.get("users", function(json) {
+	db.sort("users", {
+		score: -1,
+		name: 1
+	}, function(json) {
 		var users = json;
 		res.render('./layouts/profiles', {
 			name: c.site.name,
@@ -84,6 +94,7 @@ app.use(function(req, res, next) {
 		name: c.site.name,
 		author: c.site.author,
 		ajax: false,
+		search: true,
 		page: '404'
 	});
 });
