@@ -2,13 +2,11 @@
 var c = require('../config.json');
 
 // Modules
-var server = require('http').createServer();
-var WebSocketServer = require('ws').Server;
-var wss = new WebSocketServer({ server: server });
-
 var favicon = require('serve-favicon');
 var express = require('express');
 var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 
 // Controllers
 var db = require('./controllers/database.js');
@@ -19,23 +17,18 @@ db.connect(function(database) {
 	// ???
 });
 
-// WS
-wss.on('connection', function(ws) {
-	console.log(ws);
-	ws.on('message', function(data) {
+// Web Socket
+io.on('connection', function(socket){
+	socket.on('search', function(data){
 		try {
-			var res = JSON.parse(data);
-
-			if (res.act === "search") {
-				db.sort("users", {
-					name: 1,
-					score: -1
-				}, function(json) {
-					console.log(json);
-				}, {
-					name: res.message
-				});
-			}
+			db.sort("users", {
+				name: 1,
+				score: -1
+			}, function(json) {
+				console.log(json);
+			}, {
+				name: str
+			});
 		}
 		catch (e) {
 			console.log("Error : " + e);
