@@ -1,12 +1,15 @@
 // Config
 var c = require('../config.json');
+var port = 3001;
 
 // Modules
 var favicon = require('serve-favicon');
+var server = require('http').createServer();
+var url = require('url');
+var WebSocketServer = require('ws').Server;
+var wss = new WebSocketServer({ server: server });
 var express = require('express');
 var app = express();
-var server = require('http').Server(app);
-var io = require('socket.io')(server);
 
 // Controllers
 var db = require('./controllers/database.js');
@@ -18,22 +21,31 @@ db.connect(function(database) {
 });
 
 // Web Socket
-io.on('connection', function(socket){
-	socket.on('search', function(data){
+wss.on('connection', function connection(ws) {
+	var location = url.parse(ws.upgradeReq.url, true);
+	// you might use location.query.access_token to authenticate or share sessions
+	// or ws.upgradeReq.headers.cookie (see http://stackoverflow.com/a/16395220/151312)
+
+	ws.on('message', function incoming(message) {
 		try {
-			db.sort("users", {
-				name: 1,
-				score: -1
-			}, function(json) {
-				console.log(json);
-			}, {
-				name: str
-			});
+    		var res = JSON.parse(message);
+			if (res.act === "search") {
+				db.sort("users", {
+					score: -1,
+					name: 1
+				}, function(json) {
+					console.log(json);
+			    }, {
+					firstname: res.name
+				});
+			}
+		} catch (e) {
+
 		}
-		catch (e) {
-			console.log("Error : " + e);
-		}
+		console.log('received: %s', res.act);
 	});
+
+	ws.send('something');
 });
 
 // Set
@@ -124,6 +136,6 @@ app.use(function(req, res, next) {
 
 // Server
 server.on('request', app);
-app.listen(3001, function() {
-	console.log('Start at 3001');
+server.listen(port, function () {
+	console.log('Start at ' + server.address().port);
 });
