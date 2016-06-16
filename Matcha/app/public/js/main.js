@@ -2,10 +2,14 @@ var ws = new WebSocket('ws://' + window.location.hostname + ':' + window.locatio
 
 ws.onerror = function(err) {
 	console.log(err);
-}
+};
 ws.onopen = function () {
 	console.log('WS :)');
 };
+ws.onmessage = function(data) {
+	console.log(data.data);
+};
+
 function sendData(obj) {
 	try {
 		ws.send(JSON.stringify(obj));

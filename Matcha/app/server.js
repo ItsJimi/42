@@ -13,6 +13,7 @@ var app = express();
 
 // Controllers
 var db = require('./controllers/database.js');
+var util = require('./controllers/utils.js');
 
 // Global var
 
@@ -25,7 +26,6 @@ wss.on('connection', function connection(ws) {
 	var location = url.parse(ws.upgradeReq.url, true);
 	// you might use location.query.access_token to authenticate or share sessions
 	// or ws.upgradeReq.headers.cookie (see http://stackoverflow.com/a/16395220/151312)
-
 	ws.on('message', function incoming(message) {
 		try {
     		var res = JSON.parse(message);
@@ -33,14 +33,38 @@ wss.on('connection', function connection(ws) {
 				db.sort("users", {
 					score: -1,
 					name: 1
-				}, function(json) {
-					console.log(json);
+				}, function(data) {
+					console.log(data);
 			    }, {
 					firstname: res.name
 				});
 			}
+			else if (res.act === "signin") {
+				if (!res.mail || !res.pass)
+					return (false);
+				db.get("users", function(data) {
+					if (data.length == 1) {
+						if (data[0].mail === res.mail && data[0].pass === util.passHash(res.mail, res.pass)) {
+							ws.send(JSON.stringify({
+								act: "info",
+								end: "true",
+								message: "Connected !!"
+							}));
+							return (true);
+						}
+					}
+					ws.send(JSON.stringify({
+						act: "info",
+						end: "false",
+						message: "Wrong informations !"
+					}));
+					return (false);
+				}, {
+					mail: res.mail
+				});
+			}
 		} catch (e) {
-
+			console.log('Error try ws : ' + e);
 		}
 		console.log('received: %s', res.act);
 	});
