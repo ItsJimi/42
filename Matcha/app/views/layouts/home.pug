@@ -7,20 +7,20 @@ mixin user
 		else
 			img(class="img", class=user.color, src="img/pp.png")
 		if (user.firstname)
-			| <div class="name"> #{user.firstname}
+			.firstname=user.firstname
 		if (user.lastname)
-			|  #{user.lastname} </div>
+			.firstname=user.lastname
 		if (user.age)
 			.age=user.age + " years old"
 		if (user.gender)
 			.gender=user.gender
 		if (user.score)
 			.score=user.score + " hearts"
-		if (user.bio)
-			.bio=user.bio
 		if (user.tags)
 			each tag in user.tags
 				.tag="#" + tag
+		if (user.bio)
+			.bio=user.bio
 block content
 	.slogan
 		| Choose your future !

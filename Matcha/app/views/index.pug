@@ -12,16 +12,18 @@
 			video(id="background_video" loop muted)
 			| <div class="container">
 			header!="<a class=\"no-refresh\" href=\"home\">Îéééé" + name + "ééééÏ</a>"
-			nav
-				ul
-					li
-						a(class="no-refresh", href="home") Home
-					li
-						a(class="no-refresh", href="profiles") Profiles
-					li
-						a(class="no-refresh", href="about") About
-					li
-						a(class="no-refresh", href="contact") Contact
+			- if (nav) {
+				nav
+					ul
+						li
+							a(class="no-refresh", href="home") Home
+						li
+							a(class="no-refresh", href="profiles") Profiles
+						li
+							a(class="no-refresh", href="about") About
+						li
+							a(class="no-refresh", href="contact") Contact
+			- }
 			| <div class="content">
 - }
 block content

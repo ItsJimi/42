@@ -72,6 +72,21 @@ textarea {
 	font-size: 50px;
 	text-align: center;
 }
+input {
+     width: 100%;
+     box-sizing: border-box;
+     -webkit-box-sizing:border-box;
+     -moz-box-sizing: border-box;
+}
+input:focus {
+	outline: 0;
+}
+button:focus {
+	outline: 0;
+}
+button:hover {
+	cursor: pointer;
+}
 
 /* HEADER */
 header, footer {
@@ -127,7 +142,7 @@ li a:hover{
 /* MAIN */
 section, aside {
     color: #eee;
-    padding: 3em 1.5em;
+    padding: 0em 0em 1em 0em;
 }
 section {
     -webkit-flex: 2 1 500px;
@@ -244,52 +259,62 @@ aside {
 .user {
 	width: 100%;
 	background: #efefef;
-	border-radius: 5px;
 	color: #333;
 	margin-top: 10px;
 	padding-bottom: 0px;
 }
 .user img {
-	border-radius: 5px 0px 0px 5px;
 	width: 240px;
 	float: left;
+	box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
 }
 .img {
-	border-bottom: none;
+	border-bottom: 10px solid #333;
 	border-right: 10px solid #333;
 }
 .turquoise {
+	border-bottom: 10px solid #1abc9c;
 	border-right: 10px solid #1abc9c;
 }
 .emerald {
+	border-bottom: 10px solid #2ecc71;
 	border-right: 10px solid #2ecc71;
 }
 .river {
+	border-bottom: 10px solid #3498db;
 	border-right: 10px solid #3498db;
 }
 .amethyst {
+	border-bottom: 10px solid #9b59b6;
 	border-right: 10px solid #9b59b6;
 }
 .asphalt {
+	border-bottom: 10px solid #34495e;
 	border-right: 10px solid #34495e;
 }
 .flower {
+	border-bottom: 10px solid #f1c40f;
 	border-right: 10px solid #f1c40f;
 }
 .orange {
+	border-bottom: 10px solid #f39c12;
 	border-right: 10px solid #f39c12;
 }
 .red {
+	border-bottom: 10px solid #c0392b;
 	border-right: 10px solid #c0392b;
 }
 .gray {
+	border-bottom: 10px solid #7f8c8d;
 	border-right: 10px solid #7f8c8d;
 }
 .user div {
 	display: inline-block;
 	margin: 10px;
 	padding: 5px;
-	border-radius: 5px;
+	border-radius: 0px;
 	-webkit-transition: opacity 0.5s;
 	transition: opacity 0.5s;
 }
@@ -297,7 +322,7 @@ aside {
 	cursor: pointer;
 	opacity: 0.6;
 }
-.name {
+.firstname, .lastname {
 	border-left: 6px solid #2e8dcd;
 	border-top: 1px solid #3498db;
 	border-right: 1px solid #3498db;
@@ -337,22 +362,26 @@ aside {
 
 /* Login */
 .login {
-	max-width: 800px;
-	margin: 3em auto;
-	background-color: white;
-	height: 500px;
-	border: 10px solid #594255;
-	-webkit-display: -webkit-box;
-	-webkit-display: -webkit-flex;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-align-items: center;
-	-webkit-box-align: center;
-	-ms-flex-align: center;
-	align-items: center;
-	-webkit-justify-content: center;
-	-webkit-box-pack: center;
-	-ms-flex-pack: center;
-	justify-content: center;
+	max-width: 600px;
+	margin: 0px auto;
+}
+.login div {
+	background: #fff;
+	padding: 10px;
+}
+.login input {
+	height: 40px;
+	margin-bottom: 5px;
+	font-size: 1.1em;
+	font-family: "latothin", sans-serif;
+	color: #444;
+}
+.login button {
+	width: 100%;
+	height: 40px;
+	font-size: 1em;
+	font-family: "latothin", sans-serif;
+	border: 1px solid #16a085;
+	background: #1abc9c;
+	color: #fff;
 }

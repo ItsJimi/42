@@ -36,37 +36,6 @@ li {
 	padding-bottom: 2px;
 }
 .user img {
-	border-radius: 5px 5px 0px 0px;
 	width: 100%;
-}
-.img {
 	border-right: none;
-	border-bottom: 10px solid #333;
-}
-.turquoise {
-	border-bottom: 10px solid #1abc9c;
-}
-.emerald {
-	border-bottom: 10px solid #2ecc71;
-}
-.river {
-	border-bottom: 10px solid #3498db;
-}
-.amethyst {
-	border-bottom: 10px solid #9b59b6;
-}
-.asphalt {
-	border-bottom: 10px solid #34495e;
-}
-.flower {
-	border-bottom: 10px solid #f1c40f;
-}
-.orange {
-	border-bottom: 10px solid #f39c12;
-}
-.red {
-	border-bottom: 10px solid #c0392b;
-}
-.gray {
-	border-bottom: 10px solid #7f8c8d;
 }
