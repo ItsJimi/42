@@ -9,13 +9,18 @@ var url = require('url');
 var WebSocketServer = require('ws').Server;
 var wss = new WebSocketServer({ server: server });
 var express = require('express');
+var session = require('express-session');
 var app = express();
+
+// Session
+app.use(session({ secret : 'MpCF12y', resave: false, saveUninitialized: true }));
 
 // Controllers
 var db = require('./controllers/database.js');
 var util = require('./controllers/utils.js');
 
 // Global var
+var session;
 
 db.connect(function(database) {
 	// ???
@@ -50,6 +55,9 @@ wss.on('connection', function connection(ws) {
 								end: "true",
 								message: "Connected !!"
 							}));
+							session.uuid = data[0].uuid;
+							session.mail = data[0].mail;
+							console.log(session);
 							return (true);
 						}
 					}
@@ -81,7 +89,7 @@ app.use(express.static('./app/public'));
 app.use(favicon('./app/public/img/img1.jpg'));
 
 // Routes
-app.get('/', function (req, res) {
+app.get('/login', function (req, res) {
 	var ajax = (req.query.ajax === '') ? true : false;
 	res.render('./layouts/login', {
 		name: c.site.name,
@@ -91,8 +99,10 @@ app.get('/', function (req, res) {
 	});
 });
 app.get('/home', function (req, res) {
+	if (!session.uuid)
+		res.redirect('/login');
 	var ajax = (req.query.ajax === '') ? true : false;
-	db.sortl("users", 3, {
+	db.sortl("profiles", 3, {
 		score: -1,
 		firstname: 1
 	}, function(json) {
@@ -108,7 +118,7 @@ app.get('/home', function (req, res) {
 });
 app.get('/profiles', function (req, res) {
 	var ajax = (req.query.ajax === '') ? true : false;
-	db.sort("users", {
+	db.sort("profiles", {
 		score: -1,
 		name: 1
 	}, function(json) {
@@ -143,7 +153,7 @@ app.get('/contact', function (req, res) {
 
 app.use(function(req, res, next) {
 	var ajax = (req.query.ajax === '') ? true : false;
-	db.sortl("users", 3, {
+	db.sortl("profiles", 3, {
 		score: -1,
 		firstname: 1
 	}, function(json) {
