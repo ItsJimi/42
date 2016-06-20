@@ -50,15 +50,34 @@ wss.on('connection', function connection(ws) {
 				db.get("users", function(data) {
 					if (data.length == 1) {
 						if (data[0].mail === res.mail && data[0].pass === util.passHash(res.mail, res.pass)) {
-							ws.send(JSON.stringify({
-								act: "info",
-								end: "true",
-								message: "Connected !!"
-							}));
-							session.username = data[0].username;
-							session.mail = data[0].mail;
-							console.log(session);
-							return (true);
+							if (data[0].valid == 1) {
+								ws.send(JSON.stringify({
+									act: "info",
+									end: "true",
+									message: "Connected !!"
+								}));
+								session.username = data[0].username;
+								session.mail = data[0].mail;
+								db.get("profiles", function(data) {
+									if (data.length == 1) {
+										session.firstname = data[0].firstname;
+										session.lastname = data[0].lastname;
+									}
+								},
+								{
+									username: data[0].username
+								});
+								console.log(session);
+								return (true);
+							}
+							else {
+								ws.send(JSON.stringify({
+									act: "info",
+									end: "false",
+									message: "Your mail address is not verified."
+								}));
+								return (false);
+							}
 						}
 					}
 					ws.send(JSON.stringify({
@@ -137,8 +156,6 @@ wss.on('connection', function connection(ws) {
 		}
 		console.log('received: %s', res.act);
 	});
-
-	ws.send('something');
 });
 
 // Set
@@ -164,7 +181,11 @@ app.get('/home', function (req, res) {
 				ajax: ajax,
 				nav: true,
 				page: 'Home',
-				users: users
+				users: users,
+				me: {
+					firstname: session.firstname,
+					lastname: session.lastname
+				}
 			});
 	    });
 	}
@@ -185,7 +206,36 @@ app.get('/profiles', function (req, res) {
 				ajax: ajax,
 				nav: true,
 				page: 'Profiles',
-				users: users
+				users: users,
+				me: {
+					firstname: session.firstname,
+					lastname: session.lastname
+				}
+			});
+	    }, {});
+	}
+	else
+		res.redirect('/login');
+});
+app.get('/edit', function (req, res) {
+	if (session.username) {
+		var ajax = (req.query.ajax === '') ? true : false;
+		db.sort("profiles", {
+			score: -1,
+			name: 1
+		}, function(json) {
+			var users = json;
+			res.render('./layouts/edit', {
+				name: c.site.name,
+				author: c.site.author,
+				ajax: ajax,
+				nav: true,
+				page: 'Edit profile',
+				users: users,
+				me: {
+					firstname: session.firstname,
+					lastname: session.lastname
+				}
 			});
 	    }, {});
 	}
@@ -225,7 +275,11 @@ app.use(function(req, res, next) {
 			author: c.site.author,
 			ajax: ajax,
 			page: '404',
-			users: users
+			users: users,
+			me: {
+				firstname: session.firstname,
+				lastname: session.lastname
+			}
 		});
     });
 });

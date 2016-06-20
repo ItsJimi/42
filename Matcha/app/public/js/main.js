@@ -7,7 +7,23 @@ ws.onopen = function () {
 	console.log('WS :)');
 };
 ws.onmessage = function(data) {
-	console.log(data.data);
+	try {
+		var res = JSON.parse(data.data);
+		console.log(res);
+		if (res.act === "info") {
+			if (res.end === "true")
+				$("#info").css("background", "#27ae60");
+			else
+				$("#info").css("background", "#c0392b");
+			$("#info").text(res.message);
+			$("#info").fadeIn("fast");
+			setTimeout(function() {
+				$("#info").fadeOut("fast");
+			}, 6000);
+		}
+	} catch (e) {
+		console.log(e);
+	}
 };
 
 function sendData(obj) {
