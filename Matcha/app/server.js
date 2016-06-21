@@ -167,6 +167,9 @@ app.use(express.static('./app/public'));
 app.use(favicon('./app/public/img/img1.jpg'));
 
 // Routes
+app.get('/', function(req, res) {
+	res.redirect('/home');
+});
 app.get('/home', function (req, res) {
 	if (session.username) {
 		var ajax = (req.query.ajax === '') ? true : false;
@@ -242,6 +245,26 @@ app.get('/edit', function (req, res) {
 	else
 		res.redirect('/login');
 });
+app.get('/map', function (req, res) {
+	var ajax = (req.query.ajax === '') ? true : false;
+	res.render('./layouts/map', {
+		name: c.site.name,
+		author: c.site.author,
+		ajax: ajax
+	});
+});
+app.get('/cdn/:username', function (req, res) {
+	db.get("users", function(data) {
+		if (data.length == 1) {
+			console.log("ok");
+		}
+		else {
+			console.log("ko");
+		}
+	}, {
+		username: req.params.username.toLowerCase()
+	});
+});
 
 // Login
 app.get('/login', function (req, res) {
@@ -256,6 +279,12 @@ app.get('/login', function (req, res) {
 	}
 	else
 		res.redirect('/home');
+});
+app.get('/signin', function (req, res) {
+
+});
+app.get('/signup', function (req, res) {
+
 });
 app.get('/logout', function (req, res) {
 	session.username = false;
