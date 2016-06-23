@@ -1,5 +1,5 @@
 {
-  "name": "search",
+  "name": "choose",
   "version": "0.0.1",
   "description": "Match or match",
   "main": "./app/server.js",

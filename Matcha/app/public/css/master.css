@@ -37,9 +37,7 @@ html, body {
     color: #efefef;
     font-size: 1.1em;
     font-family: 'latothin', sans-serif;
-	background: url("../img/bg.jpg") no-repeat center fixed;
-	-webkit-background-size: cover;
-	background-size: cover;
+	background: #efefef;
 }
 #background_video {
       position: fixed;
@@ -101,22 +99,41 @@ button:hover {
 
 /* HEADER */
 header, footer {
-    height: 150px;
-	line-height: 150px;
+
     text-align: center;
     background-color: #1abc9c;
 }
 header {
-	line-height: 130px;
-	font-family: "yorkwhite", sans-serif;
-	font-size: 4em;
+	line-height: 60px;
+	height: 60px;
+	line-height: 50px;
+	font-family: "latothin", sans-serif;
+	font-size: 2em;
 }
 footer {
-
+	line-height: 30px;
+	height: 30px;
 }
 header a, footer a {
 	text-decoration: none;
 	color: #efefef;
+}
+header button {
+	background: none;
+	border: 2px solid #fff;
+	color: #fff;
+	border-radius: 5px;
+	padding: 5px;
+	font-family: "latolight", sans-serif;
+	font-size: 0.5em;
+	margin-right: 10px;
+}
+
+.left {
+	float: left;
+}
+.right {
+	float: right;
 }
 
 /* NAV */
@@ -159,22 +176,21 @@ nav.account li {
 /* MAIN */
 section, aside {
     color: #eee;
-    padding: 0em 0em 1em 0em;
+	height: calc(100vh - 154px);
 }
 section {
-    -webkit-flex: 2 1 500px;
+    -webkit-flex: 2 1 600px;
     -webkit-box-flex: 2;
-    -ms-flex: 2 1 500px;
-    flex: 2 1 500px;
+    -ms-flex: 2 1 600px;
+    flex: 2 1 600px;
 	display: flex;
 	flex-direction: column;
 }
 aside {
+	width: 300px;
 	background-color: #333;
-    -webkit-flex: 1 2 250px;
-    -webkit-box-flex: 1;
-    -ms-flex: 1 2 250px;
-    flex: 1 2 250px;
+	overflow-y: scroll;
+	overflow-x: hidden;
 }
 .content {
     -webkit-display: -webkit-box;
@@ -277,53 +293,38 @@ aside {
 	width: 100%;
 	background: #efefef;
 	color: #333;
-	margin-top: 10px;
-	padding-bottom: 0px;
+	padding-bottom: 2px;
 }
 .img {
-	width: 240px;
-	float: left;
-	box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
+	width: 100%;
 	border-bottom: 10px solid #333;
-	border-right: 10px solid #333;
 }
 .turquoise {
 	border-bottom: 10px solid #1abc9c;
-	border-right: 10px solid #1abc9c;
 }
 .emerald {
 	border-bottom: 10px solid #2ecc71;
-	border-right: 10px solid #2ecc71;
 }
 .river {
 	border-bottom: 10px solid #3498db;
-	border-right: 10px solid #3498db;
 }
 .amethyst {
 	border-bottom: 10px solid #9b59b6;
-	border-right: 10px solid #9b59b6;
 }
 .asphalt {
 	border-bottom: 10px solid #34495e;
-	border-right: 10px solid #34495e;
 }
 .flower {
 	border-bottom: 10px solid #f1c40f;
-	border-right: 10px solid #f1c40f;
 }
 .orange {
 	border-bottom: 10px solid #f39c12;
-	border-right: 10px solid #f39c12;
 }
 .red {
 	border-bottom: 10px solid #c0392b;
-	border-right: 10px solid #c0392b;
 }
 .gray {
 	border-bottom: 10px solid #7f8c8d;
-	border-right: 10px solid #7f8c8d;
 }
 .user div {
 	display: inline-block;
@@ -401,7 +402,7 @@ aside {
 	color: #fff;
 }
 #map {
-	position: absolute;
+	position: relative;
 	top: 0px;
 	left: 0px;
 	width: 100%;

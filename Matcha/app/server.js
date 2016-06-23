@@ -246,12 +246,17 @@ app.get('/edit', function (req, res) {
 		res.redirect('/login');
 });
 app.get('/map', function (req, res) {
-	var ajax = (req.query.ajax === '') ? true : false;
-	res.render('./layouts/map', {
-		name: c.site.name,
-		author: c.site.author,
-		ajax: ajax
-	});
+	db.sort("profiles", {
+		score: -1,
+		name: 1
+	}, function(json) {
+		var users = json;
+		res.render('./layouts/map', {
+			name: c.site.name,
+			author: c.site.author,
+			users: users
+		});
+	}, {});
 });
 app.get('/cdn/:username', function (req, res) {
 	db.get("users", function(data) {
