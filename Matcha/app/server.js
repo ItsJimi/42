@@ -10,6 +10,7 @@ var WebSocketServer = require('ws').Server;
 var wss = new WebSocketServer({ server: server });
 var express = require('express');
 var session = require('express-session');
+var bodyParser = require('body-parser');
 var app = express();
 
 // Session
@@ -18,9 +19,6 @@ app.use(session({ secret : 'MpCF12y', resave: false, saveUninitialized: true }))
 // Controllers
 var db = require('./controllers/database.js');
 var util = require('./controllers/utils.js');
-
-// Global var
-var session;
 
 db.connect(function(database) {
 	// ???
@@ -44,113 +42,6 @@ wss.on('connection', function connection(ws) {
 					firstname: res.name
 				});
 			}
-			else if (res.act === "signin") {
-				if (!res.mail || !res.pass)
-					return (false);
-				db.get("users", function(data) {
-					if (data.length == 1) {
-						if (data[0].mail === res.mail && data[0].pass === util.passHash(res.mail, res.pass)) {
-							if (data[0].valid == 1) {
-								ws.send(JSON.stringify({
-									act: "info",
-									end: "true",
-									message: "Connected !!"
-								}));
-								session.username = data[0].username;
-								session.mail = data[0].mail;
-								db.get("profiles", function(data) {
-									if (data.length == 1) {
-										session.firstname = data[0].firstname;
-										session.lastname = data[0].lastname;
-									}
-								},
-								{
-									username: data[0].username
-								});
-								console.log(session);
-								return (true);
-							}
-							else {
-								ws.send(JSON.stringify({
-									act: "info",
-									end: "false",
-									message: "Your mail address is not verified."
-								}));
-								return (false);
-							}
-						}
-					}
-					ws.send(JSON.stringify({
-						act: "info",
-						end: "false",
-						message: "Wrong informations !"
-					}));
-					return (false);
-				}, {
-					mail: res.mail
-				});
-			}
-			else if (res.act === "signup") {
-				if (!res.username || !res.firstname || !res.lastname || !res.mail || !res.pass1 || !res.pass2) {
-					ws.send(JSON.stringify({
-						act: "info",
-						end: "false",
-						message: "Field empty."
-					}));
-					return (false);
-				}
-				if (res.pass1 !== res.pass2) {
-					ws.send(JSON.stringify({
-						act: "info",
-						end: "false",
-						message: "Passwords don't match."
-					}));
-					return (false);
-				}
-				db.get("users", function(data) {
-					if (data.length == 1) {
-						ws.send(JSON.stringify({
-							act: "info",
-							end: "false",
-							message: "Already used."
-						}));
-						return (false);
-					}
-					else {
-						if (util.validateEmail(res.mail)) {
-							db.insert("profiles", {
-								username: res.username.toLowerCase(),
-								firstname: res.firstname,
-								lastname: res.lastname
-							});
-							db.insert("users", {
-								username: res.username.toLowerCase(),
-								mail: res.mail,
-								pass: util.passHash(res.mail, res.pass1)
-							});
-							ws.send(JSON.stringify({
-								act: "info",
-								end: "true",
-								message: "Yeah ! Welcome to Choose !"
-							}));
-							return (true);
-						}
-						else {
-							ws.send(JSON.stringify({
-								act: "info",
-								end: "false",
-								message: "Email not valid."
-							}));
-							return (false);
-						}
-					}
-				}, {
-					$or: [
-						{ username: res.username.toLowerCase() },
-						{ mail: res.mail }
-					]
-				});
-			}
 		} catch (e) {
 			console.log('Error try ws : ' + e);
 		}
@@ -165,38 +56,32 @@ app.set('views', './app/views');
 // Use
 app.use(express.static('./app/public'));
 app.use(favicon('./app/public/img/img1.jpg'));
+app.use(bodyParser.json());
 
 // Routes
 app.get('/', function(req, res) {
-	res.redirect('/home');
-});
-app.get('/home', function (req, res) {
-	if (session.username) {
-		var ajax = (req.query.ajax === '') ? true : false;
-		db.sortl("profiles", 3, {
+	var sess = req.session;
+
+	if (sess.username) {
+		db.sort("profiles", {
 			score: -1,
-			firstname: 1
+			name: 1
 		}, function(json) {
 			var users = json;
-			res.render('./layouts/home', {
+			res.render('./layouts/map', {
 				name: c.site.name,
 				author: c.site.author,
-				ajax: ajax,
-				nav: true,
-				page: 'Home',
-				users: users,
-				me: {
-					firstname: session.firstname,
-					lastname: session.lastname
-				}
+				users: users
 			});
-	    });
+		}, {});
 	}
 	else
 		res.redirect('/login');
 });
-app.get('/profiles', function (req, res) {
-	if (session.username) {
+app.get('/profiles/:username', function (req, res) {
+	var sess = req.session;
+
+	if (sess.username) {
 		var ajax = (req.query.ajax === '') ? true : false;
 		db.sort("profiles", {
 			score: -1,
@@ -211,8 +96,8 @@ app.get('/profiles', function (req, res) {
 				page: 'Profiles',
 				users: users,
 				me: {
-					firstname: session.firstname,
-					lastname: session.lastname
+					firstname: sess.firstname,
+					lastname: sess.lastname
 				}
 			});
 	    }, {});
@@ -221,7 +106,9 @@ app.get('/profiles', function (req, res) {
 		res.redirect('/login');
 });
 app.get('/edit', function (req, res) {
-	if (session.username) {
+	var sess = req.session;
+
+	if (sess.username) {
 		var ajax = (req.query.ajax === '') ? true : false;
 		db.sort("profiles", {
 			score: -1,
@@ -236,27 +123,14 @@ app.get('/edit', function (req, res) {
 				page: 'Edit profile',
 				users: users,
 				me: {
-					firstname: session.firstname,
-					lastname: session.lastname
+					firstname: sess.firstname,
+					lastname: sess.lastname
 				}
 			});
 	    }, {});
 	}
 	else
 		res.redirect('/login');
-});
-app.get('/map', function (req, res) {
-	db.sort("profiles", {
-		score: -1,
-		name: 1
-	}, function(json) {
-		var users = json;
-		res.render('./layouts/map', {
-			name: c.site.name,
-			author: c.site.author,
-			users: users
-		});
-	}, {});
 });
 app.get('/cdn/:username', function (req, res) {
 	db.get("users", function(data) {
@@ -273,7 +147,9 @@ app.get('/cdn/:username', function (req, res) {
 
 // Login
 app.get('/login', function (req, res) {
-	if (!session.username) {
+	var sess = req.session;
+
+	if (!sess.username) {
 		var ajax = (req.query.ajax === '') ? true : false;
 		res.render('./layouts/login', {
 			name: c.site.name,
@@ -283,17 +159,126 @@ app.get('/login', function (req, res) {
 		});
 	}
 	else
-		res.redirect('/home');
+		res.redirect('/');
 });
-app.get('/signin', function (req, res) {
+app.post('/signin', function (req, res) {
+	var sess = req.session;
 
+	if (!sess.username) {
+		if (!req.body.username || !req.body.pass)
+			return (false);
+		db.get("users", function(data) {
+			console.log(req.body.username);
+			if (data.length == 1) {
+				if (data[0].username === req.body.username.toLowerCase() && data[0].pass === util.passHash(req.body.username.toLowerCase(), req.body.pass)) {
+					console.log("test");
+					if (data[0].valid == 1) {
+						sess.username = data[0].username;
+						sess.mail = data[0].mail;
+						db.get("profiles", function(data) {
+							if (data.length == 1) {
+								sess.firstname = data[0].firstname;
+								sess.lastname = data[0].lastname;
+							}
+						},
+						{
+							username: data[0].username
+						});
+						res.status(200).send(JSON.stringify({
+							end: "true",
+							message: "Connected"
+						}));
+						res.redirect('/');
+						return (true);
+					}
+					else {
+						res.status(200).send(JSON.stringify({
+							end: "false",
+							message: "Your mail address is not verified."
+						}));
+						return (false);
+					}
+				}
+			}
+			res.status(200).send(JSON.stringify({
+				end: "false",
+				message: "Wrong informations"
+			}));
+			return (false);
+		}, {
+			username: req.body.username.toLowerCase()
+		});
+	}
+	else
+		res.redirect('/');
 });
-app.get('/signup', function (req, res) {
+app.post('/signup', function (req, res) {
+	var sess = req.session;
 
+	if (!sess.username) {
+		if (!req.body.username || !req.body.firstname || !req.body.lastname || !req.body.mail || !req.body.pass1 || !req.body.pass2) {
+			res.status(200).send(JSON.stringify({
+				end: "false",
+				message: "Fields empty."
+			}));
+			return (false);
+		}
+		if (req.body.pass1 !== req.body.pass2) {
+			res.status(200).send(JSON.stringify({
+				end: "false",
+				message: "Passwords don't match."
+			}));
+			return (false);
+		}
+		db.get("users", function(data) {
+			if (data.length == 1) {
+				res.status(200).send(JSON.stringify({
+					end: "false",
+					message: "Already used."
+				}));
+				return (false);
+			}
+			else {
+				if (util.validateEmail(req.body.mail)) {
+					db.insert("profiles", {
+						username: req.body.username.toLowerCase(),
+						firstname: req.body.firstname,
+						lastname: req.body.lastname
+					});
+					db.insert("users", {
+						username: req.body.username.toLowerCase(),
+						mail: req.body.mail,
+						pass: util.passHash(req.body.username.toLowerCase(), req.body.pass1)
+					});
+					res.status(200).send(JSON.stringify({
+						end: "true",
+						message: "Yeah ! Welcome to Choose !"
+					}));
+					return (true);
+				}
+				else {
+					res.status(200).send(JSON.stringify({
+						end: "false",
+						message: "Email not valid."
+					}));
+					return (false);
+				}
+			}
+		}, {
+			$or: [
+				{ username: req.body.username.toLowerCase() },
+				{ mail: req.body.mail }
+			]
+		});
+	}
+	else
+		res.redirect('/');
 });
 app.get('/logout', function (req, res) {
-	session.username = false;
-	session.mail = false;
+	req.session.destroy(function(err) {
+		if (err)
+			console.log(err);
+	});
 	res.redirect('/login');
 });
 

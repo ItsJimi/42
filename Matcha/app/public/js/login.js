@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $("#signin_submit").click(function() {
-        signin($("#signin_mail").val(), $("#signin_pass").val());
+        signin($("#signin_username").val(), $("#signin_pass").val());
     });
 	$("#signup_submit").click(function() {
         signup($("#signup_username").val(),
@@ -12,24 +12,65 @@ $(document).ready(function() {
     });
 });
 
-function signin(mail, pass) {
-	if (mail === "" || pass === "")
+function signin(username, pass) {
+	if (username === "" || pass === "") {
+		notif({
+			end: "false",
+			message: "Fields empty."
+		});
 		return (false);
-	sendData({
-		act: "signin",
-		mail: mail,
-		pass: pass
-	});
+	}
+	$.ajax({
+        url: "/signin",
+        type: "POST",
+        dataType: "json",
+        data: JSON.stringify({
+            username: username,
+            pass: pass
+        }),
+        contentType: "application/json",
+        cache: false,
+        timeout: 5000,
+        statusCode: {
+            400: function() {
+                console.log("error");
+            },
+            200: function(res) {
+				notif(res);
+            }
+        }
+    });
 }
 function signup(username, firstname, lastname, mail, pass1, pass2) {
-	console.log(username + " : " + firstname + " : " + lastname + " : " + mail + " : " + pass1 + " : " + pass2);
-	sendData({
-		act: "signup",
-		username: username,
-		firstname: firstname,
-		lastname: lastname,
-		mail: mail,
-		pass1: pass1,
-		pass2: pass2
-	});
+	if (username === "" || firstname === "" || lastname === "" || mail === "" || pass1 === "" || pass2 === "") {
+		notif({
+			end: "false",
+			message: "Fields empty."
+		});
+		return (false);
+	}
+	$.ajax({
+        url: "/signup",
+        type: "POST",
+        dataType: "json",
+        data: JSON.stringify({
+			username: username,
+			firstname: firstname,
+			lastname: lastname,
+			mail: mail,
+			pass1: pass1,
+			pass2: pass2
+        }),
+        contentType: "application/json",
+        cache: false,
+        timeout: 5000,
+        statusCode: {
+            400: function() {
+                console.log("error");
+            },
+            200: function(res) {
+				notif(res);
+            }
+        }
+    });
 }
