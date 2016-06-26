@@ -37,7 +37,15 @@ html, body {
     color: #efefef;
     font-size: 1.1em;
     font-family: 'latothin', sans-serif;
-	background: #efefef;
+	background: #343434;
+}
+::selection {
+  background: #1abc9c;
+  color: #fff;
+}
+::-moz-selection {
+  background: #1abc9c;
+  color: #fff;
 }
 #background_video {
       position: fixed;
@@ -99,7 +107,6 @@ button:hover {
 
 /* HEADER */
 header, footer {
-
     text-align: center;
     background-color: #1abc9c;
 }
@@ -107,7 +114,7 @@ header {
 	line-height: 60px;
 	height: 60px;
 	line-height: 50px;
-	font-family: "latothin", sans-serif;
+	font-family: "yorkwhite", sans-serif;
 	font-size: 2em;
 }
 footer {

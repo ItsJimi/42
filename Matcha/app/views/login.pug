@@ -1,0 +1,43 @@
+doctype html
+html
+	head
+		title="Choose"
+		meta(name='viewport', content='width=device-width, initial-scale=1.0')
+		link(rel='stylesheet', type='text/css', media='all', href='css/master.css')
+		link(rel='stylesheet', type='text/css', media='(min-width: 1200px)', href='css/screen.css')
+		link(rel='stylesheet', type='text/css', media='(max-width: 600px)', href='css/mobile.css')
+	body
+		video(id="background_video" loop muted)
+		#info
+		.container
+			header
+				a(href="/")
+					| ÎééééchooseééééÏ
+			.content
+				section
+					.login
+						h1
+							| Sign In
+						#signin
+							input(id="signin_username", type="text", placeholder="Username")
+							input(id="signin_pass", type="password", placeholder="Password")
+							button#signin_submit
+								| SignIn
+						h1
+							| Sign Up
+						#signup
+							input(id="signup_username", type="text", placeholder="Username")
+							input(id="signup_firstname", type="text", placeholder="Firstname")
+							input(id="signup_lastname", type="text", placeholder="Lastname")
+							input(id="signup_mail", type="text", placeholder="Mail")
+							input(id="signup_pass1", type="password", placeholder="Password")
+							input(id="signup_pass2", type="password", placeholder="Confirm password")
+							button#signup_submit
+								| SignUp
+					footer
+						| Made by <a href="#">Jimi</a>
+	script(src='https://code.jquery.com/jquery-2.2.4.min.js')
+	script(src='js/main.js')
+	script(src='js/login.js')
+	script(src='js/bideo.js')
+	script(src='js/bg.js')

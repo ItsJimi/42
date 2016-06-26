@@ -150,13 +150,7 @@ app.get('/login', function (req, res) {
 	var sess = req.session;
 
 	if (!sess.username) {
-		var ajax = (req.query.ajax === '') ? true : false;
-		res.render('./layouts/login', {
-			name: c.site.name,
-			author: c.site.author,
-			ajax: ajax,
-			page: 'Login'
-		});
+		res.render('./login', {});
 	}
 	else
 		res.redirect('/');
@@ -171,12 +165,15 @@ app.post('/signin', function (req, res) {
 			console.log(req.body.username);
 			if (data.length == 1) {
 				if (data[0].username === req.body.username.toLowerCase() && data[0].pass === util.passHash(req.body.username.toLowerCase(), req.body.pass)) {
-					console.log("test");
+					console.log("test 1");
 					if (data[0].valid == 1) {
+						console.log("test 2");
 						sess.username = data[0].username;
 						sess.mail = data[0].mail;
 						db.get("profiles", function(data) {
+							console.log("test 3");
 							if (data.length == 1) {
+								console.log("test 4");
 								sess.firstname = data[0].firstname;
 								sess.lastname = data[0].lastname;
 							}
