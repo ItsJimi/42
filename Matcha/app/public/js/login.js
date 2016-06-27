@@ -21,7 +21,7 @@ function signin(username, pass) {
 		return (false);
 	}
 	$.ajax({
-        url: "/signin",
+        url: "/login/signin",
         type: "POST",
         dataType: "json",
         data: JSON.stringify({
@@ -37,6 +37,8 @@ function signin(username, pass) {
             },
             200: function(res) {
 				notif(res);
+				if (res.end === "true")
+					window.location = "/";
             }
         }
     });
@@ -50,7 +52,7 @@ function signup(username, firstname, lastname, mail, pass1, pass2) {
 		return (false);
 	}
 	$.ajax({
-        url: "/signup",
+        url: "/login/signup",
         type: "POST",
         dataType: "json",
         data: JSON.stringify({

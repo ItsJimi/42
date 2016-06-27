@@ -1,22 +1,5 @@
 extends ../index.pug
 
-mixin user
-	.user
-		if (user.img)
-			img(class="img", class=user.color, src=user.img[0])
-		else
-			img(class="img", class=user.color, src="img/pp.png")
-		if (user.firstname)
-			.name=user.firstname
-		if (user.lastname)
-			.name=user.lastname
-		if (user.age)
-			.age=user.age + " years old"
-		if (user.gender)
-			.gender=user.gender
-		if (user.score)
-			.score=user.score + " hearts"
-
 block content
 	.slogan
 		| 404 Not found ...
@@ -24,7 +7,3 @@ block content
 		#search_bar(data-text="Search ...", contenteditable="true")
 		#search_button
 			include ../../public/svg/search.svg
-	section
-		h1="Most popular"
-		each user in users
-			+user

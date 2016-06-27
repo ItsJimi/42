@@ -5,9 +5,5 @@
 		"host" : "maiquez.fr",
 		"port" : "27017",
 		"database" : "matcha"
-	},
-	"site" : {
-		"name" : "choose",
-		"author" : "Jimi M"
 	}
 }
