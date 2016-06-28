@@ -13,8 +13,9 @@ router.get('/', function(req, res) {
 			name: 1
 		}, function(json) {
 			var users = json;
-			res.render('./layouts/map', {
-				users: users
+			res.render('./index', {
+				users: users,
+				test: "coucou"
 			});
 		}, {});
 	}

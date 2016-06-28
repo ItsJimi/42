@@ -56,7 +56,7 @@ wss.on('connection', function connection(ws) {
 });
 
 // Set
-app.set('view engine', 'pug');
+app.set('view engine', 'ejs');
 app.set('views', './app/views');
 
 // Use

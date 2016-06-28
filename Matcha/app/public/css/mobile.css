@@ -12,6 +12,9 @@ section {
 	-ms-flex-preferred-size: auto;
 	flex-basis: auto;
 }
+aside {
+	width: 100%;
+}
 nav ul {
 	-webkit-flex-direction: column;
 	-webkit-box-orient: vertical;

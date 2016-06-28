@@ -1,0 +1,17 @@
+<%- include('includes/header'); %>
+<%- include('includes/map'); %>
+<aside>
+	<% if (user.img[0]) { %>
+		<img class="img_profiles" src="<%= user.img[0] %>" alt="<%= user.firstname + " " + user.lastname %>" title="<%= user.firstname + " " + user.lastname %>"/>
+	<% } %>
+	<% else { %>
+		<img class="img_profiles" src="img/pp.png" alt="<%= user.firstname + " " + user.lastname %>" title="<%= user.firstname + " " + user.lastname %>"/>
+	<% } %>
+	<div class="name">
+		<% user.firstname %>
+	</div>
+	<div class="name">
+		<% user.lastname %>
+	</div>
+</aside>
+<%- include('includes/footer'); %>

@@ -132,7 +132,7 @@ header button {
 	border-radius: 5px;
 	padding: 5px;
 	font-family: "latolight", sans-serif;
-	font-size: 0.5em;
+	font-size: 0.4em;
 	margin-right: 10px;
 }
 
@@ -293,7 +293,12 @@ aside {
 }
 
 /* Home */
-
+.img_profiles {
+	width: 100%;
+}
+.img_profiles:hover {
+	cursor: pointer;
+}
 
 /* Profiles */
 .user {
@@ -301,10 +306,6 @@ aside {
 	background: #efefef;
 	color: #333;
 	padding-bottom: 2px;
-}
-.img {
-	width: 100%;
-	border-bottom: 10px solid #333;
 }
 .turquoise {
 	border-bottom: 10px solid #1abc9c;
