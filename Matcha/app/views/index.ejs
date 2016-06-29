@@ -1,13 +1,17 @@
-<%- include('includes/header'); %>
-<%- include('includes/map'); %>
-<%- include('includes/edit'); %>
-<aside>
-	<% users.forEach(function(user){ %>
-		<% if (user.img) { %>
-			<a href="profiles/<%= user.username %>">
-				<img class="img_profiles" src="<%= user.img[0] %>" alt="<%= user.firstname + " " + user.lastname %>" title="<%= user.firstname + " " + user.lastname %>"/>
-			</a>
-		<% } %>
-	<% }); %>
-</aside>
-<%- include('includes/footer'); %>
+<% if (!ajax) { %>
+	<%- include('includes/header'); %>
+	<%- include('includes/map'); %>
+	<%- include('includes/edit'); %>
+	<aside id="refresh">
+<% } %>
+		<% users.forEach(function(user){ %>
+			<% if (user.img) { %>
+				<a class="no-refresh" href="/profiles/<%= user.username %>">
+					<img class="img_profiles" src="<%= user.img[0] %>" alt="<%= user.firstname + " " + user.lastname %>" title="<%= user.firstname + " " + user.lastname %>"/>
+				</a>
+			<% } %>
+		<% }); %>
+<% if (!ajax) { %>
+	</aside>
+	<%- include('includes/footer'); %>
+<% } %>

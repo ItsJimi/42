@@ -6,7 +6,7 @@ $(document).ready(function() {
             url: location.pathname + '?ajax',
             success: function (data) {
 				NProgress.inc();
-                $('.content').html(data);
+                $('#refresh').html(data);
 				NProgress.done();
             }
         });
@@ -22,7 +22,7 @@ function setAct() {
             url: pageUrl + '?ajax',
             success: function (data) {
 				NProgress.inc();
-                $('.content').html(data);
+                $('#refresh').html(data);
 				NProgress.done();
             }
         });

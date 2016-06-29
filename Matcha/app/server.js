@@ -74,7 +74,7 @@ app.use('/cdn', cdn);
 app.use('/login', login);
 // 404
 app.use(function(req, res, next) {
-	res.status(404).render('./layouts/404', {});
+	res.status(404).render('./404');
 });
 
 // Server

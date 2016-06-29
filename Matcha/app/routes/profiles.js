@@ -4,6 +4,15 @@ var router = express.Router();
 var db = require('../controllers/database.js');
 var util = require('../controllers/utils.js');
 
+
+router.get('/', function (req, res) {
+	var sess = req.session;
+
+	if (sess.username)
+		res.redirect('/profiles/' + sess.username);
+	else
+		res.redirect('/login');
+});
 router.get('/:username', function (req, res) {
 	var sess = req.session;
 
@@ -14,19 +23,21 @@ router.get('/:username', function (req, res) {
 			name: 1
 		}, function(json) {
 			var users = json;
-			res.render('./layouts/profiles', {
-				name: c.site.name,
-				author: c.site.author,
+			if (users[0])
+				var user = users[0];
+			else
+				var user = null;
+			res.render('./profiles', {
 				ajax: ajax,
-				nav: true,
-				page: 'Profiles',
-				users: users,
+				user: user,
 				me: {
 					firstname: sess.firstname,
 					lastname: sess.lastname
 				}
 			});
-	    }, {});
+	    }, {
+			username: req.params.username
+		});
 	}
 	else
 		res.redirect('/login');
@@ -40,14 +51,10 @@ router.get('/:username/edit', function (req, res) {
 			score: -1,
 			name: 1
 		}, function(json) {
-			var users = json;
-			res.render('./layouts/edit', {
-				name: c.site.name,
-				author: c.site.author,
+			var user = json;
+			res.render('./edit', {
 				ajax: ajax,
-				nav: true,
-				page: 'Edit profile',
-				users: users,
+				users: user,
 				me: {
 					firstname: sess.firstname,
 					lastname: sess.lastname

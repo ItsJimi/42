@@ -1,17 +1,49 @@
-<%- include('includes/header'); %>
-<%- include('includes/map'); %>
-<aside>
-	<% if (user.img[0]) { %>
-		<img class="img_profiles" src="<%= user.img[0] %>" alt="<%= user.firstname + " " + user.lastname %>" title="<%= user.firstname + " " + user.lastname %>"/>
+<% if (!ajax) { %>
+	<%- include('includes/header'); %>
+	<%- include('includes/map'); %>
+	<%- include('includes/edit'); %>
+	<aside id="refresh">
+<% } %>
+	<% if (user) { %>
+		<% if (user.img) { %>
+			<img class="profiles_img" src="<%= user.img[0] %>" alt="<%= user.firstname + " " + user.lastname %>" title="<%= user.firstname + " " + user.lastname %>"/>
+		<% } else { %>
+			<img class="profiles_img" src="../img/pp.png" alt="<%= user.firstname + " " + user.lastname %>" title="<%= user.firstname + " " + user.lastname %>"/>
+		<% } %>
+		<div class="profiles_name">
+			<%= user.firstname %>
+		</div>
+		<div class="profiles_name">
+			<%= user.lastname %>
+		</div>
+		<% if (user.birthdate) { %>
+			<div class="profiles_age">
+				<%= user.age %>
+			</div>
+		<% } %>
+		<% if (user.birthdate) { %>
+			<div class="profiles_birthday">
+				<%= user.birthday %>
+			</div>
+		<% } %>
+		<% if (user.bio) { %>
+			<div class="profiles_bio">
+				<%= user.birthday %>
+			</div>
+		<% } %>
+		<% if (user.tags) { %>
+			<% user.tags.forEach(function(tag){ %>
+				<div class="profiles_tag">
+					#<%= tag %>
+				</div>
+			<% }); %>
+		<% } %>
+	<% } else { %>
+		<p>
+			Not found !
+		</p>
 	<% } %>
-	<% else { %>
-		<img class="img_profiles" src="img/pp.png" alt="<%= user.firstname + " " + user.lastname %>" title="<%= user.firstname + " " + user.lastname %>"/>
-	<% } %>
-	<div class="name">
-		<% user.firstname %>
-	</div>
-	<div class="name">
-		<% user.lastname %>
-	</div>
-</aside>
-<%- include('includes/footer'); %>
+<% if (!ajax) { %>
+	</aside>
+	<%- include('includes/footer'); %>
+<% } %>

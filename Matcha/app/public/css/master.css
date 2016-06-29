@@ -419,3 +419,32 @@ aside {
 .desc {
 	color: #333;
 }
+
+/* Edit */
+.edit_pane {
+	position: absolute;
+	top: 60px;
+	left: 0px;
+	width: 100%;
+	height: calc(100vh - 60px);
+	background: rgba(0, 0, 0, 0.8);
+	text-align: center;
+	font-size: 2em;
+}
+.edit_name {
+	font-size: 1.5em;
+	margin-bottom: 20px;
+}
+.edit_pane input {
+	max-width: 300px;
+	margin-bottom: 10px;
+}
+.edit_gender {
+	width: 300px;
+}
+.edit_orientation {
+	width: 300px;
+}
+.edit_pane div {
+	margin-bottom: 0px;
+}

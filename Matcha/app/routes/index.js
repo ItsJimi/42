@@ -8,14 +8,19 @@ router.get('/', function(req, res) {
 	var sess = req.session;
 
 	if (sess.username) {
+		var ajax = (req.query.ajax === '') ? true : false;
 		db.sort("profiles", {
 			score: -1,
 			name: 1
 		}, function(json) {
 			var users = json;
 			res.render('./index', {
+				ajax: ajax,
 				users: users,
-				test: "coucou"
+				me: {
+					firstname: sess.firstname,
+					lastname: sess.lastname
+				}
 			});
 		}, {});
 	}
