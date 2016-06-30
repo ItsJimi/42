@@ -1,15 +1,21 @@
 $(document).ready(function() {
-
+	// Nav Buttons
+	$('#nav_message').click(function() {
+		$('#message').fadeToggle('fast');
+		$('#edit').fadeOut('fast');
+		$('#profiles').fadeOut('fast');
+		$('#filters').fadeOut('fast');
+	});
+	$('#nav_edit').click(function() {
+		$('#edit').fadeToggle('fast');
+		$('#profiles').fadeOut('fast');
+		$('#message').fadeOut('fast');
+		$('#filters').fadeOut('fast');
+	});
+	$('#nav_filters').click(function() {
+		$('#filters').slideToggle('fast');
+		$('#edit').fadeOut('fast');
+		$('#message').fadeOut('fast');
+		$('#profiles').fadeOut('fast');
+	});
 });
-var show = 0;
-
-function userDisplay(user) {
-	if (show == 0) {
-		$(user).show("fast");
-		show = 1;
-	}
-	else {
-		$(user).hide("fast");
-		show = 0;
-	}
-}

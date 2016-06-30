@@ -1,22 +1,53 @@
-<div id="edit" class="edit_pane">
-	<div class="edit_name">
-		<%= me.firstname + " " + me.lastname %>
+<div id="edit" class="edit">
+	<span id="edit_firstname" class="edit_firstname">Jimi</span>
+	<span id="edit_lastname" class="edit_lastname">Maïquez</span>
+	<div id="edit_img" class="edit_img">
+		<img src="https://www.gravatar.com/avatar/fe65f553c23437048d75161e836dd724?s=500" alt="" />
 	</div>
-	<div class="">Bith date</div>
-	<input class="edit_date" type="date" name="edit_date">
-	<div class="">Gender</div>
-	<select class="edit_gender">
-		<option value="man">Man</option>
-		<option value="woman">Woman</option>
-	</select>
-	<div class="">Orientation</div>
-	<select class="edit_orientation">
-		<option value="man">Man</option>
-		<option value="woman">Woman</option>
-		<option value="other">Both</option>
-	</select>
-	<div class="">Biography</div>
-	<textarea name="edit_bio" rows="10" cols="46"></textarea>
-	<div class="">Biography</div>
-	<textarea name="edit_bio" rows="10" cols="46"></textarea>
+	<div class="img_nav">
+		<div id="img_prev"><</div>
+		<div id="img_next">></div>
+	</div>
+	<div class="fileUpload">
+		Upload
+		<input type="file" class="upload" value="Choose a file" accept="image/*" />
+	</div>
+	<div id="edit_localisation" class="edit_localisation">
+		Localisation :
+		<input id="edit_localisation_s" type="text" value="France" />
+	</div>
+	<div id="edit_birthdate" class="edit_birthdate">
+		Birth date :
+		<input id="edit_birthdate_s" type="date" value="1997-04-05" />
+	</div>
+	<div id="edit_gender" class="edit_gender">
+		Gender :
+		<select name="edit_gender_s">
+			<option value="value1" selected>Man</option>
+			<option value="value2" >Woman</option>
+		</select>
+	</div>
+	<div id="edit_preference" class="edit_preference">
+		Preference :
+		<select name="edit_preference_s">
+			<option value="value1" >Man</option>
+			<option value="value2" selected>Woman</option>
+			<option value="value2" >Both</option>
+		</select>
+	</div>
+	<div id="edit_tags" class="edit_tags">
+		<span id="tag">#Developer</span> <span id="tag">#France</span> <span id="tag">#Moto</span>
+		<select name="edit_preference_s">
+			<option value="value1">#Developer</option>
+			<option value="value2">#France</option>
+			<option value="value2">#Moto</option>
+		</select>
+		<button id="add_tag">Add</button>
+	</div>
+	<div id="edit_bio" class="edit_bio">
+		<textarea id="edit_bio_s">I'm Jimi and i'm student at 42 school in France, i like sport, food and bike.</textarea>
+	</div>
+	<div class="edit_validate">
+		Save changes
+	</div>
 </div>
