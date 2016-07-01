@@ -22,27 +22,29 @@
 	</div>
 	<div id="edit_gender" class="edit_gender">
 		Gender :
-		<select name="edit_gender_s">
-			<option value="value1" selected>Man</option>
-			<option value="value2" >Woman</option>
+		<select id="edit_gender_s" name="edit_gender_s">
+			<option id="edit_man_gender" value="edit_man_gender" selected>Man</option>
+			<option id="edit_woman_gender" value="edit_woman_gender" >Woman</option>
 		</select>
 	</div>
 	<div id="edit_preference" class="edit_preference">
 		Preference :
-		<select name="edit_preference_s">
-			<option value="value1" >Man</option>
-			<option value="value2" selected>Woman</option>
-			<option value="value2" >Both</option>
+		<select id="edit_preference_s" name="edit_preference_s">
+			<option id="edit_man_preference" value="value1" >Man</option>
+			<option id="edit_woman_preference" value="edit_woman_preference" selected>Woman</option>
+			<option id="edit_both_preference" value="edit_both_preference" >Both</option>
 		</select>
 	</div>
 	<div id="edit_tags" class="edit_tags">
 		<span id="tag">#Developer</span> <span id="tag">#France</span> <span id="tag">#Moto</span>
-		<select name="edit_preference_s">
-			<option value="value1">#Developer</option>
-			<option value="value2">#France</option>
-			<option value="value2">#Moto</option>
-		</select>
-		<button id="add_tag">Add</button>
+	</div>
+	<div class="">
+		<input type="text" list="edit_tags_choose" id="edit_tags_add" name="edit_tags_add" value="">
+		<datalist id="edit_tags_choose">
+		</datalist>
+	</div>
+	<div id="edit_add_tag" class="edit_add_tag">
+		Add
 	</div>
 	<div id="edit_bio" class="edit_bio">
 		<textarea id="edit_bio_s">I'm Jimi and i'm student at 42 school in France, i like sport, food and bike.</textarea>

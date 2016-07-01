@@ -25,6 +25,7 @@ var index = require('./routes/index.js');
 var profiles = require('./routes/profiles.js');
 var cdn = require('./routes/cdn.js');
 var login = require('./routes/login.js');
+var api = require('./routes/api.js');
 
 db.connect(function(database) {
 	// ???
@@ -58,6 +59,7 @@ wss.on('connection', function connection(ws) {
 // Set
 app.set('view engine', 'ejs');
 app.set('views', './app/views');
+app.set('json spaces', 4);
 
 // Use
 app.use(express.static('./app/public'));
@@ -72,6 +74,8 @@ app.use('/profiles', profiles);
 app.use('/cdn', cdn);
 // Auth
 app.use('/login', login);
+// Api
+app.use('/api', api);
 // 404
 app.use(function(req, res, next) {
 	res.status(404).render('./404');

@@ -439,6 +439,11 @@ aside {
 	text-align: justify;
 	height: 100px;
 }
+.edit_add_tag {
+	border: 1px solid #16a085;
+	background: #1abc9c;
+	color: #fff;
+}
 .edit_validate {
 	border: 1px solid #16a085;
 	background: #1abc9c;
