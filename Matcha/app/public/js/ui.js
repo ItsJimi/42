@@ -7,12 +7,12 @@ $(document).ready(function() {
 		$('#filters').fadeOut('fast');
 	});
 	$('#nav_edit').click(function() {
-		// editProfile(function() {
+		viewProfile(function() {
 			$('#edit').fadeToggle('fast');
 			$('#profiles').fadeOut('fast');
 			$('#message').fadeOut('fast');
 			$('#filters').fadeOut('fast');
-		// });
+		});
 	});
 	$('#nav_filters').click(function() {
 		$('#filters').slideToggle('fast');

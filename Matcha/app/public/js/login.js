@@ -14,7 +14,7 @@ $(document).ready(function() {
 
 function signin(username, pass) {
 	if (username === "" || pass === "") {
-		notif({
+		info({
 			end: "false",
 			message: "Fields empty."
 		});
@@ -36,7 +36,7 @@ function signin(username, pass) {
                 console.log("error");
             },
             200: function(res) {
-				notif(res);
+				info(res);
 				if (res.end === "true")
 					window.location = "/";
             }
@@ -45,7 +45,7 @@ function signin(username, pass) {
 }
 function signup(username, firstname, lastname, mail, pass1, pass2) {
 	if (username === "" || firstname === "" || lastname === "" || mail === "" || pass1 === "" || pass2 === "") {
-		notif({
+		info({
 			end: "false",
 			message: "Fields empty."
 		});
@@ -71,7 +71,7 @@ function signup(username, firstname, lastname, mail, pass1, pass2) {
                 console.log("error");
             },
             200: function(res) {
-				notif(res);
+				info(res);
             }
         }
     });

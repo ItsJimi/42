@@ -5,61 +5,77 @@ var db = require('../controllers/database.js');
 var util = require('../controllers/utils.js');
 
 router.get('/', function (req, res) {
-	var sess = req.session;
-
-	if (sess.username)
-		res.send("Choose API v0.1 : ' /api/username ' to get Json profile.");
-	else
-		res.redirect('/login');
+	res.send("Choose API v0.1 !");
 });
-router.get('/profiles', function (req, res) {
+
+// View all profiles
+router.get('/profiles/', function (req, res) {
 	var sess = req.session;
 
-	// if (sess.username) {
-		db.sortl("profiles", 5, {
-			score: -1,
+	if (sess.username) {
+		db.get("profiles", function(json) {
+			var user = json;
+
+			res.json(user);
+		}, {});
+	}
+});
+// View your profile
+router.get('/profiles/view/', function (req, res) {
+	var sess = req.session;
+
+	if (sess.username) {
+		db.get("profiles", function(json) {
+			var user = json;
+
+			res.json(user);
+		}, {
+			username: sess.username
+		});
+	}
+});
+// View <username> profile
+router.get('/profiles/view/:username', function (req, res) {
+	var sess = req.session;
+
+	if (sess.username) {
+		db.get("profiles", function(json) {
+			var user = json;
+
+			res.json(user);
+		}, {
+			username: req.params.username
+		});
+	}
+});
+
+// View all tags
+router.get('/tags/', function (req, res) {
+	var sess = req.session;
+
+	if (sess.username) {
+		db.sort("tags", {
 			name: 1
 		}, function(json) {
-			var users = json;
-			res.json(users);
-	    }, {});
-	// }
-	// else
-	// 	res.redirect('/login');
+			var tags = json;
+
+			res.json(tags);
+		}, {});
+	}
 });
-router.get('/profiles/:nbr', function (req, res) {
+// View profiles with <tag>
+router.get('/tags/view/:tag', function (req, res) {
 	var sess = req.session;
 
-	// if (sess.username) {
-		db.sortl("profiles", parseInt(req.params.nbr), {
-			score: -1,
+	if (sess.username) {
+		db.sort("tags", {
 			name: 1
 		}, function(json) {
-			var users = json;
-			res.json(users);
-	    }, {});
-	// }
-	// else
-	// 	res.redirect('/login');
+			var tags = json;
+
+			res.json(tags);
+		}, {});
+	}
 });
-// router.get('/profiles/:username', function (req, res) {
-// 	var sess = req.session;
-//
-// 	if (sess.username) {
-// 		db.sort("profiles", {
-// 			score: -1,
-// 			name: 1
-// 		}, function(json) {
-// 			var users = json;
-// 			if (users[0]) {
-// 				res.json(users[0]);
-// 			}
-// 	    }, {
-// 			username: req.params.username
-// 		});
-// 	}
-// 	else
-// 		res.redirect('/login');
-// });
 
 module.exports = router;

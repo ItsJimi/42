@@ -11,7 +11,10 @@ ws.onmessage = function(data) {
 		var res = JSON.parse(data.data);
 		console.log(res);
 		if (res.act === "info") {
-			notif(res);
+			info(res);
+		}
+		else if (res.act === "notif") {
+			notif(res.message, res.icon);
 		}
 	} catch (e) {
 		console.log(e);
