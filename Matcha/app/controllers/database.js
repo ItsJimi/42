@@ -21,6 +21,16 @@ module.exports = {
 		var collection = database.collection(name);
 		collection.insert(obj);
 	},
+	update: function(name, obj1, obj2, cb) {
+        // Get the documents collection
+        var collection = db.collection(name);
+        collection.updateOne(obj1, obj2, function(err, docs) {
+            if (err)
+                throw err;
+            if (cb)
+                cb(docs);
+        });
+    },
 	get : function(name, cb, obj) {
 	    // Get the documents collection
 	    var collection = database.collection(name);
