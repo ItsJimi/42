@@ -10,7 +10,6 @@ var WebSocketServer = require('ws').Server;
 var wss = new WebSocketServer({ server: server });
 var express = require('express');
 var session = require('express-session');
-var bodyParser = require('body-parser');
 var app = express();
 
 // Session
@@ -59,17 +58,14 @@ wss.on('connection', function connection(ws) {
 // Set
 app.set('view engine', 'ejs');
 app.set('views', './app/views');
-app.set('json spaces', 4);
 
 // Use
 app.use(express.static('./app/public'));
 app.use(favicon('./app/public/img/img1.jpg'));
-app.use(bodyParser.json());
+app.use(require('body-parser').urlencoded({ extended: true }));
 
 // Index
 app.use('/', index);
-// Profiles
-app.use('/profiles', profiles);
 // Cdn
 app.use('/cdn', cdn);
 // Auth

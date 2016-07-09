@@ -14,7 +14,7 @@
 	</div>
 	<div id="edit_localisation" class="edit_localisation">
 		Localisation :
-		<input id="edit_localisation_s" type="text" value="" />
+		<input id="edit_location_s" type="text" value="" />
 	</div>
 	<div id="edit_birthdate" class="edit_birthdate">
 		Birth date :
@@ -23,16 +23,17 @@
 	<div id="edit_gender" class="edit_gender">
 		Gender :
 		<select id="edit_gender_s" name="edit_gender_s">
-			<option id="edit_man_gender" value="man">Man</option>
-			<option id="edit_woman_gender" value="woman">Woman</option>
+			<option id="edit_unknown_preference" value="unknown" >Unknown</option>
+			<option id="edit_man_gender" value="man" >Man</option>
+			<option id="edit_woman_gender" value="woman" >Woman</option>
 		</select>
 	</div>
 	<div id="edit_preference" class="edit_preference">
 		Preference :
 		<select id="edit_preference_s" name="edit_preference_s">
+		<option id="edit_both_preference" value="both" >Both</option>
 			<option id="edit_man_preference" value="man" >Man</option>
-			<option id="edit_woman_preference" value="woman">Woman</option>
-			<option id="edit_both_preference" value="both" >Both</option>
+			<option id="edit_woman_preference" value="woman" >Woman</option>
 		</select>
 	</div>
 	<div id="edit_tags" class="edit_tags"></div>
@@ -47,7 +48,7 @@
 	<div id="edit_bio" class="edit_bio">
 		<textarea id="edit_bio_s"></textarea>
 	</div>
-	<div class="edit_validate">
+	<div id="edit_validate" class="edit_validate">
 		Save changes
 	</div>
 </div>

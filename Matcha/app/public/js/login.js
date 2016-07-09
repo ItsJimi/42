@@ -20,27 +20,13 @@ function signin(username, pass) {
 		});
 		return (false);
 	}
-	$.ajax({
-        url: "/login/signin",
-        type: "POST",
-        dataType: "json",
-        data: JSON.stringify({
-            username: username,
-            pass: pass
-        }),
-        contentType: "application/json",
-        cache: false,
-        timeout: 5000,
-        statusCode: {
-            400: function() {
-                console.log("error");
-            },
-            200: function(res) {
-				info(res);
-				if (res.end === "true")
-					window.location = "/";
-            }
-        }
+	$.post("/login/signin", {
+		username: username,
+        pass: pass
+    }, function(res) {
+		info(res);
+		if (res.end === "true")
+			window.location = "/";
     });
 }
 function signup(username, firstname, lastname, mail, pass1, pass2) {
@@ -51,28 +37,14 @@ function signup(username, firstname, lastname, mail, pass1, pass2) {
 		});
 		return (false);
 	}
-	$.ajax({
-        url: "/login/signup",
-        type: "POST",
-        dataType: "json",
-        data: JSON.stringify({
-			username: username,
-			firstname: firstname,
-			lastname: lastname,
-			mail: mail,
-			pass1: pass1,
-			pass2: pass2
-        }),
-        contentType: "application/json",
-        cache: false,
-        timeout: 5000,
-        statusCode: {
-            400: function() {
-                console.log("error");
-            },
-            200: function(res) {
-				info(res);
-            }
-        }
+	$.post("/login/signup", {
+		username: username,
+		firstname: firstname,
+		lastname: lastname,
+		mail: mail,
+		pass1: pass1,
+		pass2: pass2
+    }, function(res) {
+		info(res);
     });
 }

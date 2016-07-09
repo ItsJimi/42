@@ -40,4 +40,8 @@ $(document).ready(function() {
 			$('#message').fadeOut('fast');
 		}
 	});
+
+	$('#edit_validate').click(function() {
+		editProfile();
+	});
 });

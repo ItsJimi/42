@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var bcrypt = require('bcryptjs');
+var salt = bcrypt.genSaltSync(10);
 
 var db = require('../controllers/database.js');
 var util = require('../controllers/utils.js');
@@ -22,9 +24,8 @@ router.post('/signin', function (req, res) {
 		if (!req.body.username || !req.body.pass)
 			return (false);
 		db.get("users", function(data) {
-			console.log(req.body.username);
 			if (data.length == 1) {
-				if (data[0].username === req.body.username.toLowerCase() && data[0].pass === util.passHash(req.body.username.toLowerCase(), req.body.pass)) {
+				if (data[0].username === req.body.username.toLowerCase() && bcrypt.compareSync(req.body.username.toLowerCase() + req.body.pass, data[0].pass)) {
 					if (data[0].valid == 1) {
 						sess.username = data[0].username;
 						sess.mail = data[0].mail;
@@ -32,10 +33,10 @@ router.post('/signin', function (req, res) {
 							if (data.length == 1) {
 								sess.firstname = data[0].firstname;
 								sess.lastname = data[0].lastname;
-								res.status(200).send(JSON.stringify({
+								res.json({
 									end: "true",
 									message: "Connected !"
-								}));
+								});
 								return (true);
 							}
 						},
@@ -44,26 +45,26 @@ router.post('/signin', function (req, res) {
 						});
 					}
 					else {
-						res.status(200).send(JSON.stringify({
+						res.json({
 							end: "false",
 							message: "Your mail address is not verified."
-						}));
+						});
 						return (false);
 					}
 				}
 				else {
-					res.status(200).send(JSON.stringify({
+					res.json({
 						end: "false",
 						message: "Wrong informations"
-					}));
+					});
 					return (false);
 				}
 			}
 			else {
-				res.status(200).send(JSON.stringify({
+				res.json({
 					end: "false",
 					message: "Wrong informations"
-				}));
+				});
 				return (false);
 			}
 		}, {
@@ -80,25 +81,25 @@ router.post('/signup', function (req, res) {
 
 	if (!sess.username) {
 		if (!req.body.username || !req.body.firstname || !req.body.lastname || !req.body.mail || !req.body.pass1 || !req.body.pass2) {
-			res.status(200).send(JSON.stringify({
+			res.json({
 				end: "false",
 				message: "Fields empty."
-			}));
+			});
 			return (false);
 		}
 		if (req.body.pass1 !== req.body.pass2) {
-			res.status(200).send(JSON.stringify({
+			res.json({
 				end: "false",
 				message: "Passwords don't match."
-			}));
+			});
 			return (false);
 		}
 		db.get("users", function(data) {
 			if (data.length == 1) {
-				res.status(200).send(JSON.stringify({
+				res.json({
 					end: "false",
 					message: "Already used."
-				}));
+				});
 				return (false);
 			}
 			else {
@@ -111,19 +112,19 @@ router.post('/signup', function (req, res) {
 					db.insert("users", {
 						username: req.body.username.toLowerCase(),
 						mail: req.body.mail,
-						pass: util.passHash(req.body.username.toLowerCase(), req.body.pass1)
+						pass: bcrypt.hashSync(req.body.username.toLowerCase() + req.body.pass1, salt)
 					});
-					res.status(200).send(JSON.stringify({
+					res.json({
 						end: "true",
 						message: "Yeah ! Welcome to Choose !"
-					}));
+					});
 					return (true);
 				}
 				else {
-					res.status(200).send(JSON.stringify({
+					res.json({
 						end: "false",
 						message: "Email not valid."
-					}));
+					});
 					return (false);
 				}
 			}

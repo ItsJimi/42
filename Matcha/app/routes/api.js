@@ -54,40 +54,46 @@ router.get('/profiles/view/:username', function (req, res) {
 router.post('/profiles/update/', function (req, res) {
 	var sess = req.session;
 
-	var firstname = util.htmlEscape(req.body.firstname);
-	var lastname = util.htmlEscape(req.body.firstname);
-	var localisation = util.htmlEscape(req.body.localisation);
-	try {
-		var birthdate = new Date(req.body.birthdate).toISOString();
-	}
-	catch (e) {
-		res.json({
-			act: "error",
-			message: "Date format not valid."
-		});
-	}
-	if (req.body.gender === "man")
-		var gender = "Man";
-	else if (req.body.gender === "woman")
-		var gender = "Woman";
-	else
-		var gender = "Unknown";
-	
-	var preference = util.htmlEscape(req.body.firstname);
-	var firstname = util.htmlEscape(req.body.firstname);
-	var firstname = util.htmlEscape(req.body.firstname);
-	var firstname = util.htmlEscape(req.body.firstname);
-	var firstname = util.htmlEscape(req.body.firstname);
-
 	if (sess.username) {
+		var profile = {};
+
+		if (req.body.firstname)
+			profile.firstname = util.escapeHtml(req.body.firstname);
+		if (req.body.lastname)
+			profile.lastname = util.escapeHtml(req.body.lastname);
+		if (req.body.location)
+			profile.location = util.escapeHtml(req.body.location);
+		try {
+			profile.birthdate = new Date(req.body.birthdate).toISOString();
+		}
+		catch (e) {}
+		if (req.body.gender === "Man")
+			profile.gender = "Man";
+		else if (req.body.gender === "Woman")
+			profile.gender = "Woman";
+		else
+			profile.gender = "Unknown";
+		if (req.body.preference === "Man")
+			profile.preference = "Man";
+		else if (req.body.preference === "Woman")
+			profile.preference = "Woman";
+		else
+			profile.preference = "Both";
+		if (req.body.bio)
+			profile.bio = util.escapeHtml(req.body.bio);
+
+		console.log(db);
 		db.update("profiles", {
 			username: sess.username
 		}, {
-			$set: {
-		        "firstname": req.body.firstname,
-		        "lastname": req.body.flastname,
-
-			}
+			$set: profile
+		}, function(res) {
+			res.json({
+				act: "info",
+				request: true,
+				message: "Your profile has been updated."
+			});
+			console.log("testo");
 		});
 	}
 });
