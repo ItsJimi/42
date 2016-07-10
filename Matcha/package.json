@@ -18,6 +18,7 @@
     "ejs": "^2.4.2",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
+    "lwip": "0.0.9",
     "mongodb": "^2.1.21",
     "serve-favicon": "^2.3.0",
     "ws": "^1.1.0"

@@ -1,39 +1,39 @@
 function initMap() {
-	var myLatLng = {lat: 48.8966838, lng: 2.3161868};
+	$.get("/api/profiles/view", {}, function(res) {
+		if (res[0].pos)
+			var myLatLng = {lat: res[0].pos[0], lng: res[0].pos[1]};
+		else
+			var myLatLng = {lat: 48.856614, lng: 2.3522219};
 
-	var map = new google.maps.Map(document.getElementById('map'), {
-		zoom: 16,
-		center: myLatLng,
-		zoomControl: true,
-		mapTypeControl: false,
-		scaleControl: true,
-		streetViewControl: false,
-		rotateControl: false
-	});
+		var map = new google.maps.Map(document.getElementById('map'), {
+			zoom: 15,
+			center: myLatLng,
+			zoomControl: true,
+			mapTypeControl: false,
+			scaleControl: true,
+			streetViewControl: false,
+			rotateControl: false
+		});
+		$.get("/api/profiles/", {}, function(res) {
+			var i = 0;
+			var marker = [];
 
-	var marker = new google.maps.Marker({
-    	position: {lat: 48.896, lng: 2.3161868},
-    	map: map,
-    	title: '42 School !',
-		icon: 'https://www.gravatar.com/avatar/fe65f553c23437048d75161e836dd724?s=50'
-	});
-	var infowindow = new google.maps.InfoWindow({
-		content: '<div class="desc">Jimi Maiquez</div>'
-	});
-	marker.addListener('click', function() {
-		infowindow.open(map, marker);
-	});
-
-	var marker2 = new google.maps.Marker({
-    	position: {lat: 48.9, lng: 2.3161868},
-    	map: map,
-    	title: '42 School !',
-		icon: 'https://www.gravatar.com/avatar/?s=50'
-	});
-	var infowindow2 = new google.maps.InfoWindow({
-		content: '<div class="desc">Marie Coutellier</div>'
-	});
-	marker2.addListener('click', function() {
-		infowindow2.open(map, marker2);
+			res.forEach(function(profile) {
+				if (profile.pos) {
+					marker[i] = new google.maps.Marker({
+				    	position: {lat: profile.pos[0], lng: profile.pos[1]},
+				    	map: map,
+				    	title: profile.firstname + " " + profile.lastname,
+						icon: "/api/img/view/" + profile.username + "/50"
+					});
+					marker[i].addListener('click', function() {
+						viewProfile(function() {
+							$('#profiles').fadeIn('fast');
+						}, profile.username);
+					});
+				}
+				i++;
+			});
+		});
 	});
 }

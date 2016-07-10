@@ -1,4 +1,13 @@
 function viewProfile(callback, username) {
+	$('#profiles_firstname').html("");
+	$('#profiles_lastname').html("");
+	$('#profiles_img_s').attr("src", "/img/pp.png");
+	$('#profiles_location_s').html("Unknown");
+	$('#profiles_age_s').html("?");
+	$("#profiles_gender_s").html("Unknown");
+	$("#profiles_preference_s").html("Both");
+	$('#profiles_tags').html('');
+	$('#profiles_bio_s').html('');
 	if (!username)
 		username = '';
 	$.get("/api/profiles/view/" + username, {}, function(res) {
@@ -10,27 +19,29 @@ function viewProfile(callback, username) {
 			return (false);
 		}
 		if (res[0].firstname)
-			$('#profile_firstname').html(res[0].firstname);
+			$('#profiles_firstname').html(res[0].firstname);
 		if (res[0].lastname)
-			$('#profile_lastname').html(res[0].lastname);
+			$('#profiles_lastname').html(res[0].lastname);
 		if (res[0].img)
-			$('#profile_img_s').attr("src", res[0].img[0]);
+			$('#profiles_img_s').attr("src", res[0].img[0]);
 		if (res[0].location)
-			$('#profile_location_s').html(res[0].location);
-		if (res[0].birthdate)
-			$('#profile_birthdate_s').html(res[0].birthdate.substr(0, 10));
+			$('#profiles_location_s').html(res[0].location);
+		if (res[0].birthdate) {
+			var ageDifMs = Date.now() - (new Date(res[0].birthdate));
+	        var ageDate = new Date(ageDifMs);
+			$('#profiles_age_s').html(Math.abs(ageDate.getUTCFullYear() - 1970));
+		}
 		if (res[0].gender)
-			$("#profile_gender_s option[value='" + res[0].gender + "']").html("selected", "selected");
+			$("#profiles_gender_s").html(res[0].gender);
 		if (res[0].preference)
-			$("#profile_preference_s option[value='" + res[0].preference + "']").html("selected", "selected");
+			$("#profiles_preference_s").html(res[0].preference);
 		if (res[0].tags) {
 			res[0].tags.forEach(function(tag) {
-				$('#profile_tags').append('<span class="profile_tag">#' + tag + '</span> ');
+				$('#profiles_tags').append('<span class="profiles_tag">#' + tag + '</span> ');
 			});
 		}
-		getTags();
 		if (res[0].bio)
-			$('#profile_bio_s').html(res[0].bio);
+			$('#profiles_bio_s').html(res[0].bio);
 		callback();
     });
 }
@@ -45,9 +56,9 @@ function viewYourProfile(callback) {
 			return (false);
 		}
 		if (res[0].firstname)
-			$('#edit_firstname').html(res[0].firstname);
+			$('#edit_firstname').val(res[0].firstname);
 		if (res[0].lastname)
-			$('#edit_lastname').html(res[0].lastname);
+			$('#edit_lastname').val(res[0].lastname);
 		if (res[0].img)
 			$('#edit_img_s').attr("src", res[0].img[0]);
 		if (res[0].location)
@@ -72,8 +83,8 @@ function viewYourProfile(callback) {
 
 function editProfile() {
 	$.post("/api/profiles/update/", {
-		firstname: $('#edit_firstname').html(),
-		lastname: $('#edit_lastname').html(),
+		firstname: $('#edit_firstname').val(),
+		lastname: $('#edit_lastname').val(),
 		location: $('#edit_location_s').val(),
 		birthdate: $('#edit_birthdate_s').val(),
 		gender: $("#edit_gender_s option:selected").text(),
