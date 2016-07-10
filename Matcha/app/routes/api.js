@@ -82,18 +82,16 @@ router.post('/profiles/update/', function (req, res) {
 		if (req.body.bio)
 			profile.bio = util.escapeHtml(req.body.bio);
 
-		console.log(db);
 		db.update("profiles", {
 			username: sess.username
 		}, {
 			$set: profile
-		}, function(res) {
+		}, function() {
 			res.json({
 				act: "info",
 				request: true,
 				message: "Your profile has been updated."
 			});
-			console.log("testo");
 		});
 	}
 });

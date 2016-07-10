@@ -17,7 +17,7 @@ $(document).ready(function() {
 			edit = false;
 		}
 		else {
-			viewProfile(function() {
+			viewYourProfile(function() {
 				$('#edit').fadeIn('fast');
 				$('#profiles').fadeOut('fast');
 				$('#message').fadeOut('fast');

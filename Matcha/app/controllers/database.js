@@ -23,8 +23,8 @@ module.exports = {
 	},
 	update: function(name, obj1, obj2, cb) {
         // Get the documents collection
-        var collection = db.collection(name);
-        collection.updateOne(obj1, obj2, function(err, docs) {
+        var collection = database.collection(name);
+        collection.update(obj1, obj2, function(err, docs) {
             if (err)
                 throw err;
             if (cb)

@@ -1,5 +1,5 @@
 function info(res) {
-	if (res.end === "true")
+	if (res.end)
 		$("#info").css("background", "#27ae60");
 	else
 		$("#info").css("background", "#c0392b");
