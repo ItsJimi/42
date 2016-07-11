@@ -11,8 +11,8 @@
 		<div id="img_next">></div>
 	</div>
 	<div class="fileUpload">
-		Upload
-		<input type="file" class="upload" value="Choose a file" accept="image/*" />
+		<input type="file" class="upload" value="Choose a file" accept="image/*" onchange="upload(arguments[0].target.files)" />
+		<div class="upload">Upload</div>
 	</div>
 	<div id="edit_localisation" class="edit_localisation">
 		Location :

@@ -21,6 +21,7 @@
     "lwip": "0.0.9",
     "mongodb": "^2.1.21",
     "serve-favicon": "^2.3.0",
+    "validator": "^5.4.0",
     "ws": "^1.1.0"
   }
 }

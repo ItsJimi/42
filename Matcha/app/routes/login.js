@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var bcrypt = require('bcryptjs');
 var salt = bcrypt.genSaltSync(10);
+var validator = require('validator');
 
 var db = require('../controllers/database.js');
 var util = require('../controllers/utils.js');
@@ -103,7 +104,7 @@ router.post('/signup', function (req, res) {
 				return (false);
 			}
 			else {
-				if (util.validateEmail(req.body.mail)) {
+				if (validator.isEmail(req.body.mail)) {
 					db.insert("profiles", {
 						username: req.body.username.toLowerCase(),
 						firstname: req.body.firstname,

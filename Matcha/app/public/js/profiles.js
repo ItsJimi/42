@@ -114,3 +114,28 @@ function getTags(callback) {
 		});
     });
 }
+
+function upload(files) {
+    var file = files[0] ;
+
+    var reader = new FileReader();
+
+    // When the image is loaded
+    reader.onload = function(evt) {
+        $.post("/api/img/upload/", {
+            objectData: evt.target.result.split(',')[1],
+            type: file.type
+        }, function(res) {
+			if (res.end) {
+				$('#uploadImg').val('');
+				info({
+					end: true,
+					message: "Great ! ;)"
+				});
+			}
+        });
+    };
+
+    // Read in the image file as a data URL
+    reader.readAsDataURL(file);
+}

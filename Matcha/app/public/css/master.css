@@ -412,29 +412,6 @@ aside {
 .img_nav div:hover {
 	cursor: pointer;
 }
-.fileUpload {
-	margin-top: 5px;
-    position: relative;
-	font-size: 0.5em;
-	height: 30px;
-	line-height: 30px;
-	font-family: "latothin", sans-serif;
-	border: 1px solid #16a085;
-	background: #1abc9c;
-	color: #fff;
-}
-.fileUpload input.upload {
-	cursor: pointer;
-    position: absolute;
-	max-width: 300px;
-	height: 30px;
-    top: 0;
-    right: 0;
-    margin: 0;
-    padding: 0;
-    opacity: 0;
-    filter: alpha(opacity=0);
-}
 .edit_bio textarea {
 	text-align: justify;
 	height: 100px;
