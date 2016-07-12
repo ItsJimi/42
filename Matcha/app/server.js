@@ -62,7 +62,7 @@ app.set('views', './app/views');
 // Use
 app.use(express.static('./app/public'));
 app.use(favicon('./app/public/img/img1.jpg'));
-app.use(require('body-parser').urlencoded({ extended: true }));
+app.use(require('body-parser').urlencoded({ extended: true, limit: '50mb' }));
 
 // Index
 app.use('/', index);

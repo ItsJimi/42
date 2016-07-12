@@ -7,7 +7,9 @@ function viewProfile(callback, username) {
 	$("#profiles_gender_s").html("Unknown");
 	$("#profiles_preference_s").html("Both");
 	$('#profiles_tags').html('');
-	$('#profiles_bio_s').html('');
+	$('#profiles_bio').html('');
+	$('#profiles_img_prev').attr('onclick', '');
+	$('#profiles_img_next').attr('onclick', '');
 	if (!username)
 		username = '';
 	$.get("/api/profiles/view/" + username, {}, function(res) {
@@ -23,7 +25,7 @@ function viewProfile(callback, username) {
 		if (res[0].lastname)
 			$('#profiles_lastname').html(res[0].lastname);
 		if (res[0].img)
-			$('#profiles_img_s').attr("src", res[0].img[0]);
+			$('#profiles_img_s').attr("src", '/api/img/view/' + username + '/300/0');
 		if (res[0].location)
 			$('#profiles_location_s').html(res[0].location);
 		if (res[0].birthdate) {
@@ -41,7 +43,7 @@ function viewProfile(callback, username) {
 			});
 		}
 		if (res[0].bio)
-			$('#profiles_bio_s').html(res[0].bio);
+			$('#profiles_bio').html(res[0].bio);
 		callback();
     });
 }
@@ -60,7 +62,7 @@ function viewYourProfile(callback) {
 		if (res[0].lastname)
 			$('#edit_lastname').val(res[0].lastname);
 		if (res[0].img)
-			$('#edit_img_s').attr("src", res[0].img[0]);
+			$('#edit_img_s').attr("src", '/api/img/view/' + res[0].username + '/300/0');
 		if (res[0].location)
 			$('#edit_location_s').val(res[0].location);
 		if (res[0].birthdate)
@@ -126,13 +128,13 @@ function upload(files) {
             objectData: evt.target.result.split(',')[1],
             type: file.type
         }, function(res) {
-			if (res.end) {
+			if (res.request) {
 				$('#uploadImg').val('');
-				info({
-					end: true,
-					message: "Great ! ;)"
-				});
 			}
+			info({
+				end: res.request,
+				message: res.message
+			});
         });
     };
 

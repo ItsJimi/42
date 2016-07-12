@@ -1,5 +1,7 @@
 $(document).ready(function() {
 	var edit = false;
+	var edit_nbr = 0;
+	var profiles_nbr = 0;
 
 	// Nav Buttons
 	$('#nav_message').click(function() {
@@ -43,5 +45,31 @@ $(document).ready(function() {
 
 	$('#edit_validate').click(function() {
 		editProfile();
+	});
+
+	$('#profiles_img_prev').click(function() {
+		if (nbr == 0)
+			nbr = 4;
+		else
+			nbr--;
+		//$('#profiles_img_s').attr("src", '/api/img/view/' + username + '/300/' + nbr);
+	});
+	$('#profiles_img_next').click(function() {
+		if (nbr == 4)
+			nbr = 0;
+		else
+			nbr++;
+	});
+	$('#edit_img_prev').click(function() {
+		if (nbr == 0)
+			nbr = 4;
+		else
+			nbr--;
+	});
+	$('#edit_img_next').click(function() {
+		if (nbr == 4)
+			nbr = 0;
+		else
+			nbr++;
 	});
 });

@@ -24,7 +24,7 @@ function initMap() {
 				    	position: {lat: profile.pos[0], lng: profile.pos[1]},
 				    	map: map,
 				    	title: profile.firstname + " " + profile.lastname,
-						icon: "/api/img/view/" + profile.username + "/50"
+						icon: "/api/img/view/" + profile.username + "/50/0"
 					});
 					marker[i].addListener('click', function() {
 						viewProfile(function() {
