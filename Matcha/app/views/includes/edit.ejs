@@ -1,4 +1,9 @@
 <div id="edit" class="edit">
+	<div id="edit_close" class="edit_close">
+		<svg style="width:24px;height:24px" viewBox="0 0 24 24">
+		    <path fill="#fff" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+		</svg>
+	</div>
 	<div class="edit_name">
 		<input id="edit_firstname" class="edit_firstname" type="text" />
 		<input id="edit_lastname" class="edit_lastname" type="text" />
@@ -7,8 +12,21 @@
 		<img id="edit_img_s" src="/img/pp.png" alt="" />
 	</div>
 	<div class="img_nav">
-		<div id="edit_img_prev" onclick=""><</div>
-		<div id="edit_img_next" onclick="">></div>
+		<div id="edit_img_prev" onclick="">
+			<svg style="width:24px;height:24px" viewBox="0 0 24 24">
+			    <path fill="#fff" d="M18.41,7.41L17,6L11,12L17,18L18.41,16.59L13.83,12L18.41,7.41M12.41,7.41L11,6L5,12L11,18L12.41,16.59L7.83,12L12.41,7.41Z" />
+			</svg>
+		</div>
+		<div id="edit_del" class="edit_del">
+			<svg style="width:24px;height:24px" viewBox="0 0 24 24">
+			    <path fill="#fff" d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" />
+			</svg>
+		</div>
+		<div id="edit_img_next" onclick="">
+			<svg style="width:24px;height:24px" viewBox="0 0 24 24">
+			    <path fill="#fff" d="M5.59,7.41L7,6L13,12L7,18L5.59,16.59L10.17,12L5.59,7.41M11.59,7.41L13,6L19,12L13,18L11.59,16.59L16.17,12L11.59,7.41Z" />
+			</svg>
+		</div>
 	</div>
 	<div class="fileUpload">
 		<input type="file" class="upload" value="Choose a file" accept="image/*" onchange="upload(arguments[0].target.files)" />

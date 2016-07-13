@@ -29,6 +29,16 @@ $(document).ready(function() {
 			});
 		}
 	});
+	$('#edit_close').click(function() {
+		$('#edit').fadeOut('fast');
+		$('#edit_tags').html("");
+		$('#edit_tags_choose').html("");
+
+		edit = false;
+	});
+	$('#profiles_close').click(function() {
+		$('#profiles').fadeOut('fast');
+	});
 	$('#nav_filters').click(function() {
 		$('#filters').slideToggle('fast');
 		$('#edit').fadeOut('fast');
@@ -47,29 +57,39 @@ $(document).ready(function() {
 		editProfile();
 	});
 
+	$('#edit_del').click(function() {
+		delYourPicture();
+	});
 	$('#profiles_img_prev').click(function() {
-		if (nbr == 0)
-			nbr = 4;
+		if (profiles_nbr == 0)
+			profiles_nbr = 4;
 		else
-			nbr--;
-		//$('#profiles_img_s').attr("src", '/api/img/view/' + username + '/300/' + nbr);
+			profiles_nbr--;
+		var username = $('#profiles_img_s').attr('src').split('/')[4];
+		$('#profiles_img_s').attr("src", '/api/img/view/' + username + '/300/' + profiles_nbr);
 	});
 	$('#profiles_img_next').click(function() {
-		if (nbr == 4)
-			nbr = 0;
+		if (profiles_nbr == 4)
+			profiles_nbr = 0;
 		else
-			nbr++;
+			profiles_nbr++;
+		var username = $('#profiles_img_s').attr('src').split('/')[4];
+		$('#profiles_img_s').attr("src", '/api/img/view/' + username + '/300/' + profiles_nbr);
 	});
 	$('#edit_img_prev').click(function() {
-		if (nbr == 0)
-			nbr = 4;
+		if (edit_nbr == 0)
+			edit_nbr = 4;
 		else
-			nbr--;
+			edit_nbr--;
+		var username = $('#edit_img_s').attr('src').split('/')[4];
+		$('#edit_img_s').attr("src", '/api/img/view/' + username + '/300/' + edit_nbr);
 	});
 	$('#edit_img_next').click(function() {
-		if (nbr == 4)
-			nbr = 0;
+		if (edit_nbr == 4)
+			edit_nbr = 0;
 		else
-			nbr++;
+			edit_nbr++;
+		var username = $('#edit_img_s').attr('src').split('/')[4];
+		$('#edit_img_s').attr("src", '/api/img/view/' + username + '/300/' + edit_nbr);
 	});
 });

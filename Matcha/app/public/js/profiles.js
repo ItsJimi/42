@@ -1,4 +1,5 @@
 function viewProfile(callback, username) {
+	NProgress.start();
 	$('#profiles_firstname').html("");
 	$('#profiles_lastname').html("");
 	$('#profiles_img_s').attr("src", "/img/pp.png");
@@ -10,9 +11,11 @@ function viewProfile(callback, username) {
 	$('#profiles_bio').html('');
 	$('#profiles_img_prev').attr('onclick', '');
 	$('#profiles_img_next').attr('onclick', '');
+	NProgress.inc();
 	if (!username)
 		username = '';
-	$.get("/api/profiles/view/" + username, {}, function(res) {
+	$.get("/api/profiles/view/" + username, {}).done(function(res) {
+		NProgress.inc();
 		if (!res[0]) {
 			info({
 				end: false,
@@ -24,8 +27,7 @@ function viewProfile(callback, username) {
 			$('#profiles_firstname').html(res[0].firstname);
 		if (res[0].lastname)
 			$('#profiles_lastname').html(res[0].lastname);
-		if (res[0].img)
-			$('#profiles_img_s').attr("src", '/api/img/view/' + username + '/300/0');
+		$('#profiles_img_s').attr("src", '/api/img/view/' + username + '/300/0');
 		if (res[0].location)
 			$('#profiles_location_s').html(res[0].location);
 		if (res[0].birthdate) {
@@ -44,12 +46,16 @@ function viewProfile(callback, username) {
 		}
 		if (res[0].bio)
 			$('#profiles_bio').html(res[0].bio);
+		NProgress.inc();
 		callback();
+		NProgress.done();
     });
 }
 
 function viewYourProfile(callback) {
-	$.get("/api/profiles/view/", {}, function(res) {
+	NProgress.start();
+	$.get("/api/profiles/view/", {}).done(function(res) {
+		NProgress.inc();
 		if (!res[0]) {
 			info({
 				end: false,
@@ -61,8 +67,7 @@ function viewYourProfile(callback) {
 			$('#edit_firstname').val(res[0].firstname);
 		if (res[0].lastname)
 			$('#edit_lastname').val(res[0].lastname);
-		if (res[0].img)
-			$('#edit_img_s').attr("src", '/api/img/view/' + res[0].username + '/300/0');
+		$('#edit_img_s').attr("src", '/api/img/view/' + res[0].username + '/300/0');
 		if (res[0].location)
 			$('#edit_location_s').val(res[0].location);
 		if (res[0].birthdate)
@@ -76,14 +81,19 @@ function viewYourProfile(callback) {
 				$('#edit_tags').append('<span class="edit_tag">#' + tag + '</span> ');
 			});
 		}
+		NProgress.inc();
 		getTags();
+		NProgress.inc();
 		if (res[0].bio)
 			$('#edit_bio_s').html(res[0].bio);
+		NProgress.inc();
 		callback();
+		NProgress.done();
     });
 }
 
 function editProfile() {
+	NProgress.start();
 	$.post("/api/profiles/update/", {
 		firstname: $('#edit_firstname').val(),
 		lastname: $('#edit_lastname').val(),
@@ -93,6 +103,7 @@ function editProfile() {
 		preference: $("#edit_preference_s option:selected").text(),
 		bio: $('#edit_bio_s').val()
 	}).done(function(res) {
+		NProgress.inc();
 		if (!res.request) {
 			info({
 				end: false,
@@ -106,6 +117,7 @@ function editProfile() {
 				message: res.message
 			});
 		}
+		NProgress.done();
     });
 }
 
@@ -118,16 +130,19 @@ function getTags(callback) {
 }
 
 function upload(files) {
+	NProgress.start();
     var file = files[0] ;
 
     var reader = new FileReader();
 
     // When the image is loaded
     reader.onload = function(evt) {
+		NProgress.inc();
         $.post("/api/img/upload/", {
             objectData: evt.target.result.split(',')[1],
             type: file.type
-        }, function(res) {
+        }).done(function(res) {
+			NProgress.inc();
 			if (res.request) {
 				$('#uploadImg').val('');
 			}
@@ -135,9 +150,22 @@ function upload(files) {
 				end: res.request,
 				message: res.message
 			});
+			NProgress.done();
         });
     };
 
+	NProgress.inc();
     // Read in the image file as a data URL
     reader.readAsDataURL(file);
+}
+
+function delYourPicture() {
+	$.post("/api/img/del/", {
+		image: $('#edit_img_s').attr('src').split('/')[6]
+	}).done(function(res) {
+		info({
+			end: res.request,
+			message: res.message
+		});
+	});
 }

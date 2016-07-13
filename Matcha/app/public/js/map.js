@@ -1,10 +1,12 @@
 function initMap() {
-	$.get("/api/profiles/view", {}, function(res) {
+	NProgress.start();
+	$.get("/api/profiles/view", {}).done(function(res) {
+		NProgress.inc();
 		if (res[0].pos)
 			var myLatLng = {lat: res[0].pos[0], lng: res[0].pos[1]};
 		else
 			var myLatLng = {lat: 48.856614, lng: 2.3522219};
-
+		NProgress.inc();
 		var map = new google.maps.Map(document.getElementById('map'), {
 			zoom: 15,
 			center: myLatLng,
@@ -14,10 +16,12 @@ function initMap() {
 			streetViewControl: false,
 			rotateControl: false
 		});
-		$.get("/api/profiles/", {}, function(res) {
+		NProgress.inc();
+		$.get("/api/profiles/", {}).done(function(res) {
 			var i = 0;
 			var marker = [];
 
+			NProgress.inc();
 			res.forEach(function(profile) {
 				if (profile.pos) {
 					marker[i] = new google.maps.Marker({
@@ -33,7 +37,9 @@ function initMap() {
 					});
 				}
 				i++;
+				NProgress.inc();
 			});
+			NProgress.done();
 		});
 	});
 }

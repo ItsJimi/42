@@ -1,3 +1,7 @@
+$('#logo').click(function() {
+	initMap();
+});
+
 function info(res) {
 	if (res.end == true)
 		$("#info").css("background", "#27ae60");

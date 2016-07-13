@@ -128,6 +128,9 @@ header a, footer a {
 	text-decoration: none;
 	color: #efefef;
 }
+.logo {
+	cursor: pointer;
+}
 .nav_svg {
 	margin-right: 0px;
 }
@@ -332,6 +335,11 @@ aside {
 	text-align: center;
 	font-size: 2em;
 }
+.profiles_close {
+	float: right;
+	padding-right: 5px;
+	cursor: pointer;
+}
 .profiles div {
 	max-width: 300px;
 	margin-top: 10px;
@@ -381,6 +389,11 @@ aside {
 	text-align: center;
 	font-size: 2em;
 }
+.edit_close {
+	float: right;
+	padding-right: 5px;
+	cursor: pointer;
+}
 .edit div {
 	max-width: 300px;
 	margin-top: 10px;
@@ -402,7 +415,7 @@ aside {
 	justify-content: space-between;
 	width: 150px;
 	height: 30px;
-	line-height: 30px;
+	line-height: 35px;
 	font-family: "latothin", sans-serif;
 	border: 1px solid #16a085;
 	background: #1abc9c;
