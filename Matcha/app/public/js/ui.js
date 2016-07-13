@@ -56,6 +56,9 @@ $(document).ready(function() {
 	$('#edit_validate').click(function() {
 		editProfile();
 	});
+	$('#edit_add_tag').click(function() {
+		addTag();
+	});
 
 	$('#edit_del').click(function() {
 		delYourPicture();

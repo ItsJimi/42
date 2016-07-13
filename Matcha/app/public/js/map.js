@@ -1,9 +1,38 @@
+var pos;
+
 function initMap() {
 	NProgress.start();
+	console.log("1");
+	// Try HTML5 geolocation.
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(function(position) {
+			console.log("2");
+			pos = {
+				lat: position.coords.latitude,
+				lng: position.coords.longitude
+			};
+			console.log(pos);
+			map();
+		}, function() {
+			//handleLocationError(true, infoWindow, map.getCenter());
+			map();
+		});
+	} else {
+		// Browser doesn't support Geolocation
+		// handleLocationError(false, infoWindow, map.getCenter());
+		map();
+	}
+	console.log("3");
+}
+
+function map() {
 	$.get("/api/profiles/view", {}).done(function(res) {
+		console.log("4");
 		NProgress.inc();
 		if (res[0].pos)
 			var myLatLng = {lat: res[0].pos[0], lng: res[0].pos[1]};
+		else if (pos)
+			var myLatLng = pos;
 		else
 			var myLatLng = {lat: 48.856614, lng: 2.3522219};
 		NProgress.inc();
@@ -22,6 +51,12 @@ function initMap() {
 			var marker = [];
 
 			NProgress.inc();
+			myPos = new google.maps.Marker({
+				position: pos,
+				map: map,
+				title: 'Me'
+			});
+			NProgress.inc();
 			res.forEach(function(profile) {
 				if (profile.pos) {
 					marker[i] = new google.maps.Marker({
@@ -39,7 +74,15 @@ function initMap() {
 				i++;
 				NProgress.inc();
 			});
+
 			NProgress.done();
 		});
 	});
+}
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  infoWindow.setPosition(pos);
+  infoWindow.setContent(browserHasGeolocation ?
+                        'Error: The Geolocation service failed.' :
+                        'Error: Your browser doesn\'t support geolocation.');
 }

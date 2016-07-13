@@ -213,7 +213,7 @@ router.post('/img/del', function (req, res) {
 	var sess = req.session;
 
 	if (sess.username) {
-		var image = parseInt(req.params.image);
+		var image = parseInt(req.body.image);
 
 		if (image < 0 || image > 4) {
 			res.json({
@@ -223,12 +223,14 @@ router.post('/img/del', function (req, res) {
 			})
 			return (false);
 		}
+		var img = "img." + image;
+		console.log(img);
 		db.update("profiles", {
 			username: sess.username,
-			"img.image": {$exists: true}
+			img: {$exists: true}
 		}, {
 			$unset: {
-				"img.image": true
+				img: true
 			}
 		}, function(json) {
 			res.json({
@@ -266,6 +268,57 @@ router.get('/tags/view/:tag', function (req, res) {
 
 			res.json(tags);
 		}, {});
+	}
+});
+// Add tag
+router.post('/tags/add', function (req, res) {
+	var sess = req.session;
+
+	if (sess.username) {
+		if (!req.body.tag)
+			return (false);
+
+		db.update("profiles", {
+			username: sess.username
+		}, {
+			 $addToSet: { tags: { $each: [ validator.escape(req.body.tag) ] } }
+		}, function() {
+			res.json({
+				act: "info",
+				request: true,
+				message: validator.escape(req.body.tag) + " has been added to your tags"
+			});
+		});
+		db.get("tags", function(data) {
+
+			if (data.length == 0) {
+				db.insert("tags", {
+					name: validator.escape(req.body.tag)
+				});
+			}
+		}, {
+			name: validator.escape(req.body.tag)
+		});
+	}
+});
+// Del tag
+router.post('/tags/del', function (req, res) {
+	var sess = req.session;
+
+	if (sess.username) {
+		db.update("profiles", {
+			username: sess.username
+		}, {
+			$pull: {
+				tags: validator.escape(req.body.tag)
+			}
+		}, function(json) {
+			res.json({
+				act: "info",
+				request: true,
+				message: validator.escape(req.body.tag) + " has been deleted"
+			});
+		});
 	}
 });
 

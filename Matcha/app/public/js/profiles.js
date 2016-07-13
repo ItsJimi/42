@@ -78,7 +78,7 @@ function viewYourProfile(callback) {
 			$("#edit_preference_s option[value='" + res[0].preference + "']").attr("selected", "selected");
 		if (res[0].tags) {
 			res[0].tags.forEach(function(tag) {
-				$('#edit_tags').append('<span class="edit_tag">#' + tag + '</span> ');
+				$('#edit_tags').append('<span class="edit_tag" onclick="delTag(this)">#' + tag + '</span> ');
 			});
 		}
 		NProgress.inc();
@@ -163,6 +163,31 @@ function delYourPicture() {
 	$.post("/api/img/del/", {
 		image: $('#edit_img_s').attr('src').split('/')[6]
 	}).done(function(res) {
+		info({
+			end: res.request,
+			message: res.message
+		});
+	});
+}
+
+function addTag() {
+	$.post("/api/tags/add/", {
+		tag: $('#edit_tags_add').val()
+	}).done(function(res) {
+		$('#edit_tags').append('<span class="edit_tag" onclick="delTag(this)">#' + $('#edit_tags_add').val() + '</span> ');
+		$('#edit_tags_add').val("");
+		info({
+			end: res.request,
+			message: res.message
+		});
+	});
+}
+
+function delTag(tag) {
+	$.post("/api/tags/del/", {
+		tag: $(tag).html().slice(1, tag.length)
+	}).done(function(res) {
+		$(tag).remove();
 		info({
 			end: res.request,
 			message: res.message
