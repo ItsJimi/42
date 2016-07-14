@@ -442,7 +442,7 @@ aside {
 
 /* Message */
 .message {
-	display: none;
+	/*display: none;*/
 	position: absolute;
 	top: 60px;
 	left: 0px;
@@ -451,4 +451,29 @@ aside {
 	background: rgba(0, 0, 0, 0.8);
 	text-align: center;
 	font-size: 2em;
+}
+.message_close {
+	float: right;
+	padding-right: 5px;
+	cursor: pointer;
+}
+.message div {
+	max-width: 300px;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 0.5em;
+}
+.message_content {
+	height: 80vh;
+	background: rgba(0, 0, 0, 0.2);
+	overflow-y: auto;
+}
+.message_text {
+	height: 3vh;
+	font-size: 1em;
+	font-family: "latothin", sans-serif;
+	width: 80%;
+}
+.message_send {
+	width: 20%;
 }

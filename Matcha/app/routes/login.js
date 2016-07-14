@@ -28,12 +28,9 @@ router.post('/signin', function (req, res) {
 			if (data.length == 1) {
 				if (data[0].username === req.body.username.toLowerCase() && bcrypt.compareSync(req.body.username.toLowerCase() + req.body.pass, data[0].pass)) {
 					if (data[0].valid == 1) {
-						sess.username = data[0].username;
-						sess.mail = data[0].mail;
+						sess.username = validator.escape(data[0].username);
 						db.get("profiles", function(data) {
 							if (data.length == 1) {
-								sess.firstname = data[0].firstname;
-								sess.lastname = data[0].lastname;
 								res.json({
 									end: "true",
 									message: "Connected !"
@@ -42,7 +39,7 @@ router.post('/signin', function (req, res) {
 							}
 						},
 						{
-							username: data[0].username
+							username: validator.escape(data[0].username)
 						});
 					}
 					else {
@@ -69,7 +66,7 @@ router.post('/signin', function (req, res) {
 				return (false);
 			}
 		}, {
-			username: req.body.username.toLowerCase()
+			username: validator.escape(req.body.username.toLowerCase())
 		});
 	}
 	else
@@ -106,13 +103,13 @@ router.post('/signup', function (req, res) {
 			else {
 				if (validator.isEmail(req.body.mail)) {
 					db.insert("profiles", {
-						username: req.body.username.toLowerCase(),
-						firstname: req.body.firstname,
-						lastname: req.body.lastname
+						username: validator.escape(eq.body.username.toLowerCase()),
+						firstname: validator.escape(req.body.firstname),
+						lastname: validator.escape(req.body.lastname)
 					});
 					db.insert("users", {
-						username: req.body.username.toLowerCase(),
-						mail: req.body.mail,
+						username: validator.escape(req.body.username.toLowerCase()),
+						mail: validator.escape(req.body.mail),
 						pass: bcrypt.hashSync(req.body.username.toLowerCase() + req.body.pass1, salt)
 					});
 					res.json({
@@ -131,8 +128,8 @@ router.post('/signup', function (req, res) {
 			}
 		}, {
 			$or: [
-				{ username: req.body.username.toLowerCase() },
-				{ mail: req.body.mail }
+				{ username: validator.escape(req.body.username.toLowerCase()) },
+				{ mail: validator.escape(req.body.mail) }
 			]
 		});
 	}

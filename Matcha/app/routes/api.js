@@ -223,21 +223,23 @@ router.post('/img/del', function (req, res) {
 			})
 			return (false);
 		}
-		var img = "img." + image;
-		console.log(img);
-		db.update("profiles", {
-			username: sess.username,
-			img: {$exists: true}
-		}, {
-			$unset: {
-				img: true
-			}
-		}, function(json) {
-			res.json({
-				act: "info",
-				request: true,
-				message: "This picture has been deleted"
+
+		db.get("profiles", function(data) {
+			db.update("profiles", {
+				username: sess.username
+			}, {
+				$pull: {
+					img: data[0].img[image]
+				}
+			}, function(json) {
+				res.json({
+					act: "info",
+					request: true,
+					message: "This picture has been deleted"
+				});
 			});
+		}, {
+			username: sess.username
 		});
 	}
 });

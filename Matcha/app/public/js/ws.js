@@ -16,6 +16,10 @@ ws.onmessage = function(data) {
 		else if (res.act === "notif") {
 			notif(res.message, res.icon);
 		}
+		else if (res.act === "message") {
+			$('#message_content').append('<div class="">' + res.message + '</div>');
+			$('#message_content').stop().animate({ scrollTop: $('#message_content').prop('scrollHeight') }, 100);
+		}
 	} catch (e) {
 		console.log(e);
 	}

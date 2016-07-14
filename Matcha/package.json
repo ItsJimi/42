@@ -15,7 +15,9 @@
   "dependencies": {
     "bcryptjs": "^2.3.0",
     "body-parser": "^1.15.2",
+    "connect-mongo": "^1.2.1",
     "ejs": "^2.4.2",
+    "emojione": "^2.2.5",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
     "lwip": "0.0.9",
