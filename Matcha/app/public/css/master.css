@@ -37,7 +37,7 @@ html, body {
     color: #efefef;
     font-size: 1.1em;
     font-family: 'latothin', sans-serif;
-	background: #343434;
+	background: #efefef;
 }
 ::selection {
   background: #1abc9c;
@@ -46,6 +46,9 @@ html, body {
 ::-moz-selection {
   background: #1abc9c;
   color: #fff;
+}
+.clear {
+	clear: both;
 }
 #background_video {
       position: fixed;
@@ -457,22 +460,87 @@ aside {
 	padding-right: 5px;
 	cursor: pointer;
 }
-.message div {
-	max-width: 300px;
-	margin-left: auto;
-	margin-right: auto;
-	font-size: 0.5em;
+.message_global {
+	-webkit-display: -webkit-box;
+	-webkit-display: -webkit-flex;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-align-items: stretch;
+	-webkit-box-align: stretch;
+	-ms-flex-align: stretch;
+	align-items: stretch;
+}
+.message_users {
+	-webkit-flex: 1 2 10px;
+	-webkit-box-flex: 1;
+	-ms-flex: 1 2 10px;
+	flex: 1 2 10px;
+}
+.message_user {
+	font-size: 1em;
+	margin: 5px;
+}
+.message_user img {
+	float: left;
+	width: 60px;
+	border-radius: 100%;
+	border: 2px solid #1abc9c;
+}
+.name {
+	font-size: 0.6em;
+}
+.username {
+	font-size: 0.4em;
 }
 .message_content {
-	height: 80vh;
+	-webkit-flex: 2 1 500px;
+	-webkit-box-flex: 2;
+	-ms-flex: 2 1 500px;
+	flex: 2 1 500px;
+
+	font-size: 0.6em;
+	padding-top: 5px;
+	height: calc(100vh - 85px);
 	background: rgba(0, 0, 0, 0.2);
 	overflow-y: auto;
 }
+.message_content img {
+	width: 20px;
+}
+.message_content div {
+	text-align: justify;
+}
+.message_sender {
+	padding: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 10px;
+	margin-right: 10px;
+	border-radius: 2px;
+	background: #efefef;
+	color: #333;
+	float: right;
+}
+.message_receiver {
+	padding: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 10px;
+	margin-right: 10px;
+	border-radius: 2px;
+	background: #1abc9c;
+	color: #fff;
+	float: left;
+}
 .message_text {
-	height: 3vh;
-	font-size: 1em;
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	height: 30px;
+	font-size: 0.5em;
 	font-family: "latothin", sans-serif;
-	width: 80%;
+	width: 100%;
 }
 .message_send {
 	width: 20%;

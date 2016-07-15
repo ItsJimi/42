@@ -78,6 +78,7 @@ wss.on('connection', function connection(ws) {
 						console.log(user.username);
 						util.sendData(user, {
 							act: "message",
+							role: "receiver",
 							message: emo.toImage(validator.escape(res.message))
 						});
 					});
@@ -85,6 +86,7 @@ wss.on('connection', function connection(ws) {
 						console.log(user.username);
 						util.sendData(user, {
 							act: "message",
+							role: "sender",
 							message: emo.toImage(validator.escape(res.message))
 						});
 					});

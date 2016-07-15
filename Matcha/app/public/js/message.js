@@ -1,6 +1,9 @@
 var to = null;
 
-to = 'test';
+function getReceiver(user) {
+	to = user;
+	console.log(to);
+}
 
 function sendMessage() {
 	sendData({

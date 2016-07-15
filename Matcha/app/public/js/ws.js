@@ -17,7 +17,8 @@ ws.onmessage = function(data) {
 			notif(res.message, res.icon);
 		}
 		else if (res.act === "message") {
-			$('#message_content').append('<div class="">' + res.message + '</div>');
+			$('#message_content').append('<div class="message_' + res.role + '">' + res.message + '</div>');
+			$('#message_content').append('<div class="clear"></div>');
 			$('#message_content').stop().animate({ scrollTop: $('#message_content').prop('scrollHeight') }, 100);
 		}
 	} catch (e) {
