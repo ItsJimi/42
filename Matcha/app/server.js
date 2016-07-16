@@ -73,7 +73,7 @@ wss.on('connection', function connection(ws) {
 		try {
     		var res = JSON.parse(message);
 			if (res.act === "message") {
-				if (res.message) {
+				if (res.message && res.to && res.to != ws.username) {
 					util.getUser(wss, res.to).forEach(function(user) {
 						console.log(user.username);
 						util.sendData(user, {

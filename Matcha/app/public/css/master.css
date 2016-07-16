@@ -206,7 +206,7 @@ section {
 aside {
 	width: 300px;
 	background-color: #333;
-	overflow-y: scroll;
+	overflow-y: auto;
 	overflow-x: hidden;
 }
 .content {
@@ -328,7 +328,7 @@ aside {
 .profiles {
 	display: none;
 	position: absolute;
-	overflow-y: scroll;
+	overflow-y: auto;
 	overflow-x: hidden;
 	top: 60px;
 	left: 0px;
@@ -382,7 +382,7 @@ aside {
 .edit {
 	display: none;
 	position: absolute;
-	overflow-y: scroll;
+	overflow-y: auto;
 	overflow-x: hidden;
 	top: 60px;
 	left: 0px;
@@ -470,12 +470,15 @@ aside {
 	-webkit-box-align: stretch;
 	-ms-flex-align: stretch;
 	align-items: stretch;
+
+	height:  calc(100vh - 95px);
 }
 .message_users {
-	-webkit-flex: 1 2 10px;
-	-webkit-box-flex: 1;
-	-ms-flex: 1 2 10px;
-	flex: 1 2 10px;
+	width: 300px;
+
+	height: 100%;
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 .message_user {
 	font-size: 1em;
@@ -501,7 +504,7 @@ aside {
 
 	font-size: 0.6em;
 	padding-top: 5px;
-	height: calc(100vh - 85px);
+	height: 100%;
 	background: rgba(0, 0, 0, 0.2);
 	overflow-y: auto;
 }
@@ -537,11 +540,8 @@ aside {
 	position: absolute;
 	bottom: 0px;
 	left: 0px;
-	height: 30px;
+	height: 40px;
 	font-size: 0.5em;
 	font-family: "latothin", sans-serif;
 	width: 100%;
-}
-.message_send {
-	width: 20%;
 }
