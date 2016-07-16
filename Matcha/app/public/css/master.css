@@ -471,10 +471,10 @@ aside {
 	-ms-flex-align: stretch;
 	align-items: stretch;
 
-	height:  calc(100vh - 95px);
+	height:  calc(100vh - 110px);
 }
 .message_users {
-	width: 300px;
+	width: 200px;
 
 	height: 100%;
 	overflow-y: auto;
@@ -483,9 +483,10 @@ aside {
 .message_user {
 	font-size: 1em;
 	margin: 5px;
+	padding: 10px;
+	cursor: pointer;
 }
 .message_user img {
-	float: left;
 	width: 60px;
 	border-radius: 100%;
 	border: 2px solid #1abc9c;
@@ -504,6 +505,7 @@ aside {
 
 	font-size: 0.6em;
 	padding-top: 5px;
+	padding-bottom: 5px;
 	height: 100%;
 	background: rgba(0, 0, 0, 0.2);
 	overflow-y: auto;

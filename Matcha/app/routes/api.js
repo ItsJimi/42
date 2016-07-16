@@ -324,4 +324,24 @@ router.post('/tags/del', function (req, res) {
 	}
 });
 
+// Get Conversation
+router.get('/messages/:username', function(req. res) {
+	var sess = req.session;
+
+	if (sess.username) {
+		db.sort("messages", {
+			'messages.date': 1
+		}, function(data) {
+			res.json(data);
+		}, {
+			users: {
+				$in: [
+					validator.escape(sess.username),
+					validator.escape(req.params.username)
+				]
+			}
+		});
+	}
+});
+
 module.exports = router;

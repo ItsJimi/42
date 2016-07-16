@@ -90,6 +90,33 @@ wss.on('connection', function connection(ws) {
 							message: emo.toImage(validator.escape(res.message))
 						});
 					});
+					db.get("messages", function(data) {
+						if (data.length == 1) {
+							db.update
+						}
+						else {
+							db.insert("messages", {
+								users: [
+									ws.username,
+									res.to
+								],
+								messages: [
+									{
+										from: validator.escape(ws.username),
+										date: new Date().toISOString(),
+										message: emo.toImage(validator.escape(res.message))
+									}
+								]
+							});
+						}
+					}, {
+						users: {
+							$in: [
+								validator.escape(ws.username),
+								validator.escape(res.to)
+							]
+						}
+					});
 				}
 			}
 		} catch (e) {
