@@ -64,24 +64,37 @@ router.post('/profiles/update/', function (req, res) {
 		if (req.body.lastname)
 			profile.lastname = validator.escape(req.body.lastname);
 		if (req.body.location) {
-		http.request({
-		    host: "maps.googleapis.com",
-		    path: "/maps/api/geocode/json?address=" + validator.escape(req.body.location) + "&key=AIzaSyCcrz8h8SAOcv2S92upJPFUreYHV6DATS8",
-		    method: 'GET'
-		}, function(res) {
-		    res.setEncoding('utf8');
-		    var body = '';
-		    res.on('data', function(chunk) {
-		        body += chunk;
-		    });
-		    res.on('end', function() {
-				try {
-					console.log(body);
-				} catch (e) {
-				}
-		    });
-		}).end();
-
+			http.request({
+                hostname: 'maps.googleapis.com',
+                path: '/maps/api/geocode/json?address=' + encodeURIComponent(req.body.location.trim())
+            }, function(response) {
+				response.setEncoding('utf8');
+			    var body = '';
+			    response.on('data', function(chunk) {
+			        body += chunk;
+			    });
+			    response.on('end', function() {
+					try {
+						var data = JSON.parse(body);
+						if (data) {
+							console.log(data.results[0].formatted_address);
+							console.log(data.results[0].geometry.location.lng);
+							console.log(data.results[0].geometry.location.lat);
+		                    db.update("profiles", {
+		                        username: sess.username
+		                    }, {
+		                        $set: {
+		                            pos: [
+		                                data.results[0].geometry.location.lng,
+		                                data.results[0].geometry.location.lat
+									],
+		                            location: data.results[0].formatted_address
+		                        }
+		                    });
+		                }
+					} catch (e) {}
+			    });
+            }).end();
 		}
 		try {
 			profile.birthdate = new Date(req.body.birthdate).toISOString();
@@ -325,23 +338,57 @@ router.post('/tags/del', function (req, res) {
 });
 
 // Get Conversation
-router.get('/messages/:username', function(req. res) {
+router.get('/messages/:username', function(req, res) {
 	var sess = req.session;
 
 	if (sess.username) {
 		db.sort("messages", {
 			'messages.date': 1
 		}, function(data) {
-			res.json(data);
-		}, {
-			users: {
-				$in: [
-					validator.escape(sess.username),
-					validator.escape(req.params.username)
-				]
+			if (data.length == 1) {
+				res.json(data);
 			}
+			else {
+				res.json({
+					act: "info",
+					request: false,
+					message: "This conversation doesn't exist"
+				});
+			}
+		}, {
+			$and: [{
+				users: {
+					$in: [
+						validator.escape(sess.username)
+					]
+				}
+			}, {
+				users: {
+					$in: [
+						validator.escape(req.params.username)
+					]
+				}
+			}]
 		});
 	}
+});
+
+// Valid mail
+router.get('/mail/valid/:username/:link', function(req, res) {
+	db.get("users", function(data) {
+		if (data.length == 1) {
+			// 
+		}
+		else {
+			res.json({
+				act: "info",
+				request: false,
+				message: "Wrong link"
+			});
+		}
+	}, {
+		username: validator.escape(req.params.username)
+	});
 });
 
 module.exports = router;

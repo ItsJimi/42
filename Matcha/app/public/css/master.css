@@ -407,6 +407,10 @@ aside {
 }
 .edit div span{
 	color: #16a085;
+	cursor: pointer;
+}
+.edit div span:hover {
+	color: #c0392b;
 }
 .edit_img img{
 	width: 100%;
@@ -432,20 +436,18 @@ aside {
 	text-align: justify;
 	height: 100px;
 }
-.edit_add_tag {
+.edit_button {
 	border: 1px solid #16a085;
 	background: #1abc9c;
 	color: #fff;
-}
-.edit_validate {
-	border: 1px solid #16a085;
-	background: #1abc9c;
-	color: #fff;
+	height: 30px;
+	line-height: 40px;
+	cursor: pointer;
 }
 
 /* Message */
 .message {
-	/*display: none;*/
+	display: none;
 	position: absolute;
 	top: 60px;
 	left: 0px;

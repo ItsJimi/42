@@ -3,7 +3,7 @@ $('#logo').click(function() {
 });
 
 function info(res) {
-	if (res.end == true)
+	if (res.request == true)
 		$("#info").css("background", "#27ae60");
 	else
 		$("#info").css("background", "#c0392b");

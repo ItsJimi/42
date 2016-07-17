@@ -22,8 +22,6 @@ var util = require('./controllers/utils.js');
 
 // Routes
 var index = require('./routes/index.js');
-var profiles = require('./routes/profiles.js');
-var cdn = require('./routes/cdn.js');
 var login = require('./routes/login.js');
 var api = require('./routes/api.js');
 
@@ -44,8 +42,6 @@ db.connect(function(database) {
 
 	// Index
 	app.use('/', index);
-	// Cdn
-	app.use('/cdn', cdn);
 	// Auth
 	app.use('/login', login);
 	// Api
@@ -79,6 +75,7 @@ wss.on('connection', function connection(ws) {
 						util.sendData(user, {
 							act: "message",
 							role: "receiver",
+							from: validator.escape(ws.username),
 							message: emo.toImage(validator.escape(res.message))
 						});
 					});
@@ -92,7 +89,17 @@ wss.on('connection', function connection(ws) {
 					});
 					db.get("messages", function(data) {
 						if (data.length == 1) {
-							db.update
+							db.update("messages", {
+								_id: data[0]._id
+							}, {
+								$addToSet: {
+									messages: {
+										from: validator.escape(ws.username),
+										date: new Date().toISOString(),
+										message: emo.toImage(validator.escape(res.message))
+									}
+								}
+							});
 						}
 						else {
 							db.insert("messages", {
@@ -110,12 +117,19 @@ wss.on('connection', function connection(ws) {
 							});
 						}
 					}, {
-						users: {
-							$in: [
-								validator.escape(ws.username),
-								validator.escape(res.to)
-							]
-						}
+						$and: [{
+							users: {
+								$in: [
+									validator.escape(ws.username)
+								]
+							}
+						}, {
+							users: {
+								$in: [
+									validator.escape(res.to)
+								]
+							}
+						}]
 					});
 				}
 			}

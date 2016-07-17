@@ -18,7 +18,7 @@ function viewProfile(callback, username) {
 		NProgress.inc();
 		if (!res[0]) {
 			info({
-				end: false,
+				request: false,
 				message: "Error"
 			});
 			return (false);
@@ -58,7 +58,7 @@ function viewYourProfile(callback) {
 		NProgress.inc();
 		if (!res[0]) {
 			info({
-				end: false,
+				request: false,
 				message: "Error"
 			});
 			return (false);
@@ -105,17 +105,11 @@ function editProfile() {
 	}).done(function(res) {
 		NProgress.inc();
 		if (!res.request) {
-			info({
-				end: false,
-				message: res.message
-			});
+			info(res);
 			return (false);
 		}
 		else {
-			info({
-				end: true,
-				message: res.message
-			});
+			info(res);
 		}
 		NProgress.done();
     });
@@ -146,10 +140,7 @@ function upload(files) {
 			if (res.request) {
 				$('#uploadImg').val('');
 			}
-			info({
-				end: res.request,
-				message: res.message
-			});
+			info(res);
 			NProgress.done();
         });
     };
@@ -163,10 +154,7 @@ function delYourPicture() {
 	$.post("/api/img/del/", {
 		image: $('#edit_img_s').attr('src').split('/')[6]
 	}).done(function(res) {
-		info({
-			end: res.request,
-			message: res.message
-		});
+		info(res);
 	});
 }
 
@@ -176,10 +164,7 @@ function addTag() {
 	}).done(function(res) {
 		$('#edit_tags').append('<span class="edit_tag" onclick="delTag(this)">#' + $('#edit_tags_add').val() + '</span> ');
 		$('#edit_tags_add').val("");
-		info({
-			end: res.request,
-			message: res.message
-		});
+		info(res);
 	});
 }
 
@@ -188,9 +173,42 @@ function delTag(tag) {
 		tag: $(tag).html().slice(1, tag.length)
 	}).done(function(res) {
 		$(tag).remove();
-		info({
-			end: res.request,
-			message: res.message
-		});
+		info(res);
 	});
+}
+
+function location() {
+	// Try HTML5 geolocation.
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(function(position) {
+			pos = {
+				lat: position.coords.latitude,
+				lng: position.coords.longitude
+			};
+			$.get("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + pos.lat + "," + pos.lng).done(function(res) {
+				if (res.results.length > 0)
+					$('#edit_location_s').val(res.results[0].formatted_address);
+			});
+		}, function() {
+			//handleLocationError(true, infoWindow, map.getCenter());
+			info({
+				request: false,
+				message: "Location error"
+			});
+		});
+	} else {
+		// Browser doesn't support Geolocation
+		// handleLocationError(false, infoWindow, map.getCenter());
+		info({
+			request: false,
+			message: "Your browser doesn't support Geolocation"
+		});
+	}
+}
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  infoWindow.setPosition(pos);
+  infoWindow.setContent(browserHasGeolocation ?
+                        'Error: The Geolocation service failed.' :
+                        'Error: Your browser doesn\'t support geolocation.');
 }

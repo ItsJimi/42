@@ -53,11 +53,14 @@ $(document).ready(function() {
 	});
 
 	// Edit pane
-	$('#edit_validate').click(function() {
-		editProfile();
+	$('#edit_location_add').click(function() {
+		location();
 	});
 	$('#edit_add_tag').click(function() {
 		addTag();
+	});
+	$('#edit_validate').click(function() {
+		editProfile();
 	});
 
 	$('#edit_del').click(function() {

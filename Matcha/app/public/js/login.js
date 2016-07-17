@@ -15,7 +15,7 @@ $(document).ready(function() {
 function signin(username, pass) {
 	if (username === "" || pass === "") {
 		info({
-			end: "false",
+			request: false,
 			message: "Fields empty."
 		});
 		return (false);
@@ -25,14 +25,14 @@ function signin(username, pass) {
         pass: pass
     }, function(res) {
 		info(res);
-		if (res.end === "true")
+		if (res.request)
 			window.location = "/";
     });
 }
 function signup(username, firstname, lastname, mail, pass1, pass2) {
 	if (username === "" || firstname === "" || lastname === "" || mail === "" || pass1 === "" || pass2 === "") {
 		info({
-			end: "false",
+			request: false,
 			message: "Fields empty."
 		});
 		return (false);
