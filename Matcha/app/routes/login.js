@@ -122,14 +122,14 @@ router.post('/signup', function (req, res) {
 						mail: validator.escape(req.body.mail),
 						pass: bcrypt.hashSync(req.body.username.toLowerCase() + req.body.pass1, salt)
 					});
-					sendmail({
-						from: 'no-reply@choose.fr',
-						to: validator.escape(req.body.mail),
-						subject: 'Welcome to Choose !',
-						content: 'Please valid your mail address with this link : localhost:3001/api/mail/valid/' validator.escape(req.body.username.toLowerCase()) + '/' + bcrypt.hashSync(req.body.username.toLowerCase() + req.body.mail, salt),
-					}, function(err, reply) {
-						console.log(err && err.stack);
-					});
+					// sendmail({
+					// 	from: 'no-reply@choose.fr',
+					// 	to: validator.escape(req.body.mail),
+					// 	subject: 'Welcome to Choose !',
+					// 	content: 'Please valid your mail address with this link : localhost:3001/api/mail/valid/' validator.escape(req.body.username.toLowerCase()) + '/' + bcrypt.hashSync(req.body.username.toLowerCase() + req.body.mail, salt),
+					// }, function(err, reply) {
+					// 	console.log(err && err.stack);
+					// });
 					res.json({
 						request: true,
 						message: "Yeah ! Welcome to Choose !"

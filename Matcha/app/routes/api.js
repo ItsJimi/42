@@ -377,7 +377,7 @@ router.get('/messages/:username', function(req, res) {
 router.get('/mail/valid/:username/:link', function(req, res) {
 	db.get("users", function(data) {
 		if (data.length == 1) {
-			// 
+			//
 		}
 		else {
 			res.json({
