@@ -114,12 +114,5 @@ $(document).ready(function() {
 			$('#profiles').fadeOut('fast');
 			$('#message').fadeOut('fast');
 		}
-		else if (e.keyCode == 13) {
-			text_history = $('#message_text').val();
-			sendMessage();
-		}
-		else if (e.keyCode == 38) {
-			$('#message_text').val(text_history);
-		}
 	});
 });

@@ -374,6 +374,21 @@ aside {
 .img_nav div:hover {
 	cursor: pointer;
 }
+.profiles_controls {
+	display: flex;
+}
+.profiles_controls div {
+	justify-content: space-between;
+	width: 100px;
+	height: 30px;
+	line-height: 35px;
+	font-family: "latothin", sans-serif;
+	border: 1px solid #16a085;
+	background: #1abc9c;
+	color: #fff;
+	font-size: 1.2em;
+	cursor: pointer;
+}
 .profiles_bio {
 	text-align: justify;
 }
@@ -428,8 +443,6 @@ aside {
 	background: #1abc9c;
 	color: #fff;
 	font-size: 1.2em;
-}
-.img_nav div:hover {
 	cursor: pointer;
 }
 .edit_bio textarea {

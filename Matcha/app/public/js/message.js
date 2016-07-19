@@ -1,3 +1,15 @@
+$(document).ready(function() {
+	$("#message_text").keypress(function(e) {
+		if (e.which == 13) {
+			text_history = $('#message_text').val();
+			sendMessage();
+		}
+		else if (e.which == 38) {
+			$('#message_text').val(text_history);
+		}
+	});
+});
+
 var to;
 
 function getReceiver(me, user) {

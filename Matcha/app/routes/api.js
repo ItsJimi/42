@@ -4,6 +4,7 @@ var validator = require('validator');
 var http = require('http');
 var bcrypt = require('bcryptjs');
 var salt = bcrypt.genSaltSync(10);
+var sendmail = require('sendmail')();
 
 var db = require('../controllers/database.js');
 var util = require('../controllers/utils.js');
@@ -60,6 +61,23 @@ router.post('/profiles/update/', function (req, res) {
 
 	if (sess.username) {
 		var profile = {};
+
+		if (!validator.isAlpha(req.body.firstname)) {
+			res.json({
+				act: "info",
+				request: false,
+				message: "Firstnames must contain only alphabetic chars"
+			});
+			return (false);
+		}
+		if (!validator.isAlpha(req.body.lastname)) {
+			res.json({
+				act: "info",
+				request: false,
+				message: "Lastnames must contain only alphabetic chars"
+			});
+			return (false);
+		}
 
 		if (req.body.firstname)
 			profile.firstname = validator.escape(req.body.firstname);
@@ -127,6 +145,83 @@ router.post('/profiles/update/', function (req, res) {
 				request: true,
 				message: "Your profile has been updated."
 			});
+		});
+	}
+});
+// Match <username> profile
+router.get('/profiles/match/:username', function (req, res) {
+	var sess = req.session;
+
+	if (sess.username) {
+		db.get("profiles", function(data) {
+			if (data.length == 0) {
+				res.json({
+					act: "info",
+					request: false,
+					message: "User not found"
+				});
+				return (false);
+			}
+			if (!data.img[0]) {
+				res.json({
+					act: "info",
+					request: false,
+					message: "You must have one picture to match people"
+				});
+				return (false);
+			}
+
+			db.get("match", function(data) {
+				if (data.length == 0) {
+					db.insert("match", {
+						users: [
+							validator.escape(sess.username),
+							validator.escape(req.params.username)
+						]
+					}, function() {
+						res.json({
+							act: "info",
+							request: true,
+							message: "Great, you like " + validator.escape(req.params.username) + " now !"
+						});
+					});
+				}
+				else {
+					db.remove("match", {
+						users: [
+							validator.escape(sess.username),
+							validator.escape(req.params.username)
+						]
+					});
+				}
+			}, {
+				'users.0': sess.username
+			});
+		}, {
+			username: sess.username
+		});
+	}
+});
+// Unmatch <username> profile
+router.get('/profiles/block/:username', function (req, res) {
+	var sess = req.session;
+
+	if (sess.username) {
+
+	}
+});
+// Report <username> profile
+router.get('/profiles/report/:username', function (req, res) {
+	var sess = req.session;
+
+	if (sess.username) {
+		sendmail({
+			from: 'report@choose.fr',
+			to: 'jimi+admin@fruitice.fr',
+			subject: 'Report member',
+			content: sess.username + ' has reported ' + req.params.username
+		}, function(err, reply) {
+			console.log(err && err.stack);
 		});
 	}
 });
@@ -294,6 +389,14 @@ router.post('/tags/add', function (req, res) {
 	if (sess.username) {
 		if (!req.body.tag)
 			return (false);
+		if (!validator.isAlphanumeric(req.body.tag)) {
+			res.json({
+				act: "info",
+				request: false,
+				message: "Tags must contain only alphanumeric chars"
+			});
+			return (false);
+		}
 
 		db.update("profiles", {
 			username: sess.username

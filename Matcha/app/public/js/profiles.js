@@ -162,8 +162,10 @@ function addTag() {
 	$.post("/api/tags/add/", {
 		tag: $('#edit_tags_add').val()
 	}).done(function(res) {
-		$('#edit_tags').append('<span class="edit_tag" onclick="delTag(this)">#' + $('#edit_tags_add').val() + '</span> ');
-		$('#edit_tags_add').val("");
+		if (res.request) {
+			$('#edit_tags').append('<span class="edit_tag" onclick="delTag(this)">#' + $('#edit_tags_add').val() + '</span> ');
+			$('#edit_tags_add').val("");
+		}
 		info(res);
 	});
 }

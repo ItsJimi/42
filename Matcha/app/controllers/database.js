@@ -21,6 +21,10 @@ module.exports = {
 		var collection = database.collection(name);
 		collection.insert(obj, cb);
 	},
+	remove : function(name, obj, cb) {
+		var collection = database.collection(name);
+		collection.remove(obj, cb);
+	},
 	update: function(name, obj1, obj2, cb) {
         // Get the documents collection
         var collection = database.collection(name);
