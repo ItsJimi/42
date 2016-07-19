@@ -32,5 +32,8 @@ module.exports = {
 		catch(e) {
 			console.log("Error sendData : " + e);
 		}
+	},
+	removeSlash: function(text) {
+	    return text.replace(/[/]/g, '');
 	}
 };

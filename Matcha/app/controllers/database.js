@@ -17,9 +17,9 @@ module.exports = {
 		else
 			callback = cb;
 	},
-	insert : function(name, obj) {
+	insert : function(name, obj, cb) {
 		var collection = database.collection(name);
-		collection.insert(obj);
+		collection.insert(obj, cb);
 	},
 	update: function(name, obj1, obj2, cb) {
         // Get the documents collection
