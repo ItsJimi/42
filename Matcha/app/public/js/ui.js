@@ -100,6 +100,15 @@ $(document).ready(function() {
 		var username = $('#profiles_img_s').attr('src').split('/')[4];
 		$('#profiles_img_s').attr("src", '/api/img/view/' + username + '/300/' + profiles_nbr);
 	});
+	$('#profiles_controls_like').click(function() {
+		like();
+	});
+	$('#profiles_controls_block').click(function() {
+		block();
+	});
+	$('#profiles_controls_report').click(function() {
+		report();
+	});
 
 	// Message pane
 	$('#message_send').click(function() {

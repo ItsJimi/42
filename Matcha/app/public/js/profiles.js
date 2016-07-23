@@ -216,8 +216,11 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 
 function like() {
-	$.get("/api/profiles/match/" + ).done(function(res) {
-		if (res.results.length > 0)
-			$('#edit_location_s').val(res.results[0].formatted_address);
+	var username = $('#profiles_img_s').attr('src').split('/')[4];
+	$.get("/api/profiles/match/" + username).done(function(res) {
+		if (res.request) {
+			console.log("Match !");
+		}
+		info(res);
 	});
 }

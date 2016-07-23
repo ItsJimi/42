@@ -34,7 +34,7 @@ function signin(username, pass) {
 		});
 		return (false);
 	}
-	$.post("/login/signin", {
+	$.post("/auth/signin", {
 		username: username,
         pass: pass
     }, function(res) {
@@ -52,7 +52,7 @@ function signup(username, firstname, lastname, mail, pass1, pass2) {
 		});
 		return (false);
 	}
-	$.post("/login/signup", {
+	$.post("/auth/signup", {
 		username: username,
 		firstname: firstname,
 		lastname: lastname,
