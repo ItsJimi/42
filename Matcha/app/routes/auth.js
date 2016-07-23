@@ -190,7 +190,7 @@ router.get('/logout', function (req, res) {
 		if (err)
 			console.log(err);
 	});
-	res.redirect('/login');
+	res.redirect('/auth');
 });
 
 module.exports = router;

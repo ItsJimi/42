@@ -15,8 +15,5 @@ module.exports = {
                 });
             }
         });
-    },
-	removeSlash: function(text) {
-	    return text.replace(/[/]/g, '');
-	}
+    }
 };

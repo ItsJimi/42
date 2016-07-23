@@ -116,7 +116,7 @@ function editProfile() {
 }
 
 function getTags(callback) {
-	$.get("/api/tags/", {}, function(res) {
+	$.get("/api/tags/").done(function(res) {
 		res.forEach(function(tag) {
 			$('#edit_tags_choose').append('<option value="' + tag.name + '">');
 		});
@@ -213,4 +213,11 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setContent(browserHasGeolocation ?
                         'Error: The Geolocation service failed.' :
                         'Error: Your browser doesn\'t support geolocation.');
+}
+
+function like() {
+	$.get("/api/profiles/match/" + ).done(function(res) {
+		if (res.results.length > 0)
+			$('#edit_location_s').val(res.results[0].formatted_address);
+	});
 }

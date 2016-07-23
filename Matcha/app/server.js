@@ -19,14 +19,15 @@ var server = require('./controllers/server.js');
 var util = require('./controllers/utils.js');
 var ws = require('./controllers/ws.js');
 
-// Routes
+// API
 var index = require('./routes/index.js');
-var login = require('./routes/login.js');
-var api = require('./routes/api.js');
+var auth = require('./routes/auth.js');
+var api = require('./api/api.js');
 
 db.connect(function(database) {
 	store = new MongoStore({ db: database });
 
+	// Websockets
 	ws.start(store);
 	// Session
 	app.use(session({ secret : 'MpCF12y', resave: false, saveUninitialized: true, store: store }));
@@ -43,7 +44,7 @@ db.connect(function(database) {
 	// Index
 	app.use('/', index);
 	// Auth
-	app.use('/login', login);
+	app.use('/auth', auth);
 	// Api
 	app.use('/api', api);
 	// 404
