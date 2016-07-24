@@ -19,9 +19,11 @@ var server = require('./controllers/server.js');
 var util = require('./controllers/utils.js');
 var ws = require('./controllers/ws.js');
 
-// API
+// Routes
 var index = require('./routes/index.js');
 var auth = require('./routes/auth.js');
+
+// API
 var api = require('./api/api.js');
 
 db.connect(function(database) {
