@@ -14,7 +14,7 @@ ws.onmessage = function(data) {
 			info(res);
 		}
 		else if (res.act === "notif") {
-			notif(res.message, res.icon);
+			notif(res.message, "/api/img/view/" + res.from + "/300/0");
 		}
 		else if (res.act === "message") {
 			$('#message_content').append('<div class="message_' + res.role + '">' + res.message + '</div><div class="clear"></div>');

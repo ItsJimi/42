@@ -4,6 +4,7 @@ var validator = require('validator');
 var http = require('http');
 var sendmail = require('sendmail')();
 
+var server = require('../controllers/server.js');
 var db = require('../controllers/database.js');
 var util = require('../controllers/utils.js');
 
@@ -40,10 +41,17 @@ router.get('/view/:username', function (req, res) {
 	var sess = req.session;
 
 	if (sess.username) {
-		db.get("profiles", function(json) {
-			var user = json;
+		db.get("profiles", function(data) {
 
-			res.json(user);
+			db.get("like", function(data1) {
+				if (data1.length == 1)
+					data[0].like = true;
+
+				res.json(data);
+			}, {
+				'users.0': validator.escape(sess.username),
+				'users.1': validator.escape(req.params.username)
+			});
 		}, {
 			username: req.params.username
 		});
@@ -142,14 +150,14 @@ router.post('/update/', function (req, res) {
 		});
 	}
 });
-// Match <username> profile
-router.get('/match/:username', function (req, res) {
+// Like <username> profile
+router.get('/like/:username', function (req, res) {
 	var sess = req.session;
 
 	if (sess.username) {
 		if (sess.username === req.params.username) {
 			res.json({
-				act: "info",
+				act: "like",
 				request: false,
 				message: "Really ?! It's you ..."
 			});
@@ -158,53 +166,75 @@ router.get('/match/:username', function (req, res) {
 		db.get("profiles", function(data) {
 			if (data.length == 0) {
 				res.json({
-					act: "info",
+					act: "like",
 					request: false,
 					message: "User not found"
 				});
 				return (false);
 			}
-			if (!data.img[0]) {
+			if (!data[0].img) {
 				res.json({
-					act: "info",
+					act: "like",
 					request: false,
-					message: "You must have one picture to match people"
+					message: "You must have one picture to match or unmatch people"
 				});
 				return (false);
 			}
 
-			db.get("match", function(data) {
+			db.get("like", function(data) {
 				if (data.length == 0) {
-					db.insert("match", {
+					db.insert("like", {
 						users: [
 							validator.escape(sess.username),
 							validator.escape(req.params.username)
 						]
 					}, function() {
+						server.getUser(req.params.username).forEach(function(user) {
+							server.sendData(user, {
+								act: "notif",
+								from: validator.escape(sess.username),
+								message: validator.escape(sess.username) + " like you ! <3"
+							});
+						});
 						res.json({
-							act: "info",
+							act: "like",
 							request: true,
 							message: "Great, you like " + validator.escape(req.params.username) + " now !"
 						});
 					});
 				}
 				else {
-					db.remove("match", {
+					db.remove("like", {
 						users: [
 							validator.escape(sess.username),
 							validator.escape(req.params.username)
 						]
+					}, function() {
+						server.getUser(req.params.username).forEach(function(user) {
+							console.log(user.username);
+							server.sendData(user, {
+								act: "notif",
+								from: validator.escape(sess.username),
+								message: validator.escape(sess.username) + " don't like you ! </3"
+							});
+						});
+						res.json({
+							act: "unlike",
+							request: true,
+							message: "You don't like " + validator.escape(req.params.username) + " now !"
+						});
 					});
 				}
 			}, {
-				'users.0': validator.escape(sess.username)
+				'users.0': validator.escape(sess.username),
+				'users.1': validator.escape(req.params.username)
 			});
 		}, {
 			username: validator.escape(sess.username)
 		});
 	}
 });
-// Unmatch <username> profile
+// Block <username> profile
 router.get('/block/:username', function (req, res) {
 	var sess = req.session;
 
