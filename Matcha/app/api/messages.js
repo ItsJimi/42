@@ -5,8 +5,40 @@ var validator = require('validator');
 var db = require('../controllers/database.js');
 var util = require('../controllers/utils.js');
 
+// Get Users
+router.get('/users', function(req, res) {
+	var sess = req.session;
+
+	if (sess.username) {
+		var like = [];
+		var users = [];
+
+		db.get("like", function(data) {
+			if (data.length > 0) {
+				data.forEach(function(user) {
+					
+				});
+				db.get("profiles", function(data1) {
+					data1.forEach(function(profile) {
+						if (like.indexOf(profile.username) == -1)
+							users.push(profile);
+					});
+					res.json(users);
+				}, {});
+			}
+			else {
+				db.get("profiles", function(data1) {
+					res.json(data1);
+				}, {});
+			}
+		}, {
+			'users.0': validator.escape(sess.username)
+		});
+	}
+});
+
 // Get Conversation
-router.get('/:username', function(req, res) {
+router.get('/view/:username', function(req, res) {
 	var sess = req.session;
 
 	if (sess.username) {

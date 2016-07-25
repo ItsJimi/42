@@ -1,4 +1,5 @@
 var lwip = require('lwip');
+var db = require('./database.js');
 
 module.exports = {
 	img: function(picture, size, type, callback) {

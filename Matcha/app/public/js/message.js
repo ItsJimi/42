@@ -12,10 +12,18 @@ $(document).ready(function() {
 
 var to;
 
+function getUsersMsg() {
+	$.get("").done(function(res) {
+		if (res.request) {
+			
+		}
+	});
+}
+
 function getReceiver(me, user) {
 	to = user;
 
-	$.get('/api/messages/' + to).done(function(res) {
+	$.get('/api/messages/view/' + to).done(function(res) {
 		if (res[0]) {
 			$('#message_content').html('');
 			$('.message_user').css("background-color", "");

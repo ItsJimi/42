@@ -231,3 +231,22 @@ function like() {
 		info(res);
 	});
 }
+function block() {
+	var username = $('#profiles_img_s').attr('src').split('/')[4];
+	$.get("/api/profiles/block/" + username).done(function(res) {
+		if (res.request) {
+			$('#profiles').fadeOut('fast');
+			marker.forEach(function(mark) {
+				if (username === mark.username)
+					marker[mark.id].setMap(null);
+			});
+		}
+		info(res);
+	});
+}
+function report() {
+	var username = $('#profiles_img_s').attr('src').split('/')[4];
+	$.get("/api/profiles/report/" + username).done(function(res) {
+		info(res);
+	});
+}

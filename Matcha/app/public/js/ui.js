@@ -6,10 +6,12 @@ $(document).ready(function() {
 
 	// Nav Buttons
 	$('#nav_message').click(function() {
-		$('#message').fadeToggle('fast');
-		$('#edit').fadeOut('fast');
-		$('#profiles').fadeOut('fast');
-		$('#filters').fadeOut('fast');
+		getUsersMsg(function() {
+			$('#message').fadeToggle('fast');
+			$('#edit').fadeOut('fast');
+			$('#profiles').fadeOut('fast');
+			$('#filters').fadeOut('fast');
+		});
 	});
 	$('#nav_edit').click(function() {
 		if (edit) {
@@ -108,12 +110,6 @@ $(document).ready(function() {
 	});
 	$('#profiles_controls_report').click(function() {
 		report();
-	});
-
-	// Message pane
-	$('#message_send').click(function() {
-		text_history = $('#message_text').val();
-		sendMessage();
 	});
 
 	// Keydown

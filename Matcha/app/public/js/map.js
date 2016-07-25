@@ -1,4 +1,6 @@
 var pos;
+var marker = [];
+var map;
 
 function initMap() {
 	NProgress.start();
@@ -9,7 +11,7 @@ function initMap() {
 		else
 			var myLatLng = {lng: 2.3522219, lat: 48.856614};
 		NProgress.inc();
-		var map = new google.maps.Map(document.getElementById('map'), {
+		map = new google.maps.Map(document.getElementById('map'), {
 			zoom: 15,
 			center: myLatLng,
 			zoomControl: true,
@@ -19,9 +21,8 @@ function initMap() {
 			rotateControl: false
 		});
 		NProgress.inc();
-		$.get("/api/profiles/", {}).done(function(res) {
+		$.get("/api/profiles/?block=true", {}).done(function(res) {
 			var i = 0;
-			var marker = [];
 
 			NProgress.inc();
 			myPos = new google.maps.Marker({
@@ -31,20 +32,22 @@ function initMap() {
 			});
 			NProgress.inc();
 			res.forEach(function(profile) {
-				if (profile.pos) {
+				if (profile.pos && profile.img) {
 					marker[i] = new google.maps.Marker({
 				    	position: {lng: profile.pos[0], lat: profile.pos[1]},
 				    	map: map,
 				    	title: profile.firstname + " " + profile.lastname,
 						icon: "/api/img/view/" + profile.username + "/50/0"
 					});
+					marker[i].username = profile.username;
+					marker[i].id = i;
 					marker[i].addListener('click', function() {
 						viewProfile(function() {
 							$('#profiles').fadeIn('fast');
 						}, profile.username);
 					});
+					i++;
 				}
-				i++;
 				NProgress.inc();
 			});
 

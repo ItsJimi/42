@@ -13,13 +13,38 @@ router.get('/', function (req, res) {
 	var sess = req.session;
 
 	if (sess.username) {
-		db.sort("profiles", {
-			username: 1
-		}, function(json) {
-			var user = json;
-
-			res.json(user);
-		}, {});
+		var users = [];
+		var block = [];
+		if (req.query.block === "true") {
+			db.get("block", function(data) {
+				if (data.length > 0) {
+					data.forEach(function(user) {
+						block.push(user.users[1]);
+					});
+					db.get("profiles", function(data1) {
+						data1.forEach(function(profile) {
+							if (block.indexOf(profile.username) == -1)
+								users.push(profile);
+						});
+						res.json(users);
+					}, {});
+				}
+				else {
+					db.get("profiles", function(data1) {
+						res.json(data1);
+					}, {});
+				}
+			}, {
+				'users.0': validator.escape(sess.username)
+			});
+		}
+		else {
+			db.sort("profiles", {
+				username: 1
+			}, function(data) {
+				res.json(data);
+			}, {});
+		}
 	}
 });
 // View your profile
@@ -27,10 +52,8 @@ router.get('/view/', function (req, res) {
 	var sess = req.session;
 
 	if (sess.username) {
-		db.get("profiles", function(json) {
-			var user = json;
-
-			res.json(user);
+		db.get("profiles", function(data) {
+			res.json(data);
 		}, {
 			username: sess.username
 		});
@@ -239,7 +262,68 @@ router.get('/block/:username', function (req, res) {
 	var sess = req.session;
 
 	if (sess.username) {
+		if (sess.username === req.params.username) {
+			res.json({
+				act: "block",
+				request: false,
+				message: "Really ?! It's you ..."
+			});
+			return (false);
+		}
+		db.get("profiles", function(data) {
+			if (data.length == 0) {
+				res.json({
+					act: "block",
+					request: false,
+					message: "User not found"
+				});
+				return (false);
+			}
+			if (!data[0].img) {
+				res.json({
+					act: "block",
+					request: false,
+					message: "You must have one picture to match or unmatch people"
+				});
+				return (false);
+			}
 
+			db.get("block", function(data) {
+				if (data.length == 0) {
+					db.insert("block", {
+						users: [
+							validator.escape(sess.username),
+							validator.escape(req.params.username)
+						]
+					}, function() {
+						res.json({
+							act: "block",
+							request: true,
+							message: "You block " + validator.escape(req.params.username) + " now !"
+						});
+					});
+				}
+				else {
+					db.remove("block", {
+						users: [
+							validator.escape(sess.username),
+							validator.escape(req.params.username)
+						]
+					}, function() {
+						res.json({
+							act: "unblock",
+							request: true,
+							message: "You don't block " + validator.escape(req.params.username) + " now !"
+						});
+					});
+				}
+			}, {
+				'users.0': validator.escape(sess.username),
+				'users.1': validator.escape(req.params.username)
+			});
+		}, {
+			username: validator.escape(sess.username)
+		});
 	}
 });
 // Report <username> profile
@@ -254,6 +338,11 @@ router.get('/report/:username', function (req, res) {
 			content: sess.username + ' has reported ' + req.params.username
 		}, function(err, reply) {
 			console.log(err && err.stack);
+			res.json({
+				act: "report",
+				request: true,
+				message: "An email was sent to administrator !"
+			});
 		});
 	}
 });
