@@ -173,6 +173,18 @@ router.post('/update/', function (req, res) {
 		});
 	}
 });
+// Liked profiles
+router.get('/like', function (req, res) {
+	var sess = req.session;
+
+	if (sess.username) {
+		db.get("like", function(data) {
+			res.json(data);
+		}, {
+			'users.1': validator.escape(sess.username)
+		});
+	}
+});
 // Like <username> profile
 router.get('/like/:username', function (req, res) {
 	var sess = req.session;
@@ -212,12 +224,18 @@ router.get('/like/:username', function (req, res) {
 							validator.escape(req.params.username)
 						]
 					}, function() {
-						server.getUser(req.params.username).forEach(function(user) {
-							server.sendData(user, {
-								act: "notif",
-								from: validator.escape(sess.username),
-								message: validator.escape(sess.username) + " like you ! <3"
-							});
+						db.get("block", function(data) {
+							if (data.length == 0) {
+								server.getUser(req.params.username).forEach(function(user) {
+									server.sendData(user, {
+										act: "notif",
+										from: validator.escape(sess.username),
+										message: validator.escape(sess.username) + " like you ! <3"
+									});
+								});
+							}
+						}, {
+							'users.1': validator.escape(sess.username)
 						});
 						res.json({
 							act: "like",
@@ -233,13 +251,19 @@ router.get('/like/:username', function (req, res) {
 							validator.escape(req.params.username)
 						]
 					}, function() {
-						server.getUser(req.params.username).forEach(function(user) {
-							console.log(user.username);
-							server.sendData(user, {
-								act: "notif",
-								from: validator.escape(sess.username),
-								message: validator.escape(sess.username) + " don't like you ! </3"
-							});
+						db.get("block", function(data) {
+							if (data.length == 0) {
+								server.getUser(req.params.username).forEach(function(user) {
+									console.log(user.username);
+									server.sendData(user, {
+										act: "notif",
+										from: validator.escape(sess.username),
+										message: validator.escape(sess.username) + " don't like you ! </3"
+									});
+								});
+							}
+						}, {
+							'users.1': validator.escape(sess.username)
 						});
 						res.json({
 							act: "unlike",
@@ -254,6 +278,18 @@ router.get('/like/:username', function (req, res) {
 			});
 		}, {
 			username: validator.escape(sess.username)
+		});
+	}
+});
+// Blocked profiles
+router.get('/block', function (req, res) {
+	var sess = req.session;
+
+	if (sess.username) {
+		db.get("block", function(data) {
+			res.json(data);
+		}, {
+			'users.0': validator.escape(sess.username)
 		});
 	}
 });
@@ -343,6 +379,84 @@ router.get('/report/:username', function (req, res) {
 				request: true,
 				message: "An email was sent to administrator !"
 			});
+		});
+	}
+});
+// Visited profiles
+router.get('/visits', function (req, res) {
+	var sess = req.session;
+
+	if (sess.username) {
+		var visits = [];
+
+		db.get("visits", function(data) {
+			data.forEach(function(profile) {
+				if (visits.indexOf(profile.users[0]) == -1)
+					visits.push(profile.users[0]);
+			});
+			res.json(visits);
+		}, {
+			'users.1': validator.escape(sess.username)
+		});
+	}
+});
+// Visits <username> profile
+router.get('/visits/:username', function (req, res) {
+	var sess = req.session;
+
+	if (sess.username) {
+		if (sess.username === req.params.username) {
+			res.json({
+				act: "visits",
+				request: false,
+				message: "It's you"
+			});
+			return (false);
+		}
+		db.get("profiles", function(data) {
+			if (data.length == 0) {
+				res.json({
+					act: "visits",
+					request: false,
+					message: "User not found"
+				});
+				return (false);
+			}
+
+			db.get("visits", function(data) {
+				if (data.length == 0) {
+					db.update("profiles", {
+						username: validator.escape(req.params.username)
+					}, {
+						$inc: {
+							score: 1
+						}
+					});
+				}
+				db.insert("visits", {
+					users: [
+						validator.escape(sess.username),
+						validator.escape(req.params.username)
+					]
+				}, function() {
+					server.getUser(req.params.username).forEach(function(user) {
+						server.sendData(user, {
+							act: "notif",
+							from: validator.escape(sess.username),
+							message: validator.escape(sess.username) + " visit you your profile ;)"
+						});
+					});
+					res.json({
+						act: "visits",
+						request: true
+					});
+				});
+			}, {
+				'users.0': validator.escape(sess.username),
+				'users.1': validator.escape(req.params.username)
+			});
+		}, {
+			username: validator.escape(req.params.username)
 		});
 	}
 });

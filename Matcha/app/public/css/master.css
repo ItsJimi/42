@@ -562,3 +562,25 @@ aside {
 	font-family: "latothin", sans-serif;
 	width: 100%;
 }
+
+/* Settings */
+.settings {
+	display: none;
+	position: absolute;
+	top: 60px;
+	left: 0px;
+	width: 100%;
+	height: calc(100vh - 60px);
+	background: rgba(0, 0, 0, 0.8);
+	text-align: center;
+	font-size: 1.2em;
+}
+.settings_close {
+	float: right;
+	padding-right: 5px;
+	cursor: pointer;
+}
+.settings div {
+	max-width: 300px;
+	margin: auto;
+}

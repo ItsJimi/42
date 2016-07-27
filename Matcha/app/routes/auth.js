@@ -83,14 +83,21 @@ router.post('/signup', function (req, res) {
 		if (!req.body.username || !req.body.firstname || !req.body.lastname || !req.body.mail || !req.body.pass1 || !req.body.pass2) {
 			res.json({
 				request: false,
-				message: "Fields empty."
+				message: "Fields empty"
 			});
 			return (false);
 		}
 		if (req.body.pass1 !== req.body.pass2) {
 			res.json({
 				request: false,
-				message: "Passwords don't match."
+				message: "Passwords don't match"
+			});
+			return (false);
+		}
+		if (req.body.pass1.length < 6) {
+			res.json({
+				request: false,
+				message: "Password must contain 6 or more caracters"
 			});
 			return (false);
 		}

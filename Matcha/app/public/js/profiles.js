@@ -1,3 +1,10 @@
+function settingsProfiles(username) {
+	viewProfile(function() {
+		$('#settings').fadeOut('fast');
+		$('#profiles').fadeIn('fast');
+	}, username);
+}
+
 function viewProfile(callback, username) {
 	NProgress.start();
 	$('#profiles_firstname').html("");
@@ -54,6 +61,7 @@ function viewProfile(callback, username) {
 		callback();
 		NProgress.done();
     });
+	$.get("/api/profiles/visits/" + username).done();
 }
 
 function viewYourProfile(callback) {

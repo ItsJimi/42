@@ -11,6 +11,7 @@ $(document).ready(function() {
 			$('#edit').fadeOut('fast');
 			$('#profiles').fadeOut('fast');
 			$('#filters').fadeOut('fast');
+			$('#settings').fadeOut('fast');
 		});
 	});
 	$('#nav_edit').click(function() {
@@ -27,6 +28,7 @@ $(document).ready(function() {
 				$('#profiles').fadeOut('fast');
 				$('#message').fadeOut('fast');
 				$('#filters').fadeOut('fast');
+				$('#settings').fadeOut('fast');
 
 				edit = true;
 			});
@@ -37,6 +39,16 @@ $(document).ready(function() {
 		$('#edit').fadeOut('fast');
 		$('#message').fadeOut('fast');
 		$('#profiles').fadeOut('fast');
+		$('#settings').fadeOut('fast');
+	});
+	$('#nav_settings').click(function() {
+		settings(function() {
+			$('#settings').fadeToggle('fast');
+			$('#filters').fadeOut('fast');
+			$('#edit').fadeOut('fast');
+			$('#message').fadeOut('fast');
+			$('#profiles').fadeOut('fast');
+		});
 	});
 
 	// Close panes
@@ -52,6 +64,9 @@ $(document).ready(function() {
 	});
 	$('#message_close').click(function() {
 		$('#message').fadeOut('fast');
+	});
+	$('#settings_close').click(function() {
+		$('#settings').fadeOut('fast');
 	});
 
 	// Edit pane
@@ -118,6 +133,7 @@ $(document).ready(function() {
 			$('#edit').fadeOut('fast');
 			$('#profiles').fadeOut('fast');
 			$('#message').fadeOut('fast');
+			$('#settings').fadeOut('fast');
 		}
 	});
 });

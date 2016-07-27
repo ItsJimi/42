@@ -13,9 +13,9 @@ $(document).ready(function() {
 var to;
 
 function getUsersMsg() {
-	$.get("").done(function(res) {
+	$.get("/api/messages/users/").done(function(res) {
 		if (res.request) {
-			
+
 		}
 	});
 }
