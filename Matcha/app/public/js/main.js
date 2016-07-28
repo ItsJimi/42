@@ -1,5 +1,10 @@
-$('#logo').click(function() {
-	initMap();
+$(document).ready(function() {
+	$('#logo').click(function() {
+		initMap();
+	});
+	$('#info').click(function() {
+		$('#info').fadeOut('fast');
+	});
 });
 
 function info(res) {

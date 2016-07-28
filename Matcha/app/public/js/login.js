@@ -24,6 +24,10 @@ $(document).ready(function() {
 			$("#signup_pass1").val(),
 			$("#signup_pass2").val());
     });
+
+	$("#reset_submit").click(function() {
+        reset($("#signin_username").val());
+    });
 });
 
 function signin(username, pass) {
@@ -68,6 +72,20 @@ function signup(username, firstname, lastname, mail, pass1, pass2) {
 			$("#signup_pass1").val('');
 			$("#signup_pass2").val('');
 		}
+		info(res);
+    });
+}
+function reset(username) {
+	if (username === "") {
+		info({
+			request: false,
+			message: "Fields empty."
+		});
+		return (false);
+	}
+	$.post("api/users/reset", {
+		username: username
+    }, function(res) {
 		info(res);
     });
 }

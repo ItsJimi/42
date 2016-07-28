@@ -71,8 +71,13 @@ router.post('/signin', function (req, res) {
 			username: validator.escape(req.body.username.toLowerCase())
 		});
 	}
-	else
-		res.redirect('/');
+	else {
+		res.json({
+			act: "unauthorized",
+			request: false,
+			message: "Unauthorized"
+		});
+	}
 });
 
 // SignUp POST
@@ -147,7 +152,9 @@ router.post('/signup', function (req, res) {
 						username: validator.escape(req.body.username.toLowerCase()),
 						firstname: validator.escape(req.body.firstname),
 						lastname: validator.escape(req.body.lastname),
-						pos: pos
+						pos: pos,
+						gender: "Unknown",
+						preference: "Both"
 					});
 					db.insert("users", {
 						username: validator.escape(req.body.username.toLowerCase()),
@@ -161,7 +168,7 @@ router.post('/signup', function (req, res) {
 							subject: 'Welcome to Choose !',
 							content: 'Please valid your mail address with this link : http://localhost:3001/api/mail/valid/' + validator.escape(req.body.username.toLowerCase()) + '/' + data.ops[0]._id
 						}, function(err, reply) {
-							console.log(err && err.stack);
+							// console.log(err && err.stack);
 						});
 						res.json({
 							act: "info",
@@ -187,8 +194,13 @@ router.post('/signup', function (req, res) {
 			]
 		});
 	}
-	else
-		res.redirect('/');
+	else {
+		res.json({
+			act: "unauthorized",
+			request: false,
+			message: "Unauthorized"
+		});
+	}
 });
 
 // SignOut

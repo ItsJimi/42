@@ -16,23 +16,34 @@ router.get('/users', function(req, res) {
 		db.get("like", function(data) {
 			if (data.length > 0) {
 				data.forEach(function(user) {
-					
+					if (user.match == true) {
+						like.push(user.users[1]);
+					}
 				});
 				db.get("profiles", function(data1) {
 					data1.forEach(function(profile) {
-						if (like.indexOf(profile.username) == -1)
+						if (like.indexOf(profile.username) != -1)
 							users.push(profile);
 					});
 					res.json(users);
 				}, {});
 			}
 			else {
-				db.get("profiles", function(data1) {
-					res.json(data1);
-				}, {});
+				res.json({
+					act: "info",
+					request: false,
+					message: "No match"
+				});
 			}
 		}, {
 			'users.0': validator.escape(sess.username)
+		});
+	}
+	else {
+		res.json({
+			act: "unauthorized",
+			request: false,
+			message: "Unauthorized"
 		});
 	}
 });
@@ -50,7 +61,7 @@ router.get('/view/:username', function(req, res) {
 			}
 			else {
 				res.json({
-					act: "info",
+					act: "msg",
 					request: false,
 					message: "This conversation doesn't exist"
 				});
@@ -69,6 +80,13 @@ router.get('/view/:username', function(req, res) {
 					]
 				}
 			}]
+		});
+	}
+	else {
+		res.json({
+			act: "unauthorized",
+			request: false,
+			message: "Unauthorized"
 		});
 	}
 });

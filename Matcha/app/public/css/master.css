@@ -567,6 +567,8 @@ aside {
 .settings {
 	display: none;
 	position: absolute;
+	overflow-y: auto;
+	overflow-x: hidden;
 	top: 60px;
 	left: 0px;
 	width: 100%;

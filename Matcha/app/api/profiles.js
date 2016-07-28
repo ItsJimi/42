@@ -13,38 +13,71 @@ router.get('/', function (req, res) {
 	var sess = req.session;
 
 	if (sess.username) {
-		var users = [];
-		var block = [];
-		if (req.query.block === "true") {
-			db.get("block", function(data) {
-				if (data.length > 0) {
-					data.forEach(function(user) {
-						block.push(user.users[1]);
+		if (req.query.filters) {
+			var filters = {
+				age_min: 18,
+				age_max: 120,
+				score_min: 0,
+				score_max: 100,
+				dist: 10,
+				tags: []
+			}
+			if (req.query.age_min)
+				filters.age_min = parseInt(req.query.age_min);
+			if (req.query.age_max)
+				filters.age_max = parseInt(req.query.age_max);
+			if (req.query.score_min)
+				filters.score_min = parseInt(req.query.score_min);
+			if (req.query.score_max)
+				filters.score_max = parseInt(req.query.score_max);
+			if (req.query.tags) {
+				var tags = req.query.tags.split(",");
+				tags.forEach(function(tag) {
+					if (tag.trim() !== '')
+						filters.tags.push(tag.trim());
+				});
+			}
+
+			if (parseInt(req.query.dist) !== NaN) {
+				util.getPeoplesNearFilters(sess.username, parseInt(req.query.dist), filters, function(data) {
+					data.sort(function(a, b) {
+						return (b.filter - a.filter);
 					});
-					db.get("profiles", function(data1) {
-						data1.forEach(function(profile) {
-							if (block.indexOf(profile.username) == -1)
-								users.push(profile);
-						});
-						res.json(users);
-					}, {});
-				}
-				else {
-					db.get("profiles", function(data1) {
-						res.json(data1);
-					}, {});
-				}
-			}, {
-				'users.0': validator.escape(sess.username)
-			});
+
+					data = data.slice(Math.max(data.length - 20, 0));
+
+					res.json(data);
+				});
+			}
+			else {
+				res.json({
+					act: "info",
+					request: false,
+					message: "error"
+				});
+			}
 		}
 		else {
-			db.sort("profiles", {
-				username: 1
-			}, function(data) {
+			var users = [];
+
+			util.getPeoplesNear(sess.username, 10, function(data) {
+				data.sort(function(a, b) {
+					return (b.filter - a.filter);
+				});
+
+				data = data.slice(Math.max(data.length - 20, 0));
+
 				res.json(data);
-			}, {});
+			});
 		}
+
+	}
+	else {
+		res.json({
+			act: "unauthorized",
+			request: false,
+			message: "Unauthorized"
+		});
 	}
 });
 // View your profile
@@ -56,6 +89,13 @@ router.get('/view/', function (req, res) {
 			res.json(data);
 		}, {
 			username: sess.username
+		});
+	}
+	else {
+		res.json({
+			act: "unauthorized",
+			request: false,
+			message: "Unauthorized"
 		});
 	}
 });
@@ -77,6 +117,13 @@ router.get('/view/:username', function (req, res) {
 			});
 		}, {
 			username: req.params.username
+		});
+	}
+	else {
+		res.json({
+			act: "unauthorized",
+			request: false,
+			message: "Unauthorized"
 		});
 	}
 });
@@ -122,9 +169,6 @@ router.post('/update/', function (req, res) {
 					try {
 						var data = JSON.parse(body);
 						if (data) {
-							console.log(data.results[0].formatted_address);
-							console.log(data.results[0].geometry.location.lng);
-							console.log(data.results[0].geometry.location.lat);
 		                    db.update("profiles", {
 		                        username: sess.username
 		                    }, {
@@ -172,6 +216,13 @@ router.post('/update/', function (req, res) {
 			});
 		});
 	}
+	else {
+		res.json({
+			act: "unauthorized",
+			request: false,
+			message: "Unauthorized"
+		});
+	}
 });
 // Liked profiles
 router.get('/like', function (req, res) {
@@ -182,6 +233,13 @@ router.get('/like', function (req, res) {
 			res.json(data);
 		}, {
 			'users.1': validator.escape(sess.username)
+		});
+	}
+	else {
+		res.json({
+			act: "unauthorized",
+			request: false,
+			message: "Unauthorized"
 		});
 	}
 });
@@ -198,86 +256,167 @@ router.get('/like/:username', function (req, res) {
 			});
 			return (false);
 		}
-		db.get("profiles", function(data) {
+		db.get("block", function(data) {
 			if (data.length == 0) {
-				res.json({
-					act: "like",
-					request: false,
-					message: "User not found"
-				});
-				return (false);
-			}
-			if (!data[0].img) {
-				res.json({
-					act: "like",
-					request: false,
-					message: "You must have one picture to match or unmatch people"
-				});
-				return (false);
-			}
-
-			db.get("like", function(data) {
-				if (data.length == 0) {
-					db.insert("like", {
-						users: [
-							validator.escape(sess.username),
-							validator.escape(req.params.username)
-						]
-					}, function() {
-						db.get("block", function(data) {
-							if (data.length == 0) {
-								server.getUser(req.params.username).forEach(function(user) {
-									server.sendData(user, {
-										act: "notif",
-										from: validator.escape(sess.username),
-										message: validator.escape(sess.username) + " like you ! <3"
-									});
-								});
-							}
-						}, {
-							'users.1': validator.escape(sess.username)
-						});
+				db.get("profiles", function(data) {
+					if (data.length == 0) {
 						res.json({
 							act: "like",
-							request: true,
-							message: "Great, you like " + validator.escape(req.params.username) + " now !"
+							request: false,
+							message: "User not found"
 						});
-					});
-				}
-				else {
-					db.remove("like", {
-						users: [
-							validator.escape(sess.username),
-							validator.escape(req.params.username)
-						]
-					}, function() {
-						db.get("block", function(data) {
-							if (data.length == 0) {
-								server.getUser(req.params.username).forEach(function(user) {
-									console.log(user.username);
-									server.sendData(user, {
-										act: "notif",
-										from: validator.escape(sess.username),
-										message: validator.escape(sess.username) + " don't like you ! </3"
-									});
-								});
-							}
-						}, {
-							'users.1': validator.escape(sess.username)
-						});
+						return (false);
+					}
+					if (!data[0].img) {
 						res.json({
-							act: "unlike",
-							request: true,
-							message: "You don't like " + validator.escape(req.params.username) + " now !"
+							act: "like",
+							request: false,
+							message: "You must have one picture to match or unmatch people"
 						});
+						return (false);
+					}
+
+					db.get("like", function(data) {
+						if (data.length == 0) {
+							db.get("like", function(data) {
+								if (data.length == 1) {
+									db.insert("like", {
+										users: [
+											validator.escape(sess.username),
+											validator.escape(req.params.username)
+										],
+										match: true
+									}, function() {
+										db.update("like", {
+											'users.0': validator.escape(req.params.username),
+											'users.1': validator.escape(sess.username)
+										}, {
+											$set: {
+												match: true
+											}
+										});
+										db.get("block", function(data) {
+											if (data.length == 0) {
+												server.getUser(req.params.username).forEach(function(user) {
+													server.sendData(user, {
+														act: "notif",
+														from: validator.escape(sess.username),
+														message: validator.escape(sess.username) + " and you match ! <3"
+													});
+												});
+											}
+										}, {
+											'users.0': validator.escape(req.params.username),
+											'users.1': validator.escape(sess.username)
+										});
+										res.json({
+											act: "like",
+											request: true,
+											message: "Great, " + validator.escape(req.params.username) + " and you match ! <3"
+										});
+									});
+								}
+								else {
+									db.insert("like", {
+										users: [
+											validator.escape(sess.username),
+											validator.escape(req.params.username)
+										]
+									}, function() {
+										db.get("block", function(data) {
+											if (data.length == 0) {
+												server.getUser(req.params.username).forEach(function(user) {
+													server.sendData(user, {
+														act: "notif",
+														from: validator.escape(sess.username),
+														message: validator.escape(sess.username) + " like you ! <3"
+													});
+												});
+											}
+										}, {
+											'users.0': validator.escape(req.params.username),
+											'users.1': validator.escape(sess.username)
+										});
+										res.json({
+											act: "like",
+											request: true,
+											message: "Great, you like " + validator.escape(req.params.username) + " now !"
+										});
+									});
+								}
+							}, {
+								'users.0': validator.escape(req.params.username),
+								'users.1': validator.escape(sess.username)
+							});
+						}
+						else {
+							db.remove("like", {
+								users: [
+									validator.escape(sess.username),
+									validator.escape(req.params.username)
+								]
+							}, function() {
+								db.get("like", function(data) {
+									if (data.length == 1) {
+										db.update("like", {
+											'users.0': validator.escape(req.params.username),
+											'users.1': validator.escape(sess.username)
+										}, {
+											$set: {
+												match: false
+											}
+										});
+									}
+								}, {
+									'users.0': validator.escape(req.params.username),
+									'users.1': validator.escape(sess.username)
+								});
+								db.get("block", function(data) {
+									if (data.length == 0) {
+										server.getUser(req.params.username).forEach(function(user) {
+											server.sendData(user, {
+												act: "notif",
+												from: validator.escape(sess.username),
+												message: validator.escape(sess.username) + " don't like you ! </3"
+											});
+										});
+									}
+								}, {
+									'users.0': validator.escape(req.params.username),
+									'users.1': validator.escape(sess.username)
+								});
+								res.json({
+									act: "unlike",
+									request: true,
+									message: "You don't like " + validator.escape(req.params.username) + " now !"
+								});
+							});
+						}
+					}, {
+						'users.0': validator.escape(sess.username),
+						'users.1': validator.escape(req.params.username)
 					});
-				}
-			}, {
-				'users.0': validator.escape(sess.username),
-				'users.1': validator.escape(req.params.username)
-			});
+				}, {
+					username: validator.escape(req.params.username)
+				});
+			}
+			else {
+				res.json({
+					act: "info",
+					request: false,
+					message: "Error"
+				});
+			}
 		}, {
-			username: validator.escape(sess.username)
+			"users.0": validator.escape(sess.username),
+			"users.1": validator.escape(req.params.username)
+		});
+	}
+	else {
+		res.json({
+			act: "unauthorized",
+			request: false,
+			message: "Unauthorized"
 		});
 	}
 });
@@ -290,6 +429,13 @@ router.get('/block', function (req, res) {
 			res.json(data);
 		}, {
 			'users.0': validator.escape(sess.username)
+		});
+	}
+	else {
+		res.json({
+			act: "unauthorized",
+			request: false,
+			message: "Unauthorized"
 		});
 	}
 });
@@ -332,10 +478,25 @@ router.get('/block/:username', function (req, res) {
 							validator.escape(req.params.username)
 						]
 					}, function() {
-						res.json({
-							act: "block",
-							request: true,
-							message: "You block " + validator.escape(req.params.username) + " now !"
+						db.remove("like", {
+							users: [
+								validator.escape(sess.username),
+								validator.escape(req.params.username)
+							]
+						}, function() {
+							db.update("like", {
+								'users.0': validator.escape(req.params.username),
+								'users.1': validator.escape(sess.username)
+							}, {
+								$set: {
+									match: false
+								}
+							});
+							res.json({
+								act: "block",
+								request: true,
+								message: "You block " + validator.escape(req.params.username) + " now !"
+							});
 						});
 					});
 				}
@@ -361,6 +522,13 @@ router.get('/block/:username', function (req, res) {
 			username: validator.escape(sess.username)
 		});
 	}
+	else {
+		res.json({
+			act: "unauthorized",
+			request: false,
+			message: "Unauthorized"
+		});
+	}
 });
 // Report <username> profile
 router.get('/report/:username', function (req, res) {
@@ -373,12 +541,18 @@ router.get('/report/:username', function (req, res) {
 			subject: 'Report member',
 			content: sess.username + ' has reported ' + req.params.username
 		}, function(err, reply) {
-			console.log(err && err.stack);
 			res.json({
 				act: "report",
 				request: true,
 				message: "An email was sent to administrator !"
 			});
+		});
+	}
+	else {
+		res.json({
+			act: "unauthorized",
+			request: false,
+			message: "Unauthorized"
 		});
 	}
 });
@@ -397,6 +571,13 @@ router.get('/visits', function (req, res) {
 			res.json(visits);
 		}, {
 			'users.1': validator.escape(sess.username)
+		});
+	}
+	else {
+		res.json({
+			act: "unauthorized",
+			request: false,
+			message: "Unauthorized"
 		});
 	}
 });
@@ -439,12 +620,19 @@ router.get('/visits/:username', function (req, res) {
 						validator.escape(req.params.username)
 					]
 				}, function() {
-					server.getUser(req.params.username).forEach(function(user) {
-						server.sendData(user, {
-							act: "notif",
-							from: validator.escape(sess.username),
-							message: validator.escape(sess.username) + " visit you your profile ;)"
-						});
+					db.get("block", function(data) {
+						if (data.length == 0) {
+							server.getUser(req.params.username).forEach(function(user) {
+								server.sendData(user, {
+									act: "notif",
+									from: validator.escape(sess.username),
+									message: validator.escape(sess.username) + " visit you your profile ;)"
+								});
+							});
+						}
+					}, {
+						'users.0': validator.escape(req.params.username),
+						'users.1': validator.escape(sess.username)
 					});
 					res.json({
 						act: "visits",
@@ -457,6 +645,13 @@ router.get('/visits/:username', function (req, res) {
 			});
 		}, {
 			username: validator.escape(req.params.username)
+		});
+	}
+	else {
+		res.json({
+			act: "unauthorized",
+			request: false,
+			message: "Unauthorized"
 		});
 	}
 });

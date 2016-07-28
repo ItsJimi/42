@@ -1,11 +1,36 @@
+$(document).ready(function() {
+	$('#settings_save').click(function() {
+		if ($('#settings_email').val() !== '') {
+			$.post('/api/users/update', {
+				mail: $('#settings_email').val()
+			}).done(function(res) {
+				info(res);
+			});
+		}
+	});
+	$('#settings_pass').click(function() {
+		if ($('#settings_pass1').val() !== '' && $('#settings_pass2').val() !== '') {
+			$.post('/api/users/pass', {
+				pass1: $('#settings_pass1').val(),
+				pass2: $('#settings_pass2').val()
+			}).done(function(res) {
+				info(res);
+			});
+		}
+	});
+});
+
 function settings(callback) {
 	$('#settings_email').val("");
 	$('#settings_like').html("");
 	$('#settings_blocked').html("");
 	$('#settings_visits').html("");
 	NProgress.start();
-	$.get("/api/profiles/view").done(function(res) {
-		
+	$.get("/api/users/view").done(function(res) {
+		if (res.request != false) {
+			if (res[0].mail)
+				$('#settings_email').val(res[0].mail);
+		}
 		$.get("/api/profiles/like").done(function(res) {
 			NProgress.inc();
 			res.forEach(function(data) {

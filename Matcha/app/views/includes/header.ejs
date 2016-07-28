@@ -35,10 +35,12 @@
 			</header>
 			<nav id="filters" class="filters">
 				<ul>
-				<li><a href="home" class="no-refresh">Home</a></li>
-				<li><a href="profiles" class="no-refresh">Profiles</a></li>
-				<li><a href="about" class="no-refresh">About</a></li>
-				<li><a href="contact" class="no-refresh">Contact</a></li>
+					<li>Age :<br /><input id="filters_age_min" type="number" value="18"><br /><input id="filters_age_max" type="number" value="120"></li>
+					<li>Popularity :<br /><input id="filters_score_min" type="number" value="0"><br /><input id="filters_score_max" type="number" value="100"></li>
+					<li>Distance :<br /><input id="filters_dist" type="number" value="10"></li>
+					<li>Tags :<br /><input id="filters_tags" type="text" placeholder='Tags separated with ","'></li>
+					<button type="button" id="filters_save">Submit</button>
 				</ul>
+
 			</nav>
 			<div class="content">

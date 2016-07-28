@@ -9,7 +9,6 @@ ws.onopen = function () {
 ws.onmessage = function(data) {
 	try {
 		var res = JSON.parse(data.data);
-		console.log(res);
 		if (res.act === "info") {
 			info(res);
 		}
@@ -17,21 +16,20 @@ ws.onmessage = function(data) {
 			notif(res.message, "/api/img/view/" + res.from + "/300/0");
 		}
 		else if (res.act === "message") {
-			$('#message_content').append('<div class="message_' + res.role + '">' + res.message + '</div><div class="clear"></div>');
-			$('#message_content').stop().animate({ scrollTop: $('#message_content').prop('scrollHeight') }, 100);
-			if (res.from)
+			if (res.from === to && res.role === "receiver")
+				$('#message_content').append('<div class="message_' + res.role + '">' + res.message + '</div><div class="clear"></div>');
+			if (res.role === "sender")
+				$('#message_content').append('<div class="message_' + res.role + '">' + res.message + '</div><div class="clear"></div>');
+			if (res.from && res.message)
 				notif(res.message, "/api/img/view/" + res.from + "/300/0");
+			$('#message_content').stop().animate({ scrollTop: $('#message_content').prop('scrollHeight') }, 0);
 		}
-	} catch (e) {
-		console.log(e);
-	}
+	} catch (e) {}
 };
 
 function sendData(obj) {
 	try {
 		ws.send(JSON.stringify(obj));
 	}
-	catch(e) {
-		console.log("Error sendData : " + e);
-	}
+	catch(e) {}
 }

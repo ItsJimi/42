@@ -18,6 +18,13 @@ router.get('/', function (req, res) {
 			res.json(tags);
 		}, {});
 	}
+	else {
+		res.json({
+			act: "unauthorized",
+			request: false,
+			message: "Unauthorized"
+		});
+	}
 });
 // View profiles with <tag>
 router.get('/view/:tag', function (req, res) {
@@ -31,6 +38,13 @@ router.get('/view/:tag', function (req, res) {
 
 			res.json(tags);
 		}, {});
+	}
+	else {
+		res.json({
+			act: "unauthorized",
+			request: false,
+			message: "Unauthorized"
+		});
 	}
 });
 // Add tag
@@ -71,6 +85,13 @@ router.post('/add', function (req, res) {
 			name: validator.escape(req.body.tag)
 		});
 	}
+	else {
+		res.json({
+			act: "unauthorized",
+			request: false,
+			message: "Unauthorized"
+		});
+	}
 });
 // Del tag
 router.post('/del', function (req, res) {
@@ -89,6 +110,13 @@ router.post('/del', function (req, res) {
 				request: true,
 				message: validator.escape(req.body.tag) + " has been deleted"
 			});
+		});
+	}
+	else {
+		res.json({
+			act: "unauthorized",
+			request: false,
+			message: "Unauthorized"
 		});
 	}
 });

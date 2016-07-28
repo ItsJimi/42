@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var validator = require('validator');
-var sendmail = require('sendmail')();
 
 var db = require('../controllers/database.js');
 var util = require('../controllers/utils.js');
@@ -18,28 +17,14 @@ router.get('/valid/:username/:link', function(req, res) {
 						valid: true
 					}
 				}, function() {
-					res.json({
-						act: "info",
-						request: true,
-						message: "Your account has been verified"
-					});
+					res.send("Your account has been verified");
 				});
 			}
-			else {
-				res.json({
-					act: "info",
-					request: false,
-					message: "Wrong link"
-				});
-			}
+			else
+				res.send("Wrong link");
 		}
-		else {
-			res.json({
-				act: "info",
-				request: false,
-				message: "Wrong link"
-			});
-		}
+		else
+			res.send("Wrong link");
 	}, {
 		username: validator.escape(req.params.username)
 	});

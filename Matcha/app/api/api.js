@@ -6,6 +6,7 @@ var img = require('./img.js');
 var tags = require('./tags.js');
 var mail = require('./mail.js');
 var messages = require('./messages.js');
+var users = require('./users.js');
 
 router.get('/', function (req, res) {
 	res.send("Choose API v0.1 !");
@@ -25,5 +26,8 @@ router.use('/mail', mail);
 
 // Messages
 router.use('/messages', messages);
+
+// Users
+router.use('/users', users);
 
 module.exports = router;
