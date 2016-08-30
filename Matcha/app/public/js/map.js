@@ -38,6 +38,20 @@ var pos;
 var marker = [];
 var map;
 
+function enterFullscreen() {
+  var element = document.documentElement;
+
+  if (element.requestFullscreen) {
+    element.requestFullscreen();
+  } else if (element.msRequestFullscreen) {
+    element.msRequestFullscreen();
+  } else if (element.mozRequestFullScreen) {
+    element.mozRequestFullScreen();
+  } else if (element.webkitRequestFullscreen) {
+    element.webkitRequestFullscreen();
+  }
+}
+
 function initMap() {
 	NProgress.start();
 	$.get("/api/profiles/view").done(function(res) {

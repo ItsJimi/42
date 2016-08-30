@@ -71,7 +71,7 @@ $(document).ready(function() {
 
 	// Edit pane
 	$('#edit_location_add').click(function() {
-		location();
+		getLocation();
 	});
 	$('#edit_add_tag').click(function() {
 		addTag();
