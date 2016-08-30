@@ -127,7 +127,7 @@ router.post('/reset', function(req, res) {
 			if (data.length == 1) {
 				var randomPass = Math.random().toString(36).slice(-8);
 				db.update("users", {
-					username: validator.escape(req.body.username)
+					username: validator.escape(req.body.username.toLowerCase())
 				}, {
 					$set: {
 						pass: bcrypt.hashSync(req.body.username.toLowerCase() + randomPass, salt)
@@ -156,7 +156,7 @@ router.post('/reset', function(req, res) {
 				});
 			}
 		}, {
-			username: validator.escape(req.body.username)
+			username: validator.escape(req.body.username.toLowerCase())
 		});
 	}
 	else {

@@ -6,6 +6,7 @@ $(document).ready(function() {
 
 	// Nav Buttons
 	$('#nav_message').click(function() {
+		$('#message_content').html("");
 		getUsersMsg(function() {
 			$('#message').fadeToggle('fast');
 			$('#edit').fadeOut('fast');
@@ -64,6 +65,7 @@ $(document).ready(function() {
 	});
 	$('#message_close').click(function() {
 		$('#message').fadeOut('fast');
+		$('#message_content').html("");
 	});
 	$('#settings_close').click(function() {
 		$('#settings').fadeOut('fast');
@@ -134,6 +136,7 @@ $(document).ready(function() {
 			$('#profiles').fadeOut('fast');
 			$('#message').fadeOut('fast');
 			$('#settings').fadeOut('fast');
+			$('#message_content').html("");
 		}
 	});
 });

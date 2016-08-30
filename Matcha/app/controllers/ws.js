@@ -22,6 +22,16 @@ module.exports = {
 				});
 			}
 
+			ws.on('close', function close() {
+				db.update("profiles", {
+					username: ws.username
+				}, {
+					$set: {
+						time: Date.now()
+					}
+				});
+			});
+
 			ws.on('message', function incoming(message) {
 				try {
 		    		var res = JSON.parse(message);
