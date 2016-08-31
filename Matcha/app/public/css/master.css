@@ -586,3 +586,18 @@ aside {
 	max-width: 300px;
 	margin: auto;
 }
+
+.nbr_notifs {
+	position: absolute;
+	top: 0px;
+	left: 130px;
+	display: inline-block;
+	background: #c24a4a;
+	color: #fff;
+	font-family: sans-serif;
+	font-size: 0.4em;
+	height: 20px;
+	line-height: 20px;
+	padding: 5px;
+	cursor: pointer;
+}

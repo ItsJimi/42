@@ -25,6 +25,7 @@ function settings(callback) {
 	$('#settings_like').html("");
 	$('#settings_blocked').html("");
 	$('#settings_visits').html("");
+	$('#settings_notifs').html("");
 	NProgress.start();
 	$.get("/api/users/view").done(function(res) {
 		if (res.request != false) {
@@ -50,8 +51,15 @@ function settings(callback) {
 						$('#settings_visits').append('<img src="/api/img/view/' + data + '/100/0" onclick="settingsProfiles(\'' + data + '\')" />');
 						NProgress.inc();
 					});
-					NProgress.done();
-					callback();
+					$.get("/api/profiles/notifs").done(function(res) {
+						NProgress.inc();
+						res.forEach(function(data) {
+							$('#settings_notifs').append('<div class="settings_notifs_s" onclick="delN(this, \'' + data._id + '\')"><img src="/api/img/view/' + data.from + '/100/0" />' + data.message + '</div>');
+							NProgress.inc();
+						});
+						NProgress.done();
+						callback();
+					});
 				});
 			});
 		});

@@ -22,8 +22,6 @@ module.exports = {
 		try {
 			ws.send(JSON.stringify(obj));
 		}
-		catch(e) {
-			console.log("Error sendData : " + e);
-		}
+		catch(e) {}
 	}
 };

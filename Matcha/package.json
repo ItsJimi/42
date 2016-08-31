@@ -4,7 +4,7 @@
   "description": "Match or match",
   "main": "./app/server.js",
   "scripts": {
-    "start": "node ./app/server.js"
+    "start": "NODE_ENV=production node ./app/server.js"
   },
   "repository": {
     "type": "git",

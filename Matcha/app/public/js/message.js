@@ -13,8 +13,11 @@ $(document).ready(function() {
 var to;
 
 function getUsersMsg(callback) {
+	NProgress.start();
 	$.get("/api/messages/users/").done(function(res) {
+		NProgress.inc();
 		if (res.request != false) {
+			NProgress.inc();
 			$('#message_users').html('');
 			res.forEach(function(profile) {
 				$('#message_users').append('<div class="message_user" onclick="getReceiver(this, \'' + profile.username + '\');">'
@@ -27,8 +30,10 @@ function getUsersMsg(callback) {
 					+ '<div class="username">'
 						+ profile.username
 					+ '</div>'
-				+ '</div>')
+				+ '</div>');
+				NProgress.inc();
 			});
+			NProgress.done();
 			callback();
 		}
 		else {
@@ -44,8 +49,11 @@ function getUsersMsg(callback) {
 function getReceiver(me, user) {
 	to = user;
 
+	NProgress.start();
 	$.get('/api/messages/view/' + to).done(function(res) {
+		NProgress.inc();
 		if (res[0]) {
+			NProgress.inc();
 			$('#message_content').html('');
 			$('.message_user').css("background-color", "");
 			$(me).css("background-color", "rgba(0, 0, 0, 0.2)");
@@ -56,8 +64,10 @@ function getReceiver(me, user) {
 				else
 					var role = "sender";
 				$('#message_content').append('<div class="message_' + role + '">' + message.message + '</div><div class="clear"></div>');
+				NProgress.inc();
 			});
 
+			NProgress.done();
 			$('#message_text').attr('placeholder', 'Press return to send message ! ;)');
 			$('#message_text').removeAttr('disabled');
 			$('#message_content').stop().animate({ scrollTop: $('#message_content').prop('scrollHeight') }, 0);
@@ -75,11 +85,15 @@ function getReceiver(me, user) {
 }
 
 function sendMessage() {
+	NProgress.start();
 	sendData({
 		act: 'message',
 		to: to,
 		message: $('#message_text').val()
 	});
+	NProgress.inc();
 	$('#message_text').val("");
+	NProgress.inc();
 	$("#message_content").animate({ scrollTop: $(document).height() }, 500);
+	NProgress.done();
 }

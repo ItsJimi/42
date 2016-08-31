@@ -3,6 +3,7 @@ var router = express.Router();
 var validator = require('validator');
 var http = require('http');
 var sendmail = require('sendmail')();
+var ObjectId = require('mongodb').ObjectID;
 
 var server = require('../controllers/server.js');
 var db = require('../controllers/database.js');
@@ -304,6 +305,11 @@ router.get('/like/:username', function (req, res) {
 														message: validator.escape(sess.username) + " and you match ! <3"
 													});
 												});
+												db.insert("notifs", {
+													username: validator.escape(req.params.username),
+													from: validator.escape(sess.username),
+													message: validator.escape(sess.username) + " and you match ! <3"
+												});
 											}
 										}, {
 											'users.0': validator.escape(req.params.username),
@@ -331,6 +337,11 @@ router.get('/like/:username', function (req, res) {
 														from: validator.escape(sess.username),
 														message: validator.escape(sess.username) + " like you ! <3"
 													});
+												});
+												db.insert("notifs", {
+													username: validator.escape(req.params.username),
+													from: validator.escape(sess.username),
+													message: validator.escape(sess.username) + " like you ! <3"
 												});
 											}
 										}, {
@@ -379,6 +390,11 @@ router.get('/like/:username', function (req, res) {
 												from: validator.escape(sess.username),
 												message: validator.escape(sess.username) + " don't like you ! </3"
 											});
+										});
+										db.insert("notifs", {
+											username: validator.escape(req.params.username),
+											from: validator.escape(sess.username),
+											message: validator.escape(sess.username) + " don't like you ! </3"
 										});
 									}
 								}, {
@@ -556,6 +572,47 @@ router.get('/report/:username', function (req, res) {
 		});
 	}
 });
+// Notifs
+router.get('/notifs', function (req, res) {
+	var sess = req.session;
+
+	if (sess.username) {
+		db.get("notifs", function(data) {
+			res.json(data);
+		}, {
+			username: validator.escape(sess.username)
+		});
+	}
+	else {
+		res.json({
+			act: "unauthorized",
+			request: false,
+			message: "Unauthorized"
+		});
+	}
+});
+// Remove Notifs
+router.post('/notifs/del', function (req, res) {
+	var sess = req.session;
+
+	if (sess.username) {
+		db.remove("notifs", {
+			_id: ObjectId(req.body.id),
+			username: validator.escape(sess.username)
+		}, function() {
+			res.json({
+				request: true
+			});
+		});
+	}
+	else {
+		res.json({
+			act: "unauthorized",
+			request: false,
+			message: "Unauthorized"
+		});
+	}
+});
 // Visited profiles
 router.get('/visits', function (req, res) {
 	var sess = req.session;
@@ -628,6 +685,11 @@ router.get('/visits/:username', function (req, res) {
 									from: validator.escape(sess.username),
 									message: validator.escape(sess.username) + " visit you your profile ;)"
 								});
+							});
+							db.insert("notifs", {
+								username: validator.escape(req.params.username),
+								from: validator.escape(sess.username),
+								message: validator.escape(sess.username) + " visit you your profile ;)"
 							});
 						}
 					}, {

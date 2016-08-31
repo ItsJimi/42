@@ -32,7 +32,7 @@ db.connect(function(database) {
 	// Websockets
 	ws.start(store);
 	// Session
-	app.use(session({ secret : 'MpCF12y', resave: false, saveUninitialized: true, store: store }));
+	app.use(session({ secret: 'MpCF12y', resave: false, saveUninitialized: true, store: store }));
 
 	// Set
 	app.set('view engine', 'ejs');
