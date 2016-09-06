@@ -1,6 +1,5 @@
 ## Projects @42born2code
 <br />
-<code>
 [X] Libft 100/116<br />
 [X] Fillit 100/100<br />
 [X] GNL 121/121<br />
