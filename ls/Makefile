@@ -6,9 +6,18 @@
 #    By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 12:02:38 by jmaiquez          #+#    #+#              #
-#    Updated: 2016/11/02 12:08:39 by jmaiquez         ###   ########.fr        #
+#    Updated: 2017/01/10 16:36:56 by jmaiquez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+# @echo "${YEL}"
+# @echo "   _____             "
+# @echo "  |_  (_)_ __ ___ (_)"
+# @echo " _  | | | '_ \` _ \| |"
+# @echo "| |_| | | | | | | | |"
+# @echo " \___/|_|_| |_| |_|_|"
+# @echo
+# @echo "${STD}"
 
 RED =		\033[31m
 GRE =		\033[32m
@@ -40,32 +49,22 @@ FLAG =		-Wall -Wextra -Werror -I$(IDIR)
 
 all: $(NAME)
 
-$(NAME): header $(OBCC)
+$(NAME): $(OBCC)
 	@echo "${BLU}+ Compilation program :${STD} $@"
 	@make -C ./libft/
 	@gcc $(FLAG) $(OBCC) ./libft/libft.a -I./incs/ -o $(NAME)
 
 $(ODIR)%.o: $(SDIR)%.c
+	@mkdir -p $(ODIR)
 	@echo "${GRE}+ Compilation :${STD} $^"
 	@gcc $^ $(FLAG) -c -o $@
 
-header:
-	@mkdir -p $(ODIR)
-	@echo "${YEL}"
-	@echo "   _____             "
-	@echo "  |_  (_)_ __ ___ (_)"
-	@echo " _  | | | '_ \` _ \| |"
-	@echo "| |_| | | | | | | | |"
-	@echo " \___/|_|_| |_| |_|_|"
-	@echo
-	@echo "${STD}"
-
-norme: header
+norme:
 	@echo "${GRE}Norme${STD}\n"
 	@norminette $(NORM)
 	@echo "${RED}\nTotal errors :${STD}" $(shell norminette $(NORM) | grep -v "Norme" | wc -l)
 
-clean: header
+clean:
 	@echo "${RED}- Remove objects${STD}"
 	@rm -rf $(OBCC)
 	@rm -rf $(ODIR)
@@ -75,6 +74,6 @@ fclean: clean
 	@make -C ./libft/ fclean
 	@rm -f $(NAME)
 
-.PHONY: all $(NAME) $(ODIR)%.o header norme clean fclean re
+.PHONY: all $(ODIR)%.o norme clean fclean re
 
 re: fclean all

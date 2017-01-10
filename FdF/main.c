@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 13:20:21 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/03/14 11:42:15 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/01/10 17:24:49 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		main(int ac, char **av)
 	if (ac > 2)
 		str_exit(-1, "To many arguments");
 	if (!(mlx = (t_mlx *)malloc(sizeof(*mlx))))
-		str_exit(-1, "new.c : Error line 32");
+		str_exit(-1, "main.c : Error line 41");
 	ft_putstr("Chargement de la carte ...\n");
 	mlx->p = parse(av[1]);
 	ft_putstr("Chargement termine !\n");

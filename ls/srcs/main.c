@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 12:00:03 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/01/10 13:52:55 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/01/10 17:33:13 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ char	*check_flags(int ac, char **av)
 
 	i = 1;
 	flags = ft_strnew(5);
-	ft_putstr(flags);
 	while (i < ac)
 	{
 		if (av[i][0] != '-')
@@ -127,6 +126,11 @@ int		main(int ac, char **av)
 	else
 	{
 		open_dir(".", 0);
+		struct passwd *pwd;
+		struct stat statbuf;
+
+		pwd = getpwuid(statbuf.st_uid);
+		ft_putstr(statbuf.st_uid);
 	}
 	return (0);
 }
