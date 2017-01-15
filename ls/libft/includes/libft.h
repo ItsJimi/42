@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: itsjimi <itsjimi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 15:14:46 by jmaiquez          #+#    #+#             */
-/*   Updated: 2016/02/02 17:07:01 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/01/15 15:32:38 by itsjimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef	struct	s_list
 	struct s_list	*next;
 }				t_list;
 
+void    		ft_putlong(long n);
 int				ft_abs(int nbr);
 int				get_next_line(int const fd, char **line);
 t_list			*ft_lstnew(void const *content, size_t content_size);

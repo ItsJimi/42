@@ -1,29 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ls.h                                            :+:      :+:    :+:   */
+/*   dir.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: itsjimi <itsjimi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/02 12:01:18 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/01/15 16:32:51 by itsjimi          ###   ########.fr       */
+/*   Created: 2017/01/15 14:36:03 by itsjimi           #+#    #+#             */
+/*   Updated: 2017/01/15 15:43:39 by itsjimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_LS_H
-# define FT_LS_H
+#include "../incs/ft_ls.h"
 
-# include "../libft/includes/libft.h"
-# include <sys/stat.h>
-# include <dirent.h>
-# include <pwd.h>
-# include <time.h>
-# include <grp.h>
+int		open_dir(char *str, int sneaky)
+{
+	DIR				*dir;
+	t_dirent		*ent;
 
-typedef struct dirent	t_dirent;
-typedef struct stat		t_stat;
-
-void		check_flags(int ac, char **av, char *flags);
-int			open_dir(char *str, int sneaky);
-
-#endif
+	if ((dir = opendir(str)) != NULL)
+	{
+		while ((ent = readdir(dir)) != NULL)
+		{
+			if (ent->d_name[0] != '.' || sneaky == 1)
+			{
+				ft_putstr(ent->d_name);
+				ft_putchar(' ');
+			}
+		}
+		ft_putchar('\n');
+		closedir(dir);
+		return (1);
+	}
+	else
+	{
+		ft_putendl(str);
+		return (0);
+	}
+}
