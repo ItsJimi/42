@@ -6,7 +6,7 @@
 /*   By: itsjimi <itsjimi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/15 14:36:48 by itsjimi           #+#    #+#             */
-/*   Updated: 2017/01/15 14:37:21 by itsjimi          ###   ########.fr       */
+/*   Updated: 2017/01/15 17:20:54 by itsjimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	if_exists(char *flags, char c, int *k)
 {
-	if (c == 'l' || c == 'R' || c == 'a' || c == 'r' || c == 't')
+	if (c == 'l' || c == 'R' || c == 'a' || c == 'r' || c == 't' || c == 's')
 	{
 		if (ft_strchr(flags, c) == NULL)
 		{
@@ -26,7 +26,7 @@ static void	if_exists(char *flags, char c, int *k)
 	{
 		ft_putstr("ls: illegal option -- ");
 		ft_putchar(c);
-		ft_putstr("\nusage: ls [-lRart] [file ...]\n");
+		ft_putstr("\nusage: ls [-lRarts] [file ...]\n");
 		exit(-1);
 	}
 }
