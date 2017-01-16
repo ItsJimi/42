@@ -77,7 +77,8 @@ SRC = 		ft_memcmp.c		\
 			ft_sqrt.c 		\
 			get_next_line.c \
 			ft_abs.c 		\
-			ft_putlong.c
+			ft_putlong.c    \
+			ft_lstaddend.c
 
 HDR = libft.h
 

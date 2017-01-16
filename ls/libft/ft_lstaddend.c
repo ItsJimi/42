@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort.c                                             :+:      :+:    :+:   */
+/*   ft_lstaddend.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itsjimi <itsjimi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/15 17:36:10 by itsjimi           #+#    #+#             */
-/*   Updated: 2017/01/15 17:39:04 by itsjimi          ###   ########.fr       */
+/*   Created: 2017/01/16 18:05:59 by jmaiquez          #+#    #+#             */
+/*   Updated: 2017/01/16 18:06:38 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/ft_ls.h"
+#include "libft.h"
 
-t_list	*ft_lstsort(t_list *list)
+void	ft_lstaddend(t_list **alst, t_list *new)
 {
-	
-	return (list);
+	t_list *tmp;
+
+	tmp = *alst;
+	if (!new)
+		return ;
+	if (!*alst)
+		*alst = new;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = new;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dir.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itsjimi <itsjimi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/15 14:36:03 by itsjimi           #+#    #+#             */
-/*   Updated: 2017/01/15 18:19:03 by itsjimi          ###   ########.fr       */
+/*   Updated: 2017/01/16 18:34:43 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,29 @@
 
 void	putlst(t_list *list)
 {
-	ft_putendl(list->content);
+	ft_putstr(list->content);
+	ft_putstr("  ");
+}
+
+t_list	*ft_lstsort(t_list *list)
+{
+	t_list		*tmp;
+	t_list		*tmpm;
+	t_list		*new;
+	int			index;
+
+	tmp = list;
+	new = NULL;
+	index = 0;
+	while (tmp->next)
+	{
+		if (ft_strcmp(tmp->content, tmp->next->content) < 0)
+		{
+
+		}
+		index++;
+	}
+	return (new);
 }
 
 int		open_dir(char *str, int sneaky)
@@ -41,12 +63,12 @@ int		open_dir(char *str, int sneaky)
 				{
 					tmp = ft_lstnew(ent->d_name, (ft_strlen(ent->d_name)
 						+ 1) * sizeof(ent->d_name));
-					ft_lstadd(&list, tmp);
+					ft_lstaddend(&list, tmp);
 				}
 			}
 		}
 		closedir(dir);
-		list = ft_lstsort(list);
+		//list = ft_lstsort(list);
 		ft_lstiter(list, putlst);
 		return (1);
 	}
