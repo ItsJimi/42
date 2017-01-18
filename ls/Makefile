@@ -6,7 +6,7 @@
 #    By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 12:02:38 by jmaiquez          #+#    #+#              #
-#    Updated: 2017/01/17 14:02:26 by jmaiquez         ###   ########.fr        #
+#    Updated: 2017/01/18 19:05:19 by jmaiquez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ OBCC =		$(addprefix $(ODIR),$(OBJS))
 
 NORM =		$(SRCC) $(INCC) $(EXEC)
 
-FLAG =		-Wall -Wextra -Werror -I$(IDIR)
+FLAG =		-Wall -Wextra -Werror -I$(IDIR) -g -ggdb
 
 all: $(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 15:14:46 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/01/16 18:07:00 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/01/18 17:27:15 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef	struct	s_list
 	struct s_list	*next;
 }				t_list;
 
-void    		ft_putlong(long n);
+void			ft_putlong(long n);
 int				ft_abs(int nbr);
 int				get_next_line(int const fd, char **line);
 t_list			*ft_lstnew(void const *content, size_t content_size);
@@ -101,5 +101,9 @@ void			ft_freedtab(char **tab);
 char			*ft_strtrimall(char const *s, char c);
 int				ft_power(int nb, int power);
 int				ft_sqrt(int nb);
+
+t_list			*ft_lstsort(t_list *list);
+t_list			*ft_lstsortrev(t_list *list);
+void			ft_swap(size_t *a, size_t *b);
 
 #endif

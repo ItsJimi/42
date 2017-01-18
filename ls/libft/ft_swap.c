@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstaddend.c                                     :+:      :+:    :+:   */
+/*   ft_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/16 18:05:59 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/01/18 17:27:51 by jmaiquez         ###   ########.fr       */
+/*   Created: 2017/01/18 16:58:39 by jmaiquez          #+#    #+#             */
+/*   Updated: 2017/01/18 17:26:47 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstaddend(t_list **alst, t_list *new)
+void	ft_swap(size_t *a, size_t *b)
 {
-	t_list *tmp;
+	size_t	tmp;
 
-	tmp = *alst;
-	if (!new)
-		return ;
-	if (!*alst)
-		*alst = new;
-	while (tmp->next)
-		tmp = tmp->next;
-	tmp->next = new;
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 }

@@ -6,7 +6,7 @@
 #    By: jmaiquez <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/26 11:25:20 by jmaiquez          #+#    #+#              #
-#    Updated: 2016/01/22 12:59:06 by jmaiquez         ###   ########.fr        #
+#    Updated: 2017/01/18 19:05:04 by jmaiquez         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -78,13 +78,16 @@ SRC = 		ft_memcmp.c		\
 			get_next_line.c \
 			ft_abs.c 		\
 			ft_putlong.c    \
-			ft_lstaddend.c
+			ft_lstaddend.c  \
+			ft_swap.c       \
+			ft_lstsort.c    \
+			ft_lstsortrev.c
 
 HDR = libft.h
 
 OFL = $(SRC:.c=.o)
 
-FLGS = -Wall -Wextra -Werror
+FLGS = -Wall -Wextra -Werror -g -ggdb
 
 $(NAME):
 	@gcc $(FLGS) -c $(SRC) -I./includes/

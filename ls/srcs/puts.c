@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstaddend.c                                     :+:      :+:    :+:   */
+/*   puts.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/16 18:05:59 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/01/18 17:27:51 by jmaiquez         ###   ########.fr       */
+/*   Created: 2017/01/18 17:50:27 by jmaiquez          #+#    #+#             */
+/*   Updated: 2017/01/18 17:50:39 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../incs/ft_ls.h"
 
-void	ft_lstaddend(t_list **alst, t_list *new)
+void		putlst(t_list *list)
 {
-	t_list *tmp;
-
-	tmp = *alst;
-	if (!new)
-		return ;
-	if (!*alst)
-		*alst = new;
-	while (tmp->next)
-		tmp = tmp->next;
-	tmp->next = new;
+	ft_putstr(list->content);
+	ft_putstr("  ");
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ls.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itsjimi <itsjimi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 12:01:18 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/01/15 17:28:29 by itsjimi          ###   ########.fr       */
+/*   Updated: 2017/01/18 17:49:57 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@
 
 typedef struct dirent	t_dirent;
 typedef struct stat		t_stat;
-typedef struct passwd 	t_passwd;
-typedef struct group 	t_group;
+typedef struct passwd	t_passwd;
+typedef struct group	t_group;
 
+void		putlst(t_list *list);
 void		check_flags(int ac, char **av, char *flags);
-int			open_dir(char *str, int sneaky);
+t_list		*open_dir(char *str, int sneaky, int sort);
 
 #endif
