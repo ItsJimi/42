@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 12:00:03 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/01/19 15:59:05 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/01/19 18:36:17 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,15 @@ void	print_infos(char **av)
 void	power_swag(char *flags, char *path)
 {
 	t_list	*list;
-	int		i;
 
 	list = NULL;
-	i = 0;
 	if (ft_strchr(flags, 'a'))
 		list = open_dir(path, 1, 1);
 	else
 		list = open_dir(path, 0, 1);
-	if (list && i > 0)
+	if (list)
 	{
+		list = ft_lstsort(list);
 		ft_putstr(path);
 		ft_putendl(":");
 		ft_lstiter(list, putlst);
@@ -76,7 +75,6 @@ void	power_swag(char *flags, char *path)
 			power_swag(flags, ft_strjoin(ft_strjoin(path, "/"), list->content));
 		list = list->next;
 	}
-	i++;
 }
 
 int		main(int ac, char **av)
