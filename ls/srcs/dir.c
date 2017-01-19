@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/15 14:36:03 by itsjimi           #+#    #+#             */
-/*   Updated: 2017/01/18 18:24:36 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/01/19 15:54:20 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static void	read_dir(t_list **list, DIR **dir, int sneaky, int sort)
 		*list = ft_lstsort(*list);
 	else if (sort == -1)
 		*list = ft_lstsortrev(*list);
+	free(ent);
 }
 
 t_list		*open_dir(char *str, int sneaky, int sort)
