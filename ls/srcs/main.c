@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: itsjimi <itsjimi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 12:00:03 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/01/20 16:04:57 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/01/20 23:41:03 by itsjimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void	power_swag(char *flags, char *path)
 		ft_putendl(":");
 		ft_lstiter(list, putlst);
 		ft_putendl("");
-		ft_putendl("");
 	}
 	while (list && ft_strchr(flags, 'R'))
 	{
@@ -76,22 +75,30 @@ void	power_swag(char *flags, char *path)
 	}
 }
 
-int		is_valid(char *file)
+int		is_valid(char *file, t_list **nofile, t_list **nofolder)
 {
 	t_stat	buffer;
 
 	if (stat(file, &buffer) == -1)
 	{
-		ft_putstr("ls: ");
-		ft_putstr(file);
-		ft_putendl(": No such file or directory");
+		if (*nofile == NULL)
+			*nofile = ft_lstnew(file, (ft_strlen(file) + 1)
+				* sizeof(file));
+		else
+			ft_lstaddend(nofile, ft_lstnew(file, (ft_strlen(file)
+				+ 1) * sizeof(file)));
 		return (0);
 	}
 	else
 	{
 		if (S_ISDIR(buffer.st_mode) == 0)
 		{
-			ft_putstr(file);
+			if (*nofolder == NULL)
+			*nofolder = ft_lstnew(file, (ft_strlen(file) + 1)
+				* sizeof(file));
+			else
+				ft_lstaddend(nofolder, ft_lstnew(file, (ft_strlen(file)
+					+ 1) * sizeof(file)));
 			return (0);
 		}
 	}
@@ -101,27 +108,35 @@ int		is_valid(char *file)
 void	check_args(t_list **args, char **av, char *flags)
 {
 	int		i;
-	t_list	*tmp;
+	int		j;
+	t_list	*nofile;
+	t_list	*nofolder;
 
 	i = check_flags(av, flags);
-	tmp = NULL;
+	j = 0;
+	nofile = NULL;
+	nofolder = NULL;
 	while (av[i])
 	{
-		if (is_valid(av[i]))
+		if (is_valid(av[i], &nofile, &nofolder))
 		{
 			if (*args == NULL)
 				*args = ft_lstnew(av[i], (ft_strlen(av[i]) + 1)
 					* sizeof(av[i]));
 			else
-			{
-				tmp = ft_lstnew(av[i], (ft_strlen(av[i])
-					+ 1) * sizeof(av[i]));
-				ft_lstaddend(args, tmp);
-			}
+				ft_lstaddend(args, ft_lstnew(av[i], (ft_strlen(av[i])
+					+ 1) * sizeof(av[i])));
+			j++;
 		}
 		i++;
 	}
 	*args = ft_lstsort(*args);
+	nofile = ft_lstsort(nofile);
+	if (j == 0)
+		nofolder = ft_lstsort(nofolder);
+	ft_lstiter(nofile, putnofile);
+	ft_lstiter(nofolder, putlst);
+	ft_putchar('\n');
 }
 
 int		main(int ac, char **av)
@@ -154,6 +169,6 @@ int		main(int ac, char **av)
 		if (list)
 			ft_lstiter(list, putlst);
 	}
-	ft_putchar('\n');
+	ft_putstr("\n");
 	return (0);
 }
