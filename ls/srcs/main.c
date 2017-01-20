@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 12:00:03 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/01/19 18:36:17 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/01/20 16:04:57 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	power_swag(char *flags, char *path)
 		list = open_dir(path, 0, 1);
 	if (list)
 	{
-		list = ft_lstsort(list);
 		ft_putstr(path);
 		ft_putendl(":");
 		ft_lstiter(list, putlst);
@@ -77,22 +76,74 @@ void	power_swag(char *flags, char *path)
 	}
 }
 
+int		is_valid(char *file)
+{
+	t_stat	buffer;
+
+	if (stat(file, &buffer) == -1)
+	{
+		ft_putstr("ls: ");
+		ft_putstr(file);
+		ft_putendl(": No such file or directory");
+		return (0);
+	}
+	else
+	{
+		if (S_ISDIR(buffer.st_mode) == 0)
+		{
+			ft_putstr(file);
+			return (0);
+		}
+	}
+	return (1);
+}
+
+void	check_args(t_list **args, char **av, char *flags)
+{
+	int		i;
+	t_list	*tmp;
+
+	i = check_flags(av, flags);
+	tmp = NULL;
+	while (av[i])
+	{
+		if (is_valid(av[i]))
+		{
+			if (*args == NULL)
+				*args = ft_lstnew(av[i], (ft_strlen(av[i]) + 1)
+					* sizeof(av[i]));
+			else
+			{
+				tmp = ft_lstnew(av[i], (ft_strlen(av[i])
+					+ 1) * sizeof(av[i]));
+				ft_lstaddend(args, tmp);
+			}
+		}
+		i++;
+	}
+	*args = ft_lstsort(*args);
+}
+
 int		main(int ac, char **av)
 {
 	int		i;
 	char	*flags;
+	t_list	*args;
 
-	i = 1;
+	i = 0;
 	flags = ft_strnew(7);
+	args = NULL;
 	if (ac > 1)
 	{
-		check_flags(ac, av, flags);
-		while (av[i])
+		check_args(&args, av, flags);
+		while (args)
 		{
-			if (av[i][0] != '-')
-				power_swag(flags, av[i]);
+			power_swag(flags, args->content);
 			i++;
+			args = args->next;
 		}
+		if (i == 0)
+			power_swag(flags, ".");
 	}
 	else
 	{

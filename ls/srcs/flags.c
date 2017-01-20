@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/15 14:36:48 by itsjimi           #+#    #+#             */
-/*   Updated: 2017/01/18 17:25:38 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/01/20 15:47:20 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	if_exists(char *flags, char c, int *k)
 	}
 }
 
-void		check_flags(int ac, char **av, char *flags)
+int			check_flags(char **av, char *flags)
 {
 	int		i;
 	int		j;
@@ -39,10 +39,10 @@ void		check_flags(int ac, char **av, char *flags)
 
 	i = 1;
 	k = 0;
-	while (i < ac)
+	while (av[i])
 	{
 		if (av[i][0] != '-')
-			return ;
+			return (i);
 		j = 1;
 		while (av[i][j])
 		{
@@ -51,5 +51,5 @@ void		check_flags(int ac, char **av, char *flags)
 		}
 		i++;
 	}
-	return ;
+	return (1);
 }

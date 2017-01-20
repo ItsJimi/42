@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 12:01:18 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/01/18 17:49:57 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/01/20 15:24:21 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct passwd	t_passwd;
 typedef struct group	t_group;
 
 void		putlst(t_list *list);
-void		check_flags(int ac, char **av, char *flags);
+int			check_flags(char **av, char *flags);
 t_list		*open_dir(char *str, int sneaky, int sort);
 
 #endif
