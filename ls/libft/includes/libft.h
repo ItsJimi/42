@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 15:14:46 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/01/18 17:27:15 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/01/23 13:28:49 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int				ft_strequ(char const *s1, char const *s2);
 int				ft_strnequ(char const *s1, char const *s2, size_t n);
 char			*ft_strsub(char const *s, unsigned int start, size_t len);
 char			*ft_strjoin(char const *s1, char const *s2);
+char			*ft_strjoinfree(char *str1, char const *str2);
 
 char			*ft_strcat(char *restrict s1, const char *restrict s2);
 size_t			ft_strlcat(char *dst, const char *src, size_t size);

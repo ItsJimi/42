@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/15 14:36:03 by itsjimi           #+#    #+#             */
-/*   Updated: 2017/01/19 15:54:20 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/01/23 14:05:36 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,8 @@ static void	read_dir(t_list **list, DIR **dir, int sneaky, int sort)
 				*list = ft_lstnew(ent->d_name, (ft_strlen(ent->d_name) + 1)
 					* sizeof(ent->d_name));
 			else
-			{
-				tmp = ft_lstnew(ent->d_name, (ft_strlen(ent->d_name)
-					+ 1) * sizeof(ent->d_name));
-				ft_lstaddend(list, tmp);
-			}
+				ft_lstaddend(list, ft_lstnew(ent->d_name, (ft_strlen(ent->d_name)
+					+ 1) * sizeof(ent->d_name)));
 		}
 	}
 	if (sort == 1)

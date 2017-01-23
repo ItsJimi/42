@@ -81,7 +81,8 @@ SRC = 		ft_memcmp.c		\
 			ft_lstaddend.c  \
 			ft_swap.c       \
 			ft_lstsort.c    \
-			ft_lstsortrev.c
+			ft_lstsortrev.c \
+			ft_strjoinfree.c
 
 HDR = libft.h
 

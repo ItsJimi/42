@@ -74,9 +74,10 @@ SRC = 		ft_memcmp.c		\
 			ft_strtrimall.c	\
 			ft_freedtab.c	\
 			ft_power.c		\
-			ft_sqrt.c \
+			ft_sqrt.c       \
 			get_next_line.c \
-			ft_abs.c
+			ft_abs.c        \
+			ft_strjoinfree.c
 
 HDR = libft.h
 
