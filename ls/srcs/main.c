@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 12:00:03 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/01/23 14:31:36 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/01/23 17:05:59 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,13 @@ int		is_valid(char *file, t_list **nofile, t_list **nofolder)
 	return (1);
 }
 
+
+void	freelst(void *content, size_t size)
+{
+	free(content);
+	size = 0;
+}
+
 void	check_args(t_list **args, char **av, char *flags)
 {
 	int		i;
@@ -101,6 +108,8 @@ void	check_args(t_list **args, char **av, char *flags)
 	ft_lstiter(nofile, putnofile);
 	ft_lstiter(nofolder, putlst);
 	ft_putchar('\n');
+	ft_lstdel(&nofile, freelst);
+	ft_lstdel(&nofolder, freelst);
 }
 
 int		main(int ac, char **av)
@@ -120,6 +129,7 @@ int		main(int ac, char **av)
 		}
 		if (!args)
 			power_swag(flags, ".");
+		while (1);
 	}
 	else
 	{

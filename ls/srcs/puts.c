@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 17:50:27 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/01/23 15:19:52 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/01/23 16:51:05 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ void		putinfos(t_list *list)
 	t_stat		file_stat;
 	t_passwd	*pwd;
 	t_group		*grp;
+	int			i;
+	char		**name;
 
+	i = 0;
 	stat(list->content, &file_stat);
 	ft_putlong(file_stat.st_blocks);
 	ft_putstr(" ");
@@ -63,6 +66,10 @@ void		putinfos(t_list *list)
 	ft_putstr(" ");
 	ft_putlong(file_stat.st_atime);
 	ft_putstr(" ");
-	ft_putstr(list->content);
+	name = ft_strsplit(list->content, '/');
+	while (name[i])
+		i++;
+	ft_putstr(name[i - 1]);
 	ft_putstr("\n");
+	ft_freedtab(name);
 }
