@@ -6,9 +6,12 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/02 10:32:20 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/02 15:05:27 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/02 18:28:59 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef CONTACT_CLASS_HPP
+# define CONTACT_CLASS_HPP
 
 #include <iostream>
 
@@ -20,18 +23,20 @@ public:
   void display(void);
   void displayAll(void);
 
-  std::string firstname;
-  std::string lastname;
-  std::string nickname;
-  std::string login;
-  std::string postalAddress;
-  std::string emailAddress;
-  std::string phoneNumber;
-  std::string birthdayDate;
-  std::string favoriteMeal;
-  std::string underwearColor;
-  std::string darkestSecret;
-
 private:
+  std::string _firstname;
+  std::string _lastname;
+  std::string _nickname;
+  std::string _login;
+  std::string _postalAddress;
+  std::string _emailAddress;
+  std::string _phoneNumber;
+  std::string _birthdayDate;
+  std::string _favoriteMeal;
+  std::string _underwearColor;
+  std::string _darkestSecret;
+
   void _print(std::string str);
 };
+
+#endif
