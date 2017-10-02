@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/02 10:26:06 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/02 14:25:15 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/02 18:13:19 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int main() {
     } else if (buf == "ADD") {
       if (n == 8) {
         std::cout << "Your phonebook is full, please buy an other." << std::endl;
-        return(0);
+        continue;
       }
       contacts[n].add();
       n++;

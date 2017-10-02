@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/02 10:32:20 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/02 13:54:10 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/02 15:05:27 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ public:
   std::string darkestSecret;
 
 private:
-  void print(std::string str);
+  void _print(std::string str);
 };

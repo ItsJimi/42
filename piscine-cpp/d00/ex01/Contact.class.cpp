@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/02 10:34:35 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/02 14:19:39 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/02 15:08:00 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void Contact::add(void) {
   return;
 }
 
-void Contact::print(std::string str) {
+void Contact::_print(std::string str) {
   if (str.length() > 10) {
     str = str.substr(0, 9) + ".";
   } else if (str.length() < 10) {
@@ -60,11 +60,11 @@ void Contact::print(std::string str) {
 
 void Contact::display(void) {
   std::cout << "|";
-  print(this->firstname);
+  this->_print(this->firstname);
   std::cout << "|";
-  print(this->lastname);
+  this->_print(this->lastname);
   std::cout << "|";
-  print(this->nickname);
+  this->_print(this->nickname);
   std::cout << "|" << std::endl;
   return;
 }
