@@ -6,30 +6,23 @@
 #    By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/02 09:58:33 by jmaiquez          #+#    #+#              #
-#    Updated: 2017/10/02 14:19:13 by jmaiquez         ###   ########.fr        #
+#    Updated: 2017/10/02 10:22:48 by jmaiquez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = clang++
 FLAG = -Wall -Werror -Wextra
-NAME = phonebook
-SRCS = $(shell ls *.cpp)
-OBJS = $(SRCS:.cpp=.o)
+NAME = megaphone
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) $(FLAG) $(OBJS) -o $@
-
-%.o: %.c
-	$(CC) $(FLAG) $(SRCS) -c -o $@
+$(NAME):
+	clang++ $(FLAG) $(NAME).cpp -c
+	clang++ $(FLAG) $(NAME).o -o $(NAME)
 
 clean:
-	rm -f *.o
+	rm -f $(NAME).o
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-
-.PHONY: all test clean fclean re
