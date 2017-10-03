@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ex04.cpp                                           :+:      :+:    :+:   */
+/*   Brain.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/03 11:31:35 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/03 11:40:46 by jmaiquez         ###   ########.fr       */
+/*   Created: 2017/10/03 12:45:19 by jmaiquez          #+#    #+#             */
+/*   Updated: 2017/10/03 13:53:01 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#include "Brain.hpp"
 
-int main(void) {
-  std::string str = "HI THIS IS BRAIN";
+Brain::Brain(void) {
+  std::cout << "Brain created" << std::endl;
+  return;
+}
 
-  std::string* strPtr = &str;
-  std::string& strRef = str;
+Brain::~Brain(void) {
+  return;
+}
 
-  std::cout << *strPtr << std::endl;
-  std::cout << strRef << std::endl;
+std::string Brain::identify(void) const {
+  std::stringstream stream;
+  stream << this;
 
-  return (0);
+  return (stream.str());
 }

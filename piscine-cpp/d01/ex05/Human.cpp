@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ex04.cpp                                           :+:      :+:    :+:   */
+/*   Human.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/03 11:31:35 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/03 11:40:46 by jmaiquez         ###   ########.fr       */
+/*   Created: 2017/10/03 12:48:28 by jmaiquez          #+#    #+#             */
+/*   Updated: 2017/10/03 13:53:53 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#include "Human.hpp"
 
-int main(void) {
-  std::string str = "HI THIS IS BRAIN";
+Human::Human(void) : _brain(Brain()) {
+  std::cout << "Human created" << std::endl;
+  return;
+}
 
-  std::string* strPtr = &str;
-  std::string& strRef = str;
+Human::~Human(void) {
+  return;
+}
 
-  std::cout << *strPtr << std::endl;
-  std::cout << strRef << std::endl;
+Brain const & Human::getBrain(void) const {
+  return (this->_brain);
+}
 
-  return (0);
+std::string Human::identify(void) const {
+  return (this->_brain.identify());
 }

@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ex04.cpp                                           :+:      :+:    :+:   */
+/*   Human.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/03 11:31:35 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/03 11:40:46 by jmaiquez         ###   ########.fr       */
+/*   Created: 2017/10/03 12:46:45 by jmaiquez          #+#    #+#             */
+/*   Updated: 2017/10/03 13:53:49 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef HUMAN_HPP
+# define HUMAN_HPP
+
+#include "Brain.hpp"
 #include <iostream>
 
-int main(void) {
-  std::string str = "HI THIS IS BRAIN";
+class Human {
+public:
+  Human(void);
+  ~Human(void);
+  std::string identify(void) const;
+  Brain const & getBrain(void) const;
 
-  std::string* strPtr = &str;
-  std::string& strRef = str;
+private:
+  Brain const _brain;
+};
 
-  std::cout << *strPtr << std::endl;
-  std::cout << strRef << std::endl;
-
-  return (0);
-}
+#endif
