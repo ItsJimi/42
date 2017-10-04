@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 19:06:11 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/03 19:33:28 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/04 18:59:31 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 
 int main(int argc, char** argv) {
   if (argc == 1) {
-    std::string str;
-    while (1) {
-      std::cin >> str;
-      std::cout << str << std::endl;
+    char c;
+    while (std::cin >> std::noskipws >> c) {
+      std::cout << c;
     }
   }
 
@@ -31,10 +30,10 @@ int main(int argc, char** argv) {
     }
 
     char c;
-    while(!ifs.eof()) {
-      ifs >> std::noskipws >> c;
+    while(ifs >> std::noskipws >> c) {
       std::cout << c;
     }
+    ifs.close();
     std::cout << std::endl;
   }
   return (0);

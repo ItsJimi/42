@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 09:12:48 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/03 09:23:50 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/04 17:39:56 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void ponyOnTheStack(void) {
   Pony littlePony = Pony("blue");
+  littlePony.jump();
   return;
 }
 
@@ -24,7 +25,8 @@ void ponyOnTheHeap(void) {
 }
 
 int main(void) {
-  ponyOnTheStack();
   ponyOnTheHeap();
+  ponyOnTheStack();
+  std::cout << "No pony" << std::endl;
   return (0);
 }

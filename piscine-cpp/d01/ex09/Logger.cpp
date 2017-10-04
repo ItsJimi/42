@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 18:12:00 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/03 19:05:12 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/04 18:48:08 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ void Logger::logToConsole(std::string str) {
 
 void Logger::logToFile(std::string str) {
   std::ofstream ofs(this->_filename, std::ios::app);
+  if (ofs == 0) {
+    std::cout << "Can't write file." << std::endl;
+    return;
+  }
   ofs << str;
   ofs.close();
   return;
@@ -53,6 +57,6 @@ std::string now( const char* format = "%c" ) {
 
 std::string Logger::makeLogEntry(std::string str) {
   std::stringstream date;
-  date << "[" << now( "%D %I:%M:%S" ) << "] " << str << std::endl;
+  date << "[" << now( "%D %H:%M:%S" ) << "] " << str << std::endl;
   return date.str();
 }

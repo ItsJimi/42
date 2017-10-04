@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 14:44:41 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/03 18:32:18 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/04 18:44:00 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int main(int argc, char** argv) {
   std::ifstream ifs(argv[1]);
   if (ifs == 0) {
     std::cout << argv[1] << " doesn't exist." << std::endl;
-    ifs.close();
     return (1);
   }
 
@@ -46,7 +45,6 @@ int main(int argc, char** argv) {
   std::ofstream ofs(std::string(argv[1]) + ".replace");
   if (ofs == 0) {
     std::cout << "Can't write " << argv[1] << ".replace" << std::endl;
-    ofs.close();
     return (1);
   }
   ofs << text;

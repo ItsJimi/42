@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 14:05:49 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/03 14:36:33 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/04 18:28:09 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ Weapon::~Weapon(void) {
   return;
 }
 
-std::string Weapon::getType(void) const {
+std::string const & Weapon::getType(void) const {
   return this->_type;
 }
 
