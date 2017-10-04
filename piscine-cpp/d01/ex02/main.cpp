@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 09:44:23 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/03 10:50:10 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/04 19:21:35 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int main(void) {
   event.setZombieType("Splitter");
   Zombie* zombie2 = event.randomChump();
 
-  event.setZombieType("Witcher");
+  event.setZombieType("Witch");
   Zombie* zombie3 = event.newZombie("Billy");
   zombie3->announce();
 

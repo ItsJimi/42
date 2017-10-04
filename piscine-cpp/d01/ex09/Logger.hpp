@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 18:12:05 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/04 18:51:19 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/04 19:23:22 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 class Logger {
 public:
   Logger(std::string filename);
-  ~Logger(void);
   void log(std::string const & dest, std::string const & message);
 
 private:

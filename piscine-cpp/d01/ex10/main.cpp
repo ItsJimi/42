@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 19:06:11 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/04 18:59:31 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/04 19:27:16 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int main(int argc, char** argv) {
     std::ifstream ifs(argv[i]);
 
     if (ifs == 0) {
-      std::cout << argv[0] << ": " << argv[i] << ": No such file or directory" << std::endl;
+      std::cout << argv[0] << ": " << argv[i] << ": Cannot open file" << std::endl;
       return (1);
     }
 
@@ -34,7 +34,6 @@ int main(int argc, char** argv) {
       std::cout << c;
     }
     ifs.close();
-    std::cout << std::endl;
   }
   return (0);
 }
