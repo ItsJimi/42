@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 10:39:33 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/04 14:08:54 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/04 14:18:21 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ public:
 private:
   int _rawBits;
   static int const _bits;
-  int power(int nbr) const;
 };
 
 std::ostream & operator<<(std::ostream & stream, Fixed const & rhs);

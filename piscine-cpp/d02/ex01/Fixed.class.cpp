@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 10:57:36 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/04 14:12:46 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/04 14:18:16 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ Fixed::Fixed(int number) {
 }
 
 Fixed::Fixed(float number) {
-  this->_rawBits = std::roundf(number * this->power(2));
+  this->_rawBits = std::roundf(number * (1 << this->_bits));
   return;
 }
 
@@ -61,18 +61,10 @@ std::ostream & operator<<(std::ostream & stream, Fixed const & rhs) {
   return stream;
 }
 
-int Fixed::power(int nbr) const {
-  int result = nbr;
-  for (int i = 0; i < this->_bits - 1; i++) {
-    result *= nbr;
-  }
-  return result;
-}
-
 int Fixed::toInt(void) const {
-  return (this->_rawBits / power(2));
+  return (this->_rawBits / (1 << this->_bits));
 }
 
 float Fixed::toFloat(void) const {
-  return (float)this->_rawBits / power(2);
+  return (float)this->_rawBits / (1 << this->_bits);
 }
