@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/05 11:21:08 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/05 15:08:45 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/05 15:13:26 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,17 @@ ClapTrap::~ClapTrap(void) {
 /* MEMBERS */
 
 void ClapTrap::takeDamage(unsigned int amount) {
-  this->_hitPoints = this->_hitPoints - (amount - this->_armorDamageReduction);
-  if (this->_hitPoints < 0) {
-    this->_hitPoints = 0;
+  int damages = amount - this->_armorDamageReduction;
+  if (damages <= 0) {
+    std::cout << "CL4P-TP " << this->_name << " lost 0 hit points" << std::endl;
+    return;
   }
-  std::cout << "CL4P-TP " << this->_name << " lost " << (amount - this->_armorDamageReduction) << " hit points, he have " << this->_hitPoints << "/" << this->_maxHitPoints << " now." << std::endl;
+  if ((int)(this->_hitPoints - damages) < 0) {
+    this->_hitPoints = 0;
+  } else {
+    this->_hitPoints = this->_hitPoints - (amount - this->_armorDamageReduction);
+  }
+  std::cout << "CL4P-TP " << this->_name << " lost " << damages << " hit points, he have " << this->_hitPoints << "/" << this->_maxHitPoints << " now." << std::endl;
   return;
 }
 

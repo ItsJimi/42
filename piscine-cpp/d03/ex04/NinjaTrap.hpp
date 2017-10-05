@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   NinjaTrap.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/05 10:52:38 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/05 15:09:09 by jmaiquez         ###   ########.fr       */
+/*   Created: 2017/10/05 13:06:38 by jmaiquez          #+#    #+#             */
+/*   Updated: 2017/10/05 15:13:00 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCAVTRAP_HPP
-# define SCAVTRAP_HPP
+#ifndef NINJATRAP_HPP
+# define NINJATRAP_HPP
 
 #include <iostream>
 #include "ClapTrap.hpp"
+#include "FragTrap.hpp"
+#include "ScavTrap.hpp"
 
-class ScavTrap : public ClapTrap {
+class NinjaTrap : virtual public ClapTrap {
 public:
-  ScavTrap(std::string name);
-  ScavTrap(ScavTrap const & src);
-  ~ScavTrap(void);
+  NinjaTrap(std::string name);
+  NinjaTrap(NinjaTrap const & src);
+  ~NinjaTrap(void);
 
   void rangedAttack(std::string const & target);
   void meleeAttack(std::string const & target);
-  void challengeNewcomer(void);
+  void ninjaShoebox(ClapTrap & target);
+  void ninjaShoebox(NinjaTrap & target);
+  void ninjaShoebox(FragTrap & target);
+  void ninjaShoebox(ScavTrap & target);
 
-  ScavTrap& operator=(ScavTrap const & rhs);
+  NinjaTrap& operator=(NinjaTrap const & rhs);
 };
 
 #endif

@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/05 10:52:38 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/05 15:09:09 by jmaiquez         ###   ########.fr       */
+/*   Created: 2017/10/05 08:57:14 by jmaiquez          #+#    #+#             */
+/*   Updated: 2017/10/05 15:09:40 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCAVTRAP_HPP
-# define SCAVTRAP_HPP
+#ifndef FRAGTRAP_HPP
+# define FRAGTRAP_HPP
 
 #include <iostream>
 #include "ClapTrap.hpp"
 
-class ScavTrap : public ClapTrap {
+class FragTrap : public ClapTrap {
 public:
-  ScavTrap(std::string name);
-  ScavTrap(ScavTrap const & src);
-  ~ScavTrap(void);
+  FragTrap(std::string name);
+  FragTrap(FragTrap const & src);
+  ~FragTrap(void);
 
   void rangedAttack(std::string const & target);
   void meleeAttack(std::string const & target);
-  void challengeNewcomer(void);
+  void vaulthunter_dot_exe(std::string const & target);
 
-  ScavTrap& operator=(ScavTrap const & rhs);
+  FragTrap& operator=(FragTrap const & rhs);
 };
 
 #endif
