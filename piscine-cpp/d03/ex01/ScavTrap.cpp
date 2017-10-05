@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/05 10:53:59 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/05 11:15:50 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/05 11:43:39 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ ScavTrap& ScavTrap::operator=(ScavTrap const & rhs) {
   this->_hitPoints = rhs.gethitPoints();
   this->_maxHitPoints = rhs.getmaxHitPoints();
   this->_energyPoints = rhs.getenergyPoints();
-  this->_maxEnergyPoints = rhs._maxEnergyPoints;
+  this->_maxEnergyPoints = rhs.getmaxEnergyPoints();
   this->_level = rhs.getLevel();
   this->_meleeAttackDamage = rhs.getmeleeAttackDamage();
   this->_rangedAttackDamage = rhs.getrangedAttackDamage();

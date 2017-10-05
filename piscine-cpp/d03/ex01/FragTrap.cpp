@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/05 08:57:55 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/05 11:11:11 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/05 11:43:47 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ FragTrap& FragTrap::operator=(FragTrap const & rhs) {
   this->_hitPoints = rhs.gethitPoints();
   this->_maxHitPoints = rhs.getmaxHitPoints();
   this->_energyPoints = rhs.getenergyPoints();
-  this->_maxEnergyPoints = rhs._maxEnergyPoints;
+  this->_maxEnergyPoints = rhs.getmaxEnergyPoints();
   this->_level = rhs.getLevel();
   this->_meleeAttackDamage = rhs.getmeleeAttackDamage();
   this->_rangedAttackDamage = rhs.getrangedAttackDamage();
