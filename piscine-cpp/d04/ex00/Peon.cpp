@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 10:18:12 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/06 11:30:07 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/06 13:22:54 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,27 @@
 
 /* CONSTRUCTORS */
 
-Peon::Peon(void) {
-  std::cout << "Some random Peon called " << this->_name << " just popped !" << std::endl;
+Peon::Peon(std::string name) : Victim(name) {
+  
+  std::cout << "Zog zog." << std::endl;
   return;
 }
 
-Peon::Peon(std::string name) : _name(name) {
-  std::cout << "Some random Peon called " << this->_name << " just popped !" << std::endl;
-  return;
-}
-
-Peon::Peon(Peon const & src) {
+Peon::Peon(Peon const & src) : Victim(src) {
   *this = src;
-  std::cout << "Some random Peon called " << this->_name << " just popped !" << std::endl;
+  std::cout << "Zog zog." << std::endl;
   return;
 }
 
 Peon::~Peon(void) {
-  std::cout << "Peon " << this->_name << " just died for no apparent reason !" << std::endl;
+  std::cout << "Bleuark..." << std::endl;
   return;
 }
 
 /* MEMBERS */
 
-void Peon::getPolymorphed(void) {
-  std::cout << this->_name << " has been turned into a cute little sheep !" << std::endl;
+void Peon::getPolymorphed(void) const {
+  std::cout << this->_name << " has been turned into a pink pony !" << std::endl;
   return;
 }
 
@@ -47,9 +43,4 @@ void Peon::getPolymorphed(void) {
 Peon& Peon::operator=(Peon const & rhs) {
   this->_name = rhs.getName();
   return *this;
-}
-
-std::ostream & operator<<(std::ostream & stream, Peon const & rhs) {
-  stream << "I am " << rhs.getName() << " and I like otters !";
-  return stream;
 }

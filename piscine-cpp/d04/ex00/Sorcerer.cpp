@@ -6,18 +6,13 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 10:18:15 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/06 10:58:24 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/06 13:20:54 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Sorcerer.hpp"
 
 /* CONSTRUCTORS */
-
-Sorcerer::Sorcerer(void) {
-  std::cout << this->_name << ", " << this->_title << ", is born !" << std::endl;
-  return;
-}
 
 Sorcerer::Sorcerer(std::string name, std::string title) : _name(name), _title(title) {
   std::cout << this->_name << ", " << this->_title << ", is born !" << std::endl;
@@ -37,11 +32,11 @@ Sorcerer::~Sorcerer(void) {
 
 /* MEMBERS */
 
-std::string Sorcerer::getName(void) {
+std::string Sorcerer::getName(void) const {
   return this->_name;
 }
 
-std::string Sorcerer::getTitle(void) {
+std::string Sorcerer::getTitle(void) const {
   return this->_title;
 }
 
@@ -59,6 +54,6 @@ Sorcerer& Sorcerer::operator=(Sorcerer const & rhs) {
 }
 
 std::ostream & operator<<(std::ostream & stream, Sorcerer const & rhs) {
-  stream << "I am " << rhs.getName() << ", " << rhs.getTitle() << ", and I like ponies !";
+  stream << "I am " << rhs.getName() << ", " << rhs.getTitle() << ", and I like ponies !" << std::endl;
   return stream;
 }

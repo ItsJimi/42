@@ -6,18 +6,13 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 10:18:17 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/06 10:56:14 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/06 13:20:49 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Victim.hpp"
 
 /* CONSTRUCTORS */
-
-Victim::Victim(void) {
-  std::cout << "Some random victim called " << this->_name << " just popped !" << std::endl;
-  return;
-}
 
 Victim::Victim(std::string name) : _name(name) {
   std::cout << "Some random victim called " << this->_name << " just popped !" << std::endl;
@@ -37,11 +32,11 @@ Victim::~Victim(void) {
 
 /* MEMBERS */
 
-std::string Victim::getName(void) {
+std::string Victim::getName(void) const {
   return this->_name;
 }
 
-void Victim::getPolymorphed(void) {
+void Victim::getPolymorphed(void) const {
   std::cout << this->_name << " has been turned into a cute little sheep !" << std::endl;
   return;
 }
@@ -54,6 +49,6 @@ Victim& Victim::operator=(Victim const & rhs) {
 }
 
 std::ostream & operator<<(std::ostream & stream, Victim const & rhs) {
-  stream << "I am " << rhs.getName() << " and I like otters !";
+  stream << "I am " << rhs.getName() << " and I like otters !" << std::endl;
   return stream;
 }
