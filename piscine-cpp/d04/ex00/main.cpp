@@ -6,11 +6,21 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 09:20:27 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/06 09:20:52 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/06 10:22:33 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Sorcerer.hpp"
+#include "Victim.hpp"
+#include "Peon.hpp"
+
 int main(void) {
+  Sorcerer robert("Robert", "the Magnificent");
+  Victim jim("Jimmy");
+  Peon joe("Joe");
+  std::cout << robert << jim << joe;
+  robert.polymorph(jim);
+  robert.polymorph(joe);
 
   return (0);
 }
