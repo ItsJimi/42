@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   RadScorpion.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/06 09:20:27 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/06 13:27:03 by jmaiquez         ###   ########.fr       */
+/*   Created: 2017/10/06 14:32:56 by jmaiquez          #+#    #+#             */
+/*   Updated: 2017/10/06 15:15:54 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Sorcerer.hpp"
-#include "Victim.hpp"
-#include "Peon.hpp"
+#ifndef RADSCORPION_HPP
+# define RADSCORPION_HPP
 
-int main(void) {
-  Sorcerer robert("Robert", "the Magnificent");
-  Victim jim("Jimmy");
-  Peon joe("Joe");
-  std::cout << robert << jim << joe;
-  robert.polymorph(jim);
-  robert.polymorph(joe);
-  Victim *amoinial = new Peon("Amoinial");
-  delete amoinial;
+#include <iostream>
+#include "Enemy.hpp"
 
-  return (0);
-}
+class RadScorpion : public Enemy {
+public:
+  RadScorpion(void);
+  RadScorpion(RadScorpion const & src);
+  virtual ~RadScorpion(void);
+
+  RadScorpion& operator=(RadScorpion const & rhs);
+
+  using Enemy::takeDamage;
+};
+
+#endif

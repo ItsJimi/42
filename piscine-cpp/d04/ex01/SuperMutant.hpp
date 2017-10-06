@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   SuperMutant.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/06 09:20:27 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/06 13:27:03 by jmaiquez         ###   ########.fr       */
+/*   Created: 2017/10/06 14:20:07 by jmaiquez          #+#    #+#             */
+/*   Updated: 2017/10/06 14:26:08 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Sorcerer.hpp"
-#include "Victim.hpp"
-#include "Peon.hpp"
+#ifndef SUPERMUTANT_HPP
+# define SUPERMUTANT_HPP
 
-int main(void) {
-  Sorcerer robert("Robert", "the Magnificent");
-  Victim jim("Jimmy");
-  Peon joe("Joe");
-  std::cout << robert << jim << joe;
-  robert.polymorph(jim);
-  robert.polymorph(joe);
-  Victim *amoinial = new Peon("Amoinial");
-  delete amoinial;
+#include <iostream>
+#include "Enemy.hpp"
 
-  return (0);
-}
+class SuperMutant : public Enemy {
+public:
+  SuperMutant(void);
+  SuperMutant(SuperMutant const & src);
+  virtual ~SuperMutant(void);
+
+  SuperMutant& operator=(SuperMutant const & rhs);
+
+  virtual void takeDamage(int damages);
+};
+
+#endif

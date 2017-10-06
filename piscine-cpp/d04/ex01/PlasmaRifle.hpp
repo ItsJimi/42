@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   PlasmaRifle.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/06 09:20:27 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/06 13:27:03 by jmaiquez         ###   ########.fr       */
+/*   Created: 2017/10/06 13:51:51 by jmaiquez          #+#    #+#             */
+/*   Updated: 2017/10/06 13:57:50 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Sorcerer.hpp"
-#include "Victim.hpp"
-#include "Peon.hpp"
+#ifndef PLASMARIFLE_HPP
+# define PLASMARIFLE_HPP
 
-int main(void) {
-  Sorcerer robert("Robert", "the Magnificent");
-  Victim jim("Jimmy");
-  Peon joe("Joe");
-  std::cout << robert << jim << joe;
-  robert.polymorph(jim);
-  robert.polymorph(joe);
-  Victim *amoinial = new Peon("Amoinial");
-  delete amoinial;
+#include <iostream>
+#include "AWeapon.hpp"
 
-  return (0);
-}
+class PlasmaRifle : public AWeapon {
+public:
+  PlasmaRifle(void);
+  PlasmaRifle(PlasmaRifle const & src);
+  ~PlasmaRifle(void);
+
+  PlasmaRifle& operator=(PlasmaRifle const & rhs);
+
+  virtual void attack(void) const;
+};
+
+#endif

@@ -1,28 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Enemy.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/06 09:20:27 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/06 13:27:03 by jmaiquez         ###   ########.fr       */
+/*   Created: 2017/10/06 14:02:59 by jmaiquez          #+#    #+#             */
+/*   Updated: 2017/10/06 15:23:05 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Sorcerer.hpp"
-#include "Victim.hpp"
-#include "Peon.hpp"
+#ifndef ENEMY_HPP
+# define ENEMY_HPP
 
-int main(void) {
-  Sorcerer robert("Robert", "the Magnificent");
-  Victim jim("Jimmy");
-  Peon joe("Joe");
-  std::cout << robert << jim << joe;
-  robert.polymorph(jim);
-  robert.polymorph(joe);
-  Victim *amoinial = new Peon("Amoinial");
-  delete amoinial;
+#include <iostream>
 
-  return (0);
-}
+class Enemy {
+public:
+  Enemy(Enemy const & src);
+  Enemy(int hp, std::string const & type);
+  virtual ~Enemy(void);
+
+  Enemy& operator=(Enemy const & rhs);
+
+  std::string getType(void) const;
+  int getHP(void) const;
+  virtual void takeDamage(int damages);
+
+private:
+  Enemy(void);
+
+protected:
+  int _hitPoints;
+  std::string _type;
+};
+
+#endif
