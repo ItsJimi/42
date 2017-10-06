@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 14:37:25 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/06 15:23:40 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/06 20:36:13 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ public:
 
   void recoverAP(void);
   void equip(AWeapon* weapon);
-  void attack(Enemy* enemy);
+  void attack(Enemy* &enemy);
   std::string getName(void) const;
   int getAP(void) const;
   AWeapon *getWeapon(void) const;

@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 14:39:10 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/06 15:50:03 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/06 20:36:56 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void Character::equip(AWeapon* weapon) {
   return;
 }
 
-void Character::attack(Enemy* enemy) {
+void Character::attack(Enemy* &enemy) {
   if (!this->_weapon || !enemy) {
     return;
   }
@@ -52,8 +52,8 @@ void Character::attack(Enemy* enemy) {
   this->_AP = (this->_AP - this->_weapon->getAPCost() <= 0) ? 0 : this->_AP - this->_weapon->getAPCost();
   enemy->takeDamage(this->_weapon->getDamage());
   if (enemy->getHP() <= 0) {
-    enemy = NULL;
     delete enemy;
+    enemy = NULL;
   }
   return;
 }
