@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 15:12:29 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/06 15:42:44 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/06 18:36:05 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,5 @@ int main() {
   std::cout << *zaz;
   zaz->attack(b);
   std::cout << *zaz;
-  std::cout << b->getHP() << std::endl;
-  zaz->attack(b);
-  std::cout << *zaz;
-  std::cout << b->getHP() << std::endl;
   return 0;
 }
