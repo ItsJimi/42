@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Point.hpp                                          :+:      :+:    :+:   */
+/*   Logger.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/07 14:58:25 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/07 19:05:03 by jmaiquez         ###   ########.fr       */
+/*   Created: 2017/10/03 18:12:05 by jmaiquez          #+#    #+#             */
+/*   Updated: 2017/10/04 19:23:22 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTS_HPP
-# define STRUCTS_HPP
+#ifndef LOGGER_HPP
+# define LOGGER_HPP
 
-#include "GameEntity.class.hpp"
+#include <iostream>
+#include <fstream>
+#include <sstream>
 
-struct Point {
-  GameEntity *entity;
-  bool  isMoved;
+class Logger {
+public:
+  Logger(std::string filename);
+  void log(std::string const & dest, std::string const & message);
+
+private:
+  void logToConsole(std::string str);
+  void logToFile(std::string str);
+  std::string makeLogEntry(std::string str);
+  std::string _filename;
 };
 
 #endif

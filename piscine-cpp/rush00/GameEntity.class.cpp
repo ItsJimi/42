@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/07 10:05:16 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/07 15:03:06 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/07 19:47:04 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /* CONSTRUCTORS */
 
 GameEntity::GameEntity(std::string name, char type, int width, int height, int x, int y) : _name(name), _moveSize(1), _type(type), _width(width), _height(height), _x(x), _y(y) {
-  std::cout << this->_name << " : Game Entity created" << std::endl;
+  // std::cout << this->_name << " : Game Entity created" << std::endl;
   return;
 }
 
@@ -25,7 +25,7 @@ GameEntity::GameEntity(GameEntity const & src) {
 }
 
 GameEntity::~GameEntity(void) {
-  std::cout << this->_name << " : Game Entity deleted" << std::endl;
+  // std::cout << this->_name << " : Game Entity deleted" << std::endl;
   return;
 }
 
