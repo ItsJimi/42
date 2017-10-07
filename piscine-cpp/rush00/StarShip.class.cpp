@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/07 10:56:08 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/07 11:04:19 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/07 15:04:58 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /* OPERATORS */
 
-StarShip::StarShip(std::string name, char type, int width, int height, Position pos) : GameEntity(name, type, width, height, pos) {
+StarShip::StarShip(std::string name, char type, int width, int height, int x, int y) : GameEntity(name, type, width, height, x, y) {
   return;
 }
 
@@ -32,7 +32,8 @@ StarShip::~StarShip(void) {
 /* OPERATORS */
 
 StarShip& StarShip::operator=(StarShip const & rhs) {
-  this->_pos = rhs.getPos();
+  this->_x = rhs.getX();
+  this->_y = rhs.getY();
   this->_name = rhs.getName();
   this->_moveSize = rhs.getMoveSize();
   this->_type = rhs.getType();

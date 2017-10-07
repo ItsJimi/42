@@ -6,22 +6,28 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/07 09:21:33 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/07 11:18:31 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/07 17:08:35 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ncurses.h>
-#include "StarShip.class.hpp"
-#include "Structs.hpp"
+#include "Game.class.hpp"
 
 int main(void) {
-  Position boatPos;
-  boatPos.x = 2;
-  boatPos.y = 2;
-  StarShip boat = StarShip("Luke", '@', 2, 2, boatPos);
-  boat.setMoveSize(2);
-  boat.moveRight();
-  std::cout << boat.getPos().x << " : " << boat.getPos().y << std::endl;
+  initscr();
+  curs_set(0);
+  nodelay(stdscr, TRUE);
 
+  Game game = Game(1);
+  game.init();
+  game.createPlayer();
+  while (1){
+    game.fetchAndCalc();
+    game.display();
+    // usleep(500);
+  }
+  getch();
+  endwin();
+  
   return (0);
 }

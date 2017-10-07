@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/07 11:23:18 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/07 11:25:43 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/07 15:04:42 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 class Enemy : public GameEntity {
 public:
-  Enemy(std::string name, char type, int width, int height, Position pos);
+  Enemy(std::string name, char type, int width, int height, int x, int y);
   Enemy(Enemy const & src);
   virtual ~Enemy(void);
 
