@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/07 14:10:34 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/07 20:02:36 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/08 11:50:42 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ public:
   Game& operator=(Game const & rhs);
 
   void init(void);
-  void createEntity(std::string entity, int x, int y);
+  void createEntity(std::string entity, int x, int y, int w, int h);
   void display(void);
   void fetchAndCalc(void);
 
@@ -39,6 +39,7 @@ public:
   void setLines(int lin);
   int getLines(void);
   void moveEntities(void);
+  void popEnemy(void);
 
 private:
   Game(void);
@@ -51,7 +52,8 @@ private:
   int _cmp;
   GameEntity *_player;
 
-  void  _moveOneEntity(GameEntity *entity, int move);
+  void _moveOneEntity(GameEntity *entity, int move);
+  void _decaleBack(void);
 };
 
 #endif

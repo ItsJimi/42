@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/07 11:24:56 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/07 15:05:06 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/08 10:20:46 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ Enemy::~Enemy(void) {
 /* MEMBERS */
 
 /* OPERATORS */
+
+//void attack(StarShip & ship );
+
+//void attack(MissileEnemy & ship, points );
+
 
 Enemy& Enemy::operator=(Enemy const & rhs) {
   this->_x = rhs.getX();

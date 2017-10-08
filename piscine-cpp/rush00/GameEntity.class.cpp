@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/07 10:05:16 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/07 19:47:04 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/08 11:03:36 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,35 @@ int GameEntity::getWidth(void) const {
 
 int GameEntity::getHeight(void) const {
   return this->_height;
+}
+
+void GameEntity::attack(GameEntity *entity, Point **points) {
+  if (this->getType() == 'o' || entity->getType() == 'o')
+    exit(0);
+    
+  int h = entity->getHeight();
+  int w = entity->getWidth();
+  int x = entity->getX();
+  int y = entity->getY();
+  delete entity;
+  for (int i = 0; i < h; i++) {
+    for (int j = 0; j < w; j++) {
+      points[i + y][j + x].entity = NULL;
+    }
+  }
+
+  h = this->getHeight();
+  w = this->getWidth();
+  x = this->getX();
+  y = this->getY();
+  for (int i = 0; i < h; i++) {
+    for (int j = 0; j < w; j++) {
+      points[i + y][j + x].entity = NULL;
+    }
+  }
+  delete this;
+
+  return;
 }
 
 /* OPERATORS */

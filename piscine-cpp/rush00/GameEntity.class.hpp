@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/07 09:48:46 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/07 16:11:47 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/08 10:57:01 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define GAMEENTITY_CLASS_HPP
 
 #include <iostream>
+#include "Point.hpp"
 
 class GameEntity {
 public:
@@ -36,6 +37,8 @@ public:
   char getType(void) const;
   int getWidth(void) const;
   int getHeight(void) const;
+
+  void attack(GameEntity *entity, Point **points);
 
 protected:
   std::string _name;

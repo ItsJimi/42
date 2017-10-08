@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/07 14:16:31 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/07 20:43:37 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/08 11:57:06 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,34 +46,40 @@ void  Game::init(void) {
   this->_points = new Point*[this->_lines];
   for (int i = 0; i < this->_lines; i++) {    
     this->_points[i] = new Point[this->_cols];
-  }  
+  }
 
+  for (int i = 0; i < this->_lines; i++) {
+    for (int j = 0; j < this->_cols; j++) {
+      if (rand() % 10 == 0){
+				this->_points[i][j].back = true;
+			} else {
+				this->_points[i][j].back = false;
+			}
+    }
+  }
 
   return;
 }
 
-void  Game::createEntity(std::string entity, int x, int y) {
-  int w = 1;
-  int h = 1;
-
+void  Game::createEntity(std::string entity, int x, int y, int w, int h) {
   GameEntity *tmp;
 
   if (entity == "StarShip") {
-    tmp = new StarShip("Luke", 'o', 1, 1, (int)(this->_cols / 2),  (int)(this->_lines - (h + 1)));
+    tmp = new StarShip("Luke", 'o', 1, 1, (int)(this->_cols / 2),  (int)(this->_lines - 2));
     this->_player = tmp;
   } else if (entity == "Enemy") {
-    tmp = new Enemy("Dark Vador", 'W', 1, 1, x,  y);
+    tmp = new Enemy("Dark Vador", 'W', w, h, x, y);
   } else if (entity == "Missile") {
-    tmp = new Missile("Missile", '|', 1, 1, x, y);
+    tmp = new Missile("Missile", '|', w, h, x, y);
   } else {
     return;
   }
   
   int i = 0;
   int j;
-  while (i < h){
+  while (i < tmp->getHeight()) {
     j = 0;
-    while(j < w){
+    while(j < tmp->getWidth()) {
       this->_points[tmp->getY() + i][tmp->getX() + j].entity = tmp;
       this->_points[i][j].isMoved = false;
       
@@ -96,7 +102,13 @@ void Game::display() {
       if (this->_points[i][j].entity) {
         mvaddch(i, j, this->_points[i][j].entity->getType());
       } else {
-        mvaddch(i, j, ' ');
+        if (this->_points[i][j].back) {
+          attron(COLOR_PAIR(100));
+          mvaddch(i, j, '|');
+          attroff(COLOR_PAIR(100));
+        } else {
+          mvaddch(i, j, ' ');
+        }
       }
       j++;
     }
@@ -113,12 +125,12 @@ void Game::fetchAndCalc(void) {
   this->_choice = wgetch(stdscr);
   // if (this->_choice != -1) {
   //   // std::cout << this->_choice << " : " << KEY_UP << std::endl;
-  //   // Logger logger = Logger("Game.log");
-  //   // logger.log("file", std::to_string(this->_choice));
+  //   Logger logger = Logger("Game.log");
+  //   logger.log("file", std::to_string(this->_choice));
   // }
 
   if(this->_choice == 32) {
-    this->createEntity("Missile", this->_player->getX(), this->_player->getY() - 1);
+    this->createEntity("Missile", this->_player->getX(), this->_player->getY() - 1, 1, 1);
   }
   return;
 }
@@ -128,19 +140,37 @@ void  Game::_moveOneEntity(GameEntity *entity, int move) {
   if (move == 2 && entity->getX() == this->_cols - 1 && entity->getType() == 'o') return;
   if (move == 3 && entity->getY() == this->_lines - 1 && entity->getType() == 'o') return;
   if (move == 4 && entity->getX() == 0 && entity->getType() == 'o') return;
-  if (move == 3 && entity->getY() == this->_lines - 1 && entity->getType() != 'o') {
-    this->_points[entity->getY()][entity->getX()].entity = NULL;
+
+  if (move == 3 && entity->getY() + entity->getHeight() == this->_lines - 1 && entity->getType() != 'o') {
+    int h = entity->getHeight();
+    int w = entity->getWidth();
+    int x = entity->getX();
+    int y = entity->getY();
     delete entity;
-    entity = NULL;
-    return;
-  }
-  if (move == 1 && entity->getY() == 0 && entity->getType() != 'o') {
-    this->_points[entity->getY()][entity->getX()].entity = NULL;
-    delete entity;
-    entity = NULL;
+    for (int i = 0; i < h; i++) {
+      for (int j = 0; j < w; j++) {
+        this->_points[i + y][j + x].entity = NULL;
+      }
+    }
     return;
   }
 
+  if (move == 1 && (entity->getY() == 0) && (entity->getType() != 'o')) {
+    int h = entity->getHeight();
+    int w = entity->getWidth();
+    int x = entity->getX();
+    int y = entity->getY();
+    delete entity;
+    for (int i = 0; i < h; i++) {
+      for (int j = 0; j < w; j++) {
+        this->_points[i + y][j + x].entity = NULL;
+      }
+    }
+    return;
+  }
+
+
+  
   int i = 0;
   int j;
   while (i < entity->getHeight()) {
@@ -151,6 +181,7 @@ void  Game::_moveOneEntity(GameEntity *entity, int move) {
     }
     i++;
   }
+
 
   switch (move) {
     case 1:
@@ -167,6 +198,8 @@ void  Game::_moveOneEntity(GameEntity *entity, int move) {
       break;
   }
 
+
+
   // Logger logger = Logger("Game.log");
   // logger.log("file", "move");
   
@@ -180,6 +213,10 @@ void  Game::_moveOneEntity(GameEntity *entity, int move) {
     j = 0;
     while(j < entity->getWidth()) {
       // logger.log("file", "in");
+      if(this->_points[entity->getY() + i][entity->getX() + j].entity){
+        entity->attack(this->_points[entity->getY() + i][entity->getX() + j].entity , this->_points);
+        return;
+      }
       this->_points[entity->getY() + i][entity->getX() + j].entity = entity;
       this->_points[entity->getY() + i][entity->getX() + j].isMoved = true;
       j++;
@@ -189,7 +226,19 @@ void  Game::_moveOneEntity(GameEntity *entity, int move) {
   return;
 }
 
+void Game::popEnemy() {
+	if (rand() % 1000 == 0){
+		int i = rand() % (this->_cols - 1);
+		if(this->_points[0][i].entity == NULL){
+      // l une des deux lignes:
+      this->createEntity("Enemy", i, 0, rand() % 5, rand() % 5);
+    }
+	}
+}
+
 void Game::moveEntities(void) {
+  this->popEnemy();
+  this->_decaleBack();
   int i = 0;
   int j = 0;
   
@@ -201,9 +250,12 @@ void Game::moveEntities(void) {
         continue;
       }
       if (this->_points[i][j].entity != NULL) {
-        if (this->_points[i][j].entity->getType() == 'W' && this->_cmp % 500 == 0)
+        if (this->_points[i][j].entity->getType() == 'W' && this->_cmp % 500 == 0){
+
           this->_moveOneEntity(this->_points[i][j].entity, 3);
-        else if (this->_points[i][j].entity->getType() == '|' && this->_cmp % 100 == 0)
+
+        }
+        else if (this->_points[i][j].entity->getType() == '|' && this->_cmp % 25 == 0)
           this->_moveOneEntity(this->_points[i][j].entity, 1);
         else if (this->_points[i][j].entity->getType() == 'o') {
           switch (this->_choice) {
@@ -239,6 +291,29 @@ void Game::moveEntities(void) {
   }
 
    this->_choice = -1;
+}
+
+void Game::_decaleBack(void) {
+  for (int i = this->_lines - 2; i >= 0; i--) {
+    for (int j = 0; j < this->_cols; j++) {
+      if (this->_points[i][j].back) {
+        this->_points[i][j].back = false;
+        this->_points[i + 1][j].back = true;
+      } else {
+        this->_points[i + 1][j].back = false;
+      }
+    }
+  }
+
+  for (int i = 0; i < this->_cols; i++) {
+    if (rand() % 10 == 0) {
+			this->_points[0][i].back = true;
+		} else {
+			this->_points[0][i].back = false;
+		}
+  }
+
+	return;
 }
 
 /* OPERATORS */
