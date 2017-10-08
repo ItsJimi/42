@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/07 14:16:31 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/08 20:48:02 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/08 20:52:23 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 /* OPERATORS */
 
 Game::Game(void) : _choice(-1), _score(0), isRunning(true) {
+  std::srand(std::time(NULL) + std::clock());
   initscr();
   curs_set(0);
   nodelay(stdscr, TRUE);
