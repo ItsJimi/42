@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/07 10:05:16 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/08 18:14:27 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/08 19:27:28 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,12 +113,12 @@ int GameEntity::attack(GameEntity *entity, Point **points) {
   w = this->getWidth();
   x = this->getX();
   y = this->getY();
+  delete this;
   for (int i = 0; i < h; i++) {
     for (int j = 0; j < w; j++) {
       points[i + y][j + x].entity = NULL;
     }
   }
-  delete this;
 
   // Send score
   return attackScore;

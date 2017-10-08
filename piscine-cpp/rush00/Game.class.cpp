@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/07 14:16:31 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/08 18:22:45 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/08 19:42:52 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,17 @@ void  Game::init(void) {
 }
 
 void  Game::_createEntity(std::string entity, int x, int y, int w, int h) {
-  GameEntity *tmp;
+  // Check if entity exist
+  for (int i = 0; i < h; i++) {
+    for (int j = 0; j < w; j++) {
+      if (this->_points[y + i][x + j].entity)
+        return;
+    }
+  }
 
   // Create right entity
+  GameEntity *tmp;
+
   if (entity == "StarShip") {
     tmp = new StarShip("Luke", 'o', w, h, (int)(this->_cols / 2 - w),  (int)(this->_lines - 2));
     this->_player = tmp;
@@ -84,9 +92,15 @@ void Game::display(void) {
   // Draw entity or background on screen
   for (int i = 0; i < this->_lines; i++) {
     for (int j = 0; j < this->_cols; j++) {
-      if (this->_points[i][j].entity)
-        mvaddch(i, j, this->_points[i][j].entity->getType());
-      else {
+      if (this->_points[i][j].entity) {
+        if (this->_points[i][j].entity->getType() == 'o') {
+          attron(COLOR_PAIR(1));
+          mvaddch(i, j, this->_points[i][j].entity->getType());
+          attroff(COLOR_PAIR(1));
+        } else {
+          mvaddch(i, j, this->_points[i][j].entity->getType());
+        }
+      } else {
         if (this->_points[i][j].back) {
           attron(COLOR_PAIR(100));
           mvaddch(i, j, '|');
@@ -229,7 +243,7 @@ void Game::moveEntities(void) {
       if (this->_points[i][j].entity) {
         // Move Enemy
         if (this->_points[i][j].entity->getType() == 'W' && this->_cmp % 8 == 0) {
-          if (rand() % 10 == 0 && this->_points[i][j].entity->getY() + this->_points[i][j].entity->getHeight() < this->_lines - 1)
+          if (rand() % 10 == 0 && this->_points[i][j].entity->getY() + this->_points[i][j].entity->getHeight() < this->_lines - 3)
             this->_createEntity("DarkMissile", this->_points[i][j].entity->getX() + (this->_points[i][j].entity->getWidth() / 2), this->_points[i][j].entity->getY() + this->_points[i][j].entity->getHeight() + 2, 1, 1);
           this->_moveOneEntity(this->_points[i][j].entity, 3);
         }
