@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/07 10:05:16 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/08 20:35:35 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/08 21:05:02 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ int GameEntity::getHeight(void) const {
 int GameEntity::attack(GameEntity *entity, Point **points) {
   // If player dies, exit
   if (this->getType() == 'o' || entity->getType() == 'o') {
+    delete entity;
+    delete this;
     return -1;
   }
 
