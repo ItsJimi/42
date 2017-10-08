@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/07 14:16:31 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/08 20:52:23 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/08 20:56:35 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ Game::~Game(void) {
   refresh();
   getch();
   endwin();
+  std::cout << "Score: " << this->_score << std::endl;
   return;
 }
 
