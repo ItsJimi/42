@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/07 14:16:31 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/08 19:42:52 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/08 20:48:02 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,18 @@
 
 /* OPERATORS */
 
-Game::Game(void) : _choice(-1), _score(0) {
+Game::Game(void) : _choice(-1), _score(0), isRunning(true) {
+  initscr();
+  curs_set(0);
+  nodelay(stdscr, TRUE);
+  noecho();
+  start_color();
+  init_color(COLOR_MAGENTA, 200, 200, 200);
+  init_pair(1, COLOR_RED, COLOR_BLACK);
+  init_pair(2, COLOR_GREEN, COLOR_BLACK);
+  init_pair(3, COLOR_BLUE, COLOR_BLACK);
+  init_pair(100, COLOR_MAGENTA, COLOR_BLACK);
+
   this->_cols = COLS;
   this->_lines = LINES;
   return;
@@ -26,6 +37,12 @@ Game::Game(Game const & src) {
 }
 
 Game::~Game(void) {
+  clear();
+  nodelay(stdscr, FALSE);
+  mvprintw(this->_lines / 2, this->_cols / 2, ("Score: " + std::to_string(this->_score)).c_str());
+  refresh();
+  getch();
+  endwin();
   return;
 }
 
@@ -128,6 +145,10 @@ void Game::inputLogic(void) {
   // Launch Missile when spacebar is pressed
   if (this->_choice == 32 && (this->_player->getY() != 0))
     this->_createEntity("Missile", this->_player->getX() + (this->_player->getWidth() / 2), this->_player->getY() - 1, 1, 1);
+  
+  // Exit game
+  if (this->_choice == 'x')
+    this->isRunning = false;
   return;
 }
 
@@ -204,6 +225,10 @@ void  Game::_moveOneEntity(GameEntity *entity, int move) {
       // if collision entity attack other entity
       if (this->_points[entity->getY() + i][entity->getX() + j].entity) {
         int attackScore = entity->attack(this->_points[entity->getY() + i][entity->getX() + j].entity, this->_points);
+        if (attackScore == -1) {
+          this->isRunning = false;
+          return;
+        }
         this->_score += attackScore;
         return;
       }
@@ -217,10 +242,11 @@ void  Game::_moveOneEntity(GameEntity *entity, int move) {
 
 void Game::_popEnemy(void) {
   // Pop enemy randomly
-	if (rand() % 25 == 0){
-		int i = rand() % (this->_cols - 1);
+	if (rand() % 25 == 0) {
+    int w = (rand() % 5) + 1;
+		int i = rand() % (this->_cols - w - 2);
 		if (this->_points[0][i].entity == NULL)
-      this->_createEntity("Enemy", i, 0, rand() % 5, rand() % 5);
+      this->_createEntity("Enemy", i, 0, w, (rand() % 5) + 1);
 	}
 }
 

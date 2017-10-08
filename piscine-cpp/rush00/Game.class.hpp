@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/07 14:10:34 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/08 17:08:16 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/08 20:30:23 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ public:
   void display(void);
   void inputLogic(void);
   void moveEntities(void);
+
+  bool isRunning;
 
 private:
   int _cols;
