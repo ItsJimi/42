@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/07 10:05:16 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/08 11:03:36 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/08 18:14:27 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 /* CONSTRUCTORS */
 
 GameEntity::GameEntity(std::string name, char type, int width, int height, int x, int y) : _name(name), _moveSize(1), _type(type), _width(width), _height(height), _x(x), _y(y) {
-  // std::cout << this->_name << " : Game Entity created" << std::endl;
   return;
 }
 
@@ -25,7 +24,6 @@ GameEntity::GameEntity(GameEntity const & src) {
 }
 
 GameEntity::~GameEntity(void) {
-  // std::cout << this->_name << " : Game Entity deleted" << std::endl;
   return;
 }
 
@@ -84,10 +82,21 @@ int GameEntity::getHeight(void) const {
   return this->_height;
 }
 
-void GameEntity::attack(GameEntity *entity, Point **points) {
-  if (this->getType() == 'o' || entity->getType() == 'o')
+int GameEntity::attack(GameEntity *entity, Point **points) {
+  // If player dies, exit
+  if (this->getType() == 'o' || entity->getType() == 'o') {
+    endwin();
     exit(0);
-    
+  }
+
+  // Calculate score with size of enemy
+  int attackScore = 0;  
+  if (this->getType() == 'W' && entity->getType() == '|')
+    attackScore = this->getWidth() * this->getHeight();
+  else if (this->getType() == '|' && entity->getType() == 'W')
+    attackScore = entity->getWidth() * entity->getHeight();
+
+  // Delete entity
   int h = entity->getHeight();
   int w = entity->getWidth();
   int x = entity->getX();
@@ -99,6 +108,7 @@ void GameEntity::attack(GameEntity *entity, Point **points) {
     }
   }
 
+  // Delete this
   h = this->getHeight();
   w = this->getWidth();
   x = this->getX();
@@ -110,7 +120,8 @@ void GameEntity::attack(GameEntity *entity, Point **points) {
   }
   delete this;
 
-  return;
+  // Send score
+  return attackScore;
 }
 
 /* OPERATORS */

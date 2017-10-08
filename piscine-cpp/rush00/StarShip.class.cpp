@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/07 10:56:08 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/08 10:38:23 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/08 18:15:31 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ StarShip::StarShip(StarShip const & src) : GameEntity(src) {
 StarShip::~StarShip(void) {
   return;
 }
-
-/* MEMBERS */
 
 /* OPERATORS */
 

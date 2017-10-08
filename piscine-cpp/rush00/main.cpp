@@ -6,15 +6,18 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/07 09:21:33 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/08 11:59:02 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/08 18:20:58 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ncurses.h>
-#include <unistd.h>
+#include <ctime>
 #include "Game.class.hpp"
 
 int main(void) {
+  struct timespec timeOut, remains;
+  timeOut.tv_sec = 0;
+  timeOut.tv_nsec = 10000000;
+
   initscr();
   curs_set(0);
   nodelay(stdscr, TRUE);
@@ -26,16 +29,14 @@ int main(void) {
   init_pair(3, COLOR_BLUE, COLOR_BLACK);
   init_pair(100, COLOR_MAGENTA, COLOR_BLACK);
 
-  Game game = Game(1);
+  Game game = Game();
   game.init();
-  game.createEntity("StarShip", 0, 0, 1, 1);
-
 
   while (1) {
-    game.fetchAndCalc();
+    game.inputLogic();
     game.moveEntities();
     game.display();
-    usleep(1000);
+    nanosleep(&timeOut, &remains);
   }
   getch();
   endwin();

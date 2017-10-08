@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/07 11:27:34 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/07 15:05:02 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/08 18:14:43 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ Missile::Missile(Missile const & src) : GameEntity(src) {
 Missile::~Missile(void) {
   return;
 }
-
-/* MEMBERS */
 
 /* OPERATORS */
 
