@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 14:46:16 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/11 17:11:40 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/11 17:20:12 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,16 @@ int main(void) {
   Array<int> numbersCopy = Array<int>(numbers);
 
   std::cout << "numbersCopy size: " << numbersCopy.size() << std::endl;
+  try {
+    std::cout << "numbers 0: " << numbers[0] << std::endl;
+  } catch (std::exception e) {
+    std::cout << e.what() << std::endl;
+  }
+  try {
+    std::cout << "numbers 1: " << numbers[1] << std::endl;
+  } catch (std::exception e) {
+    std::cout << e.what() << std::endl;
+  }
 
   return (0);
 }

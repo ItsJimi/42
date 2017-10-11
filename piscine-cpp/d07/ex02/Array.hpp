@@ -6,7 +6,7 @@
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 14:46:24 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/11 17:12:13 by jmaiquez         ###   ########.fr       */
+/*   Updated: 2017/10/11 17:19:31 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,11 @@ public:
   }
 
   Array& operator=(Array const & rhs) {
-    this->tab = rhs.tab;
+    this->tab = new T[rhs.length]();
+    this->length = rhs.length;
+    for (int i = 0; i < rhs.length; i++) {
+      this->tab[i] = rhs.tab[i];
+    }
     return *this;
   }
 
