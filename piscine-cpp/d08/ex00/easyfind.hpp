@@ -1,35 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iter.cpp                                           :+:      :+:    :+:   */
+/*   easyfind.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaiquez <jmaiquez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/11 14:02:10 by jmaiquez          #+#    #+#             */
-/*   Updated: 2017/10/12 09:57:44 by jmaiquez         ###   ########.fr       */
+/*   Created: 2017/10/12 09:14:42 by jmaiquez          #+#    #+#             */
+/*   Updated: 2017/10/12 09:20:30 by jmaiquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef EASYFIND_HPP
+# define EASYFIND_HPP
 
 #include <iostream>
 
 template <typename T>
-void iter(T * tab, size_t length, void (*f)(T const &)) {
-  for (int i = 0; i < length; i++) {
-    f(tab[i]);
-  }
+void easyfind(T container, int n) {
+  
   return;
 }
 
-template <typename T>
-void print(T & str) {
-  std::cout << str << std::endl;
-}
-
-int main(void) {
-  std::string names[] = {"Jimi", "Alex", "Florian", "Alexandre", "Valentin", "David"};
-  int const numbers[] = {21, 42, 4, 2};
-  
-  ::iter(names, 6, print);
-  ::iter(numbers, 4, print);
-  return (0);
-}
+#endif
