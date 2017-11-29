@@ -95,38 +95,47 @@ func main() {
 
 	left := parseTab(leftSide)
 	right := parseTab(rightSide)
-	// fmt.Println(left)
-	// fmt.Println(right)
 
 	var p []float64
 	for i := 0; i < getMaxLength(left, right); i++ {
 		p = append(p, parseNbr(left, i)-parseNbr(right, i))
 	}
 
-	fmt.Println(p)
 	printReduced(p)
 	fmt.Printf("Polynomial degree: %d\n", len(p)-1)
+	// Polynomial degree greater than 2
 	if len(p) > 3 {
 		fmt.Println("The polynomial degree is stricly greater than 2, I can't solve.")
-		os.Exit(1)
+		os.Exit(0)
 	}
+	// Polynomial degree 2
 	if len(p) == 3 {
 		delta := p[1]*p[1] - 4*p[2]*p[0]
 		fmt.Printf("Delta: %f\n", delta)
 		if delta < 0 {
-			fmt.Println("Can't solve")
-			os.Exit(1)
+			fmt.Println("Discriminant is strictly negative, there is no solution.")
+			os.Exit(0)
 		} else if delta == 0 {
-			result := -p[1] / 2 * p[2]
-			fmt.Println("The solution is:")
-			fmt.Println(result)
+			solve1 := -p[1] / 2 * p[2]
+			fmt.Println("Discriminant is equal to zero, the solution is:")
+			fmt.Println(solve1)
+			os.Exit(0)
 		} else {
 			solve1 := (-p[1] - math.Sqrt(delta)) / (2 * p[2])
 			solve2 := (-p[1] + math.Sqrt(delta)) / (2 * p[2])
-			fmt.Println("The solution is:")
+			fmt.Println("Discriminant is strictly positive, the two solutions are:")
 			fmt.Println(solve1)
 			fmt.Println(solve2)
+			os.Exit(0)
 		}
+	}
+	// Polynomial degree 1
+	if len(p) == 2 {
+		// TODO
+	}
+	// Polynomial degree 0
+	if len(p) == 1 {
+		// TODO
 	}
 }
 
