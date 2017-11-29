@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"os"
 	"regexp"
 	"strconv"
@@ -109,13 +110,24 @@ func main() {
 		fmt.Println("The polynomial degree is stricly greater than 2, I can't solve.")
 		os.Exit(1)
 	}
-
-	// result := p1*p1 - 4*p2*p0
-	// fmt.Println(result)
-	// solve1 := (-p1 - math.Sqrt(result)) / (2 * p2)
-	// solve2 := (-p1 + math.Sqrt(result)) / (2 * p2)
-	// fmt.Println(solve1)
-	// fmt.Println(solve2)
+	if len(p) == 3 {
+		delta := p[1]*p[1] - 4*p[2]*p[0]
+		fmt.Printf("Delta: %f\n", delta)
+		if delta < 0 {
+			fmt.Println("Can't solve")
+			os.Exit(1)
+		} else if delta == 0 {
+			result := -p[1] / 2 * p[2]
+			fmt.Println("The solution is:")
+			fmt.Println(result)
+		} else {
+			solve1 := (-p[1] - math.Sqrt(delta)) / (2 * p[2])
+			solve2 := (-p[1] + math.Sqrt(delta)) / (2 * p[2])
+			fmt.Println("The solution is:")
+			fmt.Println(solve1)
+			fmt.Println(solve2)
+		}
+	}
 }
 
 /*
