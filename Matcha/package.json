@@ -22,7 +22,7 @@
     "express-session": "^1.13.0",
     "geoip-lite": "^1.1.8",
     "lwip": "0.0.9",
-    "mongodb": "^2.1.21",
+    "mongodb": "^3.6.1",
     "sendmail": "^0.2.2",
     "serve-favicon": "^2.3.0",
     "validator": "^5.4.0",
